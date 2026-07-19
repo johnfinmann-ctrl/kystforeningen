@@ -498,14 +498,15 @@ textarea.fi { height: 92px; resize: vertical; }
 #cookie-banner a  { color: #c8e6c9; text-decoration: underline; cursor: pointer; }
 .ck-btns { display: flex; gap: .5rem; flex-shrink: 0; }
 
-/* PWA OPDATERING BANNER */
+/* PWA OPDATERING BANNER – skjult som standard, vises kun med .visible */
 #update-banner {
-  display: none; position: fixed; top: 64px; left: 50%; transform: translateX(-50%);
+  display: none;
+  position: fixed; top: 64px; left: 50%; transform: translateX(-50%);
   background: var(--c-gold); color: var(--c-navy);
   padding: .65rem 1.2rem; border-radius: var(--r-sm);
   font-family: var(--font-sans); font-size: .83rem; font-weight: 700;
   z-index: 300; box-shadow: var(--shadow-md);
-  display: flex; align-items: center; gap: var(--space-sm);
+  align-items: center; gap: var(--space-sm);
   white-space: nowrap;
 }
 #update-banner.visible { display: flex; }

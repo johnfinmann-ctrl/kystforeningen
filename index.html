@@ -19,7 +19,8 @@
   <meta property="og:type"        content="website">
 
   <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <!-- Supabase CDN – UDEN defer, skal være klar før config.js og supabase-client.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css">
@@ -29,7 +30,7 @@
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      OPDATERINGS-BANNER (PWA)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-<div id="update-banner" role="alert" aria-live="polite">
+<div id="update-banner" role="alert" aria-live="polite" style="display:none;">
   🔄 En ny version er klar –
   <button id="update-now" class="btn btn-sm" style="background:var(--c-navy);color:#fff;padding:.3rem .8rem;margin-left:.4rem;">
     Opdater nu
@@ -37,7 +38,7 @@
 </div>
 
 <!-- KONFIGFEJL (vises hvis config.js ikke er udfyldt) -->
-<div id="config-warn">
+<div id="config-warn" style="display:none;">
   ⚙ Supabase ikke sat op – udfyld <strong>js/config.js</strong>
   <a href="admin.html">→ Admin</a>
 </div>

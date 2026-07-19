@@ -449,23 +449,48 @@ function setupRealtime() {
   }), 5 * 60 * 1000);
 }
 
-$('update-now')?.addEventListener('click', () => window.location.reload(true));
-
 /* ══════════════════════════════════════════
    PWA SERVICE WORKER
 ══════════════════════════════════════════ */
+let _swReg = null;  // gem SW-registrering globalt til brug ved opdatering
+
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').then(reg => {
+  navigator.serviceWorker.register('./sw.js').then(reg => {
+    _swReg = reg;
+
+    // Lyt på opdatering af SW (ny kode tilgængelig)
     reg.addEventListener('updatefound', () => {
       const worker = reg.installing;
       worker?.addEventListener('statechange', () => {
         if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+          // Ny SW installeret og venter – vis opdateringsbanner
           $('update-banner')?.classList.add('visible');
         }
       });
     });
+
+    // Hvis SW allerede venter (bruger genåbner siden) – vis banner
+    if (reg.waiting && navigator.serviceWorker.controller) {
+      $('update-banner')?.classList.add('visible');
+    }
   }).catch(e => console.warn('[SW]', e));
+
+  // Lyt på SW-kontrol-skift – genindlæs siden automatisk
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    window.location.reload();
+  });
 }
+
+// "Opdater nu"-knap: send SKIP_WAITING til SW, så ny version overtager
+$('update-now')?.addEventListener('click', () => {
+  if (_swReg?.waiting) {
+    // Send signal til sw.js om at aktivere ny version
+    _swReg.waiting.postMessage('SKIP_WAITING');
+  } else {
+    // Fallback: hård genindlæsning
+    window.location.reload(true);
+  }
+});
 
 /* ══════════════════════════════════════════
    INIT
