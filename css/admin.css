@@ -236,6 +236,8 @@ textarea.fi { min-height: 90px; resize: vertical; }
 .img-item:hover .img-del { opacity: 1; }
 .img-copy { position: absolute; top: .3rem; left: .3rem; background: rgba(0,0,0,.5); color: #fff; border: none; border-radius: 3px; padding: .12rem .3rem; font-size: .66rem; cursor: pointer; opacity: 0; transition: opacity var(--ease); }
 .img-item:hover .img-copy { opacity: 1; }
+.img-edit { position: absolute; top: .3rem; left: 2.1rem; background: rgba(0,0,0,.5); color: #fff; border: none; border-radius: 3px; padding: .12rem .3rem; font-size: .66rem; cursor: pointer; opacity: 0; transition: opacity var(--ease); }
+.img-item:hover .img-edit { opacity: 1; }
 
 /* Confirm delete */
 .confirm-box { padding: 1.3rem; }

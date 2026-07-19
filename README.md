@@ -142,3 +142,40 @@ Brugerne ser nu: *"En ny version er klar – Opdater nu"*
 
 ## Bygget af Nordic Operations
 [nordicoperations.dk](https://nordic-operations.dk)
+
+---
+
+## LIVE VALIDERING
+
+Udfyld denne tjekliste, når Supabase er oprettet og GitHub Pages er aktivt.
+
+Afkryds hvert punkt efterhånden som det er testet og bekræftet.
+
+```
+□ Supabase Project oprettet
+□ config.js udfyldt med Project URL og anon key
+□ Authentication testet (bruger kan oprettes)
+□ Login testet (e-mail + adgangskode virker)
+□ Logout testet (session afsluttes korrekt)
+□ Password reset testet (mail modtages og virker)
+□ Database testet (indhold hentes fra Supabase)
+□ Storage upload testet (fil gemmes i bucket)
+□ Dokumentupload testet (PDF/Word/Excel uploades)
+□ Billedupload testet (billede komprimeres og uploades)
+□ Realtime testet (ændring i admin vises straks på hjemmesiden)
+□ PWA installeret (siden kan tilføjes til hjemskærm)
+□ Service Worker testet (side indlæses offline)
+□ Ny version-banner testet (banner vises ved ny CACHE_VERSION)
+□ GitHub Pages testet (side er live på github.io-URL)
+□ Mobil testet (iPhone og/eller Android)
+□ Tablet testet (iPad eller Android-tablet)
+□ Desktop testet (Chrome/Edge/Safari/Firefox)
+```
+
+Når alle punkter er afkrydset, er Version 1.0 **Stable**.
+
+---
+
+*Nordic Operations Platform · Version 1.0 Release Candidate*
+*Referenceprojekt: Kystforeningen Djursland*
+*Bygget af [Nordic Operations](https://nordic-operations.dk)*

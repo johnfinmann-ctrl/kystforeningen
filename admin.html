@@ -364,6 +364,26 @@
   </div>
 </div></div>
 
+<!-- BILLEDE – REDIGER METADATA (alt-tekst + billedtekst) -->
+<div class="modal-ov" id="m-img-meta"><div class="modal-box" style="max-width:480px;">
+  <div class="modal-hdr"><h3>Rediger billedinfo</h3><button class="modal-close" data-close="m-img-meta">✕</button></div>
+  <div class="modal-body">
+    <input type="hidden" id="img-meta-id">
+    <div style="margin-bottom:.9rem;">
+      <img id="img-meta-preview" src="" alt="" style="width:100%;max-height:180px;object-fit:cover;border-radius:6px;display:block;">
+    </div>
+    <div class="form-grid">
+      <div class="form-field span2"><label>Alt-tekst (billedbeskrivelse til skærmlæsere)</label><input type="text" class="fi" id="img-meta-alt" placeholder="Beskriv billedet kort"></div>
+      <div class="form-field span2"><label>Billedtekst (caption – vises under billedet)</label><input type="text" class="fi" id="img-meta-caption" placeholder="Valgfri billedtekst"></div>
+    </div>
+    <div id="img-meta-alert" class="alert" style="margin-top:.8rem;"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-muted btn-sm" data-close="m-img-meta">Annuller</button>
+    <button class="btn btn-primary btn-sm" id="btn-save-img-meta">💾 Gem</button>
+  </div>
+</div></div>
+
 <!-- SLET BEKRÆFTELSE -->
 <div class="modal-ov" id="m-del"><div class="modal-box" style="max-width:380px;">
   <div class="modal-hdr"><h3>Bekræft sletning</h3><button class="modal-close" data-close="m-del">✕</button></div>

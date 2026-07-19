@@ -508,39 +508,79 @@ let _imgData=[];
 async function loadImages() {
   const grid=$('img-grid'); if(!grid) return;
   grid.innerHTML='<p style="color:var(--c-muted);font-size:.83rem;padding:1rem;">Indlæser billeder...</p>';
-  _imgData=await fetchAll('media','id,file_name,original_name,url',{order:'created_at',asc:false});
-  if(!_imgData.length){grid.innerHTML='<p style="color:var(--c-muted);font-size:.83rem;padding:1rem;">Ingen billeder endnu. Upload med knappen ovenfor.</p>';return;}
-  grid.innerHTML=_imgData.map(m=>`
+  // Hent inkl. alt_text og caption
+  _imgData=await fetchAll('media','id,file_name,original_name,url,alt_text,caption',{order:'created_at',asc:false});
+  if(!_imgData.length){
+    grid.innerHTML='<p style="color:var(--c-muted);font-size:.83rem;padding:1rem;">Ingen billeder endnu. Upload med knappen ovenfor.</p>';
+    return;
+  }
+  grid.innerHTML=_imgData.map((m,i)=>`
     <div class="img-item">
-      <img src="${escH(m.url)}" alt="${escH(m.original_name||m.file_name)}" loading="lazy">
+      <img src="${escH(m.url)}" alt="${escH(m.alt_text||m.original_name||m.file_name)}" loading="lazy">
       <div class="img-name" title="${escH(m.original_name||m.file_name)}">${escH(m.original_name||m.file_name)}</div>
-      <button class="img-copy" data-url="${escH(m.url)}" title="Kopiér URL">📋</button>
-      <button class="img-del" data-del-img="${m.id}" data-del-fname="${escH(m.file_name)}" data-del-name="${escH(m.original_name||m.file_name)}" title="Slet">✕</button>
+      <button class="img-copy"  data-url="${escH(m.url)}"    title="Kopiér URL">📋</button>
+      <button class="img-edit"  data-idx="${i}"              title="Rediger info">✏️</button>
+      <button class="img-del"   data-del-img="${m.id}" data-del-fname="${escH(m.file_name)}" data-del-name="${escH(m.original_name||m.file_name)}" title="Slet">✕</button>
     </div>`).join('');
+
+  // Kopiér URL
   grid.querySelectorAll('.img-copy').forEach(btn=>{
     btn.addEventListener('click',()=>{
-      navigator.clipboard?.writeText(btn.dataset.url).then(()=>{btn.textContent='✓';setTimeout(()=>btn.textContent='📋',2000)});
+      navigator.clipboard?.writeText(btn.dataset.url)
+        .then(()=>{btn.textContent='✓'; setTimeout(()=>btn.textContent='📋',2000);});
     });
   });
+
+  // Rediger alt-tekst + billedtekst
+  grid.querySelectorAll('.img-edit').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const m=_imgData[parseInt(btn.dataset.idx)];
+      set('img-meta-id',m.id);
+      set('img-meta-alt',m.alt_text||'');
+      set('img-meta-caption',m.caption||'');
+      $('img-meta-preview').src=m.url;
+      $('img-meta-preview').alt=m.alt_text||m.original_name||'';
+      $('img-meta-alert').className='alert';
+      openModal('m-img-meta');
+    });
+  });
+
+  // Slet
   grid.querySelectorAll('.img-del').forEach(btn=>{
     btn.addEventListener('click',()=>confirmDelete(btn.dataset.delName,async()=>{
       await sb().from('media').delete().eq('id',btn.dataset.delImg);
-      // Forsøg slet fra storage
       await sb().storage.from('images').remove([btn.dataset.delFname]);
       loadImages();
     }));
   });
 }
 
-// Komprimer billede inden upload
+// Gem billede-metadata (alt-tekst + billedtekst)
+$('btn-save-img-meta')?.addEventListener('click',async()=>{
+  const id=val('img-meta-id'); if(!id) return;
+  const btn=$('btn-save-img-meta');
+  btn.innerHTML='<span class="spinner"></span>'; btn.disabled=true;
+  const {error}=await sb().from('media').update({
+    alt_text: val('img-meta-alt'),
+    caption:  val('img-meta-caption'),
+  }).eq('id',id);
+  btn.innerHTML='💾 Gem'; btn.disabled=false;
+  if(error){showAlert('img-meta-alert','⚠ '+error.message,false);return;}
+  showAlert('img-meta-alert','✓ Gemt!',true);
+  setTimeout(()=>{closeModal('m-img-meta');loadImages();},1200);
+});
+
+// Komprimer billede i browser inden upload (maks 1600px, 82% kvalitet)
 async function komprimerBillede(fil, maxW=1600, q=0.82) {
   return new Promise(resolve=>{
-    const img=new Image(); const url=URL.createObjectURL(fil);
+    const img=new Image();
+    const url=URL.createObjectURL(fil);
     img.onload=()=>{
       URL.revokeObjectURL(url);
       const scale=Math.min(1,maxW/img.width);
       const c=document.createElement('canvas');
-      c.width=Math.round(img.width*scale); c.height=Math.round(img.height*scale);
+      c.width=Math.round(img.width*scale);
+      c.height=Math.round(img.height*scale);
       c.getContext('2d').drawImage(img,0,0,c.width,c.height);
       c.toBlob(b=>resolve(b||fil),'image/jpeg',q);
     };
@@ -549,20 +589,32 @@ async function komprimerBillede(fil, maxW=1600, q=0.82) {
   });
 }
 
+// Upload billeder (komprimeret, med original filnavn gemt)
 $('img-upload')?.addEventListener('change',async function(){
-  const filer=Array.from(this.files); if(!filer.length)return;
-  const prog=$('upload-prog'); const progTxt=$('upload-prog-txt');
+  const filer=Array.from(this.files); if(!filer.length) return;
+  const prog=$('upload-prog');
+  const progTxt=$('upload-prog-txt');
   prog.style.display='block';
+
   for(const [i,fil] of filer.entries()){
     progTxt.textContent=`${fil.name} (${i+1}/${filer.length})`;
     try{
       const blob=await komprimerBillede(fil);
       const fn=`img-${Date.now()}-${Math.random().toString(36).slice(2,6)}.jpg`;
       const url=await uploadFile('images',fn,blob,{contentType:'image/jpeg'});
-      if(url) await sb().from('media').insert({file_name:fn,original_name:fil.name,url,bucket:'images',file_type:'jpg',file_size:blob.size});
+      if(url){
+        await sb().from('media').insert({
+          file_name:fn, original_name:fil.name,
+          url, bucket:'images', file_type:'jpg',
+          file_size:blob.size,
+          alt_text:'',  // redigeres efterfølgende via ✏️-knap
+          caption:'',
+        });
+      }
     }catch(e){console.error('[img upload]',e);}
   }
-  prog.style.display='none'; this.value='';
+  prog.style.display='none';
+  this.value='';
   loadImages();
 });
 
