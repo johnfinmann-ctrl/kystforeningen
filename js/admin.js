@@ -123,15 +123,44 @@ $('sb-overlay')?.addEventListener('click', () => {
 ══════════════════════════════════════════════ */
 async function initAuth() {
   const client = sb();
+
   if (!client) {
-    showAlert('l-alert','⚠ Supabase ikke konfigureret – udfyld js/config.js',false);
-    $('l-alert').style.display='block';
+    // Supabase ikke konfigureret endnu:
+    // Deaktivér login-knap og vis klar vejledning – ingen teknisk jargon
+    const btnLogin  = $('btn-login');
+    const btnReset  = $('btn-reset');
+    const emailInp  = $('l-email');
+    const pwInp     = $('l-pw');
+
+    if (btnLogin)  { btnLogin.disabled  = true; btnLogin.style.opacity = '.45'; }
+    if (btnReset)  { btnReset.disabled  = true; btnReset.style.opacity = '.45'; }
+    if (emailInp)  emailInp.disabled = true;
+    if (pwInp)     pwInp.disabled    = true;
+
+    const alert = $('l-alert');
+    if (alert) {
+      alert.className   = 'alert show err';
+      alert.style.display = 'block';
+      alert.innerHTML   =
+        '<strong>Opsætning mangler</strong><br>' +
+        'Platformen er ikke tilsluttet sin database endnu.<br>' +
+        'Udfyld <code>js/config.js</code> med Supabase-nøglerne, ' +
+        'kør SQL-filerne og upload til GitHub Pages.<br>' +
+        'Se <strong>README.md</strong> for trin-for-trin vejledning.';
+    }
     return;
   }
-  const { data:{ session } } = await client.auth.getSession();
-  session ? showApp(session.user) : showLoginScreen();
 
-  client.auth.onAuthStateChange((_,session) => {
+  // Supabase er konfigureret – hent aktiv session
+  try {
+    const { data: { session } } = await client.auth.getSession();
+    session ? showApp(session.user) : showLoginScreen();
+  } catch(e) {
+    showLoginScreen();
+  }
+
+  // Lyt på auth-ændringer (login / logout)
+  client.auth.onAuthStateChange((_, session) => {
     session ? showApp(session.user) : showLoginScreen();
   });
 }
@@ -139,33 +168,61 @@ async function initAuth() {
 function showApp(user) {
   $('login-screen').style.display = 'none';
   $('adm-app').style.display      = 'flex';
-  const email = user.email||'';
-  if ($('sb-user'))  $('sb-user').textContent  = email;
-  if ($('tb-user'))  $('tb-user').textContent  = email;
+  const email = user.email || '';
+  if ($('sb-user')) $('sb-user').textContent = email;
+  if ($('tb-user')) $('tb-user').textContent = email;
   loadDashboard();
 }
+
 function showLoginScreen() {
   $('login-screen').style.display = 'flex';
   $('adm-app').style.display      = 'none';
 }
 
+// Login med e-mail + adgangskode via Supabase Authentication
 $('btn-login')?.addEventListener('click', async () => {
-  const email=val('l-email'), pw=val('l-pw');
-  if (!email||!pw) { showAlert('l-alert','⚠ Udfyld e-mail og adgangskode.',false); $('l-alert').style.display='block'; return; }
-  const btn=$('btn-login');
-  btn.innerHTML='<span class="spinner"></span> Logger ind...'; btn.disabled=true;
-  const { error } = await sb().auth.signInWithPassword({ email, password:pw });
-  btn.innerHTML='Log ind'; btn.disabled=false;
-  if (error) { showAlert('l-alert','⚠ Forkert e-mail eller adgangskode.',false); $('l-alert').style.display='block'; }
-});
-$('l-pw')?.addEventListener('keydown', e => { if(e.key==='Enter') $('btn-login')?.click(); });
+  const email = val('l-email');
+  const pw    = val('l-pw');
+  if (!email || !pw) {
+    showAlert('l-alert','⚠ Udfyld e-mail og adgangskode.',false);
+    $('l-alert').style.display = 'block';
+    return;
+  }
+  const btn = $('btn-login');
+  btn.innerHTML = '<span class="spinner"></span> Logger ind…';
+  btn.disabled  = true;
 
+  const { error } = await sb().auth.signInWithPassword({ email, password: pw });
+
+  btn.innerHTML = 'Log ind';
+  btn.disabled  = false;
+
+  if (error) {
+    showAlert('l-alert','⚠ Forkert e-mail eller adgangskode.',false);
+    $('l-alert').style.display = 'block';
+  }
+});
+
+// Enter-tast i adgangskodefeltet
+$('l-pw')?.addEventListener('keydown', e => {
+  if (e.key === 'Enter') $('btn-login')?.click();
+});
+
+// Glemt adgangskode – sender reset-mail via Supabase
 $('btn-reset')?.addEventListener('click', async () => {
-  const email=val('l-email');
-  if (!email) { showAlert('l-alert','⚠ Skriv din e-mail øverst.',false); $('l-alert').style.display='block'; return; }
-  const { error } = await sb().auth.resetPasswordForEmail(email, { redirectTo: window.location.origin+'/admin.html' });
-  showAlert('l-alert', error ? '⚠ '+error.message : '✓ Nulstillingsmail sendt til '+email, !error);
-  $('l-alert').style.display='block';
+  const email = val('l-email');
+  if (!email) {
+    showAlert('l-alert','⚠ Skriv din e-mail i feltet ovenfor.',false);
+    $('l-alert').style.display = 'block';
+    return;
+  }
+  const { error } = await sb().auth.resetPasswordForEmail(email, {
+    redirectTo: window.location.origin + '/admin.html'
+  });
+  showAlert('l-alert',
+    error ? '⚠ ' + error.message : '✓ Nulstillingsmail sendt til ' + email,
+    !error);
+  $('l-alert').style.display = 'block';
 });
 
 $('btn-logout')?.addEventListener('click', () => sb()?.auth.signOut());

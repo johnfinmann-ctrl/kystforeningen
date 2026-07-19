@@ -98,18 +98,20 @@ INSERT INTO news (title, excerpt, body, status, published_at, sort_order) VALUES
 -- AKTUELLE SAGER
 -- ----------------------------------------------------------------
 INSERT INTO cases
-  (title, excerpt, body, on_frontpage, priority, status, sort_order)
+  (title, excerpt, body, image_url, on_frontpage, priority, status, sort_order)
 VALUES
 (
   'Vindmøller ved Vosnæs',
   'Planer om opstilling af vindmøller i kystnære områder ved Vosnæs er under kommunal behandling.',
   'Der er fremsat planer om opstilling af vindmøller i kystnære områder ved Vosnæs på Djursland. Foreningen følger den kommunale planproces og orienterer løbende om offentlige høringer. Vi formidler fakta og offentligt tilgængeligt materiale, så borgerne kan tage stilling og eventuelt afgive bemærkninger i høringsprocessen.',
+  'assets/vindmoeller.jpg',
   true, 1, 'published', 1
 ),
 (
   'Ålerne / Grobund',
   'Projekt om etablering af ny bebyggelse og anlæg nær kystlandskabet ved Grobund-området.',
   'Foreningen følger sagen om Grobund-projektet, der omhandler planer om etablering nær kystlandskabet. Vi videreformidler offentligt tilgængeligt materiale om miljøvurdering, lokalplanproces og kommunale høringer. Grobund er én ud af flere sager, som foreningen følger. Vi er en oplysende forening, ikke en kampagneorganisation.',
+  '',
   true, 2, 'published', 2
 ),
 (

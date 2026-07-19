@@ -83,11 +83,28 @@ const SUPABASE_ANON = 'eyJhbGci...din_nøgle...';
 
 ### Trin 6 – Opret første administrator
 
-1. Supabase: klik **Authentication** → **Users** → **Add user** → **Create new user**
-2. Udfyld e-mail og et stærkt kodeord
+Der er **ingen standardadgangskode** i platformen. Alle administratorer oprettes direkte i Supabase.
+
+**Sådan oprettes en administrator:**
+
+1. Supabase Dashboard → **Authentication** → **Users** → **Add user** → **Create new user**
+2. Udfyld e-mail og vælg et stærkt kodeord
 3. Klik **Create user**
 4. Gå til **Table Editor** → tabellen **profiles**
-5. Find den nye bruger → sæt `role` til `admin` → klik **Save**
+5. Find rækken med den nye brugers e-mail
+6. Klik på `role`-feltet → ændr fra `editor` til `admin`
+7. Klik **Save**
+
+**Login:**
+Åbn `admin.html` og brug e-mail + kodeord fra Supabase.
+Der er ingen backup-kode eller standardkode – kun Supabase Authentication.
+
+**Glemt adgangskode:**
+Klik "Glemt adgangskode?" på admin-siden – du modtager en nulstillingsmail.
+
+**Tilføj ekstra administrator:** Gentag ovenstående trin med ny e-mail.
+
+**Fjern administrator:** Supabase → Authentication → Users → Delete user.
 
 ### Trin 7 – Upload til GitHub Pages
 

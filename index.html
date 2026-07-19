@@ -37,10 +37,13 @@
   </button>
 </div>
 
-<!-- KONFIGFEJL (vises hvis config.js ikke er udfyldt) -->
-<div id="config-warn" style="display:none;">
-  ⚙ Supabase ikke sat op – udfyld <strong>js/config.js</strong>
-  <a href="admin.html">→ Admin</a>
+<!-- DEBUG-STATUS: Vises KUN hvis DEBUG_MODE = true i config.js -->
+<!-- Aldrig synlig for offentlige brugere i produktion -->
+<div id="config-warn" style="display:none;"
+     aria-hidden="true"
+     title="Kun synlig i DEBUG_MODE">
+  🛠 Udviklerinfo: Supabase ikke konfigureret –
+  åbn <code>js/config.js</code> og indsæt URL + nøgle.
 </div>
 
 <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

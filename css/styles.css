@@ -511,16 +511,16 @@ textarea.fi { height: 92px; resize: vertical; }
 }
 #update-banner.visible { display: flex; }
 
-/* CONFIG FEJL */
+/* CONFIG DEBUG BAR – kun synlig i DEBUG_MODE, aldrig i produktion */
 #config-warn {
-  display: none; position: fixed; bottom: 5rem; left: 50%;
-  transform: translateX(-50%);
-  background: var(--c-navy); color: #fff;
-  padding: .75rem 1.3rem; border-radius: var(--r-sm);
-  font-size: .82rem; z-index: 300; box-shadow: var(--shadow-md);
-  text-align: center;
+  display: none; /* JS sætter display:block KUN hvis DEBUG_MODE = true */
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: #1a1a1a; color: #aaa;
+  padding: .3rem .8rem; font-size: .7rem;
+  font-family: monospace; z-index: 999;
+  border-top: 1px solid #333;
 }
-#config-warn a { color: var(--c-gold); margin-left: .5rem; }
+#config-warn code { color: #e6db74; }
 
 /* FOOTER */
 footer {
