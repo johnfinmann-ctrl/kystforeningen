@@ -1,1194 +1,419 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kystforeningen Djursland</title>
-<meta name="description" content="Bevarelse af naturen og de rekreative kystområder på Djursland. Folkeoplysende, uafhængig forening.">
-<style>
-/* =====================================================
-   KYSTFORENINGEN DJURSLAND – Hjemmeside
-   Bygget af Nordic Operations · nordicoperations.dk
-   =====================================================
-   ADGANGSKODE til admin: se linjen "var PW = ..."
-   i JavaScript-sektionen nederst i filen.
-   ===================================================== */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kystforeningen Djursland – Bevar Djurslands kyster</title>
+  <meta name="description" content="Kystforeningen Djursland arbejder for at bevare naturen og de rekreative kystområder på Djursland gennem folkeoplysning, fællesskab og konkrete aktiviteter.">
+  <meta name="theme-color" content="#173d5c">
+  <link rel="canonical" href="https://kystforeningendj.dk/">
 
-:root{
-  --blaa:#1a3d5c;
-  --lys-blaa:#3a7fbf;
-  --groen:#2d5e3a;
-  --lys-groen:#6a9e72;
-  --sand:#d4b86a;
-  --lys-sand:#f5edd8;
-  --hvid:#ffffff;
-  --tekst:#1a2a1e;
-  --graa:#6b7280;
-  --rod:#c0392b;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:auto;}
-body{font-family:Georgia,serif;color:var(--tekst);background:var(--hvid);line-height:1.7;font-size:16px;}
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
 
-/* ===== NAV ===== */
-nav{
-  background:transparent;
-  position:fixed;top:0;left:0;right:0;
-  z-index:200;
-  transition:background .35s,box-shadow .35s;
-}
-nav.scrolled{background:var(--blaa);box-shadow:0 2px 8px rgba(0,0,0,.25);}
-.nav-inner{max-width:1020px;margin:0 auto;padding:0 1.2rem;display:flex;align-items:center;justify-content:space-between;min-height:58px;}
-.nav-logo{color:#fff;font-size:.95rem;font-weight:bold;text-decoration:none;line-height:1.3;white-space:nowrap;}
-.nav-links{display:flex;list-style:none;gap:.05rem;flex-wrap:nowrap;}
-.nav-btn{background:none;border:none;color:rgba(255,255,255,.88);padding:.4rem .55rem;border-radius:4px;font-family:Arial,sans-serif;font-size:.77rem;cursor:pointer;transition:background .2s;white-space:nowrap;}
-.nav-btn:hover{background:rgba(255,255,255,.15);color:#fff;}
-.hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px;}
-.hamburger span{display:block;width:22px;height:2px;background:white;border-radius:2px;transition:all .3s;}
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Kystforeningen Djursland">
+  <meta property="og:description" content="Bevarelse af naturen og de rekreative kystområder på Djursland">
+  <meta property="og:image"       content="assets/kyst-hero.jpg">
+  <meta property="og:type"        content="website">
 
-/* ===== HERO ===== */
-.hero{
-  position:relative;width:100%;min-height:65vh;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;text-align:center;color:#fff;
-}
-.hero-bg{
-  position:absolute;inset:0;
-  background-image:url('assets/kyst-hero.jpg');
-  background-size:cover;
-  background-position:center 40%;
-  background-repeat:no-repeat;
-  z-index:0;
-}
-.hero-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(10,28,18,.3) 0%,rgba(10,28,18,.52) 50%,rgba(10,28,18,.72) 100%);
-  z-index:1;
-}
-.hero-inner{position:relative;z-index:2;max-width:700px;margin:0 auto;padding:0 1.5rem;}
-.hero .kicker{font-family:Arial,sans-serif;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;opacity:.82;margin-bottom:.9rem;color:var(--sand);}
-.hero h1{font-size:clamp(1.9rem,5vw,3.2rem);line-height:1.18;margin-bottom:1rem;text-shadow:0 2px 14px rgba(0,0,0,.45);letter-spacing:.01em;}
-.hero-sub{font-family:Arial,sans-serif;font-size:clamp(.9rem,1.8vw,1.1rem);opacity:.92;margin-bottom:2.2rem;color:rgba(255,255,255,.92);max-width:540px;margin-left:auto;margin-right:auto;line-height:1.65;text-shadow:0 1px 6px rgba(0,0,0,.3);font-weight:300;}
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
-.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.55);font-family:Arial,sans-serif;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:.4rem;cursor:pointer;border:none;background:none;}
-.hero-pil{width:18px;height:18px;border-right:2px solid rgba(255,255,255,.45);border-bottom:2px solid rgba(255,255,255,.45);transform:rotate(45deg);animation:bob 1.7s ease-in-out infinite;}
-@keyframes bob{0%,100%{transform:rotate(45deg) translateY(0);}50%{transform:rotate(45deg) translateY(6px);}}
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 
-/* ===== KNAPPER ===== */
-.btn{display:inline-block;padding:.68rem 1.6rem;border-radius:5px;font-family:Arial,sans-serif;font-size:.9rem;font-weight:bold;cursor:pointer;border:none;text-decoration:none;text-align:center;transition:transform .15s,box-shadow .15s;line-height:1.4;}
-.btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.18);}
-.btn-groen{background:var(--groen);color:#fff;}
-.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.7);}
-.btn-outline:hover{background:rgba(255,255,255,.1);}
-.btn-blaa{background:var(--blaa);color:#fff;}
-.btn-sand{background:var(--sand);color:var(--blaa);}
-.btn-graa{background:#e5e7eb;color:var(--tekst);}
-.btn-sm{padding:.4rem .9rem;font-size:.82rem;}
-.btn-full{width:100%;padding:.8rem;}
-
-/* ===== LAYOUT ===== */
-.sek{padding:3rem 1.2rem;}
-/* Undersider skjules som standard - vises via JS ved menuklik */
-.underside{display:none;}
-.underside.aktiv{display:block;}
-.sek-sand{background:var(--lys-sand);}
-.sek-blaa{background:var(--blaa);color:#fff;}
-.mw{max-width:920px;margin:0 auto;}
-.center{text-align:center;}
-.h2{font-size:1.5rem;color:var(--blaa);margin-bottom:.4rem;}
-.h2-hvid{font-size:1.5rem;color:#fff;margin-bottom:.4rem;}
-.linje{width:44px;height:3px;background:var(--lys-groen);margin:.3rem 0 1.5rem;border-radius:2px;}
-.linje-c{width:44px;height:3px;background:var(--lys-groen);margin:.3rem auto 1.5rem;border-radius:2px;}
-.linje-hvid{width:44px;height:3px;background:rgba(255,255,255,.4);margin:.3rem 0 1.5rem;border-radius:2px;}
-.divider{height:3px;background:linear-gradient(90deg,var(--blaa),var(--lys-groen),var(--sand));}
-.underside + .divider, .divider:has(+ .underside){display:none;}
-[id]{scroll-margin-top:60px;}
-
-/* ===== FORSIDE – 3 BOKSE ===== */
-.tre-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:1.5rem;}
-.tre-boks{background:var(--hvid);border-radius:8px;padding:1.4rem;box-shadow:0 2px 10px rgba(0,0,0,.07);display:flex;flex-direction:column;border-top:3px solid var(--lys-groen);}
-.tre-boks .tb-tag{font-family:Arial,sans-serif;font-size:.72rem;color:var(--lys-blaa);font-weight:bold;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem;}
-.tre-boks h3{font-size:.97rem;color:var(--blaa);margin-bottom:.4rem;}
-.tre-boks p{font-size:.84rem;font-family:Arial,sans-serif;color:var(--graa);flex:1;margin-bottom:.9rem;line-height:1.6;}
-.tre-boks .btn{align-self:flex-start;}
-
-/* ===== OM SEKTIONER ===== */
-.om-tekst{font-family:Arial,sans-serif;font-size:.93rem;color:#374151;max-width:640px;line-height:1.75;}
-.om-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin-top:1.4rem;}
-.om-kort{background:var(--hvid);border-left:4px solid var(--lys-groen);padding:1rem 1.2rem;border-radius:0 6px 6px 0;box-shadow:0 1px 4px rgba(0,0,0,.06);}
-.om-kort h3{font-size:.93rem;color:var(--blaa);margin-bottom:.3rem;}
-.om-kort p{font-size:.83rem;font-family:Arial,sans-serif;color:var(--graa);}
-
-/* ===== AKTIVITETER ===== */
-.ak-liste{display:flex;flex-direction:column;gap:.7rem;margin-top:1rem;}
-.ak{background:var(--hvid);border-radius:7px;padding:1rem 1.3rem;box-shadow:0 1px 6px rgba(0,0,0,.06);display:flex;gap:1rem;align-items:flex-start;}
-.ak-dato{background:var(--blaa);color:#fff;border-radius:5px;padding:.4rem .65rem;text-align:center;font-family:Arial,sans-serif;font-size:.7rem;font-weight:bold;text-transform:uppercase;min-width:54px;flex-shrink:0;line-height:1.4;}
-.ak h3{font-size:.92rem;color:var(--blaa);margin-bottom:.2rem;}
-.ak p{font-size:.82rem;font-family:Arial,sans-serif;color:var(--graa);}
-
-/* ===== SAGER ===== */
-.sag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1rem;}
-.sag{background:var(--hvid);border-radius:7px;padding:1.3rem;box-shadow:0 2px 8px rgba(0,0,0,.07);border-top:3px solid var(--lys-blaa);display:flex;flex-direction:column;}
-.sag h3{font-size:.95rem;color:var(--blaa);margin-bottom:.4rem;}
-.sag p{font-size:.84rem;font-family:Arial,sans-serif;color:var(--graa);line-height:1.6;flex:1;margin-bottom:.8rem;}
-.sag-note{background:var(--lys-sand);border-left:4px solid var(--lys-blaa);padding:.75rem 1rem;border-radius:0 5px 5px 0;margin-bottom:1.2rem;font-family:Arial,sans-serif;font-size:.82rem;color:var(--blaa);}
-.sag-tom{font-family:Arial,sans-serif;font-size:.85rem;color:var(--graa);}
-
-/* ===== BESTYRELSE ===== */
-.bst-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.1rem;margin-top:1rem;}
-.bst{background:var(--hvid);border-radius:8px;padding:1.3rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.07);}
-.bst-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--lys-blaa),var(--groen));margin:0 auto .7rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;overflow:hidden;position:relative;flex-shrink:0;}
-.bst-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;}
-.bst h3{font-size:.92rem;color:var(--tekst);margin-bottom:.15rem;}
-.bst .rolle{font-size:.76rem;font-family:Arial,sans-serif;color:var(--lys-blaa);font-weight:bold;margin-bottom:.3rem;}
-.bst a{font-size:.76rem;font-family:Arial,sans-serif;color:var(--graa);text-decoration:none;word-break:break-all;}
-.bst a:hover{color:var(--lys-blaa);}
-
-/* ===== GENERALFORSAMLING/DOKUMENTER ===== */
-.dok-kategori{margin-bottom:1.5rem;}
-.dok-kat-titel{font-size:.93rem;color:var(--blaa);font-family:Arial,sans-serif;margin-bottom:.55rem;border-bottom:2px solid var(--lys-sand);padding-bottom:.3rem;}
-.dok-liste{display:flex;flex-direction:column;gap:.5rem;}
-.dok-r{display:flex;align-items:center;gap:.9rem;background:var(--hvid);border:1px solid #e5e7eb;border-radius:6px;padding:.7rem .95rem;text-decoration:none;color:var(--tekst);transition:border-color .2s,background .2s;}
-.dok-r:hover{border-color:var(--lys-blaa);background:#f0f7ff;}
-.dok-r .di{flex:1;}
-.dok-r .di strong{display:block;font-size:.86rem;}
-.dok-r .di span{font-size:.75rem;font-family:Arial,sans-serif;color:var(--graa);}
-.dok-r .pil{color:var(--lys-blaa);font-size:.9rem;flex-shrink:0;}
-.ingen-dok{font-family:Arial,sans-serif;font-size:.83rem;color:var(--graa);padding:.3rem 0;}
-
-/* ===== NYHEDER ===== */
-.nyhed-liste{display:flex;flex-direction:column;gap:.8rem;margin-top:1rem;}
-.nyhed{background:var(--hvid);border-radius:7px;padding:1.1rem 1.3rem;box-shadow:0 1px 6px rgba(0,0,0,.06);border-left:4px solid var(--sand);}
-.nyhed .n-dato{font-family:Arial,sans-serif;font-size:.74rem;color:var(--graa);margin-bottom:.25rem;}
-.nyhed h3{font-size:.93rem;color:var(--blaa);margin-bottom:.25rem;}
-.nyhed p{font-size:.84rem;font-family:Arial,sans-serif;color:var(--graa);}
-
-/* ===== MEDLEMSKAB ===== */
-.mboks{max-width:500px;margin:0 auto;background:var(--hvid);border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,.09);overflow:hidden;}
-.mboks-top{background:linear-gradient(135deg,var(--blaa),var(--groen));color:#fff;padding:1.8rem;text-align:center;}
-.mboks-top .pris{font-size:1.9rem;font-weight:bold;}
-.mboks-top .pris-note{font-family:Arial,sans-serif;font-size:.82rem;opacity:.85;}
-.mboks ul{padding:1.2rem 1.6rem;list-style:none;}
-.mboks ul li{font-family:Arial,sans-serif;font-size:.87rem;padding:.35rem 0;border-bottom:1px solid #f0f0f0;display:flex;gap:.6rem;}
-.mboks ul li::before{content:'✓';color:var(--groen);font-weight:bold;flex-shrink:0;}
-.mform{padding:1.2rem 1.6rem;border-top:1px solid #f0f0f0;display:flex;flex-direction:column;gap:.7rem;}
-
-/* ===== FORMULARER ===== */
-.fi{padding:.65rem .9rem;border:1px solid #d1d5db;border-radius:5px;font-family:Arial,sans-serif;font-size:.88rem;width:100%;}
-.fi:focus{outline:none;border-color:var(--lys-blaa);box-shadow:0 0 0 2px rgba(58,127,191,.12);}
-select.fi{background:#fff;cursor:pointer;}
-textarea.fi{height:88px;resize:vertical;}
-.svar{font-family:Arial,sans-serif;font-size:.83rem;padding:.5rem .85rem;border-radius:5px;display:none;margin-top:.2rem;}
-.svar.ok{color:var(--groen);background:#f0faf5;border:1px solid #a8d5bc;}
-.svar.err{color:var(--rod);background:#fdf0f0;border:1px solid #f5b7b1;}
-
-/* ===== KONTAKT ===== */
-.k-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1rem;}
-.k-info{display:flex;flex-direction:column;gap:1rem;}
-.k-kort{background:var(--hvid);border-radius:8px;padding:1.2rem 1.3rem;box-shadow:0 1px 6px rgba(0,0,0,.06);}
-.k-kort h3{font-size:.92rem;color:var(--blaa);margin-bottom:.6rem;}
-.k-raekke{display:flex;gap:.7rem;align-items:center;font-family:Arial,sans-serif;font-size:.87rem;margin-bottom:.5rem;}
-.k-raekke:last-child{margin-bottom:0;}
-.k-raekke .ki{font-size:1.1rem;flex-shrink:0;}
-.k-raekke a{color:var(--lys-blaa);text-decoration:none;font-weight:bold;}
-.k-raekke a:hover{text-decoration:underline;}
-.k-form{display:flex;flex-direction:column;gap:.7rem;}
-
-/* ===== FOOTER ===== */
-footer{background:var(--blaa);color:rgba(255,255,255,.8);padding:2rem 1.2rem 1.2rem;text-align:center;font-family:Arial,sans-serif;font-size:.82rem;}
-footer strong{color:#fff;display:block;margin-bottom:.3rem;font-size:.92rem;}
-footer p{margin-bottom:.2rem;}
-.footer-links{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:.7rem;font-size:.76rem;opacity:.6;}
-.footer-links a{color:rgba(255,255,255,.7);text-decoration:none;}
-.footer-links a:hover{color:#fff;}
-
-/* ===== MODALER ===== */
-.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;align-items:center;justify-content:center;padding:1rem;}
-.modal-ov.vis{display:flex;}
-.modal{background:#fff;border-radius:10px;width:100%;max-width:560px;max-height:88vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.2);}
-.modal-hdr{background:var(--blaa);color:#fff;padding:.9rem 1.4rem;display:flex;justify-content:space-between;align-items:center;border-radius:10px 10px 0 0;position:sticky;top:0;}
-.modal-hdr h2{font-size:.95rem;font-family:Arial,sans-serif;}
-.mluk{background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer;line-height:1;padding:.2rem .3rem;}
-.modal-body{padding:1.3rem 1.6rem;font-family:Arial,sans-serif;font-size:.87rem;line-height:1.7;color:var(--tekst);}
-.modal-body h3{color:var(--blaa);margin:1rem 0 .35rem;font-size:.93rem;}
-.modal-body p{margin-bottom:.6rem;}
-.modal-body ul{margin:.3rem 0 .7rem 1.1rem;}
-.modal-body ul li{margin-bottom:.25rem;}
-.besked-boks{background:var(--lys-sand);border-radius:5px;padding:.9rem;font-size:.83rem;white-space:pre-wrap;word-break:break-word;margin:.8rem 0;border:1px solid #d1d5db;}
-.besked-btns{display:flex;gap:.7rem;flex-wrap:wrap;}
-
-/* ===== COOKIE ===== */
-#cookie-banner{position:fixed;bottom:0;left:0;right:0;background:rgba(26,61,92,.97);color:#fff;padding:.9rem 1.4rem;z-index:400;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;font-family:Arial,sans-serif;font-size:.83rem;}
-#cookie-banner p{flex:1;min-width:180px;line-height:1.5;}
-#cookie-banner a{color:#c8e6c9;text-decoration:underline;cursor:pointer;}
-.ck-btns{display:flex;gap:.5rem;flex-shrink:0;}
-
-/* ===== ADMIN ===== */
-#adm-fab{position:fixed;bottom:1.4rem;right:1.4rem;z-index:300;background:var(--blaa);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:1rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.25);transition:background .2s;}
-#adm-fab:hover{background:var(--lys-blaa);}
-#adm-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:350;align-items:center;justify-content:center;padding:1rem;}
-#adm-ov.vis{display:flex;}
-#adm-panel{background:#fff;border-radius:10px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.2);}
-#adm-hdr{background:var(--blaa);color:#fff;padding:.9rem 1.4rem;display:flex;justify-content:space-between;align-items:center;border-radius:10px 10px 0 0;}
-#adm-hdr h2{font-size:.95rem;font-family:Arial,sans-serif;}
-#adm-login-boks{padding:1.6rem;}
-#adm-login-boks p{font-family:Arial,sans-serif;font-size:.86rem;color:var(--graa);margin-bottom:.7rem;}
-#adm-content{padding:1.3rem;display:none;}
-.adm-sek{margin-bottom:1.6rem;padding-bottom:1.6rem;border-bottom:1px solid #e5e7eb;}
-.adm-sek:last-child{border-bottom:none;margin-bottom:0;}
-.adm-sek h3{font-family:Arial,sans-serif;font-size:.9rem;color:var(--blaa);margin-bottom:.8rem;}
-.adm-sek .hint{font-family:Arial,sans-serif;font-size:.78rem;color:var(--graa);margin-bottom:.7rem;}
-.adm-note{font-family:Arial,sans-serif;font-size:.76rem;color:var(--graa);background:var(--lys-sand);padding:.5rem .8rem;border-radius:5px;margin-bottom:.8rem;border-left:3px solid var(--sand);}
-.adm-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;flex-wrap:wrap;}
-.adm-row label{font-family:Arial,sans-serif;font-size:.78rem;color:var(--graa);min-width:75px;}
-.adm-row .fi{flex:1;min-width:110px;font-size:.84rem;padding:.5rem .7rem;}
-.kt-prev{font-family:Arial,sans-serif;font-size:.8rem;background:var(--lys-sand);padding:.6rem .9rem;border-radius:5px;margin-top:.6rem;}
-.dok-adm-ul{list-style:none;margin-top:.7rem;display:flex;flex-direction:column;gap:.4rem;}
-.dok-adm-li{display:flex;align-items:center;gap:.5rem;background:var(--lys-sand);padding:.5rem .75rem;border-radius:5px;font-family:Arial,sans-serif;font-size:.79rem;}
-.dok-adm-li span{flex:1;word-break:break-word;}
-.dok-adm-li button{background:none;border:none;cursor:pointer;color:var(--rod);font-size:.95rem;padding:.15rem;flex-shrink:0;}
-.item-adm{background:var(--lys-sand);border-radius:7px;padding:.85rem;margin-bottom:.7rem;}
-.item-adm-fields{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.5rem;}
-.item-adm-row{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;}
-.item-adm-row label{font-family:Arial,sans-serif;font-size:.77rem;color:var(--graa);min-width:60px;}
-.item-adm-row .fi{flex:1;min-width:100px;font-size:.83rem;padding:.45rem .65rem;}
-.item-adm-btns{display:flex;gap:.5rem;flex-wrap:wrap;}
-.bst-adm-item{background:var(--lys-sand);border-radius:7px;padding:.85rem;margin-bottom:.7rem;}
-.bst-adm-top{display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem;}
-.bst-adm-ava{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--lys-blaa),var(--groen));display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;flex-shrink:0;overflow:hidden;position:relative;}
-.bst-adm-ava img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;}
-.bst-adm-navn{font-family:Arial,sans-serif;font-size:.87rem;font-weight:bold;color:var(--blaa);}
-.foto-lbl{display:inline-block;padding:.38rem .75rem;background:var(--blaa);color:#fff;border-radius:5px;font-family:Arial,sans-serif;font-size:.78rem;cursor:pointer;white-space:nowrap;}
-.foto-lbl:hover{background:var(--lys-blaa);}
-.foto-inp{display:none;}
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:720px){
-  .hero{min-height:55vh;}
-  .nav-links{display:none;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:var(--blaa);padding:.8rem;gap:.2rem;box-shadow:0 4px 12px rgba(0,0,0,.2);}
-  .nav-links.open{display:flex;}
-  .hamburger{display:flex;}
-  .hero-inner{padding:7rem 1.2rem 4rem;}
-  .tre-grid{grid-template-columns:1fr;}
-  .k-grid{grid-template-columns:1fr;}
-  .mboks ul{padding:1rem 1.1rem;}
-  .mform{padding:1rem 1.1rem;}
-  #cookie-banner{flex-direction:column;}
-  .besked-btns{flex-direction:column;}
-  .ak{flex-direction:column;gap:.5rem;}
-  .bst-grid{grid-template-columns:repeat(2,1fr);}
-}
-@media(max-width:400px){
-  .bst-grid{grid-template-columns:1fr;}
-}
-</style>
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="nav">
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     OPDATERINGS-BANNER (PWA)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="update-banner" role="alert" aria-live="polite">
+  🔄 En ny version er klar –
+  <button id="update-now" class="btn btn-sm" style="background:var(--c-navy);color:#fff;padding:.3rem .8rem;margin-left:.4rem;">
+    Opdater nu
+  </button>
+</div>
+
+<!-- KONFIGFEJL (vises hvis config.js ikke er udfyldt) -->
+<div id="config-warn">
+  ⚙ Supabase ikke sat op – udfyld <strong>js/config.js</strong>
+  <a href="admin.html">→ Admin</a>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     NAVIGATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<nav id="nav" role="navigation" aria-label="Primær navigation">
   <div class="nav-inner">
-    <a href="#" class="nav-logo" onclick="visForside();return false;">🌊 Kystforeningen Djursland</a>
-    <ul class="nav-links" id="navLinks">
-      <li><button type="button" class="nav-btn" data-side="forside" onclick="visForside()">Forside</button></li>
-      <li><button type="button" class="nav-btn" data-side="om" onclick="visUnderside('om')">Om foreningen</button></li>
-      <li><button type="button" class="nav-btn" data-side="aktiviteter" onclick="visUnderside('aktiviteter')">Aktiviteter</button></li>
-      <li><button type="button" class="nav-btn" data-side="sager" onclick="visUnderside('sager')">Aktuelle sager</button></li>
-      <li><button type="button" class="nav-btn" data-side="bestyrelse" onclick="visUnderside('bestyrelse')">Bestyrelse</button></li>
-      <li><button type="button" class="nav-btn" data-side="gf" onclick="visUnderside('gf')">Generalforsamling</button></li>
-      <li><button type="button" class="nav-btn" data-side="medlem" onclick="visUnderside('medlem')">Medlemskab</button></li>
-      <li><button type="button" class="nav-btn" data-side="kontakt" onclick="visUnderside('kontakt')">Kontakt</button></li>
+    <a href="#" class="nav-logo" id="nav-logo" aria-label="Kystforeningen Djursland – forside">
+      🌊 Kystforeningen Djursland
+    </a>
+    <ul class="nav-links" id="nav-links" role="list">
+      <li><button class="nav-btn" data-page="forside">Forside</button></li>
+      <li><button class="nav-btn" data-page="om">Om foreningen</button></li>
+      <li><button class="nav-btn" data-page="aktiviteter">Aktiviteter</button></li>
+      <li><button class="nav-btn" data-page="sager">Aktuelle sager</button></li>
+      <li><button class="nav-btn" data-page="bestyrelse">Bestyrelse</button></li>
+      <li><button class="nav-btn" data-page="gf">Generalforsamling</button></li>
+      <li><button class="nav-btn" data-page="medlem">Bliv medlem</button></li>
+      <li><button class="nav-btn" data-page="kontakt">Kontakt</button></li>
     </ul>
-    <button class="hamburger" id="hamburger" type="button" aria-label="Menu">
+    <button class="hamburger" id="hamburger" aria-label="Åbn menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<!-- ========== HERO ========== -->
-<section id="forside" class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-inner">
-    <div class="kicker">Folkeoplysende · Partipolitisk uafhængig forening</div>
-    <h1>Bevar Djurslands kyster</h1>
-    <p class="hero-sub">Vi arbejder for at bevare naturen og de rekreative områder langs Djurslands kyster gennem folkeoplysning, fællesskab og konkrete aktiviteter.</p>
-    <div class="hero-btns">
-      <button type="button" class="btn btn-groen" data-side="aktiviteter" onclick="visUnderside('aktiviteter')" style="font-size:.93rem;padding:.75rem 1.9rem;">Se aktiviteter</button>
-      <button type="button" class="btn btn-outline" data-side="medlem" onclick="visUnderside('medlem')" style="font-size:.93rem;padding:.75rem 1.9rem;">Bliv medlem</button>
-    </div>
-  </div>
-  <button class="hero-scroll" onclick="window.scrollTo({top:window.innerHeight*0.65,behavior:'smooth'})" aria-label="Scroll ned">
-    <span>Scroll</span>
-    <div class="hero-pil"></div>
-  </button>
-</section>
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     FORSIDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="page-forside" class="page active">
 
-<!-- ========== INTRO (kort præsentation) ========== -->
-<section id="intro" class="sek" style="padding:1.8rem 1.2rem;">
-  <div class="mw">
-    <p class="om-tekst"><strong>Kystforeningen Djursland</strong> er en åben, uafhængig folkeoplysende forening, der arbejder for at bevare naturen, kystlandskaberne og de rekreative områder på Djursland. Vi samler borgere med interesse i kystnaturen og giver dem en fælles stemme gennem oplysning, aktiviteter og dialog.</p>
-  </div>
-</section>
-
-<div class="divider forside-divider"></div>
-
-<!-- ========== TRE BOKSE ========== -->
-<section class="sek sek-sand tre-sek" style="padding:2rem 1.2rem;">
-  <div class="mw">
-    <div class="tre-grid">
-      <div class="tre-boks">
-        <div class="tb-tag">📅 Kommende aktivitet</div>
-        <h3 id="tb-ak-titel">Forårsvandring langs kysten</h3>
-        <p id="tb-ak-tekst">Guidet vandring med naturformidling ved Mols Bjerge. Lørdag d. 14. juni 2026 kl. 10:00.</p>
-        <button type="button" class="btn btn-blaa btn-sm" data-side="aktiviteter" onclick="visUnderside('aktiviteter')">Se alle aktiviteter</button>
-      </div>
-      <div class="tre-boks">
-        <div class="tb-tag">📢 Seneste nyhed</div>
-        <h3 id="tb-ny-titel">Generalforsamling afholdt</h3>
-        <p id="tb-ny-tekst">Årets generalforsamling blev afholdt i marts 2026. Referat er tilgængeligt under Generalforsamling.</p>
-        <button type="button" class="btn btn-blaa btn-sm" data-side="gf" onclick="visUnderside('gf')">Se dokumenter</button>
-      </div>
-      <div class="tre-boks">
-        <div class="tb-tag">⚡ Aktuel sag</div>
-        <h3 id="tb-sag-titel">Ålerne / Grobund</h3>
-        <p id="tb-sag-tekst">Projekt om udvikling nær kysten ved Grobund-området følges løbende af foreningen.</p>
-        <button type="button" class="btn btn-blaa btn-sm" data-side="sager" onclick="visUnderside('sager')">Se alle sager</button>
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-h1">
+    <div class="hero-bg" role="img" aria-label="Udsigt over Randers Fjord med gyldne marker og skov"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-kicker">Folkeoplysende · Partipolitisk uafhængig forening</p>
+      <h1 id="hero-h1">Bevar Djurslands kyster</h1>
+      <p class="hero-sub">Vi arbejder for at bevare naturen og de rekreative områder langs Djurslands kyster gennem folkeoplysning, fællesskab og konkrete aktiviteter.</p>
+      <div class="hero-btns">
+        <button class="btn btn-primary btn-lg" data-goto="aktiviteter">Se aktiviteter</button>
+        <button class="btn btn-outline btn-lg" data-goto="medlem">Bliv medlem</button>
       </div>
     </div>
-  </div>
-</section>
+    <button class="hero-scroll" aria-label="Scroll ned" id="hero-scroll">
+      <span>Scroll</span>
+      <div class="hero-chevron"></div>
+    </button>
+  </section>
 
-<div class="divider"></div>
-
-<!-- ========== OM FORENINGEN ========== -->
-<section id="om" class="sek underside" class="sek">
-  <div class="mw">
-    <h2 class="h2">Om foreningen</h2>
-    <div class="linje"></div>
-    <p class="om-tekst" style="margin-bottom:1.4rem;">Foreningen til bevarelse af naturen og rekreative områder langs kysterne på Djursland er en partipolitisk uafhængig folkeoplysende forening stiftet af borgere med kærlighed til Djurslands kyst og natur.</p>
-    <div class="om-grid">
-      <div class="om-kort"><h3>🎯 Formål</h3><p>At bevare naturen, landskaberne og de rekreative kystområder til glæde for nuværende og kommende generationer.</p></div>
-      <div class="om-kort"><h3>📚 Folkeoplysning</h3><p>Foredrag, vandringer, borgermøder og formidling af viden om natur, miljø og planlægning.</p></div>
-      <div class="om-kort"><h3>👥 Fællesskab</h3><p>Åben for alle borgere uanset bopæl. Stemmeret og indflydelse for alle medlemmer.</p></div>
-      <div class="om-kort"><h3>⚖️ Uafhængig</h3><p>Ingen partipolitiske eller kommercielle bindinger. Foreningen taler alene naturens og borgernes sag.</p></div>
+  <!-- KORT PRÆSENTATION -->
+  <section class="section home-only" id="intro" aria-labelledby="intro-h2">
+    <div class="mw-sm">
+      <p class="section-label">Om foreningen</p>
+      <h2 id="intro-h2">En åben og uafhængig forening for alle</h2>
+      <div class="section-line"></div>
+      <p class="intro-text">
+        Kystforeningen Djursland er en åben, partipolitisk uafhængig folkeoplysende forening, der samler borgere med kærlighed til Djurslands kyst og natur.
+        Vi oplyser, arrangerer aktiviteter og fremmer fællesskabet om de natur- og landskabsværdier, vi har til fælles ansvar at bevare.
+      </p>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider"></div>
+  <!-- TRE BOKSE -->
+  <section class="section section-sand home-only" aria-label="Highlights">
+    <div class="mw">
+      <div class="tres" id="tres-grid">
 
-<!-- ========== AKTIVITETER ========== -->
-<section id="aktiviteter" class="sek sek-sand underside">
-  <div class="mw">
-    <h2 class="h2">Aktiviteter</h2>
-    <div class="linje"></div>
-    <p style="font-family:Arial,sans-serif;font-size:.85rem;color:var(--graa);margin-bottom:1rem;">Alle arrangementer er åbne for medlemmer og interesserede borgere.</p>
-    <div class="ak-liste" id="ak-liste"><!-- JS --></div>
-  </div>
-</section>
+        <article class="tres-boks">
+          <div class="tres-tag">📅 Kommende aktivitet</div>
+          <h3 id="tb-ak-h">Forårsvandring langs kysten</h3>
+          <p id="tb-ak-p">Guidet vandring med naturformidling. Lørdag d. 14. juni 2026 kl. 10:00.</p>
+          <button class="btn btn-navy btn-sm" data-goto="aktiviteter">Se alle aktiviteter</button>
+        </article>
 
-<div class="divider"></div>
+        <article class="tres-boks">
+          <div class="tres-tag">📢 Seneste nyhed</div>
+          <h3 id="tb-ny-h">Generalforsamling afholdt</h3>
+          <p id="tb-ny-p">Årets generalforsamling fandt sted i marts 2026. Referat kan downloades.</p>
+          <button class="btn btn-navy btn-sm" data-goto="gf">Se dokumenter</button>
+        </article>
 
-<!-- ========== AKTUELLE SAGER ========== -->
-<section id="sager" class="sek underside">
-  <div class="mw">
-    <h2 class="h2">Aktuelle sager</h2>
-    <div class="linje"></div>
-    <div class="sag-note">📋 Vi formidler offentligt tilgængelig information om sager der berører Djurslands kyster og natur. Foreningen er ikke kampagneorganisation.</div>
-    <div class="sag-grid" id="sag-grid"><!-- JS --></div>
-  </div>
-</section>
+        <article class="tres-boks">
+          <div class="tres-tag">⚡ Aktuel sag</div>
+          <h3 id="tb-sag-h">Vindmøller ved Vosnæs</h3>
+          <p id="tb-sag-p">Planer om vindmøller i kystnære områder er under kommunal behandling.</p>
+          <button class="btn btn-navy btn-sm" data-goto="sager">Se alle sager</button>
+        </article>
 
-<div class="divider"></div>
-
-<!-- ========== BESTYRELSE ========== -->
-<section id="bestyrelse" class="sek sek-sand underside">
-  <div class="mw">
-    <h2 class="h2">Bestyrelse</h2>
-    <div class="linje"></div>
-    <div class="bst-grid" id="bst-grid"><!-- JS --></div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ========== GENERALFORSAMLING ========== -->
-<section id="gf" class="sek underside">
-  <div class="mw">
-    <h2 class="h2">Generalforsamling & dokumenter</h2>
-    <div class="linje"></div>
-    <p style="font-family:Arial,sans-serif;font-size:.85rem;color:var(--graa);margin-bottom:1.2rem;">Alle officielle dokumenter er offentligt tilgængelige. Klik for at åbne eller downloade som PDF.</p>
-    <div id="dok-omraader"><!-- JS --></div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ========== MEDLEMSKAB ========== -->
-<section id="medlem" class="sek sek-sand underside">
-  <div class="mw center">
-    <h2 class="h2">Bliv medlem</h2>
-    <div class="linje-c"></div>
-    <p style="font-family:Arial,sans-serif;font-size:.88rem;color:var(--graa);margin-bottom:1.6rem;">Støt bevarelsen af Djurslands kyster – alle interesserede borgere kan melde sig ind.</p>
-    <div class="mboks">
-      <div class="mboks-top">
-        <div class="pris" id="vis-pris">150 kr.</div>
-        <div class="pris-note" id="vis-note">per år · familiemedlemskab 250 kr.</div>
-      </div>
-      <ul>
-        <li>Nyhedsbrev og løbende orientering om sager</li>
-        <li>Adgang til alle arrangementer og aktiviteter</li>
-        <li>Stemmeret på den årlige generalforsamling</li>
-        <li>Mulighed for at påvirke foreningens arbejde</li>
-      </ul>
-      <div class="mform">
-        <input type="text" class="fi" id="m-navn" placeholder="Navn *">
-        <input type="email" class="fi" id="m-email" placeholder="E-mail *">
-        <input type="tel" class="fi" id="m-tlf" placeholder="Telefon">
-        <textarea class="fi" id="m-kommentar" placeholder="Kommentar (valgfrit)" style="height:68px;"></textarea>
-        <button type="button" class="btn btn-blaa btn-full" id="btn-tilmeld">Send tilmelding</button>
-        <div id="m-err" class="svar err"></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider"></div>
+</div><!-- /page-forside -->
 
-<!-- ========== KONTAKT ========== -->
-<section id="kontakt" class="sek underside">
-  <div class="mw">
-    <h2 class="h2">Kontakt</h2>
-    <div class="linje"></div>
-    <div class="k-grid">
-      <div class="k-info">
-        <div class="k-kort">
-          <h3>Kontaktperson</h3>
-          <div class="k-raekke"><span class="ki">👤</span><span id="k-vis-navn">[Formandens navn]</span></div>
-          <div class="k-raekke"><span class="ki">📧</span><a id="k-vis-mail" href="mailto:info@kystforeningendj.dk">info@kystforeningendj.dk</a></div>
-          <div class="k-raekke"><span class="ki">📞</span><a id="k-vis-tlf" href="tel:+4500000000">+45 00 00 00 00</a></div>
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     OM FORENINGEN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="page-om" class="page">
+  <section class="section" aria-labelledby="om-h2">
+    <div class="mw">
+      <p class="section-label">Hvem er vi</p>
+      <h2 id="om-h2">Om foreningen</h2>
+      <div class="section-line"></div>
+      <p style="max-width:640px;font-size:.95rem;color:#374141;line-height:1.8;margin-bottom:var(--space-lg);">
+        Foreningen til bevarelse af naturen og rekreative områder langs kysterne på Djursland er en partipolitisk uafhængig folkeoplysende forening.
+        Vi er åbne for alle borgere med interesse for kystnaturen, og vi arbejder igennem oplysning, aktiviteter og dialog.
+      </p>
+      <div class="om-grid">
+        <div class="om-kort"><div class="ok-icon">🎯</div><h4>Formål</h4><p>At bevare naturen, landskaberne og de rekreative kystområder til glæde for nuværende og kommende generationer.</p></div>
+        <div class="om-kort"><div class="ok-icon">📚</div><h4>Folkeoplysning</h4><p>Foredrag, vandringer, borgermøder og formidling af viden om natur, miljø og planlægning.</p></div>
+        <div class="om-kort"><div class="ok-icon">👥</div><h4>Fællesskab</h4><p>Åben for alle borgere uanset bopæl. Stemmeret og indflydelse for alle medlemmer.</p></div>
+        <div class="om-kort"><div class="ok-icon">🤝</div><h4>Borgerinddragelse</h4><p>Vi oplyser om planlægning og aktuelle projekter og inddrager borgerne i dialogen.</p></div>
+        <div class="om-kort"><div class="ok-icon">⚖️</div><h4>Uafhængig</h4><p>Ingen partipolitiske eller kommercielle bindinger. Vi taler naturens og borgernes sag.</p></div>
+        <div class="om-kort"><div class="ok-icon">🌿</div><h4>Naturformidling</h4><p>Vi formidler viden om Djurslands kystlandskaber, biodiversitet og havmiljø.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     AKTIVITETER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="page-aktiviteter" class="page">
+  <section class="section" aria-labelledby="ak-h2">
+    <div class="mw">
+      <p class="section-label">Hvad sker der</p>
+      <h2 id="ak-h2">Aktiviteter</h2>
+      <div class="section-line"></div>
+      <p style="font-size:.88rem;color:var(--c-muted);margin-bottom:var(--space-md);">
+        Alle arrangementer er åbne for medlemmer og interesserede borgere. Tilmelding ikke nødvendig, medmindre andet er angivet.
+      </p>
+      <div class="ak-list" id="ak-list">
+        <p class="text-muted">Indlæser aktiviteter...</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     AKTUELLE SAGER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="page-sager" class="page">
+  <section class="section" aria-labelledby="sag-h2">
+    <div class="mw">
+      <p class="section-label">Vi holder øje</p>
+      <h2 id="sag-h2">Aktuelle sager</h2>
+      <div class="section-line"></div>
+      <div class="sag-note" role="note">
+        📋 Vi formidler offentligt tilgængeligt materiale om sager der berører Djurslands kyster og natur.
+        Foreningen er ikke kampagneorganisation – vi oplyser og inddrager borgerne.
+      </div>
+      <div class="sag-grid" id="sag-grid">
+        <p class="text-muted">Indlæser sager...</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     BESTYRELSE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="page-bestyrelse" class="page">
+  <section class="section" aria-labelledby="bst-h2">
+    <div class="mw">
+      <p class="section-label">Hvem driver foreningen</p>
+      <h2 id="bst-h2">Bestyrelse</h2>
+      <div class="section-line"></div>
+      <div class="bst-grid" id="bst-grid">
+        <p class="text-muted">Indlæser bestyrelse...</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     GENERALFORSAMLING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="page-gf" class="page">
+  <section class="section" aria-labelledby="gf-h2">
+    <div class="mw">
+      <p class="section-label">Dokumenter og referater</p>
+      <h2 id="gf-h2">Generalforsamling & dokumenter</h2>
+      <div class="section-line"></div>
+      <p style="font-size:.88rem;color:var(--c-muted);margin-bottom:var(--space-md);">
+        Alle officielle dokumenter er offentligt tilgængelige. Klik for at åbne eller downloade som PDF.
+      </p>
+      <div id="dok-areas">
+        <p class="text-muted">Indlæser dokumenter...</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     BLIV MEDLEM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="page-medlem" class="page">
+  <section class="section text-center" aria-labelledby="med-h2">
+    <div class="mw">
+      <p class="section-label">Støt bevarelsen</p>
+      <h2 id="med-h2">Bliv medlem</h2>
+      <div class="section-line-c"></div>
+      <p style="font-size:.88rem;color:var(--c-muted);margin-bottom:var(--space-lg);">
+        Alle interesserede borgere kan melde sig ind – uanset bopæl.
+      </p>
+      <div class="membership-box">
+        <div class="mb-top">
+          <div class="mb-price" id="mb-price">150 kr.</div>
+          <div class="mb-note"  id="mb-note">per år · familiemedlemskab 250 kr.</div>
         </div>
-        <div class="k-kort">
-          <h3>Find os</h3>
-          <div class="k-raekke"><span class="ki">📍</span><span style="font-family:Arial,sans-serif;font-size:.87rem;">Djursland, Region Midtjylland</span></div>
-          <div class="k-raekke"><span class="ki">📘</span><a href="#" style="color:var(--lys-blaa);text-decoration:none;font-weight:bold;font-family:Arial,sans-serif;font-size:.87rem;">Kystforeningen Djursland på Facebook</a></div>
+        <ul class="mb-perks" aria-label="Fordele ved medlemskab">
+          <li>Nyhedsbrev og løbende orientering</li>
+          <li>Adgang til alle arrangementer og aktiviteter</li>
+          <li>Stemmeret på den årlige generalforsamling</li>
+          <li>Mulighed for at påvirke foreningens arbejde</li>
+        </ul>
+        <div class="mb-form">
+          <input type="text"  class="fi" id="m-navn"      placeholder="Navn *" autocomplete="name">
+          <input type="email" class="fi" id="m-email"     placeholder="E-mail *" autocomplete="email">
+          <input type="tel"   class="fi" id="m-tlf"       placeholder="Telefon (valgfrit)" autocomplete="tel">
+          <textarea           class="fi" id="m-kommentar" placeholder="Kommentar (valgfrit)" style="height:70px;"></textarea>
+          <button type="button" class="btn btn-primary btn-full" id="btn-tilmeld">Send tilmelding</button>
+          <div id="m-alert" class="alert" role="alert"></div>
         </div>
-        <p style="font-family:Arial,sans-serif;font-size:.8rem;color:var(--graa);">Vi svarer normalt inden for 3 hverdage.</p>
-      </div>
-      <div class="k-form">
-        <input type="text" class="fi" id="k-navn" placeholder="Dit navn *">
-        <input type="email" class="fi" id="k-email" placeholder="Din e-mail *">
-        <textarea class="fi" id="k-besked" placeholder="Din besked *"></textarea>
-        <button type="button" class="btn btn-blaa btn-full" id="btn-kontakt">Send besked</button>
-        <div id="k-err" class="svar err"></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
-<!-- ========== FOOTER ========== -->
-<footer>
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     KONTAKT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="page-kontakt" class="page">
+  <section class="section" aria-labelledby="kont-h2">
+    <div class="mw">
+      <p class="section-label">Skriv til os</p>
+      <h2 id="kont-h2">Kontakt</h2>
+      <div class="section-line"></div>
+      <div class="kontakt-grid">
+        <div class="kontakt-info">
+          <div class="k-kort">
+            <h4>Kontaktperson</h4>
+            <div class="k-row"><span class="ki">👤</span><span id="k-navn">[Formandens navn]</span></div>
+            <div class="k-row"><span class="ki">📧</span><a id="k-email" href="mailto:info@kystforeningendj.dk">info@kystforeningendj.dk</a></div>
+            <div class="k-row"><span class="ki">📞</span><a id="k-tlf"   href="tel:+4500000000">+45 00 00 00 00</a></div>
+          </div>
+          <div class="k-kort">
+            <h4>Find os</h4>
+            <div class="k-row"><span class="ki">📍</span><span>Djursland, Region Midtjylland</span></div>
+            <div class="k-row"><span class="ki">📘</span><a id="k-fb" href="#">Kystforeningen Djursland på Facebook</a></div>
+          </div>
+          <p class="text-muted">Vi svarer normalt inden for 3 hverdage.</p>
+        </div>
+        <div>
+          <div class="k-form">
+            <input type="text"  class="fi" id="k-navn-form"  placeholder="Dit navn *" autocomplete="name">
+            <input type="email" class="fi" id="k-email-form" placeholder="Din e-mail *" autocomplete="email">
+            <textarea           class="fi" id="k-besked"     placeholder="Din besked *"></textarea>
+            <button type="button" class="btn btn-navy btn-full" id="btn-kontakt">Send besked</button>
+            <div id="k-alert" class="alert" role="alert"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     FOOTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<footer role="contentinfo">
   <strong>Kystforeningen Djursland</strong>
   <p>Bevarelse af naturen og de rekreative kystområder på Djursland</p>
-  <p style="margin-top:.4rem;">Folkeoplysende forening · Partipolitisk uafhængig · CVR: [indsæt] · © 2026</p>
-  <div class="footer-links">
-    <a href="#" id="fp-link">Privatlivspolitik</a>
-    <span>·</span>
-    <a href="#" id="fc-link">Cookiepolitik</a>
-    <span>·</span>
-    <a href="#" id="fa-link">Admin</a>
-    <span>·</span>
-    <span>Hjemmeside: <a href="https://nordic-operations.dk" target="_blank" rel="noopener" style="color:rgba(255,255,255,.6);">Nordic Operations</a></span>
-  </div>
+  <p style="margin-top:.4rem;">
+    Folkeoplysende forening · Partipolitisk uafhængig · CVR: <span id="f-cvr">[indsæt]</span> · © 2026
+  </p>
+  <nav class="footer-links" aria-label="Footer navigation">
+    <a href="#" id="fp-priv">Privatlivspolitik</a>
+    <span aria-hidden="true">·</span>
+    <a href="#" id="fp-cook">Cookiepolitik</a>
+    <span aria-hidden="true">·</span>
+    <a href="admin.html" id="fp-admin">Admin</a>
+    <span aria-hidden="true">·</span>
+    <span>Hjemmeside: <a href="https://nordic-operations.dk" target="_blank" rel="noopener">Nordic Operations</a></span>
+  </nav>
 </footer>
 
-<!-- LÆS MERE (sager) -->
-<div class="modal-ov" id="sag-modal">
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     MODALER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+
+<!-- LÆS MERE – SAG -->
+<div class="modal-ov" id="modal-sag" role="dialog" aria-modal="true" aria-labelledby="sag-modal-h2">
   <div class="modal">
-    <div class="modal-hdr"><h2 id="sm-titel">Sag</h2><button type="button" class="mluk" id="sm-luk">✕</button></div>
-    <div class="modal-body" id="sm-body"></div>
+    <div class="modal-hdr">
+      <h2 id="sag-modal-h2">Sag</h2>
+      <button class="modal-close" data-close="modal-sag" aria-label="Luk">✕</button>
+    </div>
+    <div class="modal-body" id="sag-modal-body"></div>
   </div>
 </div>
 
 <!-- BESKED DIALOG -->
-<div class="modal-ov" id="besked-modal">
+<div class="modal-ov" id="modal-besked" role="dialog" aria-modal="true" aria-labelledby="besked-modal-h2">
   <div class="modal">
-    <div class="modal-hdr"><h2 id="bd-titel">Besked klar</h2><button type="button" class="mluk" id="bd-luk">✕</button></div>
+    <div class="modal-hdr">
+      <h2 id="besked-modal-h2">Besked klar til afsendelse</h2>
+      <button class="modal-close" data-close="modal-besked" aria-label="Luk">✕</button>
+    </div>
     <div class="modal-body">
       <p id="bd-intro"></p>
-      <div class="besked-boks" id="bd-tekst"></div>
+      <div class="besked-boks" id="bd-tekst" aria-label="Beskedindhold"></div>
       <div class="besked-btns">
-        <button type="button" class="btn btn-groen btn-sm" id="bd-kopi">📋 Kopiér</button>
-        <a href="#" class="btn btn-blaa btn-sm" id="bd-mailto">✉ Åbn e-mailprogram</a>
-        <button type="button" class="btn btn-graa btn-sm" id="bd-luk2">Luk</button>
+        <button class="btn btn-primary btn-sm" id="bd-kopi">📋 Kopiér</button>
+        <a href="#" class="btn btn-navy btn-sm" id="bd-mailto">✉ Åbn e-mailprogram</a>
+        <button class="btn btn-ghost btn-sm" data-close="modal-besked">Luk</button>
       </div>
-      <p style="margin-top:.8rem;font-size:.77rem;color:var(--graa);">Send til: <strong id="bd-til"></strong></p>
+      <p class="text-muted" style="margin-top:.8rem;">Send til: <strong id="bd-til"></strong></p>
     </div>
   </div>
 </div>
 
 <!-- PRIVATLIVSPOLITIK -->
-<div class="modal-ov" id="m-priv">
+<div class="modal-ov" id="modal-priv" role="dialog" aria-modal="true" aria-labelledby="priv-h2">
   <div class="modal">
-    <div class="modal-hdr"><h2>🔒 Privatlivspolitik</h2><button type="button" class="mluk" id="luk-priv">✕</button></div>
+    <div class="modal-hdr">
+      <h2 id="priv-h2">🔒 Privatlivspolitik</h2>
+      <button class="modal-close" data-close="modal-priv" aria-label="Luk">✕</button>
+    </div>
     <div class="modal-body">
-      <p><strong>Kystforeningen Djursland</strong> er dataansvarlig for personoplysninger vi behandler.</p>
+      <p><strong>Kystforeningen Djursland</strong> er dataansvarlig for de personoplysninger vi behandler.</p>
       <h3>Oplysninger vi behandler</h3>
-      <ul><li>Navn, e-mail og telefon ved tilmelding</li><li>Navn, e-mail og besked ved kontakthenvendelse</li></ul>
+      <ul><li>Navn, e-mail og telefon ved medlemstilmelding</li><li>Navn, e-mail og besked ved kontakthenvendelse</li></ul>
       <h3>Formål og retsgrundlag</h3>
       <p>Oplysningerne bruges til at administrere medlemskab og besvare henvendelser (GDPR art. 6, stk. 1, litra a og b).</p>
       <h3>Opbevaring</h3>
       <p>Medlemsoplysninger slettes senest 1 år efter udmeldelse. Kontakthenvendelser slettes senest 2 år efter modtagelse.</p>
       <h3>Dine rettigheder</h3>
-      <p>Ret til indsigt, berigtigelse og sletning. Klage til <a href="https://datatilsynet.dk" target="_blank" style="color:var(--lys-blaa);">Datatilsynet</a>.</p>
-      <p>Kontakt: <a href="mailto:info@kystforeningendj.dk" style="color:var(--lys-blaa);">info@kystforeningendj.dk</a></p>
+      <p>Ret til indsigt, berigtigelse og sletning. Klage til <a href="https://datatilsynet.dk" target="_blank" rel="noopener">Datatilsynet</a>.</p>
+      <p>Kontakt: <a href="mailto:info@kystforeningendj.dk">info@kystforeningendj.dk</a></p>
     </div>
   </div>
 </div>
 
 <!-- COOKIEPOLITIK -->
-<div class="modal-ov" id="m-cook">
+<div class="modal-ov" id="modal-cook" role="dialog" aria-modal="true" aria-labelledby="cook-h2">
   <div class="modal">
-    <div class="modal-hdr"><h2>🍪 Cookiepolitik</h2><button type="button" class="mluk" id="luk-cook">✕</button></div>
+    <div class="modal-hdr">
+      <h2 id="cook-h2">🍪 Cookiepolitik</h2>
+      <button class="modal-close" data-close="modal-cook" aria-label="Luk">✕</button>
+    </div>
     <div class="modal-body">
-      <p><strong>OBS – kun localStorage:</strong> Denne hjemmeside gemmer udelukkende data lokalt i din browser via localStorage. Det betyder at ændringer foretaget i admin kun vises på den enhed og browser, der redigerede. Der er ingen fælles database eller server.</p>
-      <p>Data der gemmes: dit cookievalg, kontingentsatser, aktiviteter, sager, dokumenter, bestyrelse og kontaktoplysninger.</p>
-      <p>Ingen tracking, ingen analysecookies, ingen reklamecookies. Du kan rydde data i browserindstillingerne.</p>
-      <p>Kontakt: <a href="mailto:info@kystforeningendj.dk" style="color:var(--lys-blaa);">info@kystforeningendj.dk</a></p>
+      <p>Denne hjemmeside gemmer udelukkende funktionelle data i din browser (sessionStorage og cookies til login). Vi anvender ingen tracking, ingen analysecookies og ingen reklamecookies.</p>
+      <p>Data fra Supabase (indhold, billeder, dokumenter) indlæses fra vores sikre database og gemmes ikke lokalt i din browser.</p>
+      <p>Spørgsmål: <a href="mailto:info@kystforeningendj.dk">info@kystforeningendj.dk</a></p>
     </div>
   </div>
 </div>
 
 <!-- COOKIE BANNER -->
-<div id="cookie-banner" style="display:none;">
-  <p>Vi bruger kun funktionelle data i din browser – ingen tracking. <a id="ck-laes">Læs mere</a></p>
+<div id="cookie-banner" role="complementary" aria-label="Cookiesamtykke" style="display:none;">
+  <p>Vi bruger kun nødvendige cookies til drift af siden – ingen tracking. <button id="ck-laes" class="btn btn-sm" style="background:none;border:none;color:#c8e6c9;padding:0;text-decoration:underline;cursor:pointer;font-size:inherit;">Læs mere</button></p>
   <div class="ck-btns">
-    <button type="button" class="btn btn-graa btn-sm" id="ck-nej">Kun nødvendige</button>
-    <button type="button" class="btn btn-groen btn-sm" id="ck-ja">OK</button>
+    <button type="button" class="btn btn-ghost btn-sm" style="color:#fff;border-color:rgba(255,255,255,.4);" id="ck-nej">Kun nødvendige</button>
+    <button type="button" class="btn btn-primary btn-sm" id="ck-ok">OK</button>
   </div>
 </div>
 
-<!-- ADMIN FAB -->
-<button type="button" id="adm-fab" title="Admin">⚙</button>
-
-<!-- ADMIN PANEL -->
-<div id="adm-ov">
-  <div id="adm-panel">
-    <div id="adm-hdr"><h2>⚙ Administration</h2><button type="button" class="mluk" id="adm-luk">✕</button></div>
-    <div id="adm-login-boks">
-      <p>Indtast adgangskoden for at redigere siden.</p>
-      <input type="password" class="fi" id="adm-pw" placeholder="Adgangskode" style="margin-bottom:.7rem;">
-      <button type="button" class="btn btn-blaa btn-full" id="adm-login-btn">Log ind</button>
-      <div id="adm-err" class="svar err" style="margin-top:.4rem;">⚠ Forkert adgangskode.</div>
-    </div>
-    <div id="adm-content">
-      <div class="adm-note">⚠ <strong>localStorage:</strong> Ændringer gemmes kun i denne browsers hukommelse på denne enhed. Hvis andre bestyrelsesmedlemmer skal se ændringerne, skal de uploade en ny version af HTML-filen.</div>
-
-      <!-- KONTINGENT -->
-      <div class="adm-sek">
-        <h3>💰 Kontingent</h3>
-        <div class="adm-row"><label>Enkelt:</label><input type="text" class="fi" id="a-enkelt" placeholder="150 kr."></div>
-        <div class="adm-row"><label>Familie:</label><input type="text" class="fi" id="a-familie" placeholder="250 kr."></div>
-        <div class="adm-row"><label>Note:</label><input type="text" class="fi" id="a-note" placeholder="per år"></div>
-        <div class="kt-prev" id="kt-prev"></div>
-        <button type="button" class="btn btn-groen btn-sm" style="margin-top:.7rem;" id="btn-gem-kt">💾 Gem kontingent</button>
-        <div id="kt-svar" class="svar ok" style="margin-top:.4rem;"></div>
-      </div>
-
-      <!-- AKTIVITETER -->
-      <div class="adm-sek">
-        <h3>📅 Aktiviteter</h3>
-        <p class="hint">Ret titel, dato og beskrivelse. Klik Gem for at opdatere siden.</p>
-        <div id="ak-adm-liste"></div>
-        <button type="button" class="btn btn-groen btn-sm" id="btn-tilf-ak" style="margin-top:.3rem;">➕ Tilføj aktivitet</button>
-        <div id="ak-svar" class="svar ok" style="margin-top:.4rem;"></div>
-      </div>
-
-      <!-- NYHEDER (forsideboks) -->
-      <div class="adm-sek">
-        <h3>📢 Seneste nyhed (forsideboks)</h3>
-        <div class="adm-row"><label>Titel:</label><input type="text" class="fi" id="a-ny-titel" placeholder="Nyhedens overskrift"></div>
-        <div class="adm-row"><label>Tekst:</label><input type="text" class="fi" id="a-ny-tekst" placeholder="Kort beskrivelse"></div>
-        <button type="button" class="btn btn-groen btn-sm" style="margin-top:.5rem;" id="btn-gem-ny">💾 Gem nyhed</button>
-        <div id="ny-svar" class="svar ok" style="margin-top:.4rem;"></div>
-      </div>
-
-      <!-- AKTUELLE SAGER -->
-      <div class="adm-sek">
-        <h3>⚡ Aktuelle sager <span style="font-weight:normal;font-size:.8rem;color:var(--graa);">(max 5)</span></h3>
-        <p class="hint">Ret titel, kort tekst og uddybende tekst. "Arkivér" fjerner sagen fra forsiden.</p>
-        <div id="sag-adm-liste"></div>
-        <button type="button" class="btn btn-groen btn-sm" id="btn-tilf-sag" style="margin-top:.3rem;">➕ Tilføj sag</button>
-        <div id="sag-svar" class="svar ok" style="margin-top:.4rem;"></div>
-      </div>
-
-      <!-- BESTYRELSE -->
-      <div class="adm-sek">
-        <h3>👥 Bestyrelse</h3>
-        <p class="hint">Ret navn, rolle og mail. Upload foto fra din computer (gemmes som base64).</p>
-        <div id="bst-adm-liste"></div>
-        <button type="button" class="btn btn-groen btn-sm" id="btn-tilf-bst" style="margin-top:.3rem;">➕ Tilføj bestyrelsesmedlem</button>
-        <div id="bst-svar" class="svar ok" style="margin-top:.4rem;"></div>
-      </div>
-
-      <!-- DOKUMENTER -->
-      <div class="adm-sek">
-        <h3>📄 Dokumenter</h3>
-        <p class="hint">Indsæt link til PDF (Google Drive, Dropbox o.l.). Vælg kategori.</p>
-        <div class="adm-row"><label>Kategori:</label>
-          <select class="fi" id="dok-kat">
-            <option>Vedtægter</option><option>Referater</option>
-            <option>Generalforsamlinger</option><option>Høringssvar</option>
-            <option>Pressemeddelelser</option>
-          </select>
-        </div>
-        <div class="adm-row"><label>Titel:</label><input type="text" class="fi" id="dok-titel" placeholder="f.eks. Vedtægter 2026"></div>
-        <div class="adm-row"><label>Beskrivelse:</label><input type="text" class="fi" id="dok-besk" placeholder="f.eks. PDF · vedtaget 2026"></div>
-        <div class="adm-row"><label>Link:</label><input type="url" class="fi" id="dok-url" placeholder="https://..."></div>
-        <button type="button" class="btn btn-groen btn-sm" id="btn-tilf-dok">➕ Tilføj dokument</button>
-        <div id="dok-svar" class="svar ok" style="margin-top:.4rem;"></div>
-        <ul class="dok-adm-ul" id="dok-adm-ul" style="margin-top:.9rem;"></ul>
-      </div>
-
-      <!-- KONTAKTOPLYSNINGER -->
-      <div class="adm-sek">
-        <h3>☎️ Kontaktoplysninger</h3>
-        <div class="adm-row"><label>Navn:</label><input type="text" class="fi" id="a-kn" placeholder="Formandens navn"></div>
-        <div class="adm-row"><label>E-mail:</label><input type="email" class="fi" id="a-km" placeholder="info@..."></div>
-        <div class="adm-row"><label>Telefon:</label><input type="tel" class="fi" id="a-kt" placeholder="+45 12 34 56 78"></div>
-        <button type="button" class="btn btn-groen btn-sm" style="margin-top:.5rem;" id="btn-gem-k">💾 Gem kontakt</button>
-        <div id="k-svar" class="svar ok" style="margin-top:.4rem;"></div>
-      </div>
-
-      <div style="text-align:center;padding-top:.3rem;">
-        <button type="button" class="btn btn-graa btn-sm" id="btn-logout">Log ud</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-/* =====================================================
-   KYSTFORENINGEN DJURSLAND – JavaScript
-   =====================================================
-
-   *** ADGANGSKODE TIL ADMIN ***
-   Find linjen nedenfor og skift 'Kyst2026!' til
-   din ønskede adgangskode. Hold den hemmelig.
-
-   BEMÆRK: Hjemmesiden bruger localStorage.
-   Det betyder at alle ændringer KUN gemmes i
-   den browser og enhed, der redigerer.
-   Der er ingen fælles database eller server.
-   ===================================================== */
-
-/* ===== SIDE-NAVIGATION (forside / undersider) =====
-   Siden er en single-page app.
-   Forside: hero + intro + tre bokse vises altid.
-   Undersider: skjult som standard, vises ved menuklik.
-   ===================================================== */
-var UNDERSIDER = ['om','aktiviteter','sager','bestyrelse','gf','medlem','kontakt'];
-
-/* -------------------------------------------------------
-   NAVIGATION – single-page med browser history support.
-   visForside() og visUnderside(id) styrer hvad der vises.
-   pushState sikrer at tilbageknap virker korrekt.
-   ------------------------------------------------------- */
-
-function _visSide(id){
-  // Skjul/vis intro + tre bokse
-  var intro=document.getElementById('intro');
-  var treS=document.querySelector('.tre-sek');
-  var fd=document.querySelector('.forside-divider');
-  var erForside=(id==='forside');
-  if(intro) intro.style.display=erForside?'':'none';
-  if(treS)  treS.style.display=erForside?'':'none';
-  if(fd)    fd.style.display=erForside?'':'none';
-  // Skjul alle undersider
-  UNDERSIDER.forEach(function(uid){
-    var s=document.getElementById(uid);
-    if(s) s.style.display='none';
-  });
-  // Vis underside hvis ikke forside
-  if(!erForside){
-    var t=document.getElementById(id);
-    if(t) t.style.display='block';
-  }
-  document.getElementById('navLinks').classList.remove('open');
-  window.scrollTo({top:0,behavior:'smooth'});
-  // Fremhæv aktiv menu-knap
-  document.querySelectorAll('.nav-btn').forEach(function(b){
-    var aktiv=b.getAttribute('data-side')===id;
-    b.style.background=aktiv?'rgba(255,255,255,.2)':'';
-    b.style.color=aktiv?'#fff':'';
-  });
-}
-
-function visForside(){
-  history.pushState({side:'forside'},'','#');
-  _visSide('forside');
-}
-
-function visUnderside(id){
-  history.pushState({side:id},'','#'+id);
-  _visSide(id);
-}
-
-// Tilbageknap / frem-knap i browseren
-window.addEventListener('popstate',function(e){
-  var id=(e.state&&e.state.side)||'forside';
-  _visSide(id);
-});
-
-/* ===== GLOBAL SCROLL ===== */
-function rulTil(id){
-  var t=document.getElementById(id);
-  if(!t) return;
-  var y=t.getBoundingClientRect().top+window.pageYOffset-58;
-  window.scrollTo({top:y,behavior:'smooth'});
-}
-function navRul(id){
-  var nl=document.getElementById('navLinks');
-  if(nl) nl.classList.remove('open');
-  setTimeout(function(){ rulTil(id); },50);
-}
-
-/* ===== NAV SCROLL ===== */
-(function(){
-  var nav=document.getElementById('nav');
-  function opdater(){ nav.classList[window.pageYOffset>80?'add':'remove']('scrolled'); }
-  window.addEventListener('scroll',opdater,{passive:true});
-  opdater();
-})();
-
-(function(){
-'use strict';
-
-/* =====================================================
-   *** SKIFT ADGANGSKODE HER ***
-   ===================================================== */
-var PW = 'Kyst2026!';
-/* ===================================================== */
-
-var EMAIL_DEFAULT = 'info@kystforeningendj.dk';
-
-/* ===== STANDARD DATA ===== */
-var STD_AK = [
-  {dato:'Mar 2026', titel:'📋 Generalforsamling', tekst:'Årets generalforsamling med valg og orientering om foreningens arbejde.'},
-  {dato:'Jun 2026', titel:'🌸 Forårsvandring langs kysten', tekst:'Guidet vandring med naturformidling ved Mols Bjerge. Ca. 3 km, let terræn.'},
-  {dato:'Jul 2026', titel:'☀️ Sommerarrangement ved kysten', tekst:'Guidet tur og socialt samvær. Passer til hele familien.'},
-  {dato:'Sep 2026', titel:'🎤 Temaaften: Natur og planlægning', tekst:'Foredrag og debat om natur, miljø og kommunal planlægning.'},
-  {dato:'Okt 2026', titel:'🏛️ Borgermøde om kystsager', tekst:'Information og dialog om aktuelle projekter langs Djurslands kyster.'},
-  {dato:'Nov 2026', titel:'🍂 Efterårsvandring', tekst:'Vandring med fokus på natur, kulturhistorie og rekreative værdier.'}
-];
-var STD_SAGER = [
-  {titel:'🐟 Ålerne / Grobund', tekst:'Projekt om udvikling nær kysten ved Grobund-området.', detalje:'Foreningen følger sagen om udviklingsprojektet ved Grobund/Ålerne. Vi videreformidler offentligt tilgængelige oplysninger om miljøvurdering, lokalplanproces og kommunale høringer.'},
-  {titel:'🌬️ Vindmølleprojekter', tekst:'Planer om vindmøller i kystnære områder på Djursland.', detalje:'Der er fremsat planer om opstilling af vindmøller i kystnære områder. Foreningen følger den kommunale planproces og orienterer om offentlige høringer.'},
-  {titel:'📋 Kystnære lokalplaner', tekst:'Lokalplaner der berører kystzonen og naturområder.', detalje:'Kommunale lokalplaner der berører kystzonen kan have betydning for naturværdier og rekreativ adgang. Foreningen samler information og hjælper borgere med at finde vej i høringsmaterialet.'}
-];
-var STD_BST = [
-  {navn:'[Formand navn]', rolle:'Formand', mail:'formand@kystforeningendj.dk', foto:''},
-  {navn:'[Næstformand navn]', rolle:'Næstformand', mail:'naestformand@kystforeningendj.dk', foto:''},
-  {navn:'[Kasserer navn]', rolle:'Kasserer', mail:'kasserer@kystforeningendj.dk', foto:''},
-  {navn:'[Bestyrelsesmedlem]', rolle:'Bestyrelsesmedlem', mail:'bestyrelse@kystforeningendj.dk', foto:''},
-  {navn:'[Bestyrelsesmedlem]', rolle:'Bestyrelsesmedlem', mail:'bestyrelse@kystforeningendj.dk', foto:''}
-];
-var STD_DOCS = {
-  'Vedtægter':[{titel:'Vedtægter – Kystforeningen Djursland',besk:'Vedtaget på stiftende generalforsamling · PDF',url:''}],
-  'Referater':[{titel:'Referat – Generalforsamling 2026',besk:'Afholdt marts 2026 · PDF',url:''}],
-  'Generalforsamlinger':[{titel:'Indkaldelse – Generalforsamling 2026',besk:'Med dagsorden · PDF',url:''}],
-  'Høringssvar':[],'Pressemeddelelser':[]
-};
-var STD_KONTAKT = {navn:'[Formandens navn]',mail:'info@kystforeningendj.dk',tlf:'+45 00 00 00 00'};
-var STD_KT = {enkelt:'150 kr.',familie:'250 kr.',note:'per år'};
-var STD_NY = {titel:'Generalforsamling afholdt',tekst:'Årets generalforsamling blev afholdt i marts 2026. Referat er tilgængeligt under Generalforsamling.'};
-
-/* ===== STORAGE ===== */
-var S={
-  _m:{},
-  get:function(k){ try{var v=localStorage.getItem(k);return v!==null?JSON.parse(v):null;}catch(e){return this._m[k]||null;} },
-  set:function(k,v){ try{localStorage.setItem(k,JSON.stringify(v));}catch(e){this._m[k]=v;} }
-};
-
-/* ===== HJÆLP ===== */
-function el(id){ return document.getElementById(id); }
-function vis(id,d){ var e=el(id);if(e) e.style.display=d||'block'; }
-function skjul(id){ var e=el(id);if(e) e.style.display='none'; }
-function valEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
-function escH(t){ return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function visSvar(id,txt,ok,varig){
-  var e=el(id);if(!e) return;
-  e.textContent=txt; e.className='svar '+(ok?'ok':'err'); e.style.display='block';
-  if(!varig) setTimeout(function(){ e.style.display='none'; },4000);
-}
-
-/* ===== MODALER ===== */
-function aabne(id){ el(id).classList.add('vis'); }
-function luk(id){ el(id).classList.remove('vis'); }
-document.querySelectorAll('.modal-ov').forEach(function(ov){
-  ov.addEventListener('click',function(e){ if(e.target===ov) ov.classList.remove('vis'); });
-});
-el('fp-link').onclick=function(e){ e.preventDefault(); aabne('m-priv'); };
-el('fc-link').onclick=function(e){ e.preventDefault(); aabne('m-cook'); };
-el('fa-link').onclick=function(e){ e.preventDefault(); aabneAdmin(); };
-el('luk-priv').onclick=function(){ luk('m-priv'); };
-el('luk-cook').onclick=function(){ luk('m-cook'); };
-el('sm-luk').onclick=function(){ luk('sag-modal'); };
-
-/* ===== COOKIE ===== */
-el('ck-laes').onclick=function(e){ e.preventDefault(); aabne('m-cook'); };
-el('ck-ja').onclick=function(){ S.set('ck',1); skjul('cookie-banner'); };
-el('ck-nej').onclick=function(){ S.set('ck',0); skjul('cookie-banner'); };
-if(S.get('ck')===null) vis('cookie-banner','flex');
-
-/* ===== HAMBURGER ===== */
-el('hamburger').addEventListener('click',function(e){
-  e.stopPropagation();
-  el('navLinks').classList.toggle('open');
-});
-
-/* ===== AKTIVITETER ===== */
-function hentAk(){ return S.get('kfd_ak')||JSON.parse(JSON.stringify(STD_AK)); }
-function gemAk(d){ S.set('kfd_ak',d); }
-function visAkSide(){
-  var ak=hentAk();
-  var c=el('ak-liste'); if(!c) return;
-  if(ak.length===0){ c.innerHTML='<p style="font-family:Arial,sans-serif;font-size:.85rem;color:var(--graa);">Ingen planlagte aktiviteter.</p>'; return; }
-  c.innerHTML=ak.map(function(a){
-    return '<div class="ak"><div class="ak-dato">'+escH(a.dato)+'</div><div><h3>'+escH(a.titel)+'</h3><p>'+escH(a.tekst)+'</p></div></div>';
-  }).join('');
-  // Opdater forsideboks med første aktivitet
-  if(ak[0]){ var t=el('tb-ak-titel'),tx=el('tb-ak-tekst'); if(t) t.textContent=ak[0].titel; if(tx) tx.textContent=ak[0].tekst+' ('+ak[0].dato+')'; }
-}
-function visAdmAk(){
-  var ak=hentAk(); var c=el('ak-adm-liste'); if(!c) return;
-  if(ak.length===0){ c.innerHTML='<p class="hint">Ingen aktiviteter.</p>'; return; }
-  c.innerHTML=ak.map(function(a,i){
-    return '<div class="item-adm"><div class="item-adm-fields">'
-      +'<div class="item-adm-row"><label>Dato:</label><input type="text" class="fi ak-fi" data-idx="'+i+'" data-felt="dato" value="'+escH(a.dato)+'" style="max-width:100px;"></div>'
-      +'<div class="item-adm-row"><label>Titel:</label><input type="text" class="fi ak-fi" data-idx="'+i+'" data-felt="titel" value="'+escH(a.titel)+'"></div>'
-      +'<div class="item-adm-row"><label>Tekst:</label><input type="text" class="fi ak-fi" data-idx="'+i+'" data-felt="tekst" value="'+escH(a.tekst)+'"></div>'
-      +'</div><div class="item-adm-btns">'
-      +'<button type="button" class="btn btn-groen btn-sm gem-ak" data-idx="'+i+'">💾 Gem</button>'
-      +'<button type="button" class="btn btn-sm slet-ak" style="background:#fdf0f0;color:var(--rod);border:1px solid #f5b7b1;" data-idx="'+i+'">🗑</button>'
-      +'</div></div>';
-  }).join('');
-  c.querySelectorAll('.gem-ak').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var i=parseInt(this.getAttribute('data-idx')); var ak=hentAk();
-      c.querySelectorAll('.ak-fi[data-idx="'+i+'"]').forEach(function(inp){ ak[i][inp.getAttribute('data-felt')]=inp.value; });
-      gemAk(ak); visAkSide(); visAdmAk(); visSvar('ak-svar','✓ Aktivitet gemt.',true);
-    });
-  });
-  c.querySelectorAll('.slet-ak').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      if(!confirm('Slet?')) return;
-      var ak=hentAk(); ak.splice(parseInt(this.getAttribute('data-idx')),1);
-      gemAk(ak); visAkSide(); visAdmAk();
-    });
-  });
-}
-el('btn-tilf-ak').addEventListener('click',function(){
-  var ak=hentAk(); ak.push({dato:'[Dato]',titel:'[Ny aktivitet]',tekst:'Beskrivelse.'});
-  gemAk(ak); visAkSide(); visAdmAk();
-});
-
-/* ===== NYHED ===== */
-function hentNy(){ return S.get('kfd_ny')||JSON.parse(JSON.stringify(STD_NY)); }
-function visNySide(){
-  var ny=hentNy();
-  var t=el('tb-ny-titel'),tx=el('tb-ny-tekst');
-  if(t) t.textContent=ny.titel; if(tx) tx.textContent=ny.tekst;
-}
-el('btn-gem-ny').addEventListener('click',function(){
-  var t=el('a-ny-titel').value.trim(), tx=el('a-ny-tekst').value.trim();
-  if(!t){ visSvar('ny-svar','⚠ Udfyld titel.',false); return; }
-  S.set('kfd_ny',{titel:t,tekst:tx}); visNySide();
-  visSvar('ny-svar','✓ Nyhed opdateret på forsiden.',true);
-});
-
-/* ===== AKTUELLE SAGER ===== */
-function hentSager(){ return S.get('kfd_sager')||JSON.parse(JSON.stringify(STD_SAGER)); }
-function gemSager(d){ S.set('kfd_sager',d); }
-function visSagerSide(){
-  var sager=hentSager().slice(0,5); var g=el('sag-grid'); if(!g) return;
-  if(sager.length===0){ g.innerHTML='<p class="sag-tom">Ingen aktive sager.</p>'; return; }
-  g.innerHTML=sager.map(function(s,i){
-    return '<div class="sag"><h3>'+escH(s.titel)+'</h3><p>'+escH(s.tekst)+'</p>'
-      +'<button type="button" class="btn btn-blaa btn-sm laes-mere" data-idx="'+i+'" style="align-self:flex-start;">Læs mere</button></div>';
-  }).join('');
-  g.querySelectorAll('.laes-mere').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var s=hentSager()[parseInt(this.getAttribute('data-idx'))];
-      el('sm-titel').textContent=s.titel;
-      el('sm-body').innerHTML='<p>'+escH(s.detalje||s.tekst)+'</p>';
-      aabne('sag-modal');
-    });
-  });
-  // Opdater forsideboks med første sag
-  if(sager[0]){ var t=el('tb-sag-titel'),tx=el('tb-sag-tekst'); if(t) t.textContent=sager[0].titel; if(tx) tx.textContent=sager[0].tekst; }
-}
-function visAdmSager(){
-  var sager=hentSager(); var c=el('sag-adm-liste'); if(!c) return;
-  if(sager.length===0){ c.innerHTML='<p class="hint">Ingen sager.</p>'; return; }
-  c.innerHTML=sager.map(function(s,i){
-    return '<div class="item-adm"><div class="item-adm-fields">'
-      +'<div class="item-adm-row"><label>Titel:</label><input type="text" class="fi sag-fi" data-idx="'+i+'" data-felt="titel" value="'+escH(s.titel)+'"></div>'
-      +'<div class="item-adm-row"><label>Kort:</label><input type="text" class="fi sag-fi" data-idx="'+i+'" data-felt="tekst" value="'+escH(s.tekst)+'"></div>'
-      +'<div class="item-adm-row"><label>Læs mere:</label><input type="text" class="fi sag-fi" data-idx="'+i+'" data-felt="detalje" value="'+escH(s.detalje||'')+'"></div>'
-      +'</div><div class="item-adm-btns">'
-      +'<button type="button" class="btn btn-groen btn-sm gem-sag" data-idx="'+i+'">💾 Gem</button>'
-      +'<button type="button" class="btn btn-sm slet-sag" style="background:#fdf0f0;color:var(--rod);border:1px solid #f5b7b1;" data-idx="'+i+'">🗑 Slet</button>'
-      +'</div></div>';
-  }).join('');
-  c.querySelectorAll('.gem-sag').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var i=parseInt(this.getAttribute('data-idx')); var sager=hentSager();
-      c.querySelectorAll('.sag-fi[data-idx="'+i+'"]').forEach(function(inp){ sager[i][inp.getAttribute('data-felt')]=inp.value; });
-      gemSager(sager); visSagerSide(); visAdmSager(); visSvar('sag-svar','✓ Sag gemt.',true);
-    });
-  });
-  c.querySelectorAll('.slet-sag').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      if(!confirm('Slet?')) return;
-      var sager=hentSager(); sager.splice(parseInt(this.getAttribute('data-idx')),1);
-      gemSager(sager); visSagerSide(); visAdmSager();
-    });
-  });
-}
-el('btn-tilf-sag').addEventListener('click',function(){
-  var sager=hentSager();
-  if(sager.length>=5){ visSvar('sag-svar','⚠ Max 5 sager.',false); return; }
-  sager.push({titel:'[Ny sag]',tekst:'Kort beskrivelse.',detalje:'Uddybende tekst.'});
-  gemSager(sager); visSagerSide(); visAdmSager();
-});
-
-/* ===== BESTYRELSE ===== */
-function hentBst(){ return S.get('kfd_bst')||JSON.parse(JSON.stringify(STD_BST)); }
-function gemBst(d){ S.set('kfd_bst',d); }
-function visBstSide(){
-  var bst=hentBst(); var g=el('bst-grid'); if(!g) return;
-  g.innerHTML=bst.map(function(m){
-    var av=m.foto?'<div class="bst-avatar"><img src="'+escH(m.foto)+'" alt="'+escH(m.navn)+'"></div>':'<div class="bst-avatar">👤</div>';
-    return '<div class="bst">'+av+'<h3>'+escH(m.navn)+'</h3><div class="rolle">'+escH(m.rolle)+'</div><a href="mailto:'+escH(m.mail)+'">'+escH(m.mail)+'</a></div>';
-  }).join('');
-}
-function visAdmBst(){
-  var bst=hentBst(); var c=el('bst-adm-liste'); if(!c) return;
-  if(bst.length===0){ c.innerHTML='<p class="hint">Ingen bestyrelsesmedlemmer.</p>'; return; }
-  c.innerHTML=bst.map(function(m,i){
-    var av=m.foto?'<div class="bst-adm-ava"><img src="'+escH(m.foto)+'" alt=""></div>':'<div class="bst-adm-ava">👤</div>';
-    return '<div class="bst-adm-item"><div class="bst-adm-top">'+av+'<span class="bst-adm-navn">'+escH(m.navn)+'</span></div>'
-      +'<div class="item-adm-fields">'
-      +'<div class="item-adm-row"><label>Navn:</label><input type="text" class="fi bst-fi" data-idx="'+i+'" data-felt="navn" value="'+escH(m.navn)+'"></div>'
-      +'<div class="item-adm-row"><label>Rolle:</label><input type="text" class="fi bst-fi" data-idx="'+i+'" data-felt="rolle" value="'+escH(m.rolle)+'"></div>'
-      +'<div class="item-adm-row"><label>Mail:</label><input type="email" class="fi bst-fi" data-idx="'+i+'" data-felt="mail" value="'+escH(m.mail)+'"></div>'
-      +'</div><div class="item-adm-btns">'
-      +'<label class="foto-lbl">📷 Foto<input type="file" class="foto-inp" accept="image/*" data-idx="'+i+'"></label>'
-      +(m.foto?'<button type="button" class="btn btn-graa btn-sm fjern-foto" data-idx="'+i+'">✕ Fjern</button>':'')
-      +'<button type="button" class="btn btn-groen btn-sm gem-bst" data-idx="'+i+'">💾 Gem</button>'
-      +'<button type="button" class="btn btn-sm slet-bst" style="background:#fdf0f0;color:var(--rod);border:1px solid #f5b7b1;" data-idx="'+i+'">🗑</button>'
-      +'</div></div>';
-  }).join('');
-  c.querySelectorAll('.gem-bst').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var i=parseInt(this.getAttribute('data-idx')); var bst=hentBst();
-      c.querySelectorAll('.bst-fi[data-idx="'+i+'"]').forEach(function(inp){ bst[i][inp.getAttribute('data-felt')]=inp.value; });
-      gemBst(bst); visBstSide(); visAdmBst(); visSvar('bst-svar','✓ Gemt.',true);
-    });
-  });
-  c.querySelectorAll('.slet-bst').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      if(!confirm('Slet?')) return;
-      var bst=hentBst(); bst.splice(parseInt(this.getAttribute('data-idx')),1);
-      gemBst(bst); visBstSide(); visAdmBst();
-    });
-  });
-  c.querySelectorAll('.fjern-foto').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var bst=hentBst(); bst[parseInt(this.getAttribute('data-idx'))].foto='';
-      gemBst(bst); visBstSide(); visAdmBst();
-    });
-  });
-  c.querySelectorAll('.foto-inp').forEach(function(inp){
-    inp.addEventListener('change',function(){
-      var i=parseInt(this.getAttribute('data-idx')); var fil=this.files[0]; if(!fil) return;
-      var r=new FileReader();
-      r.onload=function(ev){ var bst=hentBst(); bst[i].foto=ev.target.result; gemBst(bst); visBstSide(); visAdmBst(); };
-      r.readAsDataURL(fil);
-    });
-  });
-}
-el('btn-tilf-bst').addEventListener('click',function(){
-  var bst=hentBst(); bst.push({navn:'[Nyt medlem]',rolle:'Bestyrelsesmedlem',mail:'bestyrelse@kystforeningendj.dk',foto:''});
-  gemBst(bst); visBstSide(); visAdmBst();
-});
-
-/* ===== DOKUMENTER ===== */
-var DOK_KAT=['Vedtægter','Referater','Generalforsamlinger','Høringssvar','Pressemeddelelser'];
-function hentDoks(){ return S.get('kfd_docs')||JSON.parse(JSON.stringify(STD_DOCS)); }
-function gemDoks(d){ S.set('kfd_docs',d); }
-function visDokSide(){
-  var docs=hentDoks(); var c=el('dok-omraader'); if(!c) return;
-  var html='';
-  DOK_KAT.forEach(function(kat){
-    var liste=docs[kat]||[];
-    html+='<div class="dok-kategori"><div class="dok-kat-titel">'+kat+'</div>';
-    if(liste.length===0){ html+='<p class="ingen-dok">Ingen dokumenter endnu.</p>'; }
-    else{
-      html+='<div class="dok-liste">'+liste.map(function(d){
-        var harUrl=d.url&&d.url.length>4;
-        return '<a '+(harUrl?'href="'+escH(d.url)+'" target="_blank" rel="noopener"':'href="#" onclick="return false"')
-          +' class="dok-r"><span style="font-size:1.05rem;flex-shrink:0;">📄</span>'
-          +'<div class="di"><strong>'+escH(d.titel)+'</strong><span>'+escH(d.besk)+'</span></div>'
-          +'<span class="pil">'+(harUrl?'⬇':'📎')+'</span></a>';
-      }).join('')+'</div>';
-    }
-    html+='</div>';
-  });
-  c.innerHTML=html;
-}
-function visAdmDoks(){
-  var docs=hentDoks(); var ul=el('dok-adm-ul'); if(!ul) return;
-  var rows=[];
-  DOK_KAT.forEach(function(kat){
-    (docs[kat]||[]).forEach(function(d,i){
-      rows.push('<li class="dok-adm-li"><span>['+kat+'] 📄 <strong>'+escH(d.titel)+'</strong>'+(d.besk?' – '+escH(d.besk):'')+'</span>'
-        +'<button type="button" data-kat="'+kat+'" data-idx="'+i+'" class="slet-dok">🗑</button></li>');
-    });
-  });
-  ul.innerHTML=rows.length?rows.join(''):'<li style="font-family:Arial,sans-serif;font-size:.8rem;color:var(--graa);">Ingen dokumenter endnu.</li>';
-  ul.querySelectorAll('.slet-dok').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      if(!confirm('Slet?')) return;
-      var docs=hentDoks(); var kat=this.getAttribute('data-kat'), i=parseInt(this.getAttribute('data-idx'));
-      docs[kat].splice(i,1); gemDoks(docs); visDokSide(); visAdmDoks();
-    });
-  });
-}
-el('btn-tilf-dok').addEventListener('click',function(){
-  var titel=el('dok-titel').value.trim(); if(!titel){ visSvar('dok-svar','⚠ Titel mangler.',false); return; }
-  var docs=hentDoks(); var kat=el('dok-kat').value; if(!docs[kat]) docs[kat]=[];
-  docs[kat].push({titel:titel,besk:el('dok-besk').value.trim(),url:el('dok-url').value.trim()});
-  gemDoks(docs); visDokSide(); visAdmDoks();
-  el('dok-titel').value=''; el('dok-besk').value=''; el('dok-url').value='';
-  visSvar('dok-svar','✓ Dokument tilføjet.',true);
-});
-
-/* ===== KONTINGENT ===== */
-function hentKt(){ return S.get('kfd_kt')||STD_KT; }
-function visKtSide(){ var k=hentKt(); el('vis-pris').textContent=k.enkelt; el('vis-note').textContent=k.note+' · familiemedlemskab '+k.familie; }
-function opdKtPrev(){ var e=el('a-enkelt').value||'—',f=el('a-familie').value||'—',n=el('a-note').value||'per år'; el('kt-prev').innerHTML='<strong>Forhåndsvisning:</strong> '+escH(e)+' / familie: '+escH(f)+' · '+escH(n); }
-['a-enkelt','a-familie','a-note'].forEach(function(id){ var e=el(id); if(e) e.addEventListener('input',opdKtPrev); });
-el('btn-gem-kt').addEventListener('click',function(){
-  var e=el('a-enkelt').value.trim(),f=el('a-familie').value.trim(),n=el('a-note').value.trim()||'per år';
-  if(!e||!f){ visSvar('kt-svar','⚠ Udfyld begge beløb.',false); return; }
-  S.set('kfd_kt',{enkelt:e,familie:f,note:n}); visKtSide(); visSvar('kt-svar','✓ Kontingent opdateret.',true);
-});
-
-/* ===== KONTAKTOPLYSNINGER ===== */
-function hentK(){ return S.get('kfd_kontakt')||STD_KONTAKT; }
-function visKSide(){
-  var k=hentK();
-  var n=el('k-vis-navn'),m=el('k-vis-mail'),t=el('k-vis-tlf');
-  if(n) n.textContent=k.navn;
-  if(m){ m.textContent=k.mail; m.href='mailto:'+k.mail; }
-  if(t){ t.textContent=k.tlf; t.href='tel:'+k.tlf.replace(/\s+/g,''); }
-}
-el('btn-gem-k').addEventListener('click',function(){
-  var n=el('a-kn').value.trim(),m=el('a-km').value.trim(),t=el('a-kt').value.trim();
-  if(!n||!m||!t){ visSvar('k-svar','⚠ Udfyld alle felter.',false); return; }
-  if(!valEmail(m)){ visSvar('k-svar','⚠ Ugyldig e-mail.',false); return; }
-  S.set('kfd_kontakt',{navn:n,mail:m,tlf:t}); visKSide(); visSvar('k-svar','✓ Kontakt opdateret.',true);
-});
-
-/* ===== ADMIN LOGIN ===== */
-function aabneAdmin(){
-  el('adm-pw').value=''; skjul('adm-err');
-  vis('adm-login-boks'); skjul('adm-content');
-  aabne('adm-ov');
-  setTimeout(function(){ el('adm-pw').focus(); },80);
-}
-function lukAdmin(){ luk('adm-ov'); }
-el('adm-fab').addEventListener('click',aabneAdmin);
-el('adm-luk').addEventListener('click',lukAdmin);
-el('adm-ov').addEventListener('click',function(e){ if(e.target===this) lukAdmin(); });
-function doLogin(){
-  if(el('adm-pw').value===PW){
-    skjul('adm-err'); skjul('adm-login-boks'); vis('adm-content');
-    var k=hentKt(); el('a-enkelt').value=k.enkelt; el('a-familie').value=k.familie; el('a-note').value=k.note; opdKtPrev();
-    var ny=hentNy(); el('a-ny-titel').value=ny.titel; el('a-ny-tekst').value=ny.tekst;
-    var kt=hentK(); el('a-kn').value=kt.navn; el('a-km').value=kt.mail; el('a-kt').value=kt.tlf;
-    visAdmAk(); visAdmSager(); visAdmBst(); visAdmDoks();
-  } else { vis('adm-err'); }
-}
-el('adm-login-btn').addEventListener('click',doLogin);
-el('adm-pw').addEventListener('keydown',function(e){ if(e.key==='Enter') doLogin(); });
-el('btn-logout').addEventListener('click',function(){ skjul('adm-content'); vis('adm-login-boks'); el('adm-pw').value=''; skjul('adm-err'); });
-
-/* ===== BESKED DIALOG ===== */
-function visBesked(titel,intro,tekst,emne,body,email){
-  el('bd-titel').textContent=titel; el('bd-intro').textContent=intro;
-  el('bd-tekst').textContent=tekst; el('bd-til').textContent=email;
-  el('bd-mailto').href='mailto:'+email+'?subject='+encodeURIComponent(emne)+'&body='+encodeURIComponent(body);
-  aabne('besked-modal');
-}
-el('bd-luk').onclick=function(){ luk('besked-modal'); };
-el('bd-luk2').onclick=function(){ luk('besked-modal'); };
-el('bd-kopi').addEventListener('click',function(){
-  var t=el('bd-tekst').textContent, btn=this;
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(t).then(function(){ btn.textContent='✓ Kopieret!'; setTimeout(function(){ btn.textContent='📋 Kopiér'; },2000); });
-  } else {
-    var ta=document.createElement('textarea'); ta.value=t; ta.style.cssText='position:fixed;opacity:0';
-    document.body.appendChild(ta); ta.select();
-    try{ document.execCommand('copy'); btn.textContent='✓ Kopieret!'; setTimeout(function(){ btn.textContent='📋 Kopiér'; },2000); }catch(ex){}
-    document.body.removeChild(ta);
-  }
-});
-
-/* ===== TILMELDING ===== */
-el('btn-tilmeld').addEventListener('click',function(){
-  skjul('m-err');
-  var navn=el('m-navn').value.trim(), email=el('m-email').value.trim();
-  var tlf=el('m-tlf').value.trim(), kom=el('m-kommentar').value.trim();
-  if(!navn){ visSvar('m-err','⚠ Udfyld dit navn.',false,true); return; }
-  if(!email||!valEmail(email)){ visSvar('m-err','⚠ Ugyldig e-mail.',false,true); return; }
-  var kt=hentKt(); var emne='Ny medlemstilmelding – '+navn;
-  var tekst='Hej Kystforeningen Djursland,\n\nJeg ønsker at melde mig ind.\n\nNavn: '+navn+'\nE-mail: '+email+(tlf?'\nTelefon: '+tlf:'')+(kom?'\nKommentar: '+kom:'')+'\n\nMed venlig hilsen\n'+navn;
-  visBesked('✅ Tilmelding klar','Klik "Åbn e-mailprogram" eller kopiér og send manuelt.',tekst,emne,tekst,hentK().mail);
-  el('m-navn').value=''; el('m-email').value=''; el('m-tlf').value=''; el('m-kommentar').value='';
-});
-
-/* ===== KONTAKTFORMULAR ===== */
-el('btn-kontakt').addEventListener('click',function(){
-  skjul('k-err');
-  var navn=el('k-navn').value.trim(), email=el('k-email').value.trim(), besked=el('k-besked').value.trim();
-  if(!navn){ visSvar('k-err','⚠ Udfyld dit navn.',false,true); return; }
-  if(!email||!valEmail(email)){ visSvar('k-err','⚠ Ugyldig e-mail.',false,true); return; }
-  if(!besked){ visSvar('k-err','⚠ Skriv en besked.',false,true); return; }
-  var emne='Besked fra '+navn+' – Kystforeningen Djursland';
-  var tekst='Fra: '+navn+'\nE-mail: '+email+'\n\n'+besked;
-  visBesked('✅ Besked klar','Klik "Åbn e-mailprogram" eller kopiér og send manuelt.',tekst,emne,tekst,hentK().mail);
-  el('k-navn').value=''; el('k-email').value=''; el('k-besked').value='';
-});
-
-/* ===== INIT ===== */
-visAkSide(); visSagerSide(); visBstSide(); visDokSide(); visKtSide(); visKSide(); visNySide();
-// Ved sideload: vis side baseret på URL-hash (støtter direkte links og genindlæsning)
-(function(){
-  var hash=window.location.hash.replace('#','');
-  if(hash && UNDERSIDER.indexOf(hash)!==-1){
-    history.replaceState({side:hash},'','#'+hash);
-    _visSide(hash);
-  } else {
-    history.replaceState({side:'forside'},'','#');
-    _visSide('forside');
-  }
-})();
-
-})();
-</script>
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     SCRIPTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<script src="js/config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin – Kystforeningen Djursland CMS</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     LOGIN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="login-screen" class="login-wrap">
+  <div class="login-box">
+    <div class="login-logo">
+      <h1>🌊 Kystforeningen Djursland</h1>
+      <p>Nordic Operations CMS v2</p>
+    </div>
+    <h2>Log ind</h2>
+    <div class="login-fields">
+      <input type="email"    class="fi" id="l-email" placeholder="E-mail" autocomplete="email">
+      <input type="password" class="fi" id="l-pw"    placeholder="Adgangskode" autocomplete="current-password">
+      <button type="button" class="btn btn-primary btn-full-lg" id="btn-login">Log ind</button>
+      <button type="button" class="btn btn-muted btn-full" id="btn-reset" style="font-size:.77rem;">Glemt adgangskode?</button>
+      <div id="l-alert" class="alert"></div>
+    </div>
+    <p style="margin-top:1.1rem;font-size:.7rem;color:var(--c-muted);text-align:center;">
+      Kun godkendte administratorer · Kontakt Nordic Operations for adgang
+    </p>
+  </div>
+</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     APP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<div id="adm-app" class="adm-app" style="display:none;">
+
+  <div class="sb-overlay" id="sb-overlay"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Admin navigation">
+    <div class="sb-logo">
+      <h1>🌊 Kystforeningen<br>Djursland</h1>
+      <p>Nordic Operations CMS</p>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-group">Oversigt</div>
+      <button class="sb-btn active" data-mod="dashboard"><span class="icon">📊</span>Dashboard</button>
+
+      <div class="sb-group">Indhold</div>
+      <button class="sb-btn" data-mod="nyheder"><span class="icon">📢</span>Nyheder</button>
+      <button class="sb-btn" data-mod="aktiviteter"><span class="icon">📅</span>Aktiviteter</button>
+      <button class="sb-btn" data-mod="sager"><span class="icon">⚡</span>Aktuelle sager</button>
+      <button class="sb-btn" data-mod="bestyrelse"><span class="icon">👥</span>Bestyrelse</button>
+      <button class="sb-btn" data-mod="dokumenter"><span class="icon">📄</span>Dokumenter</button>
+
+      <div class="sb-group">Medier</div>
+      <button class="sb-btn" data-mod="billeder"><span class="icon">🖼️</span>Billeder</button>
+
+      <div class="sb-group">Indstillinger</div>
+      <button class="sb-btn" data-mod="kontakt"><span class="icon">☎️</span>Kontakt & Kontingent</button>
+
+      <div class="sb-group">Side</div>
+      <button class="sb-btn" onclick="window.open('index.html','_blank')"><span class="icon">🌐</span>Se hjemmeside</button>
+    </nav>
+    <div class="sb-foot">
+      <div class="sb-user" id="sb-user"></div>
+      <button type="button" class="btn btn-muted btn-full" style="font-size:.76rem;" id="btn-logout">Log ud</button>
+      <div style="margin-top:.6rem;">Bygget af <a href="https://nordic-operations.dk" target="_blank">Nordic Operations</a></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-area">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="sb-toggle" id="sb-toggle" aria-label="Åbn menu">
+          <span></span><span></span><span></span>
+        </button>
+        <h2 id="topbar-title">Dashboard</h2>
+      </div>
+      <div class="topbar-right">
+        <span id="tb-user" style="font-size:.76rem;color:var(--c-muted);"></span>
+        <button class="btn btn-primary btn-sm" id="btn-new" style="display:none;">+ Opret ny</button>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- ══ DASHBOARD ══════════════════════════════════════ -->
+      <div class="module active" id="mod-dashboard">
+        <div class="stats-grid" id="dash-stats">
+          <div class="stat-box"><div class="num" id="s-news">–</div><div class="lbl">Nyheder</div></div>
+          <div class="stat-box"><div class="num" id="s-act">–</div><div class="lbl">Aktiviteter</div></div>
+          <div class="stat-box"><div class="num" id="s-cas">–</div><div class="lbl">Aktuelle sager</div></div>
+          <div class="stat-box"><div class="num" id="s-brd">–</div><div class="lbl">Bestyrelsesmedlemmer</div></div>
+          <div class="stat-box"><div class="num" id="s-doc">–</div><div class="lbl">Dokumenter</div></div>
+          <div class="stat-box"><div class="num" id="s-med">–</div><div class="lbl">Billeder</div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-hdr"><h3>Hurtige genveje</h3></div>
+          <div class="panel-body">
+            <div class="quick-links">
+              <button class="btn btn-primary btn-sm" data-shortcut="nyheder">+ Ny nyhed</button>
+              <button class="btn btn-ocean btn-sm"   data-shortcut="aktiviteter">+ Ny aktivitet</button>
+              <button class="btn btn-gold btn-sm"    data-shortcut="sager">+ Ny sag</button>
+              <button class="btn btn-ghost btn-sm"   data-shortcut="dokumenter">+ Upload dokument</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ NYHEDER ════════════════════════════════════════ -->
+      <div class="module" id="mod-nyheder">
+        <div class="panel">
+          <div class="panel-hdr">
+            <h3>Nyheder</h3>
+            <button class="btn btn-primary btn-sm" id="btn-new-news">+ Opret nyhed</button>
+          </div>
+          <div class="tbl-wrap">
+            <table><thead><tr><th>Overskrift</th><th>Dato</th><th>Status</th><th>Handlinger</th></tr></thead>
+            <tbody id="tbody-news"><tr><td colspan="4" class="empty-row">Indlæser...</td></tr></tbody></table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ AKTIVITETER ════════════════════════════════════ -->
+      <div class="module" id="mod-aktiviteter">
+        <div class="panel">
+          <div class="panel-hdr">
+            <h3>Aktiviteter</h3>
+            <button class="btn btn-primary btn-sm" id="btn-new-act">+ Opret aktivitet</button>
+          </div>
+          <div class="tbl-wrap">
+            <table><thead><tr><th>Titel</th><th>Dato</th><th>Sted</th><th>Status</th><th>Handlinger</th></tr></thead>
+            <tbody id="tbody-act"><tr><td colspan="5" class="empty-row">Indlæser...</td></tr></tbody></table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ AKTUELLE SAGER ═════════════════════════════════ -->
+      <div class="module" id="mod-sager">
+        <div class="panel">
+          <div class="panel-hdr">
+            <h3>Aktuelle sager</h3>
+            <button class="btn btn-primary btn-sm" id="btn-new-case">+ Opret sag</button>
+          </div>
+          <div class="tbl-wrap">
+            <table><thead><tr><th>Titel</th><th>Prioritet</th><th>Forside</th><th>Status</th><th>Handlinger</th></tr></thead>
+            <tbody id="tbody-cases"><tr><td colspan="5" class="empty-row">Indlæser...</td></tr></tbody></table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ BESTYRELSE ═════════════════════════════════════ -->
+      <div class="module" id="mod-bestyrelse">
+        <div class="panel">
+          <div class="panel-hdr">
+            <h3>Bestyrelse</h3>
+            <button class="btn btn-primary btn-sm" id="btn-new-brd">+ Tilføj medlem</button>
+          </div>
+          <div class="tbl-wrap">
+            <table><thead><tr><th>Navn</th><th>Funktion</th><th>E-mail</th><th>Status</th><th>Handlinger</th></tr></thead>
+            <tbody id="tbody-brd"><tr><td colspan="5" class="empty-row">Indlæser...</td></tr></tbody></table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ DOKUMENTER ═════════════════════════════════════ -->
+      <div class="module" id="mod-dokumenter">
+        <div class="panel">
+          <div class="panel-hdr">
+            <h3>Dokumenter</h3>
+            <button class="btn btn-primary btn-sm" id="btn-new-doc">+ Upload dokument</button>
+          </div>
+          <div class="tbl-wrap">
+            <table><thead><tr><th>Titel</th><th>Kategori</th><th>År</th><th>Type</th><th>Handlinger</th></tr></thead>
+            <tbody id="tbody-docs"><tr><td colspan="5" class="empty-row">Indlæser...</td></tr></tbody></table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ BILLEDER ═══════════════════════════════════════ -->
+      <div class="module" id="mod-billeder">
+        <div class="panel">
+          <div class="panel-hdr">
+            <h3>Billedgalleri</h3>
+            <label class="btn btn-primary btn-sm" style="cursor:pointer;">
+              + Upload billeder
+              <input type="file" id="img-upload" accept="image/*" multiple style="display:none;">
+            </label>
+          </div>
+          <div id="upload-prog" style="display:none;padding:.5rem 1rem;font-size:.8rem;color:var(--c-muted);border-bottom:1px solid var(--c-border);">
+            Uploader: <span id="upload-prog-txt"></span>
+          </div>
+          <div class="img-grid" id="img-grid">
+            <p style="color:var(--c-muted);font-size:.83rem;padding:1rem;">Indlæser billeder...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ KONTAKT & KONTINGENT ═══════════════════════════ -->
+      <div class="module" id="mod-kontakt">
+        <div class="panel">
+          <div class="panel-hdr"><h3>Kontaktoplysninger & Kontingent</h3></div>
+          <div class="panel-body" style="max-width:480px;">
+            <div class="form-grid">
+              <div class="form-field span2"><label>Kontaktpersons navn</label><input type="text" class="fi" id="s-kn" placeholder="Formand"></div>
+              <div class="form-field"><label>E-mail</label><input type="email" class="fi" id="s-km" placeholder="info@..."></div>
+              <div class="form-field"><label>Telefon</label><input type="tel" class="fi" id="s-kt" placeholder="+45 ..."></div>
+              <div class="form-field span2"><label>Facebook URL</label><input type="url" class="fi" id="s-fb" placeholder="https://facebook.com/..."></div>
+              <div class="form-field"><label>CVR-nummer</label><input type="text" class="fi" id="s-cvr" placeholder="12345678"></div>
+            </div>
+            <hr style="margin:1.2rem 0;border:none;border-top:1px solid var(--c-border);">
+            <div class="form-grid">
+              <div class="form-field"><label>Kontingent – enkelt</label><input type="text" class="fi" id="s-ms" placeholder="150 kr."></div>
+              <div class="form-field"><label>Kontingent – familie</label><input type="text" class="fi" id="s-mf" placeholder="250 kr."></div>
+              <div class="form-field span2"><label>Note</label><input type="text" class="fi" id="s-mn" placeholder="per år"></div>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" style="margin-top:1rem;" id="btn-save-settings">💾 Gem indstillinger</button>
+            <div id="settings-alert" class="alert" style="margin-top:.6rem;"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </main>
+</div><!-- /adm-app -->
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     FORMULARER (modaler)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+
+<!-- NYHED -->
+<div class="modal-ov" id="m-news"><div class="modal-box">
+  <div class="modal-hdr"><h3 id="m-news-title">Opret nyhed</h3><button class="modal-close" data-close="m-news">✕</button></div>
+  <div class="modal-body">
+    <input type="hidden" id="n-id">
+    <div class="form-grid">
+      <div class="form-field span2"><label>Overskrift *</label><input type="text" class="fi" id="n-title" placeholder="Overskrift"></div>
+      <div class="form-field span2"><label>Kort uddrag</label><textarea class="fi" id="n-excerpt" style="height:70px;" placeholder="2–3 linjer til forsiden"></textarea></div>
+      <div class="form-field span2"><label>Brødtekst</label><textarea class="fi" id="n-body" style="height:130px;" placeholder="Hele nyhedens tekst..."></textarea></div>
+      <div class="form-field"><label>Dato</label><input type="date" class="fi" id="n-date"></div>
+      <div class="form-field"><label>Status</label><select class="fi" id="n-status"><option value="draft">Kladde</option><option value="published">Publiceret</option></select></div>
+      <div class="form-field span2"><label>Billede-URL (fra billedgalleriet)</label><input type="url" class="fi" id="n-img" placeholder="https://..."></div>
+    </div>
+    <div id="news-alert" class="alert" style="margin-top:.8rem;"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-muted btn-sm" data-close="m-news">Annuller</button>
+    <button class="btn btn-primary btn-sm" id="btn-save-news">💾 Gem nyhed</button>
+  </div>
+</div></div>
+
+<!-- AKTIVITET -->
+<div class="modal-ov" id="m-act"><div class="modal-box">
+  <div class="modal-hdr"><h3 id="m-act-title">Opret aktivitet</h3><button class="modal-close" data-close="m-act">✕</button></div>
+  <div class="modal-body">
+    <input type="hidden" id="a-id">
+    <div class="form-grid">
+      <div class="form-field span2"><label>Titel *</label><input type="text" class="fi" id="a-title" placeholder="Aktivitetens titel"></div>
+      <div class="form-field"><label>Dato</label><input type="date" class="fi" id="a-date"></div>
+      <div class="form-field"><label>Starttid</label><input type="time" class="fi" id="a-tstart"></div>
+      <div class="form-field"><label>Sluttid</label><input type="time" class="fi" id="a-tend"></div>
+      <div class="form-field"><label>Sted</label><input type="text" class="fi" id="a-loc" placeholder="Mødested"></div>
+      <div class="form-field span2"><label>Kort beskrivelse</label><textarea class="fi" id="a-exc" style="height:65px;" placeholder="Vises i aktivitetslisten"></textarea></div>
+      <div class="form-field span2"><label>Fuld beskrivelse</label><textarea class="fi" id="a-body" style="height:110px;" placeholder="Alle detaljer..."></textarea></div>
+      <div class="form-field"><label>Tilmeldingslink</label><input type="url" class="fi" id="a-signup" placeholder="https://..."></div>
+      <div class="form-field"><label>Status</label><select class="fi" id="a-status"><option value="draft">Kladde</option><option value="published">Publiceret</option></select></div>
+    </div>
+    <div id="act-alert" class="alert" style="margin-top:.8rem;"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-muted btn-sm" data-close="m-act">Annuller</button>
+    <button class="btn btn-primary btn-sm" id="btn-save-act">💾 Gem aktivitet</button>
+  </div>
+</div></div>
+
+<!-- SAG -->
+<div class="modal-ov" id="m-case"><div class="modal-box">
+  <div class="modal-hdr"><h3 id="m-case-title">Opret sag</h3><button class="modal-close" data-close="m-case">✕</button></div>
+  <div class="modal-body">
+    <input type="hidden" id="c-id">
+    <div class="form-grid">
+      <div class="form-field span2"><label>Titel *</label><input type="text" class="fi" id="c-title" placeholder="Sagens titel"></div>
+      <div class="form-field span2"><label>Kort uddrag</label><textarea class="fi" id="c-exc" style="height:65px;" placeholder="2–3 linjer"></textarea></div>
+      <div class="form-field span2"><label>Fuld beskrivelse</label><textarea class="fi" id="c-body" style="height:115px;" placeholder="Uddybende tekst..."></textarea></div>
+      <div class="form-field span2"><label>Billede-URL</label><input type="url" class="fi" id="c-img" placeholder="https://... (fra billedgalleriet)"></div>
+      <div class="form-field"><label>Prioritet (1 = øverst)</label><input type="number" class="fi" id="c-prio" placeholder="1" min="1"></div>
+      <div class="form-field"><label>Status</label><select class="fi" id="c-status"><option value="draft">Kladde</option><option value="published">Publiceret</option><option value="archived">Arkiveret</option></select></div>
+      <div class="form-field span2" style="flex-direction:row;align-items:center;gap:.6rem;padding-top:1.4rem;">
+        <input type="checkbox" id="c-front" style="width:auto;accent-color:var(--c-forest);">
+        <label for="c-front" style="font-weight:normal;font-size:.84rem;cursor:pointer;text-transform:none;letter-spacing:0;">Vis i forsideboks</label>
+      </div>
+    </div>
+    <div id="case-alert" class="alert" style="margin-top:.8rem;"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-muted btn-sm" data-close="m-case">Annuller</button>
+    <button class="btn btn-primary btn-sm" id="btn-save-case">💾 Gem sag</button>
+  </div>
+</div></div>
+
+<!-- BESTYRELSESMEDLEM -->
+<div class="modal-ov" id="m-brd"><div class="modal-box">
+  <div class="modal-hdr"><h3 id="m-brd-title">Tilføj bestyrelsesmedlem</h3><button class="modal-close" data-close="m-brd">✕</button></div>
+  <div class="modal-body">
+    <input type="hidden" id="b-id">
+    <input type="hidden" id="b-photo-url">
+    <div class="form-grid">
+      <div class="form-field span2"><label>Navn *</label><input type="text" class="fi" id="b-name" placeholder="Fuldt navn"></div>
+      <div class="form-field"><label>Funktion/rolle</label><input type="text" class="fi" id="b-role" placeholder="Formand"></div>
+      <div class="form-field"><label>E-mail</label><input type="email" class="fi" id="b-email" placeholder="navn@..."></div>
+      <div class="form-field"><label>Telefon (valgfrit)</label><input type="tel" class="fi" id="b-phone" placeholder="+45 ..."></div>
+      <div class="form-field"><label>Rækkefølge</label><input type="number" class="fi" id="b-sort" placeholder="1" min="1"></div>
+      <div class="form-field span2">
+        <label>Foto</label>
+        <div class="upload-zone" id="b-photo-zone"><span style="font-size:1.4rem;">📷</span><p>Klik for at vælge foto</p><input type="file" id="b-photo-inp" accept="image/*"></div>
+        <div id="b-photo-prev" style="margin-top:.5rem;"></div>
+      </div>
+      <div class="form-field" style="flex-direction:row;align-items:center;gap:.6rem;padding-top:1.2rem;">
+        <input type="checkbox" id="b-active" style="width:auto;accent-color:var(--c-forest);" checked>
+        <label for="b-active" style="font-weight:normal;font-size:.84rem;cursor:pointer;text-transform:none;letter-spacing:0;">Aktivt bestyrelsesmedlem</label>
+      </div>
+    </div>
+    <div id="brd-alert" class="alert" style="margin-top:.8rem;"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-muted btn-sm" data-close="m-brd">Annuller</button>
+    <button class="btn btn-primary btn-sm" id="btn-save-brd">💾 Gem</button>
+  </div>
+</div></div>
+
+<!-- DOKUMENT -->
+<div class="modal-ov" id="m-doc"><div class="modal-box">
+  <div class="modal-hdr"><h3>Upload dokument</h3><button class="modal-close" data-close="m-doc">✕</button></div>
+  <div class="modal-body">
+    <input type="hidden" id="d-id">
+    <input type="hidden" id="d-file-url">
+    <div class="form-grid">
+      <div class="form-field span2"><label>Titel *</label><input type="text" class="fi" id="d-title" placeholder="f.eks. Referat – Generalforsamling 2026"></div>
+      <div class="form-field"><label>Kategori *</label>
+        <select class="fi" id="d-cat">
+          <option>Vedtægter</option><option>Indkaldelser</option><option>Dagsordener</option>
+          <option>Referater</option><option>Regnskaber</option><option>Årsberetninger</option>
+          <option>Høringssvar</option><option>Pressemeddelelser</option><option>Bilag</option><option>Andre</option>
+        </select>
+      </div>
+      <div class="form-field"><label>År</label><input type="number" class="fi" id="d-year" placeholder="2026"></div>
+      <div class="form-field span2"><label>Beskrivelse (valgfrit)</label><input type="text" class="fi" id="d-desc" placeholder="Kort beskrivelse"></div>
+      <div class="form-field span2">
+        <label>Fil (PDF, Word, Excel)</label>
+        <div class="upload-zone" id="d-upload-zone"><span style="font-size:1.4rem;">📄</span><p>Klik for at vælge fil</p><input type="file" id="d-file-inp" accept=".pdf,.doc,.docx,.xls,.xlsx"></div>
+        <div id="d-fname" style="margin-top:.4rem;font-size:.78rem;color:var(--c-muted);"></div>
+      </div>
+    </div>
+    <div id="doc-alert" class="alert" style="margin-top:.8rem;"></div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-muted btn-sm" data-close="m-doc">Annuller</button>
+    <button class="btn btn-primary btn-sm" id="btn-save-doc">💾 Upload & gem</button>
+  </div>
+</div></div>
+
+<!-- SLET BEKRÆFTELSE -->
+<div class="modal-ov" id="m-del"><div class="modal-box" style="max-width:380px;">
+  <div class="modal-hdr"><h3>Bekræft sletning</h3><button class="modal-close" data-close="m-del">✕</button></div>
+  <div class="confirm-box">
+    <p>Er du sikker på, at du vil slette <strong id="del-name"></strong>?</p>
+    <p class="warn">Denne handling kan ikke fortrydes.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-muted btn-sm" data-close="m-del">Annuller</button>
+    <button class="btn btn-danger btn-sm" id="btn-confirm-del">Slet permanent</button>
+  </div>
+</div></div>
+
+<!-- Scripts -->
+<script src="js/config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

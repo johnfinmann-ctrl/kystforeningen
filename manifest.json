@@ -1,0 +1,19 @@
+{
+  "name": "Kystforeningen Djursland",
+  "short_name": "Kystforeningen",
+  "description": "Bevarelse af naturen og de rekreative kystområder på Djursland",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#173d5c",
+  "theme_color": "#173d5c",
+  "lang": "da",
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "categories": ["lifestyle", "education"],
+  "screenshots": [
+    { "src": "assets/kyst-hero.jpg", "sizes": "1600x1059", "type": "image/jpeg" }
+  ]
+}
