@@ -5,64 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kystforeningen Djursland – Bevar Djurslands kyster</title>
   <meta name="description" content="Kystforeningen Djursland arbejder for at bevare naturen og de rekreative kystområder på Djursland gennem folkeoplysning, fællesskab og konkrete aktiviteter.">
-  <meta name="theme-color" content="#173d5c">
-  <link rel="canonical" href="https://kystforeningendj.dk/">
-
-  <!-- PWA -->
+  <meta name="theme-color" content="#0d2233">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
-
-  <!-- Open Graph -->
-  <meta property="og:title"       content="Kystforeningen Djursland">
+  <meta property="og:title" content="Kystforeningen Djursland">
   <meta property="og:description" content="Bevarelse af naturen og de rekreative kystområder på Djursland">
-  <meta property="og:image"       content="assets/kyst-hero.jpg">
-  <meta property="og:type"        content="website">
-
-  <!-- Supabase -->
-  <!-- Supabase CDN – UDEN defer, skal være klar før config.js og supabase-client.js -->
+  <meta property="og:image" content="assets/kyst-hero.jpg">
+  <meta property="og:type" content="website">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     OPDATERINGS-BANNER (PWA)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-<div id="update-banner" role="alert" aria-live="polite" style="display:none;">
+<!-- UPDATE BANNER -->
+<div id="update-banner" style="display:none;" role="alert" aria-live="polite">
   🔄 En ny version er klar –
-  <button id="update-now" class="btn btn-sm" style="background:var(--c-navy);color:#fff;padding:.3rem .8rem;margin-left:.4rem;">
-    Opdater nu
-  </button>
+  <button id="update-now" class="btn btn-sm btn-navy" style="padding:.3rem .8rem;margin-left:.4rem;">Opdater nu</button>
 </div>
 
-<!-- DEBUG-STATUS: Vises KUN hvis DEBUG_MODE = true i config.js -->
-<!-- Aldrig synlig for offentlige brugere i produktion -->
-<div id="config-warn" style="display:none;"
-     aria-hidden="true"
-     title="Kun synlig i DEBUG_MODE">
-  🛠 Udviklerinfo: Supabase ikke konfigureret –
-  åbn <code>js/config.js</code> og indsæt URL + nøgle.
-</div>
+<!-- DEBUG BAR (kun DEBUG_MODE = true) -->
+<div id="config-warn" style="display:none;" aria-hidden="true"></div>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<!-- ════════════════════════════════════════════
      NAVIGATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+════════════════════════════════════════════ -->
 <nav id="nav" role="navigation" aria-label="Primær navigation">
   <div class="nav-inner">
     <a href="#" class="nav-logo" id="nav-logo" aria-label="Kystforeningen Djursland – forside">
       🌊 Kystforeningen Djursland
     </a>
-    <ul class="nav-links" id="nav-links" role="list">
+    <ul id="nav-links" role="list">
       <li><button class="nav-btn" data-page="forside">Forside</button></li>
       <li><button class="nav-btn" data-page="om">Om foreningen</button></li>
       <li><button class="nav-btn" data-page="aktiviteter">Aktiviteter</button></li>
       <li><button class="nav-btn" data-page="sager">Aktuelle sager</button></li>
       <li><button class="nav-btn" data-page="bestyrelse">Bestyrelse</button></li>
       <li><button class="nav-btn" data-page="gf">Generalforsamling</button></li>
-      <li><button class="nav-btn" data-page="medlem">Bliv medlem</button></li>
       <li><button class="nav-btn" data-page="kontakt">Kontakt</button></li>
+      <li><button class="nav-btn" data-page="medlem" style="margin-left:.5rem;background:rgba(200,164,90,.18);color:var(--c-gold);border-radius:3px;padding:.4rem .8rem;">Bliv medlem</button></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Åbn menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -70,185 +50,325 @@
   </div>
 </nav>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<!-- ════════════════════════════════════════════
      FORSIDE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+════════════════════════════════════════════ -->
 <div id="page-forside" class="page active">
 
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-h1">
-    <div class="hero-bg" role="img" aria-label="Udsigt over Randers Fjord med gyldne marker og skov"></div>
+    <div class="hero-bg" role="img"
+         aria-label="Udsigt over Randers Fjord med gyldne marker, skov og blå himmel"></div>
     <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <p class="hero-kicker">Folkeoplysende · Partipolitisk uafhængig forening</p>
-      <h1 id="hero-h1">Bevar Djurslands kyster</h1>
-      <p class="hero-sub">Vi arbejder for at bevare naturen og de rekreative områder langs Djurslands kyster gennem folkeoplysning, fællesskab og konkrete aktiviteter.</p>
-      <div class="hero-btns">
-        <button class="btn btn-primary btn-lg" data-goto="aktiviteter">Se aktiviteter</button>
-        <button class="btn btn-outline btn-lg" data-goto="medlem">Bliv medlem</button>
+
+    <div class="hero-content mw">
+      <p class="hero-eyebrow">Folkeoplysende · Uafhængig forening · Djursland</p>
+      <h1 id="hero-h1" class="hero-title">
+        <span>BEVAR</span>
+        <span>DJURSLANDS</span>
+        <span>KYSTER</span>
+      </h1>
+      <p class="hero-sub">For naturen, landskabet og de rekreative områder.</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary btn-lg" data-goto="aktiviteter">
+          Se vores aktiviteter <span class="arrow">→</span>
+        </button>
       </div>
     </div>
-    <button class="hero-scroll" aria-label="Scroll ned" id="hero-scroll">
+
+    <button class="hero-scroll-hint" id="hero-scroll" aria-label="Scroll ned">
       <span>Scroll</span>
-      <div class="hero-chevron"></div>
+      <div class="hero-scroll-chevron"></div>
     </button>
   </section>
 
-  <!-- KORT PRÆSENTATION -->
-  <section class="section home-only" id="intro" aria-labelledby="intro-h2">
-    <div class="mw-sm">
+  <!-- INTRO -->
+  <section id="intro" aria-labelledby="intro-h2">
+    <div class="mw-sm" style="padding: var(--sp-2xl) var(--sp-md);">
       <p class="section-label">Om foreningen</p>
-      <h2 id="intro-h2">En åben og uafhængig forening for alle</h2>
-      <div class="section-line"></div>
+      <h2 id="intro-h2" class="intro-statement">
+        Kysten er vores<br>fælles landskab
+      </h2>
+      <div class="section-rule"></div>
       <p class="intro-text">
-        Kystforeningen Djursland er en åben, partipolitisk uafhængig folkeoplysende forening, der samler borgere med kærlighed til Djurslands kyst og natur.
-        Vi oplyser, arrangerer aktiviteter og fremmer fællesskabet om de natur- og landskabsværdier, vi har til fælles ansvar at bevare.
+        Kystforeningen Djursland er en åben, partipolitisk uafhængig folkeoplysende forening.
+        Vi samler borgere om bevarelsen af Djurslands kystlandskaber, natur og rekreative områder
+        gennem viden, fællesskab og konkrete aktiviteter.
       </p>
     </div>
   </section>
 
-  <!-- TRE BOKSE -->
-  <section class="section section-sand home-only" aria-label="Highlights">
+  <!-- MØRKEBLÅ SEKTION: OPLEV · FORSTÅ · BEVAR -->
+  <section class="dark-section" aria-label="Hvad vi tilbyder">
+    <div class="dark-section-hdr">
+      <p class="section-label">Kystforeningen Djursland</p>
+      <div class="dark-tagline">OPLEV · FORSTÅ · BEVAR</div>
+    </div>
+    <div class="dark-frames">
+      <div class="dark-frame" role="button" tabindex="0" data-goto="om"
+           aria-label="Læs om natur og kyst">
+        <div class="dark-frame-body">
+          <div class="dark-frame-num">01</div>
+          <div class="dark-frame-title">Natur<br>& kyst</div>
+          <div class="dark-frame-text">
+            Naturformidling og viden om Djurslands kystlandskaber, biodiversitet og havmiljø.
+          </div>
+          <div class="dark-frame-arrow">Læs mere</div>
+        </div>
+      </div>
+      <div class="dark-frame" role="button" tabindex="0" data-goto="aktiviteter"
+           aria-label="Se aktiviteter">
+        <div class="dark-frame-body">
+          <div class="dark-frame-num">02</div>
+          <div class="dark-frame-title">Aktiviteter</div>
+          <div class="dark-frame-text">
+            Kystvandringer, foredrag, borgermøder og åbne arrangementer for alle.
+          </div>
+          <div class="dark-frame-arrow">Se program</div>
+        </div>
+      </div>
+      <div class="dark-frame" role="button" tabindex="0" data-goto="sager"
+           aria-label="Aktuelle sager">
+        <div class="dark-frame-body">
+          <div class="dark-frame-num">03</div>
+          <div class="dark-frame-title">Aktuelle<br>sager</div>
+          <div class="dark-frame-text">
+            Vi følger og formidler udviklingen langs Djurslands kyster og naturområder.
+          </div>
+          <div class="dark-frame-arrow">Se sager</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRE INDGANGE – editorial -->
+  <section class="editorial-section" aria-label="Seneste indhold">
     <div class="mw">
-      <div class="tres" id="tres-grid">
+      <div class="editorial-hdr">
+        <p class="section-label">Fra foreningen</p>
+        <h2 class="section-title" style="margin-top:var(--sp-xs);">Nu og snart</h2>
+      </div>
+      <div class="editorial-grid">
 
-        <article class="tres-boks">
-          <div class="tres-tag">📅 Kommende aktivitet</div>
-          <h3 id="tb-ak-h">Forårsvandring langs kysten</h3>
-          <p id="tb-ak-p">Guidet vandring med naturformidling. Lørdag d. 14. juni 2026 kl. 10:00.</p>
-          <button class="btn btn-navy btn-sm" data-goto="aktiviteter">Se alle aktiviteter</button>
+        <!-- STOR BOKS: NÆSTE AKTIVITET -->
+        <article class="ed-card ed-card-main"
+                 role="button" tabindex="0" data-goto="aktiviteter">
+          <div class="ed-card-img" style="background:linear-gradient(160deg,var(--c-navy) 0%,var(--c-forest) 100%);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.15);font-size:4rem;">
+            🌿
+          </div>
+          <div class="ed-card-body">
+            <div class="ed-tag">📅 Næste aktivitet</div>
+            <div class="ed-card-title" id="tb-ak-h">Forårsvandring langs kysten</div>
+            <div class="ed-card-text" id="tb-ak-p">
+              Guidet vandring med naturformidling. Lørdag 14. juni 2026 kl. 10:00.
+            </div>
+            <span class="ed-card-link">Se alle aktiviteter</span>
+          </div>
         </article>
 
-        <article class="tres-boks">
-          <div class="tres-tag">📢 Seneste nyhed</div>
-          <h3 id="tb-ny-h">Generalforsamling afholdt</h3>
-          <p id="tb-ny-p">Årets generalforsamling fandt sted i marts 2026. Referat kan downloades.</p>
-          <button class="btn btn-navy btn-sm" data-goto="gf">Se dokumenter</button>
+        <!-- NYHED -->
+        <article class="ed-card ed-card-sm"
+                 role="button" tabindex="0" data-goto="gf">
+          <div class="ed-card-body" style="border-top:2px solid var(--c-ocean);">
+            <div class="ed-tag">📢 Seneste nyhed</div>
+            <div class="ed-card-title" id="tb-ny-h">Generalforsamling afholdt</div>
+            <div class="ed-card-text" id="tb-ny-p">
+              Årets generalforsamling fandt sted i marts 2026. Referat kan downloades.
+            </div>
+            <span class="ed-card-link">Se dokumenter</span>
+          </div>
         </article>
 
-        <article class="tres-boks">
-          <div class="tres-tag">⚡ Aktuel sag</div>
-          <h3 id="tb-sag-h">Vindmøller ved Vosnæs</h3>
-          <p id="tb-sag-p">Planer om vindmøller i kystnære områder er under kommunal behandling.</p>
-          <button class="btn btn-navy btn-sm" data-goto="sager">Se alle sager</button>
+        <!-- SAG -->
+        <article class="ed-card ed-card-sm"
+                 role="button" tabindex="0" data-goto="sager">
+          <div class="ed-card-body" style="border-top:2px solid var(--c-gold);">
+            <div class="ed-tag">⚡ Aktuel sag</div>
+            <div class="ed-card-title" id="tb-sag-h">Vindmøller ved Vosnæs</div>
+            <div class="ed-card-text" id="tb-sag-p">
+              Planer om vindmøller i kystnære områder er under kommunal behandling.
+            </div>
+            <span class="ed-card-link">Læs mere</span>
+          </div>
         </article>
 
       </div>
+    </div>
+  </section>
+
+  <!-- MEDLEMS-CTA -->
+  <section class="member-cta" aria-labelledby="cta-h2">
+    <div class="mw-xs">
+      <p class="section-label">Støt bevarelsen</p>
+      <h2 id="cta-h2" class="member-cta-title">
+        Bliv en del<br>af fællesskabet
+      </h2>
+      <p class="member-cta-text">
+        Alle kan melde sig ind – uanset bopæl.
+        Dit medlemskab støtter foreningens arbejde for naturen og kystlandskabet.
+      </p>
+      <button class="btn btn-gold btn-lg" data-goto="medlem">
+        Bliv medlem <span class="arrow">→</span>
+      </button>
     </div>
   </section>
 
 </div><!-- /page-forside -->
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<!-- ════════════════════════════════════════════
      OM FORENINGEN
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+════════════════════════════════════════════ -->
 <div id="page-om" class="page">
-  <section class="section" aria-labelledby="om-h2">
+  <div class="page-hero">
     <div class="mw">
       <p class="section-label">Hvem er vi</p>
-      <h2 id="om-h2">Om foreningen</h2>
-      <div class="section-line"></div>
-      <p style="max-width:640px;font-size:.95rem;color:#374141;line-height:1.8;margin-bottom:var(--space-lg);">
-        Foreningen til bevarelse af naturen og rekreative områder langs kysterne på Djursland er en partipolitisk uafhængig folkeoplysende forening.
-        Vi er åbne for alle borgere med interesse for kystnaturen, og vi arbejder igennem oplysning, aktiviteter og dialog.
+      <h1 class="page-hero-title">Om foreningen</h1>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="mw">
+      <p style="max-width:640px;font-size:1rem;color:var(--c-stone);line-height:1.8;margin-bottom:var(--sp-xl);">
+        Kystforeningen Djursland er en partipolitisk uafhængig folkeoplysende forening.
+        Vi arbejder for bevarelse af naturværdier, kystlandskaber og rekreative muligheder
+        på Djursland — gennem oplysning, aktiviteter og åben dialog med borgerne.
       </p>
-      <div class="om-grid">
-        <div class="om-kort"><div class="ok-icon">🎯</div><h4>Formål</h4><p>At bevare naturen, landskaberne og de rekreative kystområder til glæde for nuværende og kommende generationer.</p></div>
-        <div class="om-kort"><div class="ok-icon">📚</div><h4>Folkeoplysning</h4><p>Foredrag, vandringer, borgermøder og formidling af viden om natur, miljø og planlægning.</p></div>
-        <div class="om-kort"><div class="ok-icon">👥</div><h4>Fællesskab</h4><p>Åben for alle borgere uanset bopæl. Stemmeret og indflydelse for alle medlemmer.</p></div>
-        <div class="om-kort"><div class="ok-icon">🤝</div><h4>Borgerinddragelse</h4><p>Vi oplyser om planlægning og aktuelle projekter og inddrager borgerne i dialogen.</p></div>
-        <div class="om-kort"><div class="ok-icon">⚖️</div><h4>Uafhængig</h4><p>Ingen partipolitiske eller kommercielle bindinger. Vi taler naturens og borgernes sag.</p></div>
-        <div class="om-kort"><div class="ok-icon">🌿</div><h4>Naturformidling</h4><p>Vi formidler viden om Djurslands kystlandskaber, biodiversitet og havmiljø.</p></div>
+      <div class="om-pillars">
+        <div class="om-pillar">
+          <div class="om-pillar-icon">🎯</div>
+          <h4>Formål</h4>
+          <p>Bevare naturen og kystlandskaberne til glæde for nuværende og kommende generationer.</p>
+        </div>
+        <div class="om-pillar">
+          <div class="om-pillar-icon">📚</div>
+          <h4>Folkeoplysning</h4>
+          <p>Foredrag, vandringer, borgermøder og formidling af viden om natur, miljø og planlægning.</p>
+        </div>
+        <div class="om-pillar">
+          <div class="om-pillar-icon">👥</div>
+          <h4>Fællesskab</h4>
+          <p>Åben for alle borgere. Stemmeret og indflydelse på generalforsamlingen.</p>
+        </div>
+        <div class="om-pillar">
+          <div class="om-pillar-icon">⚖️</div>
+          <h4>Uafhængig</h4>
+          <p>Ingen partipolitiske eller kommercielle bindinger. Vi taler naturens og borgernes sag.</p>
+        </div>
+        <div class="om-pillar">
+          <div class="om-pillar-icon">🤝</div>
+          <h4>Borgerinddragelse</h4>
+          <p>Vi formidler om planprocesser og inddrager borgerne i demokratisk dialog.</p>
+        </div>
+        <div class="om-pillar">
+          <div class="om-pillar-icon">🌿</div>
+          <h4>Naturformidling</h4>
+          <p>Vi formidler viden om Djurslands kystlandskaber, biodiversitet og havmiljø.</p>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<!-- ════════════════════════════════════════════
      AKTIVITETER
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+════════════════════════════════════════════ -->
 <div id="page-aktiviteter" class="page">
-  <section class="section" aria-labelledby="ak-h2">
+  <div class="page-hero">
     <div class="mw">
       <p class="section-label">Hvad sker der</p>
-      <h2 id="ak-h2">Aktiviteter</h2>
-      <div class="section-line"></div>
-      <p style="font-size:.88rem;color:var(--c-muted);margin-bottom:var(--space-md);">
-        Alle arrangementer er åbne for medlemmer og interesserede borgere. Tilmelding ikke nødvendig, medmindre andet er angivet.
+      <h1 class="page-hero-title">Aktiviteter</h1>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="mw-sm">
+      <p style="font-size:.88rem;color:var(--c-muted);margin-bottom:var(--sp-lg);">
+        Alle arrangementer er åbne for medlemmer og interesserede borgere.
+        Tilmelding ikke nødvendig, medmindre andet er angivet.
       </p>
       <div class="ak-list" id="ak-list">
-        <p class="text-muted">Indlæser aktiviteter...</p>
+        <p class="text-muted">Henter aktiviteter…</p>
       </div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<!-- ════════════════════════════════════════════
      AKTUELLE SAGER
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+════════════════════════════════════════════ -->
 <div id="page-sager" class="page">
-  <section class="section" aria-labelledby="sag-h2">
+  <div class="page-hero">
     <div class="mw">
       <p class="section-label">Vi holder øje</p>
-      <h2 id="sag-h2">Aktuelle sager</h2>
-      <div class="section-line"></div>
+      <h1 class="page-hero-title">Aktuelle sager</h1>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="mw">
       <div class="sag-note" role="note">
-        📋 Vi formidler offentligt tilgængeligt materiale om sager der berører Djurslands kyster og natur.
-        Foreningen er ikke kampagneorganisation – vi oplyser og inddrager borgerne.
+        Vi formidler offentligt tilgængeligt materiale om sager der berører Djurslands
+        kyster og natur. Foreningen er ikke kampagneorganisation – vi oplyser og inddrager borgerne.
       </div>
       <div class="sag-grid" id="sag-grid">
-        <p class="text-muted">Indlæser sager...</p>
+        <p class="text-muted">Henter sager…</p>
       </div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<!-- ════════════════════════════════════════════
      BESTYRELSE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+════════════════════════════════════════════ -->
 <div id="page-bestyrelse" class="page">
-  <section class="section" aria-labelledby="bst-h2">
+  <div class="page-hero">
     <div class="mw">
       <p class="section-label">Hvem driver foreningen</p>
-      <h2 id="bst-h2">Bestyrelse</h2>
-      <div class="section-line"></div>
+      <h1 class="page-hero-title">Bestyrelse</h1>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="mw">
       <div class="bst-grid" id="bst-grid">
-        <p class="text-muted">Indlæser bestyrelse...</p>
+        <p class="text-muted">Henter bestyrelsesoplysninger…</p>
       </div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     GENERALFORSAMLING
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- ════════════════════════════════════════════
+     GENERALFORSAMLING OG DOKUMENTER
+════════════════════════════════════════════ -->
 <div id="page-gf" class="page">
-  <section class="section" aria-labelledby="gf-h2">
+  <div class="page-hero">
     <div class="mw">
       <p class="section-label">Dokumenter og referater</p>
-      <h2 id="gf-h2">Generalforsamling & dokumenter</h2>
-      <div class="section-line"></div>
-      <p style="font-size:.88rem;color:var(--c-muted);margin-bottom:var(--space-md);">
-        Alle officielle dokumenter er offentligt tilgængelige. Klik for at åbne eller downloade som PDF.
+      <h1 class="page-hero-title">Generalforsamling<br>& dokumenter</h1>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="mw-sm">
+      <p style="font-size:.88rem;color:var(--c-muted);margin-bottom:var(--sp-lg);">
+        Alle officielle dokumenter er offentligt tilgængelige. Klik for at åbne eller downloade.
       </p>
       <div id="dok-areas">
-        <p class="text-muted">Indlæser dokumenter...</p>
+        <p class="text-muted">Henter dokumenter…</p>
       </div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<!-- ════════════════════════════════════════════
      BLIV MEDLEM
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+════════════════════════════════════════════ -->
 <div id="page-medlem" class="page">
-  <section class="section text-center" aria-labelledby="med-h2">
+  <div class="page-hero">
     <div class="mw">
       <p class="section-label">Støt bevarelsen</p>
-      <h2 id="med-h2">Bliv medlem</h2>
-      <div class="section-line-c"></div>
-      <p style="font-size:.88rem;color:var(--c-muted);margin-bottom:var(--space-lg);">
-        Alle interesserede borgere kan melde sig ind – uanset bopæl.
+      <h1 class="page-hero-title">Bliv medlem</h1>
+    </div>
+  </div>
+  <div class="page-body" style="text-align:center;">
+    <div class="mw-xs">
+      <p style="font-size:.9rem;color:var(--c-muted);margin-bottom:var(--sp-lg);">
+        Alle kan melde sig ind – uanset bopæl.
       </p>
       <div class="membership-box">
         <div class="mb-top">
@@ -262,66 +382,83 @@
           <li>Mulighed for at påvirke foreningens arbejde</li>
         </ul>
         <div class="mb-form">
-          <input type="text"  class="fi" id="m-navn"      placeholder="Navn *" autocomplete="name">
-          <input type="email" class="fi" id="m-email"     placeholder="E-mail *" autocomplete="email">
-          <input type="tel"   class="fi" id="m-tlf"       placeholder="Telefon (valgfrit)" autocomplete="tel">
-          <textarea           class="fi" id="m-kommentar" placeholder="Kommentar (valgfrit)" style="height:70px;"></textarea>
-          <button type="button" class="btn btn-primary btn-full" id="btn-tilmeld">Send tilmelding</button>
+          <input type="text"  class="fi" id="m-navn"
+                 placeholder="Navn *" autocomplete="name">
+          <input type="email" class="fi" id="m-email"
+                 placeholder="E-mail *" autocomplete="email">
+          <input type="tel"   class="fi" id="m-tlf"
+                 placeholder="Telefon (valgfrit)" autocomplete="tel">
+          <textarea           class="fi" id="m-kommentar"
+                 placeholder="Kommentar (valgfrit)" style="height:72px;"></textarea>
+          <button type="button" class="btn btn-primary btn-full" id="btn-tilmeld">
+            Send tilmelding <span class="arrow">→</span>
+          </button>
           <div id="m-alert" class="alert" role="alert"></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<!-- ════════════════════════════════════════════
      KONTAKT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+════════════════════════════════════════════ -->
 <div id="page-kontakt" class="page">
-  <section class="section" aria-labelledby="kont-h2">
+  <div class="page-hero">
     <div class="mw">
       <p class="section-label">Skriv til os</p>
-      <h2 id="kont-h2">Kontakt</h2>
-      <div class="section-line"></div>
+      <h1 class="page-hero-title">Kontakt</h1>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="mw">
       <div class="kontakt-grid">
         <div class="kontakt-info">
-          <div class="k-kort">
+          <div class="k-block">
             <h4>Kontaktperson</h4>
             <div class="k-row"><span class="ki">👤</span><span id="k-navn">[Formandens navn]</span></div>
-            <div class="k-row"><span class="ki">📧</span><a id="k-email" href="mailto:info@kystforeningendj.dk">info@kystforeningendj.dk</a></div>
-            <div class="k-row"><span class="ki">📞</span><a id="k-tlf"   href="tel:+4500000000">+45 00 00 00 00</a></div>
+            <div class="k-row"><span class="ki">📧</span>
+              <a id="k-email" href="mailto:info@kystforeningendj.dk">info@kystforeningendj.dk</a></div>
+            <div class="k-row"><span class="ki">📞</span>
+              <a id="k-tlf" href="tel:+4500000000">+45 00 00 00 00</a></div>
           </div>
-          <div class="k-kort">
+          <div class="k-block">
             <h4>Find os</h4>
             <div class="k-row"><span class="ki">📍</span><span>Djursland, Region Midtjylland</span></div>
-            <div class="k-row"><span class="ki">📘</span><a id="k-fb" href="#">Kystforeningen Djursland på Facebook</a></div>
+            <div class="k-row"><span class="ki">📘</span>
+              <a id="k-fb" href="#" target="_blank" rel="noopener">
+                Kystforeningen Djursland på Facebook</a></div>
           </div>
           <p class="text-muted">Vi svarer normalt inden for 3 hverdage.</p>
         </div>
-        <div>
-          <div class="k-form">
-            <input type="text"  class="fi" id="k-navn-form"  placeholder="Dit navn *" autocomplete="name">
-            <input type="email" class="fi" id="k-email-form" placeholder="Din e-mail *" autocomplete="email">
-            <textarea           class="fi" id="k-besked"     placeholder="Din besked *"></textarea>
-            <button type="button" class="btn btn-navy btn-full" id="btn-kontakt">Send besked</button>
-            <div id="k-alert" class="alert" role="alert"></div>
-          </div>
+        <div class="k-form">
+          <input type="text"  class="fi" id="k-navn-form"
+                 placeholder="Dit navn *" autocomplete="name">
+          <input type="email" class="fi" id="k-email-form"
+                 placeholder="Din e-mail *" autocomplete="email">
+          <textarea           class="fi" id="k-besked"
+                 placeholder="Din besked *"></textarea>
+          <button type="button" class="btn btn-navy btn-full" id="btn-kontakt">
+            Send besked <span class="arrow">→</span>
+          </button>
+          <div id="k-alert" class="alert" role="alert"></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </div>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<!-- ════════════════════════════════════════════
      FOOTER
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+════════════════════════════════════════════ -->
 <footer role="contentinfo">
   <strong>Kystforeningen Djursland</strong>
   <p>Bevarelse af naturen og de rekreative kystområder på Djursland</p>
-  <p style="margin-top:.4rem;">
-    Folkeoplysende forening · Partipolitisk uafhængig · CVR: <span id="f-cvr">[indsæt]</span> · © 2026
+  <p style="margin-top:.3rem;">
+    Folkeoplysende forening · Partipolitisk uafhængig ·
+    CVR: <span id="f-cvr">[indsæt]</span> · © 2026
   </p>
-  <nav class="footer-links" aria-label="Footer navigation">
+  <nav class="footer-links" aria-label="Footer">
     <a href="#" id="fp-priv">Privatlivspolitik</a>
     <span aria-hidden="true">·</span>
     <a href="#" id="fp-cook">Cookiepolitik</a>
@@ -332,11 +469,9 @@
   </nav>
 </footer>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<!-- ════════════════════════════════════════════
      MODALER
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-
-<!-- LÆS MERE – SAG -->
+════════════════════════════════════════════ -->
 <div class="modal-ov" id="modal-sag" role="dialog" aria-modal="true" aria-labelledby="sag-modal-h2">
   <div class="modal">
     <div class="modal-hdr">
@@ -347,11 +482,10 @@
   </div>
 </div>
 
-<!-- BESKED DIALOG -->
-<div class="modal-ov" id="modal-besked" role="dialog" aria-modal="true" aria-labelledby="besked-modal-h2">
+<div class="modal-ov" id="modal-besked" role="dialog" aria-modal="true" aria-labelledby="besked-h2">
   <div class="modal">
     <div class="modal-hdr">
-      <h2 id="besked-modal-h2">Besked klar til afsendelse</h2>
+      <h2 id="besked-h2">Besked klar</h2>
       <button class="modal-close" data-close="modal-besked" aria-label="Luk">✕</button>
     </div>
     <div class="modal-body">
@@ -362,16 +496,17 @@
         <a href="#" class="btn btn-navy btn-sm" id="bd-mailto">✉ Åbn e-mailprogram</a>
         <button class="btn btn-ghost btn-sm" data-close="modal-besked">Luk</button>
       </div>
-      <p class="text-muted" style="margin-top:.8rem;">Send til: <strong id="bd-til"></strong></p>
+      <p class="text-muted" style="margin-top:.8rem;">
+        Send til: <strong id="bd-til"></strong>
+      </p>
     </div>
   </div>
 </div>
 
-<!-- PRIVATLIVSPOLITIK -->
 <div class="modal-ov" id="modal-priv" role="dialog" aria-modal="true" aria-labelledby="priv-h2">
   <div class="modal">
     <div class="modal-hdr">
-      <h2 id="priv-h2">🔒 Privatlivspolitik</h2>
+      <h2 id="priv-h2">Privatlivspolitik</h2>
       <button class="modal-close" data-close="modal-priv" aria-label="Luk">✕</button>
     </div>
     <div class="modal-body">
@@ -381,7 +516,7 @@
       <h3>Formål og retsgrundlag</h3>
       <p>Oplysningerne bruges til at administrere medlemskab og besvare henvendelser (GDPR art. 6, stk. 1, litra a og b).</p>
       <h3>Opbevaring</h3>
-      <p>Medlemsoplysninger slettes senest 1 år efter udmeldelse. Kontakthenvendelser slettes senest 2 år efter modtagelse.</p>
+      <p>Medlemsoplysninger slettes senest 1 år efter udmeldelse.</p>
       <h3>Dine rettigheder</h3>
       <p>Ret til indsigt, berigtigelse og sletning. Klage til <a href="https://datatilsynet.dk" target="_blank" rel="noopener">Datatilsynet</a>.</p>
       <p>Kontakt: <a href="mailto:info@kystforeningendj.dk">info@kystforeningendj.dk</a></p>
@@ -389,33 +524,34 @@
   </div>
 </div>
 
-<!-- COOKIEPOLITIK -->
 <div class="modal-ov" id="modal-cook" role="dialog" aria-modal="true" aria-labelledby="cook-h2">
   <div class="modal">
     <div class="modal-hdr">
-      <h2 id="cook-h2">🍪 Cookiepolitik</h2>
+      <h2 id="cook-h2">Cookiepolitik</h2>
       <button class="modal-close" data-close="modal-cook" aria-label="Luk">✕</button>
     </div>
     <div class="modal-body">
-      <p>Denne hjemmeside gemmer udelukkende funktionelle data i din browser (sessionStorage og cookies til login). Vi anvender ingen tracking, ingen analysecookies og ingen reklamecookies.</p>
-      <p>Data fra Supabase (indhold, billeder, dokumenter) indlæses fra vores sikre database og gemmes ikke lokalt i din browser.</p>
+      <p>Denne hjemmeside gemmer udelukkende funktionelle data i din browser. Vi anvender ingen tracking, ingen analysecookies og ingen reklamecookies.</p>
       <p>Spørgsmål: <a href="mailto:info@kystforeningendj.dk">info@kystforeningendj.dk</a></p>
     </div>
   </div>
 </div>
 
 <!-- COOKIE BANNER -->
-<div id="cookie-banner" role="complementary" aria-label="Cookiesamtykke" style="display:none;">
-  <p>Vi bruger kun nødvendige cookies til drift af siden – ingen tracking. <button id="ck-laes" class="btn btn-sm" style="background:none;border:none;color:#c8e6c9;padding:0;text-decoration:underline;cursor:pointer;font-size:inherit;">Læs mere</button></p>
+<div id="cookie-banner" style="display:none;" role="complementary" aria-label="Cookiesamtykke">
+  <p>Vi bruger kun nødvendige cookies til drift af siden.
+    <button id="ck-laes" style="background:none;border:none;color:rgba(200,164,90,.9);text-decoration:underline;cursor:pointer;font-size:inherit;padding:0;">Læs mere</button>
+  </p>
   <div class="ck-btns">
-    <button type="button" class="btn btn-ghost btn-sm" style="color:#fff;border-color:rgba(255,255,255,.4);" id="ck-nej">Kun nødvendige</button>
+    <button type="button" class="btn btn-ghost btn-sm"
+            style="color:#fff;border-color:rgba(255,255,255,.35);" id="ck-nej">Kun nødvendige</button>
     <button type="button" class="btn btn-primary btn-sm" id="ck-ok">OK</button>
   </div>
 </div>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<!-- ════════════════════════════════════════════
      SCRIPTS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+════════════════════════════════════════════ -->
 <script src="js/config.js"></script>
 <script src="js/supabase-client.js"></script>
 <script src="js/app.js"></script>
