@@ -84,7 +84,7 @@ function klarTilData(elementId) {
 ════════════════════════════════════════════════ */
 const PAGES = [
   'forside','om','aktiviteter','sager',
-  'bestyrelse','gf','medlem','kontakt'
+  'bestyrelse','gf','hoeringssvar','medlem','kontakt'
 ];
 let _currentPage = 'forside';
 
@@ -96,6 +96,7 @@ const PAGE_LOADERS = {
   gf:         loadDokumenter,
   kontakt:    loadKontakt,
   medlem:     loadMedlemInfo,
+  // hoeringssvar: statisk indhold, ingen loader nødvendig
 };
 
 function showPage(id, pushState = true) {

@@ -41,6 +41,7 @@
       <li><button class="nav-btn" data-page="sager">Aktuelle sager</button></li>
       <li><button class="nav-btn" data-page="bestyrelse">Bestyrelse</button></li>
       <li><button class="nav-btn" data-page="gf">Dokumenter</button></li>
+      <li><button class="nav-btn" data-page="hoeringssvar">Høringssvar</button></li>
       <li><button class="nav-btn" data-page="kontakt">Kontakt</button></li>
       <li><button class="nav-btn" data-page="medlem" style="margin-left:.5rem;background:rgba(200,164,90,.18);color:var(--c-gold);border-radius:3px;padding:.4rem .8rem;">Bliv medlem</button></li>
     </ul>
@@ -62,7 +63,7 @@
     <div class="hero-overlay"></div>
 
     <div class="hero-content mw">
-      <p class="hero-eyebrow">Folkeoplysende · Uafhængig forening · Djursland</p>
+      <p class="hero-eyebrow">Uafhængig forening · Djursland</p>
       <h1 id="hero-h1" class="hero-title">
         <span>BEVAR</span>
         <span>DJURSLANDS</span>
@@ -91,7 +92,7 @@
       </h2>
       <div class="section-rule"></div>
       <p class="intro-text">
-        Kystforeningen Djursland er en åben, partipolitisk uafhængig folkeoplysende forening.
+        Kystforeningen Djursland er en åben, partipolitisk uafhængig forening.
         Vi samler borgere om bevarelsen af Djurslands kystlandskaber, natur og rekreative områder
         gennem viden, fællesskab og konkrete aktiviteter.
       </p>
@@ -136,6 +137,17 @@
             Vi følger og formidler udviklingen langs Djurslands kyster og naturområder.
           </div>
           <div class="dark-frame-arrow">Se sager</div>
+        </div>
+      </div>
+      <div class="dark-frame" role="button" tabindex="0" data-goto="hoeringssvar"
+           aria-label="Høringssvar og indsigelser">
+        <div class="dark-frame-body">
+          <div class="dark-frame-num">04</div>
+          <div class="dark-frame-title">Høringssvar<br>& indsigelser</div>
+          <div class="dark-frame-text">
+            Se foreningens høringssvar og indsigelser til kommunale planprocesser.
+          </div>
+          <div class="dark-frame-arrow">Se høringssvar</div>
         </div>
       </div>
     </div>
@@ -193,6 +205,24 @@
         </article>
 
       </div>
+
+      <!-- HØRINGSSVAR-KORT (under editorial grid) -->
+      <div style="margin-top:var(--sp-md);max-width:1100px;margin-left:auto;margin-right:auto;">
+        <article class="ed-card"
+                 style="flex-direction:row;align-items:center;gap:var(--sp-lg);padding:var(--sp-md) var(--sp-lg);border-top:2px solid var(--c-gold);"
+                 role="button" tabindex="0" data-goto="hoeringssvar">
+          <div style="font-size:2.2rem;flex-shrink:0;">📋</div>
+          <div style="flex:1;">
+            <div class="ed-tag">Demokrati & inddragelse</div>
+            <div class="ed-card-title" style="font-size:1.2rem;">Høringssvar & indsigelser</div>
+            <div class="ed-card-text">
+              Se alle foreningens høringssvar og indsigelser til kommunale planprocesser.
+            </div>
+          </div>
+          <span class="ed-card-link" style="flex-shrink:0;">Se høringssvar</span>
+        </article>
+      </div>
+
     </div>
   </section>
 
@@ -228,7 +258,7 @@
   <div class="page-body">
     <div class="mw">
       <p style="max-width:640px;font-size:1rem;color:var(--c-stone);line-height:1.8;margin-bottom:var(--sp-lg);">
-        Kystforeningen Djursland er en partipolitisk uafhængig folkeoplysende forening.
+        Kystforeningen Djursland er en partipolitisk uafhængig forening.
         Vi arbejder for bevarelse af naturværdier, kystlandskaber og rekreative muligheder
         på Djursland — gennem oplysning, aktiviteter og åben dialog med borgerne.
       </p>
@@ -595,6 +625,91 @@
 </div>
 
 <!-- ════════════════════════════════════════════
+     HØRINGSSVAR & INDSIGELSER
+════════════════════════════════════════════ -->
+<div id="page-hoeringssvar" class="page">
+  <div class="page-hero">
+    <div class="mw">
+      <p class="section-label">Demokrati &amp; borgerinddragelse</p>
+      <h1 class="page-hero-title">Høringssvar<br>&amp; indsigelser</h1>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="mw-sm">
+      <p style="font-size:.9rem;color:var(--c-muted);margin-bottom:var(--sp-xl);max-width:540px;line-height:1.75;">
+        Foreningen afgiver høringssvar og indsigelser i offentlige planprocesser
+        der berører Djurslands kystlandskab og natur. Alle dokumenter er frit tilgængelige.
+      </p>
+
+      <!-- HØRINGSSVAR -->
+      <div class="dok-section">
+        <div class="dok-cat-title">Høringssvar</div>
+        <div class="dok-list">
+
+          <a href="assets/documents/hoeringssvar/hoeringssvar-vindmoeller-faergehavnen-2025.pdf"
+             target="_blank" rel="noopener" class="dok-row">
+            <span class="icon">📋</span>
+            <div class="info">
+              <strong>Kæmpevindmøller ved Ebeltoft Færgehavn</strong>
+              <span>Januar 2025 · Kommuneplan 2024, punkt 1.1.T2</span>
+            </div>
+            <span class="dl" style="color:var(--c-navy);font-size:.8rem;font-weight:700;white-space:nowrap;">Læs høringssvar →</span>
+          </a>
+
+          <a href="assets/documents/hoeringssvar/hoeringssvar-grobund-kommuneplan-2025.pdf"
+             target="_blank" rel="noopener" class="dok-row">
+            <span class="icon">📋</span>
+            <div class="info">
+              <strong>Grobund og Kommuneplan 2024</strong>
+              <span>5. januar 2025 · Indsigelse mod arealer ved Ålerne til tekniske anlæg</span>
+            </div>
+            <span class="dl" style="color:var(--c-navy);font-size:.8rem;font-weight:700;white-space:nowrap;">Læs høringssvar →</span>
+          </a>
+
+          <a href="assets/documents/hoeringssvar/hoeringssvar-bosetning-aalerne-2024.pdf"
+             target="_blank" rel="noopener" class="dok-row">
+            <span class="icon">📋</span>
+            <div class="info">
+              <strong>Nej til yderligere bosætning ved Ålerne</strong>
+              <span>29. juni 2024 · Foreningens første høringssvar</span>
+            </div>
+            <span class="dl" style="color:var(--c-navy);font-size:.8rem;font-weight:700;white-space:nowrap;">Læs høringssvar →</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- INDSIGELSER -->
+      <div class="dok-section">
+        <div class="dok-cat-title">Indsigelser</div>
+        <div class="dok-list">
+
+          <a href="assets/documents/indsigelser/indsigelse-dispensation-kaarsbergsvej-2026.pdf"
+             target="_blank" rel="noopener" class="dok-row">
+            <span class="icon">📋</span>
+            <div class="info">
+              <strong>Dispensationsansøgning – Kaarsbergsvej 2</strong>
+              <span>August 2026 · Sagsnr. 25/22279 · Syddjurs Kommune</span>
+            </div>
+            <span class="dl" style="color:var(--c-navy);font-size:.8rem;font-weight:700;white-space:nowrap;">Læs indsigelse →</span>
+          </a>
+
+        </div>
+      </div>
+
+      <div style="margin-top:var(--sp-xl);padding:var(--sp-md);background:var(--c-cream);border-left:3px solid var(--c-gold);">
+        <p style="font-size:.84rem;color:var(--c-stone);line-height:1.7;margin:0;">
+          Vil du støtte foreningens arbejde? Du er altid velkommen til at
+          <button class="btn btn-ghost btn-sm" data-goto="kontakt"
+                  style="display:inline-flex;vertical-align:middle;margin-left:.3rem;">kontakte os →</button>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
      KONTAKT
 ════════════════════════════════════════════ -->
 <div id="page-kontakt" class="page">
@@ -650,7 +765,7 @@
   <p>Bevarelse af naturen og de rekreative kystområder på Djursland</p>
   <p style="margin-top:.3rem;">
     Langagervej 5, 8400 Ebeltoft · CVR: <span id="f-cvr">44995514</span> · © 2026
-    <br>Folkeoplysende, partipolitisk uafhængig forening
+    <br>Partipolitisk uafhængig forening
   </p>
   <nav class="footer-links" aria-label="Footer">
     <a href="#" id="fp-priv">Privatlivspolitik</a>
