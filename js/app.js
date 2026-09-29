@@ -83,7 +83,7 @@ function klarTilData(elementId) {
    Virker på alle sider og efter alle sideskift.
 ════════════════════════════════════════════════ */
 const PAGES = [
-  'forside','om','aktiviteter','sager',
+  'forside','om','sager',
   'bestyrelse','gf','hoeringssvar','medlem','kontakt'
 ];
 let _currentPage = 'forside';
