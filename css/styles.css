@@ -825,7 +825,7 @@ footer p { margin-bottom: .25rem; }
 }
 .sag-grid-3 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--sp-md);
 }
 .sag-kort-3 {
