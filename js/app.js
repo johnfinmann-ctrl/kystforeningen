@@ -343,6 +343,12 @@ function getSagBillede(titel) {
 async function loadSager() {
   const g = $('sag-grid');
   if (!g) return;
+
+  // Statiske sager er allerede i HTML – kør kun Supabase-opdatering
+  // hvis grid er tomt (ingen .sag-kort-3 endnu)
+  const harStatiskIndhold = g.querySelector('.sag-kort-3');
+  if (harStatiskIndhold) return; // Bevar statisk indhold
+
   g.innerHTML = '<p class="text-muted">Henter sager…</p>';
   if (!klarTilData('sag-grid')) return;
 
@@ -577,6 +583,48 @@ function setupRealtime() {
   });
 }
 
+
+/* ════════════════════════════════════════════════
+   AKTUELLE SAGER – tab-navigation og toggle
+════════════════════════════════════════════════ */
+function initSagerInteraktion() {
+  // "Læs hele sagen" toggle-knapper
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.btn-laes-sag');
+    if (!btn) return;
+    const sagId  = btn.dataset.sag;
+    const detalje = $(`sag-${sagId}`);
+    if (!detalje) return;
+    const isAktiv = detalje.classList.contains('aktiv');
+    detalje.classList.toggle('aktiv', !isAktiv);
+    btn.setAttribute('aria-expanded', String(!isAktiv));
+    btn.classList.toggle('aktiv', !isAktiv);
+    btn.textContent = isAktiv ? 'Læs hele sagen' : 'Luk';
+    if (!btn.classList.contains('aktiv')) {
+      btn.textContent = 'Læs hele sagen';
+    }
+    if (!isAktiv) {
+      detalje.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+
+  // Tab-navigation inden for sager
+  document.addEventListener('click', e => {
+    const tab = e.target.closest('.sag-tab');
+    if (!tab) return;
+    const tabId = tab.dataset.tab;
+    const container = tab.closest('.sag-detalje');
+    if (!container) return;
+    // Deaktiver alle tabs og panels i denne sag
+    container.querySelectorAll('.sag-tab').forEach(t => t.classList.remove('aktiv'));
+    container.querySelectorAll('.sag-tab-panel').forEach(p => p.classList.remove('aktiv'));
+    // Aktiver valgt tab og panel
+    tab.classList.add('aktiv');
+    const panel = $(`${tabId}`);
+    if (panel) panel.classList.add('aktiv');
+  });
+}
+
 /* ════════════════════════════════════════════════
    PWA SERVICE WORKER
 ════════════════════════════════════════════════ */
@@ -690,6 +738,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCookieBanner();
   initTilmelding();
   initKontaktFormular();
+  initSagerInteraktion();
   initServiceWorker();
   initUpdateBanner();
 

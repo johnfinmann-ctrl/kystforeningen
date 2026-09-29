@@ -88,7 +88,7 @@
 
   <!-- INTRO -->
   <section id="intro" aria-labelledby="intro-h2">
-    <div class="mw-sm" style="padding: var(--sp-2xl) var(--sp-md);">
+    <div class="mw-sm" style="padding: var(--sp-xl) var(--sp-md);">
       <p class="section-label">Om foreningen</p>
       <h2 id="intro-h2" class="intro-statement">
         Kysten er vores<br>fælles landskab
@@ -153,79 +153,6 @@
           <div class="dark-frame-arrow">Se høringssvar</div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- TRE INDGANGE – editorial -->
-  <section class="editorial-section" aria-label="Seneste indhold">
-    <div class="mw">
-      <div class="editorial-hdr">
-        <p class="section-label">Fra foreningen</p>
-        <h2 class="section-title" style="margin-top:var(--sp-xs);">Nu og snart</h2>
-      </div>
-      <div class="editorial-grid">
-
-        <!-- STOR BOKS: NÆSTE AKTIVITET -->
-        <article class="ed-card ed-card-main"
-                 role="button" tabindex="0" data-goto="aktiviteter">
-          <div class="ed-card-img" style="background:linear-gradient(160deg,var(--c-navy) 0%,var(--c-forest) 100%);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.15);font-size:4rem;">
-            🌿
-          </div>
-          <div class="ed-card-body">
-            <div class="ed-tag">📅 Næste aktivitet</div>
-            <div class="ed-card-title" id="tb-ak-h">Forårsvandring langs kysten</div>
-            <div class="ed-card-text" id="tb-ak-p">
-              Guidet vandring med naturformidling. Lørdag 14. juni 2026 kl. 10:00.
-            </div>
-            <span class="ed-card-link">Se alle aktiviteter</span>
-          </div>
-        </article>
-
-        <!-- NYHED -->
-        <article class="ed-card ed-card-sm"
-                 role="button" tabindex="0" data-goto="gf">
-          <div class="ed-card-body" style="border-top:2px solid var(--c-ocean);">
-            <div class="ed-tag">📢 Seneste nyhed</div>
-            <div class="ed-card-title" id="tb-ny-h">Generalforsamling afholdt</div>
-            <div class="ed-card-text" id="tb-ny-p">
-              Årets generalforsamling fandt sted i marts 2026. Referat kan downloades.
-            </div>
-            <span class="ed-card-link">Se dokumenter</span>
-          </div>
-        </article>
-
-        <!-- SAG -->
-        <article class="ed-card ed-card-sm"
-                 role="button" tabindex="0" data-goto="sager">
-          <div class="ed-card-body" style="border-top:2px solid var(--c-gold);">
-            <div class="ed-tag">⚡ Aktuel sag</div>
-            <div class="ed-card-title" id="tb-sag-h">Vindmøller ved Vosnæs</div>
-            <div class="ed-card-text" id="tb-sag-p">
-              Planer om vindmøller i kystnære områder er under kommunal behandling.
-            </div>
-            <span class="ed-card-link">Læs mere</span>
-          </div>
-        </article>
-
-      </div>
-
-      <!-- HØRINGSSVAR-KORT (under editorial grid) -->
-      <div style="margin-top:var(--sp-md);max-width:1100px;margin-left:auto;margin-right:auto;">
-        <article class="ed-card"
-                 style="flex-direction:row;align-items:center;gap:var(--sp-lg);padding:var(--sp-md) var(--sp-lg);border-top:2px solid var(--c-gold);"
-                 role="button" tabindex="0" data-goto="hoeringssvar">
-          <div style="font-size:2.2rem;flex-shrink:0;">📋</div>
-          <div style="flex:1;">
-            <div class="ed-tag">Demokrati & inddragelse</div>
-            <div class="ed-card-title" style="font-size:1.2rem;">Høringssvar & indsigelser</div>
-            <div class="ed-card-text">
-              Se alle foreningens høringssvar og indsigelser til kommunale planprocesser.
-            </div>
-          </div>
-          <span class="ed-card-link" style="flex-shrink:0;">Se høringssvar</span>
-        </article>
-      </div>
-
     </div>
   </section>
 
@@ -339,7 +266,7 @@
 <div id="page-sager" class="page">
   <div class="page-hero">
     <div class="mw">
-      <p class="section-label">Vi holder øje</p>
+      <p class="section-label">Vi følger sagerne</p>
       <h1 class="page-hero-title">Aktuelle sager</h1>
     </div>
   </div>
@@ -349,9 +276,156 @@
         Vi formidler offentligt tilgængeligt materiale om sager der berører Djurslands
         kyster og natur. Foreningen er ikke kampagneorganisation – vi oplyser og inddrager borgerne.
       </div>
-      <div class="sag-grid" id="sag-grid">
-        <p class="text-muted">Henter sager…</p>
-      </div>
+
+      <!-- DE TRE SAGER -->
+      <div class="sag-grid-3" id="sag-grid">
+
+        <!-- SAG 1: VOSNÆS -->
+        <div class="sag-kort-3">
+          <img class="sag-kort-img" src="assets/vindmoeller.jpg"
+               alt="Gyldne marker med halmballer og vindmøller – Vosnæs, Djursland">
+          <div class="sag-kort-3-body">
+            <div class="sag-status-badge">Igangværende</div>
+            <h3>Vosnæs – vindmøller ved kysten</h3>
+            <p>Planer om opstilling af kæmpevindmøller ved Vosnæs berører kystlandskabet og udsigten fra land og hav.</p>
+            <button class="btn-laes-sag" data-sag="vosnæs" aria-expanded="false">Læs hele sagen</button>
+          </div>
+          <div class="sag-detalje" id="sag-vosnæs">
+            <div class="sag-tabs" role="tablist">
+              <button class="sag-tab aktiv" data-tab="vosnæs-baggrund">Baggrund</button>
+              <button class="sag-tab" data-tab="vosnæs-nyt">Seneste nyt</button>
+              <button class="sag-tab" data-tab="vosnæs-arbejde">Vores arbejde</button>
+              <button class="sag-tab" data-tab="vosnæs-dok">Dokumenter</button>
+            </div>
+            <div class="sag-tab-panel aktiv" id="vosnæs-baggrund">
+              <p>Syddjurs Kommune behandler planerne om opstilling af nye kæmpevindmøller ved Ebeltoft Færgehavn og i det kystnære område ved Vosnæs på Djursland. Møllerne er planlagt til at være 150 meter høje og vil ændre kystlandskabets karakter markant.</p>
+              <p>Planerne er en del af Kommuneplan 2024 og berører punkt 1.1.T2, som reserverer arealer til tekniske anlæg i det kystnære område.</p>
+            </div>
+            <div class="sag-tab-panel" id="vosnæs-nyt">
+              <p>Kommuneplan 2024 er vedtaget. Foreningen følger den videre planproces og vil orientere om nye høringer.</p>
+            </div>
+            <div class="sag-tab-panel" id="vosnæs-arbejde">
+              <p>Kystforeningen Djursland indsendte høringssvar i januar 2025 med indsigelse mod de planlagte vindmøller ved Ebeltoft Færgehavn. Vi argumenterede for, at de høje møller vil ødelægge det åbne kystlandskab og forringe de rekreative og visuelle kvaliteter i området.</p>
+            </div>
+            <div class="sag-tab-panel" id="vosnæs-dok">
+              <h4>Høringssvar</h4>
+              <a href="assets/documents/hoeringssvar/hoeringssvar-vindmoeller-faergehavnen-2025.pdf"
+                 target="_blank" rel="noopener" class="dok-row" style="border:1px solid var(--c-border);margin-bottom:.4rem;">
+                <span class="icon">📋</span>
+                <div class="info"><strong>Høringssvar – Kæmpevindmøller ved Ebeltoft Færgehavn</strong><span>Januar 2025 · Kommuneplan 2024</span></div>
+                <span class="dl">⬇</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- SAG 2: DRÅBY -->
+        <div class="sag-kort-3">
+          <div class="sag-kort-img" style="display:flex;align-items:center;justify-content:center;font-size:3rem;color:rgba(255,255,255,.2);">🏠</div>
+          <div class="sag-kort-3-body">
+            <div class="sag-status-badge">Under behandling</div>
+            <h3>Dråby – sommerhusområde og store sommerhuse</h3>
+            <p>Et nyt sommerhusområde med op til 108 store partyhuse ved Dråby strand rejser spørgsmål om trafik, adgang og kystpåvirkning.</p>
+            <button class="btn-laes-sag" data-sag="draby" aria-expanded="false">Læs hele sagen</button>
+          </div>
+          <div class="sag-detalje" id="sag-draby">
+            <div class="sag-tabs" role="tablist">
+              <button class="sag-tab aktiv" data-tab="draby-baggrund">Baggrund</button>
+              <button class="sag-tab" data-tab="draby-nyt">Seneste nyt</button>
+              <button class="sag-tab" data-tab="draby-arbejde">Vores arbejde</button>
+              <button class="sag-tab" data-tab="draby-presse">Presse</button>
+            </div>
+            <div class="sag-tab-panel aktiv" id="draby-baggrund">
+              <p>Der er planer om et nyt sommerhusområde ved Dråby strand syd for Ebeltoft med op til 108 store sommerhuse – i folkemunde kaldet "partyhuse" på grund af størrelsen. Husene forventes at ligge i op til to etager og har en størrelse, der langt overstiger det typiske sommerhus.</p>
+              <p>Sagen rejser spørgsmål om trafikbelastning på de smalle veje, offentlig adgang til kysten og påvirkningen af det lokale miljø og nabolag.</p>
+            </div>
+            <div class="sag-tab-panel" id="draby-nyt">
+              <p>Planerne er under kommunal behandling. Foreningen følger sagen og vil orientere om høringer, når de offentliggøres.</p>
+            </div>
+            <div class="sag-tab-panel" id="draby-arbejde">
+              <p>Kystforeningen Djursland følger planprocessen og formidler offentligt tilgængeligt materiale. Vi er opmærksomme på sagens potentielle konsekvenser for kystadgang, trafik og landskab og vil deltage i relevante høringer.</p>
+            </div>
+            <div class="sag-tab-panel" id="draby-presse">
+              <div class="sag-presse-item">
+                <div class="sag-presse-kilde">Din Avis</div>
+                <div class="sag-presse-titel">Nu er nyt sommerhusområde ved Dråby på vej</div>
+                <div class="sag-presse-dato">Lokalartikel om planerne for området</div>
+              </div>
+              <div class="sag-presse-item">
+                <div class="sag-presse-kilde">Din Avis</div>
+                <div class="sag-presse-titel">»Jeg både frygter og forventer de 108 kæmpe-partyhuse«</div>
+                <div class="sag-presse-dato">Naboer og lokale udtaler sig om planerne</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SAG 3: GROBUND -->
+        <div class="sag-kort-3">
+          <img class="sag-kort-img" src="assets/sager-hero.jpg"
+               alt="Naturlandskab ved Ålerne – Grobund, Ebeltoft">
+          <div class="sag-kort-3-body">
+            <div class="sag-status-badge">Igangværende</div>
+            <h3>Grobund – bebyggelse ved Ålerne, Ebeltoft</h3>
+            <p>Planer om en ny landsby ved Ålerne ved Ebeltoft Færgehavn har mødt massiv modstand. Sagen følges tæt af foreningen.</p>
+            <button class="btn-laes-sag" data-sag="grobund" aria-expanded="false">Læs hele sagen</button>
+          </div>
+          <div class="sag-detalje" id="sag-grobund">
+            <div class="sag-tabs" role="tablist">
+              <button class="sag-tab aktiv" data-tab="grobund-baggrund">Baggrund</button>
+              <button class="sag-tab" data-tab="grobund-nyt">Seneste nyt</button>
+              <button class="sag-tab" data-tab="grobund-arbejde">Vores arbejde</button>
+              <button class="sag-tab" data-tab="grobund-dok">Dokumenter</button>
+              <button class="sag-tab" data-tab="grobund-presse">Presse</button>
+            </div>
+            <div class="sag-tab-panel aktiv" id="grobund-baggrund">
+              <p>Syddjurs Kommune har planer om at udlægge et areal på 65 ha ved Ålerne – fra Tolløkke Skoven til Færgehavnen – til en landsby for det alternative samfund Grobund. Arealet ligger i det kystnære område og er i dag åbent naturlandskab med store rekreative og landskabelige værdier.</p>
+              <p>Foreningen blev stiftet i juli 2024 som direkte reaktion på disse planer og har siden fulgt sagen tæt og afgivet adskillige høringssvar og indsigelser.</p>
+              <p>Kommunen sendte de 5,5 ha jord i offentligt udbud i maj 2024. Fonden Gældfri har forhandlet med kommunen om arealet. Helhedsplanen for Ålerne blev vedtaget af byrådet i sommeren 2025, men har ingen juridisk bindende virkning og giver ikke ret til at bygge.</p>
+            </div>
+            <div class="sag-tab-panel" id="grobund-nyt">
+              <p><strong>August 2026:</strong> Grobund ansøger om fornyelse og udvidelse af dispensationen fra Lokalplan 140 for ejendommen Kaarsbergsvej 2. Foreningen indsendte indsigelse.</p>
+              <p><strong>Juni 2026:</strong> Lokalplanprocessen udsat til 4. kvartal 2026. Uenighed om spildevandsløsning fortsætter.</p>
+              <p><strong>April 2026:</strong> Dialogen mellem kommunen og Grobund viser stor uenighed om håndtering af spildevand og "humane gødning". Kommunen gør opmærksom på ulovlighed.</p>
+              <p><strong>2025:</strong> Helhedsplanen for Ålerne vedtages af et enigt byråd i sommeren 2025. Den er juridisk ikke bindende.</p>
+            </div>
+            <div class="sag-tab-panel" id="grobund-arbejde">
+              <p>Foreningen har siden sin stiftelse i juli 2024 arbejdet aktivt med Grobund-sagen. Vi formidler offentligt tilgængeligt materiale, følger planprocessen tæt og afgiver høringssvar og indsigelser ved alle relevante høringer.</p>
+              <p>Vi har varslet byrådsmedlemmerne om personligt erstatningsansvar ved ulovlig tilsidesættelse af udbudsregler, og vi opfordrer løbende borgerne til selv at afgive høringssvar.</p>
+            </div>
+            <div class="sag-tab-panel" id="grobund-dok">
+              <h4>Høringssvar</h4>
+              <a href="assets/documents/hoeringssvar/hoeringssvar-bosetning-aalerne-2024.pdf"
+                 target="_blank" rel="noopener" class="dok-row" style="border:1px solid var(--c-border);margin-bottom:.4rem;">
+                <span class="icon">📋</span>
+                <div class="info"><strong>Nej til yderligere bosætning ved Ålerne</strong><span>29. juni 2024 · Foreningens første høringssvar</span></div>
+                <span class="dl">⬇</span>
+              </a>
+              <a href="assets/documents/hoeringssvar/hoeringssvar-grobund-kommuneplan-2025.pdf"
+                 target="_blank" rel="noopener" class="dok-row" style="border:1px solid var(--c-border);margin-bottom:.4rem;">
+                <span class="icon">📋</span>
+                <div class="info"><strong>Høringssvar – Grobund og Kommuneplan 2024</strong><span>5. januar 2025</span></div>
+                <span class="dl">⬇</span>
+              </a>
+              <h4>Indsigelser</h4>
+              <a href="assets/documents/indsigelser/indsigelse-dispensation-kaarsbergsvej-2026.pdf"
+                 target="_blank" rel="noopener" class="dok-row" style="border:1px solid var(--c-border);margin-bottom:.4rem;">
+                <span class="icon">📋</span>
+                <div class="info"><strong>Indsigelse – Dispensation Kaarsbergsvej 2</strong><span>August 2026 · Sagsnr. 25/22279</span></div>
+                <span class="dl">⬇</span>
+              </a>
+            </div>
+            <div class="sag-tab-panel" id="grobund-presse">
+              <div class="sag-presse-item">
+                <div class="sag-presse-kilde">Din Avis</div>
+                <div class="sag-presse-titel">Borgmesteren mødte kritikere af Grobund</div>
+                <div class="sag-presse-dato">Artikel om borgermøde om Grobund-planerne</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /sag-grid-3 -->
     </div>
   </div>
 </div>

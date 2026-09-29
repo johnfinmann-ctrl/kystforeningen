@@ -779,3 +779,93 @@ footer p { margin-bottom: .25rem; }
   .hero-cta { flex-direction: column; align-items: flex-start; }
   .btn-lg { width: 100%; justify-content: center; }
 }
+
+/* ── AKTUELLE SAGER – udvidede sagskort ──────────────────────── */
+.sag-detalje {
+  display: none;
+  border-top: 1px solid var(--c-border);
+  padding: var(--sp-md) 0 0;
+  margin-top: var(--sp-md);
+}
+.sag-detalje.aktiv { display: block; }
+.sag-tabs {
+  display: flex; gap: 0;
+  border-bottom: 2px solid var(--c-border);
+  margin-bottom: var(--sp-md);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.sag-tab {
+  background: none; border: none;
+  padding: .55rem 1rem; font-size: .75rem; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--c-muted); cursor: pointer; white-space: nowrap;
+  border-bottom: 2px solid transparent; margin-bottom: -2px;
+  transition: color .15s, border-color .15s;
+}
+.sag-tab:hover  { color: var(--c-navy); }
+.sag-tab.aktiv  { color: var(--c-navy); border-bottom-color: var(--c-gold); }
+.sag-tab-panel  { display: none; }
+.sag-tab-panel.aktiv { display: block; }
+.sag-tab-panel p  { font-size: .9rem; color: var(--c-stone); line-height: 1.75; margin-bottom: .65rem; }
+.sag-tab-panel h4 { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c-gold); margin: var(--sp-md) 0 var(--sp-sm); }
+.sag-presse-item {
+  padding: .75rem 0; border-bottom: 1px solid var(--c-border);
+  display: flex; flex-direction: column; gap: .2rem;
+}
+.sag-presse-item:last-child { border-bottom: none; }
+.sag-presse-kilde { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--c-gold); }
+.sag-presse-titel { font-size: .9rem; font-weight: 600; color: var(--c-navy); }
+.sag-presse-dato  { font-size: .78rem; color: var(--c-muted); }
+.sag-status-badge {
+  display: inline-block; padding: .22rem .65rem;
+  background: rgba(200,164,90,.15); color: var(--c-navy);
+  font-size: .68rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; border-radius: 2px; margin-bottom: var(--sp-sm);
+}
+.sag-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-md);
+}
+.sag-kort-3 {
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  transition: box-shadow .2s, transform .2s;
+}
+.sag-kort-3:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.sag-kort-3 .sag-kort-img {
+  width: 100%; height: 180px;
+  object-fit: cover; display: block;
+  background: linear-gradient(135deg, var(--c-navy) 0%, var(--c-forest) 100%);
+}
+.sag-kort-3-body {
+  padding: var(--sp-md); flex: 1;
+  display: flex; flex-direction: column; gap: .4rem;
+  border-top: 2px solid var(--c-gold);
+}
+.sag-kort-3-body h3 {
+  font-family: var(--font-display); font-size: 1.05rem;
+  color: var(--c-navy); line-height: 1.2;
+}
+.sag-kort-3-body p { font-size: .84rem; color: var(--c-muted); flex: 1; }
+.btn-laes-sag {
+  background: none; border: none;
+  font-family: var(--font-body); font-size: .78rem;
+  font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--c-navy); cursor: pointer; padding: .5rem 0;
+  display: flex; align-items: center; gap: .4rem;
+  border-top: 1px solid var(--c-border); margin-top: auto;
+  transition: color .15s;
+}
+.btn-laes-sag::after { content: '→'; transition: transform .2s; }
+.btn-laes-sag:hover  { color: var(--c-forest); }
+.btn-laes-sag:hover::after { transform: translateX(4px); }
+.btn-laes-sag.aktiv::after { content: '↑'; }
+@media (max-width: 768px) {
+  .sag-grid-3 { grid-template-columns: 1fr; }
+  .sag-tabs   { gap: 0; }
+  .sag-tab    { padding: .5rem .75rem; font-size: .7rem; }
+}
