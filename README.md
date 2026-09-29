@@ -15,7 +15,7 @@ kystforeningen-djursland/
 ├── manifest.json           PWA-manifest
 │
 ├── assets/
-│   ├── kyst-hero.jpg       Hero-billede (Randers Fjord) – må ikke udskiftes
+│   ├── hero-kyst.jpg       Hero-billede (Randers Fjord) – må ikke udskiftes
 │   ├── sager-hero.jpg      Billede til aktuelle sager
 │   └── icons/
 │       ├── icon-192.png    PWA-ikon
