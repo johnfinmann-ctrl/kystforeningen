@@ -193,31 +193,35 @@ p:last-child { margin-bottom: 0; }
 .hero {
   position: relative;
   width: 100%; height: 82vh; min-height: 560px; max-height: 900px;
-  display: flex; align-items: flex-end;
+  display: flex; align-items: flex-start;
   overflow: hidden; color: #fff;
 }
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
-  background: url('../assets/kyst-hero.jpg') center 42% / cover no-repeat;
+  background: url('../assets/hero-kyst.jpg') center 38% / cover no-repeat;
   animation: kenburns 24s ease-out forwards;
   transform-origin: center center;
 }
+
 @keyframes kenburns {
   from { transform: scale(1.00); }
   to   { transform: scale(1.04); }
 }
 .hero-overlay {
   position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(
-    to top,
-    rgba(10,24,18,.78) 0%,
-    rgba(10,24,18,.38) 45%,
-    rgba(10,24,18,.12) 100%
-  );
+  background:
+    /* Øverst: mørk nok til at tekst er læsbar */
+    linear-gradient(
+      to bottom,
+      rgba(8,22,35,.62) 0%,
+      rgba(8,22,35,.35) 38%,
+      rgba(8,22,35,.08) 60%,
+      rgba(8,22,35,.00) 100%
+    );
 }
 .hero-content {
   position: relative; z-index: 2;
-  width: 100%; padding: 0 var(--sp-md) var(--sp-lg);
+  width: 100%; padding: var(--sp-xl) var(--sp-md) 0;
   max-width: 1100px; margin: 0 auto;
 }
 .hero-eyebrow {
@@ -228,10 +232,10 @@ p:last-child { margin-bottom: 0; }
 }
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 9vw, 7rem);
-  font-weight: 400; line-height: .95;
-  letter-spacing: -.02em;
-  text-shadow: 0 2px 20px rgba(0,0,0,.35);
+  font-size: clamp(2.4rem, 7vw, 5.2rem);
+  font-weight: 400; line-height: 1.05;
+  letter-spacing: -.01em;
+  text-shadow: 0 2px 24px rgba(0,0,0,.55);
   margin-bottom: var(--sp-md);
 }
 .hero-title span { display: block; }
@@ -908,10 +912,14 @@ footer p { margin-bottom: .25rem; }
 
 /* ── MOBIL FORSIDE SPACING (mål: 390–430px) ─────────────────── */
 @media (max-width: 768px) {
-  /* Hero: reducér min-height så intro er synlig højere oppe */
+  /* Hero: portrait-billede på mobil – lidt højere for at bænken ses */
   .hero {
-    min-height: 420px;
-    height: 70vh;
+    min-height: 460px;
+    height: 75vh;
+  }
+  .hero-bg {
+    background-image: url('../assets/hero-kyst-mobil.jpg');
+    background-position: center 35%;
   }
 
   /* Intro: halvér den store top/bund-padding */
@@ -956,11 +964,58 @@ footer p { margin-bottom: .25rem; }
 
 @media (max-width: 480px) {
   .hero {
-    height: 75vh;
-    min-height: 380px;
+    height: 80vh;
+    min-height: 440px;
   }
 
   #intro {
     padding: 2rem var(--sp-md);
+  }
+}
+
+/* ── FACEBOOK QR-BOKS ────────────────────────────────────────── */
+.fb-qr-boks {
+  margin-top: var(--sp-lg);
+  padding: var(--sp-md);
+  background: var(--c-navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-sm);
+  max-width: 220px;
+}
+.fb-qr-label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+.fb-qr-img {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  display: block;
+  /* QR er mørkeblå på hvid – vis på hvid baggrund */
+  background: #fff;
+  padding: 8px;
+}
+.fb-qr-img:hover {
+  opacity: .88;
+}
+.fb-qr-tekst {
+  font-size: .76rem;
+  color: rgba(255,255,255,.7);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .fb-qr-boks {
+    max-width: 100%;
+  }
+  .fb-qr-img {
+    width: 180px;
+    height: 180px;
   }
 }
