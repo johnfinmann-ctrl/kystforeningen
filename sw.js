@@ -6,7 +6,7 @@
  * Det rydder gammel cache og viser opdateringsbanneret til alle brugere.
  */
 
-const CACHE_VERSION = 'kfd-v1.0.2';
+const CACHE_VERSION = 'kfd-v1.0.3';
 const CACHE_NAME    = CACHE_VERSION;
 
 // Filer der caches ved installation
@@ -18,7 +18,8 @@ const PRECACHE = [
   './js/config.js',
   './js/supabase-client.js',
   './js/app.js',
-  './assets/kyst-hero.jpg',
+  './assets/hero-kyst.jpg',
+  './assets/hero-kyst-mobil.jpg',
   './manifest.json',
 ];
 
