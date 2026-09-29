@@ -119,7 +119,6 @@
           <div class="dark-frame-arrow">Læs mere</div>
         </div>
       </div>
-      </div>
       <div class="dark-frame" role="button" tabindex="0" data-goto="sager"
            aria-label="Aktuelle sager">
         <div class="dark-frame-body">
@@ -285,6 +284,8 @@
               <button class="sag-tab" data-tab="vosnæs-nyt">Seneste nyt</button>
               <button class="sag-tab" data-tab="vosnæs-arbejde">Vores arbejde</button>
               <button class="sag-tab" data-tab="vosnæs-dok">Dokumenter</button>
+              <button class="sag-tab" data-tab="vosnæs-presse">Presse</button>
+              <button class="sag-tab" data-tab="vosnæs-kom">Kommunale kilder</button>
             </div>
             <div class="sag-tab-panel aktiv" id="vosnæs-baggrund">
               <p>Syddjurs Kommune behandler planerne om opstilling af nye kæmpevindmøller ved Ebeltoft Færgehavn og i det kystnære område ved Vosnæs på Djursland. Møllerne er planlagt til at være 150 meter høje og vil ændre kystlandskabets karakter markant.</p>
@@ -305,6 +306,34 @@
                 <span class="dl">⬇</span>
               </a>
             </div>
+            <div class="sag-tab-panel" id="vosnæs-presse">
+              <p class="presse-ingen">
+                Der er endnu ikke tilføjet verificerede presseartikler om Vosnæs-sagen.
+                Sektionen er klar til artikler, der dokumenterbart omhandler vindmølleprojektet ved Vosnæs.
+              </p>
+              <p class="text-muted" style="font-size:.78rem;">
+                Artiklerne herunder er eksterne mediers egne tekster og repræsenterer ikke Kystforeningens holdning.
+              </p>
+            </div>
+            <div class="sag-tab-panel" id="vosnæs-kom">
+              <p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">
+                Officielle kommunale og myndighedskilder om planerne for vindmøller ved Vosnæs/Ebeltoft Færgehavn.
+              </p>
+              <a href="https://aabendagsorden.syddjurs.dk"
+                 target="_blank" rel="noopener" class="presse-kort" style="border-color:var(--c-ocean);">
+                <div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+                <div class="presse-overskrift">Åben Indsigt – politiske dagsordener og referater</div>
+                <div class="presse-beskr">Kommunens åbne portal med dagsordener, referater og bilag fra byråd og udvalg, herunder behandling af vindmøllesagen.</div>
+                <div class="presse-laes">Gå til Åben Indsigt ↗</div>
+              </a>
+              <a href="https://www.syddjurs.dk/politik-og-indflydelse/hoeringer-og-afgoerelser"
+                 target="_blank" rel="noopener" class="presse-kort" style="border-color:var(--c-ocean);">
+                <div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+                <div class="presse-overskrift">Høringer og afgørelser</div>
+                <div class="presse-beskr">Kommunens høringsportal med offentlige høringer, herunder Kommuneplan 2024 og vindmølleplanen (punkt 1.1.T2).</div>
+                <div class="presse-laes">Gå til høringer ↗</div>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -323,6 +352,7 @@
               <button class="sag-tab" data-tab="draby-nyt">Seneste nyt</button>
               <button class="sag-tab" data-tab="draby-arbejde">Vores arbejde</button>
               <button class="sag-tab" data-tab="draby-presse">Presse</button>
+              <button class="sag-tab" data-tab="draby-kom">Kommunale kilder</button>
             </div>
             <div class="sag-tab-panel aktiv" id="draby-baggrund">
               <p>Der er planer om et nyt sommerhusområde ved Dråby strand syd for Ebeltoft med op til 108 store sommerhuse – i folkemunde kaldet "partyhuse" på grund af størrelsen. Husene forventes at ligge i op til to etager og har en størrelse, der langt overstiger det typiske sommerhus.</p>
@@ -335,16 +365,42 @@
               <p>Kystforeningen Djursland følger planprocessen og formidler offentligt tilgængeligt materiale. Vi er opmærksomme på sagens potentielle konsekvenser for kystadgang, trafik og landskab og vil deltage i relevante høringer.</p>
             </div>
             <div class="sag-tab-panel" id="draby-presse">
-              <div class="sag-presse-item">
-                <div class="sag-presse-kilde">Din Avis</div>
-                <div class="sag-presse-titel">Nu er nyt sommerhusområde ved Dråby på vej</div>
-                <div class="sag-presse-dato">Lokalartikel om planerne for området</div>
-              </div>
-              <div class="sag-presse-item">
-                <div class="sag-presse-kilde">Din Avis</div>
-                <div class="sag-presse-titel">»Jeg både frygter og forventer de 108 kæmpe-partyhuse«</div>
-                <div class="sag-presse-dato">Naboer og lokale udtaler sig om planerne</div>
-              </div>
+              <p style="font-size:.78rem;color:var(--c-muted);margin-bottom:var(--sp-sm);font-style:italic;">
+                Artiklerne herunder er eksterne mediers egne tekster og repræsenterer ikke Kystforeningens holdning.
+              </p>
+              <a href="https://dinavis.dk/samfund/ECE19625402/nu-er-nyt-sommerhusomraade-ved-draaby-paa-vej/"
+                 target="_blank" rel="noopener" class="presse-kort">
+                <div class="presse-kilde">Din Avis</div>
+                <div class="presse-overskrift">Nu er nyt sommerhusområde ved Dråby på vej</div>
+                <div class="presse-beskr">Artikel om planerne for det nye sommerhusområde ved Dråby strand med op til 108 store sommerhuse.</div>
+                <div class="presse-laes">Læs artiklen ↗</div>
+              </a>
+              <a href="https://dinavis.dk/debat/ECE19615092/jeg-baade-frygter-og-forventer-de-108-kaempe-partyhuse/"
+                 target="_blank" rel="noopener" class="presse-kort">
+                <div class="presse-kilde">Din Avis – Debat</div>
+                <div class="presse-overskrift">»Jeg både frygter og forventer de 108 kæmpe-partyhuse«</div>
+                <div class="presse-beskr">Læsere og lokale udtaler sig om de planlagte store sommerhuse ved Dråby.</div>
+                <div class="presse-laes">Læs artiklen ↗</div>
+              </a>
+            </div>
+            <div class="sag-tab-panel" id="draby-kom">
+              <p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">
+                Officielle kommunale kilder om planerne for sommerhusområdet ved Dråby strand.
+              </p>
+              <a href="https://www.syddjurs.dk/borger/bolig-og-byggeri/lokalplaner"
+                 target="_blank" rel="noopener" class="presse-kort" style="border-color:var(--c-ocean);">
+                <div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+                <div class="presse-overskrift">Lokalplaner – Syddjurs Kommune</div>
+                <div class="presse-beskr">Kommunens oversigt over lokalplaner, herunder forslag der berører sommerhusområder ved Dråby. Søg på Lokalplanforslag 472.</div>
+                <div class="presse-laes">Gå til lokalplaner ↗</div>
+              </a>
+              <a href="https://aabendagsorden.syddjurs.dk"
+                 target="_blank" rel="noopener" class="presse-kort" style="border-color:var(--c-ocean);">
+                <div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+                <div class="presse-overskrift">Åben Indsigt – politiske dagsordener og referater</div>
+                <div class="presse-beskr">Kommunens åbne portal med dagsordener og referater fra byråd og udvalg, herunder behandling af Dråby-sagen.</div>
+                <div class="presse-laes">Gå til Åben Indsigt ↗</div>
+              </a>
             </div>
           </div>
         </div>
@@ -366,6 +422,7 @@
               <button class="sag-tab" data-tab="grobund-arbejde">Vores arbejde</button>
               <button class="sag-tab" data-tab="grobund-dok">Dokumenter</button>
               <button class="sag-tab" data-tab="grobund-presse">Presse</button>
+              <button class="sag-tab" data-tab="grobund-kom">Kommunale kilder</button>
             </div>
             <div class="sag-tab-panel aktiv" id="grobund-baggrund">
               <p>Syddjurs Kommune har planer om at udlægge et areal på 65 ha ved Ålerne – fra Tolløkke Skoven til Færgehavnen – til en landsby for det alternative samfund Grobund. Arealet ligger i det kystnære område og er i dag åbent naturlandskab med store rekreative og landskabelige værdier.</p>
@@ -405,11 +462,49 @@
               </a>
             </div>
             <div class="sag-tab-panel" id="grobund-presse">
-              <div class="sag-presse-item">
-                <div class="sag-presse-kilde">Din Avis</div>
-                <div class="sag-presse-titel">Borgmesteren mødte kritikere af Grobund</div>
-                <div class="sag-presse-dato">Artikel om borgermøde om Grobund-planerne</div>
-              </div>
+              <p style="font-size:.78rem;color:var(--c-muted);margin-bottom:var(--sp-sm);font-style:italic;">
+                Artiklerne herunder er eksterne mediers egne tekster og repræsenterer ikke Kystforeningens holdning.
+              </p>
+              <a href="https://dinavis.dk/samfund/ECE17500943/borgmester-moedes-med-kritikere-af-grobund-hvorfor-stoetter-du-et-usolidarisk-parallelsamfund/"
+                 target="_blank" rel="noopener" class="presse-kort">
+                <div class="presse-kilde">Din Avis</div>
+                <div class="presse-overskrift">Borgmester mødes med kritikere af Grobund: Hvorfor støtter du et usolidarisk parallelsamfund?</div>
+                <div class="presse-beskr">Artikel om mødet mellem borgmesteren og kritikere af planerne om en ny landsby ved Ålerne.</div>
+                <div class="presse-laes">Læs artiklen ↗</div>
+              </a>
+              <a href="https://dinavis.dk/samfund/ECE16450014/explainer-spildevandsprop-forhindrer-grobund-i-at-lave-landsby/"
+                 target="_blank" rel="noopener" class="presse-kort">
+                <div class="presse-kilde">Din Avis</div>
+                <div class="presse-overskrift">Explainer: Spildevandsprop forhindrer Grobund i at lave landsby</div>
+                <div class="presse-beskr">Forklaring af den centrale tekniske hindring for Grobunds planer: spildevandshåndtering i kystnært område.</div>
+                <div class="presse-laes">Læs artiklen ↗</div>
+              </a>
+            </div>
+            <div class="sag-tab-panel" id="grobund-kom">
+              <p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">
+                Officielle kommunale og myndighedskilder om Helhedsplanen for Ålerne og Grobund-projektet.
+              </p>
+              <a href="https://www.syddjurs.dk/borger/natur-og-miljoe/aalerne"
+                 target="_blank" rel="noopener" class="presse-kort" style="border-color:var(--c-ocean);">
+                <div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+                <div class="presse-overskrift">Helhedsplan for Ålerne – Syddjurs Kommune</div>
+                <div class="presse-beskr">Kommunens officielle side om Helhedsplanen for Ålerne, med helhedsplanen, høringssvar, bemærkningsnotat og den videre proces.</div>
+                <div class="presse-laes">Gå til kommunens side ↗</div>
+              </a>
+              <a href="https://aabendagsorden.syddjurs.dk"
+                 target="_blank" rel="noopener" class="presse-kort" style="border-color:var(--c-ocean);">
+                <div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+                <div class="presse-overskrift">Åben Indsigt – politiske dagsordener og referater</div>
+                <div class="presse-beskr">Kommunens åbne portal med dagsordener og referater fra byråd og udvalg, herunder alle behandlinger af Helhedsplanen for Ålerne og Grobund.</div>
+                <div class="presse-laes">Gå til Åben Indsigt ↗</div>
+              </a>
+              <a href="https://www.syddjurs.dk/politik-og-indflydelse/hoeringer-og-afgoerelser"
+                 target="_blank" rel="noopener" class="presse-kort" style="border-color:var(--c-ocean);">
+                <div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+                <div class="presse-overskrift">Høringer og afgørelser</div>
+                <div class="presse-beskr">Kommunens høringsportal med alle offentlige høringer, herunder Kommuneplan 2024, Helhedsplanen og dispensationssagen for Kaarsbergsvej 2 (sagsnr. 25/22279).</div>
+                <div class="presse-laes">Gå til høringer ↗</div>
+              </a>
             </div>
           </div>
         </div>
@@ -436,34 +531,42 @@
         Valgt på ordinær generalforsamling den 25. september 2026.
       </p>
       <div class="bst-grid" id="bst-grid">
+
         <article class="bst-kort">
           <div class="bst-avatar">👤</div>
           <h3>Elsebeth Due Kjeldsen</h3>
           <div class="bst-role">Formand</div>
           <a href="mailto:elsebethduekjeldsen@gmail.com">elsebethduekjeldsen@gmail.com</a>
         </article>
+
         <article class="bst-kort">
           <div class="bst-avatar">👤</div>
           <h3>John Finmann</h3>
           <div class="bst-role">Næstformand</div>
         </article>
+
         <article class="bst-kort">
           <div class="bst-avatar">👤</div>
           <h3>Åse Bønløkke</h3>
           <div class="bst-role">Kasserer</div>
         </article>
+
         <article class="bst-kort">
           <div class="bst-avatar">👤</div>
           <h3>John Palm</h3>
           <div class="bst-role">Bestyrelsesmedlem</div>
         </article>
-        <article class="bst-kort" style="opacity:.55;">
-          <div class="bst-avatar" style="background:rgba(100,100,100,.15);color:var(--c-muted);">—</div>
+
+        <article class="bst-kort" style="opacity:.5;">
+          <div class="bst-avatar" style="background:rgba(120,110,100,.12);color:var(--c-muted);font-size:1.4rem;">—</div>
           <h3 style="color:var(--c-muted);">Vakant</h3>
           <div class="bst-role">Bestyrelsesmedlem</div>
         </article>
+
       </div>
-      <div style="margin-top:var(--sp-lg);padding:var(--sp-sm) var(--sp-md);background:var(--c-cream);border-left:3px solid var(--c-border);">
+
+      <div style="margin-top:var(--sp-lg);padding:var(--sp-sm) var(--sp-md);
+                  background:var(--c-cream);border-left:3px solid var(--c-border);">
         <p style="font-size:.82rem;color:var(--c-muted);margin:0;">
           <strong style="color:var(--c-ink);">Suppleanter:</strong>
           Sean Blicher · Kim Withen Olesen
