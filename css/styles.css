@@ -905,3 +905,62 @@ footer p { margin-bottom: .25rem; }
   font-size: .84rem; color: var(--c-muted);
   font-style: italic; padding: .5rem 0;
 }
+
+/* ── MOBIL FORSIDE SPACING (mål: 390–430px) ─────────────────── */
+@media (max-width: 768px) {
+  /* Hero: reducér min-height så intro er synlig højere oppe */
+  .hero {
+    min-height: 420px;
+    height: 70vh;
+  }
+
+  /* Intro: halvér den store top/bund-padding */
+  #intro {
+    padding: 2.5rem var(--sp-md);
+  }
+
+  /* Intro tekst: tættere luft */
+  .intro-statement {
+    font-size: clamp(1.5rem, 7vw, 2.4rem);
+    margin-bottom: 1rem;
+  }
+
+  .section-rule {
+    margin: 0.5rem 0 1rem;
+  }
+
+  .intro-text {
+    font-size: .88rem;
+    line-height: 1.65;
+  }
+
+  /* OPLEV-sektion: reducér top/bund-padding */
+  .dark-section {
+    padding: 2.5rem var(--sp-md);
+  }
+
+  .dark-section-hdr {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Undersiders page-hero: mindre padding-top på mobil */
+  .page-hero {
+    padding: calc(64px + 2rem) var(--sp-md) 2rem;
+  }
+
+  /* Generel side-body: reducér padding */
+  .page-body {
+    padding: 2rem var(--sp-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 75vh;
+    min-height: 380px;
+  }
+
+  #intro {
+    padding: 2rem var(--sp-md);
+  }
+}

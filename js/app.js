@@ -398,8 +398,16 @@ async function loadSager() {
 async function loadBestyrelse() {
   const g = $('bst-grid');
   if (!g) return;
-  g.innerHTML = '<p class="text-muted">Henter bestyrelsesoplysninger…</p>';
-  if (!klarTilData('bst-grid')) return;
+
+  // Bevar altid statisk indhold som fallback.
+  // Overskriver KUN hvis Supabase returnerer gyldige data.
+  const harStatiskIndhold = g.querySelector('.bst-kort');
+
+  // Supabase ikke konfigureret – bevar statisk indhold og returnér stille
+  if (!isConfigured() || !sb()) {
+    // Statisk indhold vises – ingen handling
+    return;
+  }
 
   let data = [];
   try {
@@ -412,15 +420,14 @@ async function loadBestyrelse() {
   } catch(e) {
     if (typeof DEBUG_MODE !== 'undefined' && DEBUG_MODE)
       console.error('[app] bestyrelse:', e);
-    g.innerHTML = '<p class="text-muted">Bestyrelsesoplysninger er midlertidigt utilgængelige.</p>';
+    // Fejl fra Supabase – bevar statisk indhold, vis ingen fejlbesked
     return;
   }
 
-  if (!data.length) {
-    g.innerHTML = '<p class="text-muted">Bestyrelsesoplysninger opdateres snart.</p>';
-    return;
-  }
+  // Supabase returnerede tomme data – bevar statisk indhold
+  if (!data.length) return;
 
+  // Supabase returnerede gyldige data – opdatér gridden
   g.innerHTML = data.map(m => `
     <article class="bst-kort">
       <div class="bst-avatar">

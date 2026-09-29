@@ -6,7 +6,7 @@
  * Det rydder gammel cache og viser opdateringsbanneret til alle brugere.
  */
 
-const CACHE_VERSION = 'kfd-v1.0.1';
+const CACHE_VERSION = 'kfd-v1.0.2';
 const CACHE_NAME    = CACHE_VERSION;
 
 // Filer der caches ved installation
