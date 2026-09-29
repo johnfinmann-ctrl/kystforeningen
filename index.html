@@ -442,7 +442,10 @@
   </div>
   <div class="page-body">
     <div class="mw">
-      <!-- Statisk fallback (overskrives af Supabase når aktiv) -->
+      <!-- Bestyrelse valgt på generalforsamling 25. september 2026 -->
+      <p style="font-size:.82rem;color:var(--c-muted);margin-bottom:var(--sp-lg);">
+        Valgt på ordinær generalforsamling den 25. september 2026.
+      </p>
       <div class="bst-grid" id="bst-grid">
         <article class="bst-kort">
           <div class="bst-avatar">👤</div>
@@ -455,10 +458,28 @@
           <h3>John Finmann</h3>
           <div class="bst-role">Næstformand</div>
         </article>
+        <article class="bst-kort">
+          <div class="bst-avatar">👤</div>
+          <h3>Åse Bønløkke</h3>
+          <div class="bst-role">Kasserer</div>
+        </article>
+        <article class="bst-kort">
+          <div class="bst-avatar">👤</div>
+          <h3>John Palm</h3>
+          <div class="bst-role">Bestyrelsesmedlem</div>
+        </article>
+        <article class="bst-kort" style="opacity:.55;">
+          <div class="bst-avatar" style="background:rgba(100,100,100,.15);color:var(--c-muted);">—</div>
+          <h3 style="color:var(--c-muted);">Vakant</h3>
+          <div class="bst-role">Bestyrelsesmedlem</div>
+        </article>
       </div>
-      <p class="text-muted" style="margin-top:var(--sp-lg);font-size:.82rem;">
-        Bestyrelsen opdateres løbende. Kontakt foreningen via kontaktformularen.
-      </p>
+      <div style="margin-top:var(--sp-lg);padding:var(--sp-sm) var(--sp-md);background:var(--c-cream);border-left:3px solid var(--c-border);">
+        <p style="font-size:.82rem;color:var(--c-muted);margin:0;">
+          <strong style="color:var(--c-ink);">Suppleanter:</strong>
+          Sean Blicher · Kim Withen Olesen
+        </p>
+      </div>
     </div>
   </div>
 </div>
@@ -637,6 +658,15 @@
       <div class="dok-section">
         <div class="dok-cat-title">Generalforsamlinger</div>
         <div class="dok-list">
+          <!-- Referat: PDF tilføjes når dokumentet foreligger -->
+          <div class="dok-row" style="opacity:.55;cursor:default;" aria-label="Referat ikke tilgængeligt endnu">
+            <span class="icon">⏳</span>
+            <div class="info">
+              <strong>Referat – Ordinær generalforsamling 25. september 2026</strong>
+              <span>Referatet offentliggøres når det endelige dokument foreligger</span>
+            </div>
+            <span class="dl" style="font-size:.7rem;color:var(--c-muted);">Afventer</span>
+          </div>
           <a href="assets/documents/aktiviteter/velkomst-og-beretning-generalforsamling-2026.pdf"
              target="_blank" rel="noopener" class="dok-row">
             <span class="icon">📄</span>
@@ -673,14 +703,22 @@
       </p>
       <div class="membership-box">
         <div class="mb-top">
-          <div class="mb-price" id="mb-price">150 kr.</div>
-          <div class="mb-note"  id="mb-note">per år · familiemedlemskab 250 kr.</div>
+          <div style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;padding:.5rem 0;">
+            <div style="text-align:center;">
+              <div class="mb-price" id="mb-price" style="font-size:2.2rem;">100 kr.</div>
+              <div style="font-size:.78rem;opacity:.8;margin-top:.2rem;">Personligt medlemskab / år</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:1.6rem;font-family:var(--font-display);font-weight:400;line-height:1;">50 kr.</div>
+              <div id="mb-note" style="font-size:.78rem;opacity:.8;margin-top:.2rem;">Ægtefælle/samlever i samme husstand / år</div>
+            </div>
+          </div>
         </div>
         <ul class="mb-perks" aria-label="Fordele ved medlemskab">
-          <li>Nyhedsbrev og løbende orientering</li>
+          <li>Nyhedsbrev og løbende orientering om foreningens arbejde</li>
           <li>Adgang til alle arrangementer og aktiviteter</li>
           <li>Stemmeret på den årlige generalforsamling</li>
-          <li>Mulighed for at påvirke foreningens arbejde</li>
+          <li>Mulighed for at påvirke foreningens arbejde og prioriteter</li>
         </ul>
         <div class="mb-form">
           <input type="text"  class="fi" id="m-navn"

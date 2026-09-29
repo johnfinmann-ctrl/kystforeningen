@@ -15,8 +15,8 @@ INSERT INTO site_settings (key, value, label) VALUES
   ('facebook_url',       '',                            'Facebook URL'),
   ('instagram_url',      '',                            'Instagram URL'),
   ('cvr',                '',                            'CVR-nummer'),
-  ('membership_single',  '150 kr.',                    'Kontingent – enkelt'),
-  ('membership_family',  '250 kr.',                    'Kontingent – familie'),
+  ('membership_single',  '100 kr.',                    'Kontingent – enkelt'),
+  ('membership_family',  '50 kr.',                    'Kontingent – familie'),
   ('membership_note',    'per år',                     'Kontingent – note'),
   ('site_title',         'Kystforeningen Djursland',   'Sidetitel'),
   ('site_tagline',       'Bevarelse af naturen og de rekreative kystområder på Djursland', 'Tagline')
