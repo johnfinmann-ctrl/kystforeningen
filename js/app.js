@@ -643,6 +643,10 @@ function initServiceWorker() {
   navigator.serviceWorker.register('./sw.js').then(reg => {
     _swReg = reg;
 
+    // Tvungen opdateringskontrol ved appstart
+    // Sikrer at genåbnet installeret PWA opdager ny SW straks
+    reg.update().catch(() => {});
+
     // Ny SW installeres – vis opdateringsbanner
     reg.addEventListener('updatefound', () => {
       const worker = reg.installing;
@@ -658,14 +662,23 @@ function initServiceWorker() {
       $('update-banner')?.classList.add('visible');
     }
 
+    // Periodisk opdateringskontrol (hvert 5. minut)
+    // Fanger ny version mens appen er åben
+    setInterval(() => { reg.update().catch(() => {}); }, 5 * 60 * 1000);
+
   }).catch(e => {
     if (typeof DEBUG_MODE !== 'undefined' && DEBUG_MODE)
       console.warn('[SW] Registrering fejlede:', e);
   });
 
-  // SW overtager – genindlæs siden
+  // SW overtager – genindlæs siden ÉN gang
+  // Guard mod reload-loop: kun reload hvis controller faktisk skifter
+  let reloading = false;
   navigator.serviceWorker.addEventListener('controllerchange', () => {
-    window.location.reload();
+    if (!reloading) {
+      reloading = true;
+      window.location.reload();
+    }
   });
 }
 

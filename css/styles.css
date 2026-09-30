@@ -921,6 +921,10 @@ footer p { margin-bottom: .25rem; }
     background-image: url('../assets/hero-kyst-mobil.jpg');
     background-position: center 35%;
   }
+  /* CTA flyttes ~80px ned: øg luft under underteksten */
+  .hero-sub {
+    margin-bottom: 4.8rem;
+  }
 
   /* Intro: halvér den store top/bund-padding */
   #intro {

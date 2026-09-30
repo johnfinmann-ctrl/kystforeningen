@@ -39,6 +39,38 @@ kystforeningen-djursland/
 
 ---
 
+
+## ★ PWA-opdateringsprocedure
+
+Når du uploader en ny version til GitHub Pages, **behøver brugerne ikke geninstallere appen**.
+
+Én URL → én installeret app → fremtidige versioner opdateres automatisk.
+
+**Trin ved ny kodeversion (fx RC5.4):**
+
+1. Opdatér `CACHE_VERSION` i `sw.js`:
+   ```
+   const CACHE_VERSION = 'kfd-v1.0.6';
+   ```
+2. Opdatér `APP_VERSION` i `js/config.js`:
+   ```
+   const APP_VERSION = '1.0.6';
+   ```
+3. Upload ændrede filer til samme GitHub-repository.
+4. GitHub Pages bygger siden (ca. 1–2 minutter).
+
+**Hvad sker der for brugeren:**
+- Appen tjekker for ny Service Worker ved åbning og hvert 5. minut.
+- Når ny version opdages, vises banneret: *"En ny version er klar – Opdater nu"*.
+- Brugeren trykker **Opdater nu** → appen indlæser ny version.
+- Alternativt: næste gang appen åbnes opdateres den automatisk.
+
+**Brugeren skal aldrig:**
+- Slette og geninstallere appen
+- Rydde cache manuelt
+- Bruge et nyt link
+
+
 ## ★ Opsætning fra nul
 
 ### Trin 1 – Opret Supabase-konto og -projekt
