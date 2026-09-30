@@ -640,45 +640,72 @@ let _swReg = null;
 function initServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
 
-  navigator.serviceWorker.register('./sw.js').then(reg => {
-    _swReg = reg;
-
-    // Tvungen opdateringskontrol ved appstart
-    // Sikrer at genåbnet installeret PWA opdager ny SW straks
-    reg.update().catch(() => {});
-
-    // Ny SW installeres – vis opdateringsbanner
-    reg.addEventListener('updatefound', () => {
-      const worker = reg.installing;
-      worker?.addEventListener('statechange', () => {
-        if (worker.state === 'installed' && navigator.serviceWorker.controller) {
-          $('update-banner')?.classList.add('visible');
-        }
-      });
-    });
-
-    // SW venter allerede (f.eks. genåbnet fane med ny version)
-    if (reg.waiting && navigator.serviceWorker.controller) {
-      $('update-banner')?.classList.add('visible');
+  // ── TRIN 1: Sæt controllerchange-listener OP ALLERFØRST ────
+  // Dette er kritisk. Hvis vi venter til efter register().then(),
+  // kan controllerchange allerede være affyret (fx når ny SW
+  // aktiverer og claims() mens siden loader) – og vi misser det.
+  let reloading = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!reloading) {
+      reloading = true;
+      // Reload sender browseren til SW'ens network-first handler
+      // og henter frisk index.html + ny app.js
+      window.location.reload();
     }
+  });
 
-    // Periodisk opdateringskontrol (hvert 5. minut)
-    // Fanger ny version mens appen er åben
-    setInterval(() => { reg.update().catch(() => {}); }, 5 * 60 * 1000);
-
+  // ── TRIN 2: Registrér SW ────────────────────────────────────
+  navigator.serviceWorker.register('./sw.js', {
+    // updateViaCache: 'none' tvinger browseren til ALTID at hente
+    // sw.js fra netværket – ignorerer HTTP-cache på sw.js-filen.
+    // Dette er den primære fix for iPhone PWA der ikke opdaterer.
+    updateViaCache: 'none'
   }).catch(e => {
     if (typeof DEBUG_MODE !== 'undefined' && DEBUG_MODE)
       console.warn('[SW] Registrering fejlede:', e);
   });
 
-  // SW overtager – genindlæs siden ÉN gang
-  // Guard mod reload-loop: kun reload hvis controller faktisk skifter
-  let reloading = false;
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (!reloading) {
-      reloading = true;
-      window.location.reload();
-    }
+  // ── TRIN 3: Vent til SW er klar, tjek derefter for ny version ──
+  // navigator.serviceWorker.ready sikrer at vi har en aktiv registration
+  // (ikke bare et promise der afventer install).
+  // Vi bruger ready i stedet for .then(reg => ...) fordi ready
+  // garanterer at controlleren er aktiv – ikke bare registreret.
+  navigator.serviceWorker.ready.then(reg => {
+    _swReg = reg;
+
+    // Hjælpefunktion: vis banner hvis SW venter
+    const visBannerHvisVenter = () => {
+      if (reg.waiting) {
+        $('update-banner')?.classList.add('visible');
+      }
+    };
+
+    // Tjek om en SW allerede venter (fra tidligere opdatering)
+    visBannerHvisVenter();
+
+    // Lyt på ny SW der installeres
+    reg.addEventListener('updatefound', () => {
+      const installing = reg.installing;
+      if (!installing) return;
+      installing.addEventListener('statechange', () => {
+        // 'installed' + aktiv controller = ny version klar
+        if (installing.state === 'installed' && navigator.serviceWorker.controller) {
+          // Med skipWaiting() i sw.js install-event aktiverer den nye SW
+          // straks og udløser controllerchange ovenfor → reload.
+          // Banneret vises kun kortvarigt hvis reload er langsom.
+          $('update-banner')?.classList.add('visible');
+        }
+        // 'activated' uden controller = første installation (ingen reload)
+      });
+    });
+
+    // ── TRIN 4: Aktiv update-check ───────────────────────────
+    // reg.update() fetcher sw.js fra netværket og sammenligner.
+    // updateViaCache:'none' ovenfor sikrer at HTTP-cachen omgås.
+    reg.update().catch(() => {});
+
+    // Periodisk check hvert 5. minut (fanger opdatering mens appen er åben)
+    setInterval(() => { reg.update().catch(() => {}); }, 5 * 60 * 1000);
   });
 }
 
