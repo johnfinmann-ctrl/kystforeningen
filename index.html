@@ -16,6 +16,9 @@
   <meta property="og:image" content="https://kystforeningen.dk/assets/hero-kyst.jpg">
   <meta property="og:url" content="https://kystforeningen.dk">
   <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -62,7 +65,7 @@
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-h1">
     <div class="hero-bg" role="img"
-         aria-label="Bænk med udsigt over Randers Fjord og kystlandskabet på Djursland"></div>
+         aria-label="Udsigt over kystlandskabet på Djursland"></div>
     <div class="hero-overlay"></div>
 
     <div class="hero-content mw">
@@ -268,163 +271,7 @@
       <!-- DE TRE SAGER -->
       <div class="sag-grid-3" id="sag-grid">
 
-        <!-- SAG 1: VOSNÆS -->
-        <div class="sag-kort-3">
-          <img class="sag-kort-img" src="assets/vosnæs-vindmoeller.jpg"
-               alt="Luftfoto af vindmøller langs kysten ved Djursland – Vosnæs-sagen">
-          <div class="sag-kort-3-body">
-            <div class="sag-status-badge">Igangværende</div>
-            <h3>Vosnæs – vindmøller ved kysten</h3>
-            <p>Planer om opstilling af kæmpevindmøller ved Vosnæs berører kystlandskabet og udsigten fra land og hav.</p>
-            <button class="btn-laes-sag" data-sag="vosnæs" aria-expanded="false">Læs hele sagen</button>
-          </div>
-          <div class="sag-detalje" id="sag-vosnæs">
-            <div class="sag-tabs" role="tablist">
-              <button class="sag-tab aktiv" data-tab="vosnæs-baggrund">Baggrund</button>
-              <button class="sag-tab" data-tab="vosnæs-nyt">Seneste nyt</button>
-              <button class="sag-tab" data-tab="vosnæs-dok">Høringer</button>
-              <button class="sag-tab" data-tab="vosnæs-arbejde">Vores arbejde</button>
-              <button class="sag-tab" data-tab="vosnæs-presse">Presse</button>
-              <button class="sag-tab" data-tab="vosnæs-kom">Kommunale kilder</button>
-            </div>
-            <div class="sag-tab-panel aktiv" id="vosnæs-baggrund">
-              <p>Syddjurs Kommune behandler planerne om opstilling af nye kæmpevindmøller ved Ebeltoft Færgehavn og i det kystnære område ved Vosnæs på Djursland. Møllerne er planlagt til at være 150 meter høje og vil ændre kystlandskabets karakter markant.</p>
-              <p>Planerne er en del af Kommuneplan 2024 og berører punkt 1.1.T2, som reserverer arealer til tekniske anlæg i det kystnære område.</p>
-            </div>
-            <div class="sag-tab-panel" id="vosnæs-nyt">
-              <div style="background:var(--c-muted);color:#fff;padding:.65rem 1rem;border-radius:6px;font-weight:700;font-size:.85rem;margin-bottom:var(--sp-sm);text-align:center;letter-spacing:.02em;">
-                SENESTE: Minister ophæver planveto – Aarhus Byråd skal fortsat beslutte om endelig vedtagelse
-              </div>
-              <div class="sag-nyt-item">
-                <span class="sag-nyt-dato">22. oktober 2026</span>
-                <strong>Minister ophæver Syddjurs' planveto – Aarhus kan vedtage vindmølleplan</strong>
-                <p>Minister for byer og landdistrikter Signe Munk (SF) har truffet afgørelse i sagen om planveto mod Aarhus Kommunes lokalplan for vindmøller ved Vosnæs. Ministeren ophæver Syddjurs Kommunes veto og åbner dermed for, at Aarhus kan vedtage lokalplanen. Borgmester Michael Harregaard Stegger (S, Syddjurs) betegner afgørelsen som "dybt skuffende" og oplyser, at kommunen vil vurdere sine videre muligheder. Kilde: <a href="https://dinavis.dk/politik/ECE19762672/minister-har-afgjort-betaendt-sag-om-150-meter-hoeje-vindmoeller-ved-kommunegraense/" target="_blank" rel="noopener">Din Avis, 22. oktober 2026</a></p>
-              </div>
-              <div class="sag-nyt-item">
-                <span class="sag-nyt-dato">Marts 2026</span>
-                <strong>Ministerens afgørelse udskudt på ubestemt tid</strong>
-                <p>Energi-, byer- og landdistriktsminister Morten Dahlin (V) skulle efter planen have truffet afgørelse i plan-veto-sagen efter vinterferien 2026. Afgørelsen blev udskudt på ubestemt tid, fordi et folketingsvalg blev udskrevet. Sagen overgik til den nye minister efter regeringsskiftet.</p>
-              </div>
-              <div class="sag-nyt-item">
-                <span class="sag-nyt-dato">August 2025</span>
-                <strong>784 høringssvar – behandling afventer politisk behandling</strong>
-                <p>Den offentlige høring om Lokalplan 1237 afsluttedes den 14. august 2025 med 784 indsendte svar. Teknik og Miljø (Aarhus) har udarbejdet et resumé, men offentliggørelse afventer, at politikerne har haft sagen til behandling.</p>
-              </div>
-              <div class="sag-nyt-item">
-                <span class="sag-nyt-dato">Juli 2025</span>
-                <strong>Syddjurs Kommune nedlægger planveto</strong>
-                <p>Syddjurs Kommune nedlagde i juli 2025 veto mod Aarhus Kommunes lokalplan for vindmøllerne ved Vosnæs. Vetoretten medfører, at sagen skal afgøres af ministeren for by og landdistrikter. Kommunerne afholdt mæglingsmøde, men nåede ikke til enighed.</p>
-              </div>
-              <p style="font-size:.82rem;color:var(--c-muted);margin-top:var(--sp-sm);border-left:3px solid var(--c-gold);padding-left:.75rem;">
-                Kilde: <a href="https://deltag.aarhus.dk/project/vindmoeller-ved-vosnaes" target="_blank" rel="noopener">Aarhus Kommune – Deltag</a> · <a href="https://dinavis.dk/samfund/ECE19076668/valget-udskyder-afgoerelse-i-betaendt-vindmoellekrig-paa-ubestemt-tid/" target="_blank" rel="noopener">Din Avis, 5. marts 2026</a> · <a href="https://dinavis.dk/politik/ECE19762672/minister-har-afgjort-betaendt-sag-om-150-meter-hoeje-vindmoeller-ved-kommunegraense/" target="_blank" rel="noopener">Din Avis, 22. oktober 2026</a>
-              </p>
-            </div>
-            <div class="sag-tab-panel" id="vosnæs-arbejde">
-              <p>Kystforeningen Djursland indsendte høringssvar i januar 2025 med indsigelse mod de planlagte vindmøller ved Ebeltoft Færgehavn. Vi argumenterede for, at de høje møller vil ødelægge det åbne kystlandskab og forringe de rekreative og visuelle kvaliteter i området.</p>
-            </div>
-            <div class="sag-tab-panel" id="vosnæs-dok">
-
-              <!-- Myndighedsafgørelser -->
-              <h4 style="font-size:.88rem;font-weight:700;margin:0 0 .5rem;color:var(--c-body);">Myndighedsafgørelser</h4>
-              <div style="border:2px solid var(--c-ocean);border-radius:8px;padding:var(--sp-sm) var(--sp-md);margin-bottom:var(--sp-md);">
-                <div style="font-size:.75rem;font-weight:700;color:var(--c-ocean);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem;">Ministerafgørelse · 22. oktober 2026</div>
-                <strong style="font-size:.95rem;display:block;margin-bottom:.35rem;">Ministerens afgørelse om vindmøller ved Vosnæs</strong>
-                <p style="font-size:.84rem;margin:.25rem 0 .5rem;">
-                  Ministeren har ophævet Syddjurs Kommunes indsigelse mod Aarhus Kommunes forslag til kommuneplantillæg nr. 169 og lokalplan nr. 1237 om tre vindmøller på op til 150 meter ved Vosnæs.
-                  Afgørelsen betyder, at Aarhus Kommune kan fortsætte planprocessen.
-                  <strong>Aarhus Byråd skal fortsat beslutte, om planerne skal vedtages endeligt.</strong>
-                </p>
-                <table style="width:100%;border-collapse:collapse;font-size:.82rem;margin-bottom:.75rem;">
-                  <tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Myndighed</td><td style="padding:.2rem 0;">Ministeriet for Byer og Landdistrikter (minister Signe Munk, SF)</td></tr>
-                  <tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Dato</td><td style="padding:.2rem 0;">22. oktober 2026</td></tr>
-                  <tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Sagsnummer</td><td style="padding:.2rem 0;">2026-3180</td></tr>
-                  <tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Omfang</td><td style="padding:.2rem 0;">6 sider, PDF</td></tr>
-                  <tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Klageadgang</td><td style="padding:.2rem 0;">Kan ikke påklages til Planklagenævnet</td></tr>
-                </table>
-                <a href="https://aarhus.viewer.dkplan.niras.dk/media/sqenxa1r/afgoerelse.pdf"
-                   target="_blank" rel="noopener noreferrer"
-                   style="display:inline-flex;align-items:center;gap:.4rem;background:var(--c-ocean);color:#fff;padding:.5rem 1rem;border-radius:4px;font-size:.85rem;font-weight:600;text-decoration:none;">
-                  📄 Læs ministerens afgørelse (PDF)
-                </a>
-              </div>
-
-              <!-- Høringssvar -->
-              <h4 style="font-size:.88rem;font-weight:700;margin:0 0 .5rem;color:var(--c-body);">Høringssvar</h4>
-              <a href="assets/documents/hoeringssvar/hoeringssvar-vindmoeller-faergehavnen-2025.pdf"
-                 target="_blank" rel="noopener" class="dok-row" style="border:1px solid var(--c-border);margin-bottom:.4rem;">
-                <span class="icon">📋</span>
-                <div class="info"><strong>Høringssvar – Kæmpevindmøller ved Ebeltoft Færgehavn</strong><span>Januar 2025 · Kommuneplan 2024</span></div>
-                <span class="dl">⬇</span>
-              </a>
-            </div>
-            <div class="sag-tab-panel" id="vosnæs-presse">
-              <p style="font-size:.78rem;color:var(--c-muted);margin-bottom:var(--sp-sm);border-left:3px solid var(--c-border);padding-left:.75rem;">Artiklerne herunder er eksterne mediers egne tekster og repræsenterer ikke Kystforeningens holdning.</p>
-              <a href="https://dinavis.dk/politik/ECE19762672/minister-har-afgjort-betaendt-sag-om-150-meter-hoeje-vindmoeller-ved-kommunegraense/" target="_blank" rel="noopener" class="presse-kort">
-                <div class="presse-kilde">Din Avis · 22. oktober 2026</div>
-                <div class="presse-overskrift">Minister har afgjort betændt sag om 150 meter høje vindmøller ved kommunegrænse</div>
-                <div class="presse-beskr">Signe Munk (SF) ophæver Syddjurs Kommunes planveto. Aarhus kan nu vedtage lokalplan for vindmøller ved Vosnæs. Borgmester Michael Harregaard Stegger (S) er dybt skuffet og vurderer videre muligheder.</div>
-                <div class="presse-laes">Læs artiklen hos Din Avis ↗</div>
-              </a>
-              <a href="https://dinavis.dk/debat/ECE19763418/taet-paa-dig-lige-nu/" target="_blank" rel="noopener" class="presse-kort">
-                <div class="presse-kilde">Din Avis – Debatindlæg · 23. oktober 2026</div>
-                <div class="presse-overskrift">Venstre efter Vosnæs-udmelding: »Det er menneskers hjem og lokalsamfund, der bliver ødelagt«</div>
-                <div class="presse-beskr">Jørgen Rosengren (V) citerer Gert Bjerregaard i reaktion på ministerens ophævelse af planvetoen. <em>(Artiklen kan kræve abonnement.)</em></div>
-                <div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
-              </a>
-              <a href="https://dinavis.dk/debat/ECE19763125/ministeren-har-tilsidesat-syddjurs-aarhus-kan-stadig-sige-nej/" target="_blank" rel="noopener" class="presse-kort">
-                <div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
-                <div class="presse-overskrift">Ministeren har tilsidesat Syddjurs – Aarhus kan stadig sige nej</div>
-                <div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
-              </a>
-              <a href="https://dinavis.dk/samfund/ECE19765492/minister-reagerer-paa-kritik-af-vindmoelleafgoerelse-kan-ikke-goere-alle-tilfredse/" target="_blank" rel="noopener" class="presse-kort">
-                <div class="presse-kilde">Din Avis · Oktober 2026</div>
-                <div class="presse-overskrift">Minister reagerer på kritik af vindmølleafgørelse: Kan ikke gøre alle tilfredse</div>
-                <div class="presse-laes">Læs artiklen hos Din Avis ↗</div>
-              </a>
-              <a href="https://dinavis.dk/debat/ECE19767306/vi-skal-vaelge-de-rigtige-steder-til-groen-energi/" target="_blank" rel="noopener" class="presse-kort">
-                <div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
-                <div class="presse-overskrift">Vi skal vælge de rigtige steder til grøn energi</div>
-                <div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
-              </a>
-              <a href="https://dinavis.dk/debat/ECE19767316/studstrupvaerket-og-hoejhuse-er-ok-men-tre-vindmoeller-er-for-meget/" target="_blank" rel="noopener" class="presse-kort">
-                <div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
-                <div class="presse-overskrift">Studstrupværket og højhuse er ok, men tre vindmøller er for meget</div>
-                <div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
-              </a>
-              <a href="https://dinavis.dk/debat/ECE19644723/praemissen-er-brudt-nu-kan-aarhus-afslutte-17-aars-vindmoellekonflikt/" target="_blank" rel="noopener" class="presse-kort">
-                <div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
-                <div class="presse-overskrift">Præmissen er brudt – nu kan Aarhus afslutte 17 års vindmøllekonflikt</div>
-                <div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
-              </a>
-              <a href="https://dinavis.dk/politik/ECE19140264/naar-vindmoeller-bliver-valgkampsvaluta-i-slutspurten/" target="_blank" rel="noopener" class="presse-kort">
-                <div class="presse-kilde">Din Avis · Oktober 2026</div>
-                <div class="presse-overskrift">Når vindmøller bliver valgkampsvaluta i slutspurten</div>
-                <div class="presse-laes">Læs artiklen hos Din Avis ↗</div>
-              </a>
-            </div>
-            <div class="sag-tab-panel" id="vosnæs-kom">
-              <p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">
-                Officielle kommunale og myndighedskilder om planerne for vindmøller ved Vosnæs/Ebeltoft Færgehavn.
-              </p>
-              <a href="https://aabendagsorden.syddjurs.dk"
-                 target="_blank" rel="noopener" class="presse-kort" style="border-color:var(--c-ocean);">
-                <div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
-                <div class="presse-overskrift">Åben Indsigt – politiske dagsordener og referater</div>
-                <div class="presse-beskr">Kommunens åbne portal med dagsordener, referater og bilag fra byråd og udvalg, herunder behandling af vindmøllesagen.</div>
-                <div class="presse-laes">Gå til Åben Indsigt ↗</div>
-              </a>
-              <a href="https://www.syddjurs.dk/politik-og-indflydelse/hoeringer-og-afgoerelser"
-                 target="_blank" rel="noopener" class="presse-kort" style="border-color:var(--c-ocean);">
-                <div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
-                <div class="presse-overskrift">Høringer og afgørelser</div>
-                <div class="presse-beskr">Kommunens høringsportal med offentlige høringer, herunder Kommuneplan 2024 og vindmølleplanen (punkt 1.1.T2).</div>
-                <div class="presse-laes">Gå til høringer ↗</div>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- SAG 2: DRÅBY -->
+        <!-- SAG 1: DRÅBY -->
         <div class="sag-kort-3">
           <img class="sag-kort-img" src="assets/draaby-sommerhus.jpg"
                alt="Luftfoto af stort moderne sommerhus i klitter ved kysten – Dråby, Djursland">
@@ -436,18 +283,18 @@
           </div>
           <div class="sag-detalje" id="sag-draby">
             <div class="sag-tabs" role="tablist">
-              <button class="sag-tab aktiv" data-tab="draby-baggrund">Baggrund</button>
-              <button class="sag-tab" data-tab="draby-nyt">Seneste nyt</button>
+              <button class="sag-tab" data-tab="draby-baggrund">Baggrund</button>
+              <button class="sag-tab aktiv" data-tab="draby-nyt">Seneste nyt</button>
               <button class="sag-tab" data-tab="draby-hoering">Høringer</button>
               <button class="sag-tab" data-tab="draby-arbejde">Vores arbejde</button>
               <button class="sag-tab" data-tab="draby-presse">Presse</button>
               <button class="sag-tab" data-tab="draby-kom">Kommunale kilder</button>
             </div>
-            <div class="sag-tab-panel aktiv" id="draby-baggrund">
+            <div class="sag-tab-panel" id="draby-baggrund">
               <p>Der er planer om et nyt sommerhusområde ved Dråby strand syd for Ebeltoft med op til 108 store sommerhuse – i folkemunde kaldet "partyhuse" på grund af størrelsen. Husene forventes at ligge i op til to etager og har en størrelse, der langt overstiger det typiske sommerhus.</p>
               <p>Sagen rejser spørgsmål om trafikbelastning på de smalle veje, offentlig adgang til kysten og påvirkningen af det lokale miljø og nabolag.</p>
             </div>
-            <div class="sag-tab-panel" id="draby-nyt">
+            <div class="sag-tab-panel aktiv" id="draby-nyt">
               <div style="background:var(--c-ocean);color:#fff;padding:.75rem 1rem;border-radius:6px;font-weight:700;font-size:.9rem;margin-bottom:var(--sp-sm);text-align:center;letter-spacing:.03em;">
                 ⚠ STATUS: OFFENTLIG HØRING – FRIST 16. DECEMBER 2026 KL. 23.59
               </div>
@@ -617,6 +464,168 @@
           </div>
         </div>
 
+        <!-- SAG 2: VOSNÆS -->
+        <div class="sag-kort-3">
+          <img class="sag-kort-img" src="assets/vosnæs-vindmoeller.jpg"
+               alt="Luftfoto af vindmøller langs kysten ved Djursland – Vosnæs-sagen">
+          <div class="sag-kort-3-body">
+            <div class="sag-status-badge">Igangværende</div>
+            <h3>Vosnæs – vindmøller ved kysten</h3>
+            <p>Planer om opstilling af kæmpevindmøller ved Vosnæs berører kystlandskabet og udsigten fra land og hav.</p>
+            <button class="btn-laes-sag" data-sag="vosnæs" aria-expanded="false">Læs hele sagen</button>
+          </div>
+          <div class="sag-detalje" id="sag-vosnæs">
+            <div class="sag-tabs" role="tablist">
+              <button class="sag-tab" data-tab="vosnæs-baggrund">Baggrund</button>
+              <button class="sag-tab aktiv" data-tab="vosnæs-nyt">Seneste nyt</button>
+              <button class="sag-tab" data-tab="vosnæs-dok">Høringer</button>
+              <button class="sag-tab" data-tab="vosnæs-arbejde">Vores arbejde</button>
+              <button class="sag-tab" data-tab="vosnæs-presse">Presse</button>
+              <button class="sag-tab" data-tab="vosnæs-kom">Kommunale kilder</button>
+            </div>
+            <div class="sag-tab-panel" id="vosnæs-baggrund">
+              <p>Syddjurs Kommune behandler planerne om opstilling af nye kæmpevindmøller ved Ebeltoft Færgehavn og i det kystnære område ved Vosnæs på Djursland. Møllerne er planlagt til at være 150 meter høje og vil ændre kystlandskabets karakter markant.</p>
+              <p>Planerne er en del af Kommuneplan 2024 og berører punkt 1.1.T2, som reserverer arealer til tekniske anlæg i det kystnære område.</p>
+            </div>
+            <div class="sag-tab-panel aktiv" id="vosnæs-nyt">
+              <div style="background:var(--c-muted);color:#fff;padding:.65rem 1rem;border-radius:6px;font-weight:700;font-size:.85rem;margin-bottom:var(--sp-sm);text-align:center;letter-spacing:.02em;">
+                SENESTE: Minister ophæver planveto – Aarhus Byråd skal fortsat beslutte om endelig vedtagelse
+              </div>
+              <div class="sag-nyt-item">
+                <span class="sag-nyt-dato">22. oktober 2026</span>
+                <strong>Minister ophæver Syddjurs' planveto – Aarhus kan vedtage vindmølleplan</strong>
+                <p>Minister for byer og landdistrikter Signe Munk (SF) har truffet afgørelse i sagen om planveto mod Aarhus Kommunes lokalplan for vindmøller ved Vosnæs. Ministeren ophæver Syddjurs Kommunes veto og åbner dermed for, at Aarhus kan vedtage lokalplanen. Borgmester Michael Harregaard Stegger (S, Syddjurs) betegner afgørelsen som "dybt skuffende" og oplyser, at kommunen vil vurdere sine videre muligheder. Kilde: <a href="https://dinavis.dk/politik/ECE19762672/minister-har-afgjort-betaendt-sag-om-150-meter-hoeje-vindmoeller-ved-kommunegraense/" target="_blank" rel="noopener">Din Avis, 22. oktober 2026</a></p>
+              </div>
+              <div class="sag-nyt-item">
+                <span class="sag-nyt-dato">Marts 2026</span>
+                <strong>Ministerens afgørelse udskudt på ubestemt tid</strong>
+                <p>Energi-, byer- og landdistriktsminister Morten Dahlin (V) skulle efter planen have truffet afgørelse i plan-veto-sagen efter vinterferien 2026. Afgørelsen blev udskudt på ubestemt tid, fordi et folketingsvalg blev udskrevet. Sagen overgik til den nye minister efter regeringsskiftet.</p>
+              </div>
+              <div class="sag-nyt-item">
+                <span class="sag-nyt-dato">August 2025</span>
+                <strong>784 høringssvar – behandling afventer politisk behandling</strong>
+                <p>Den offentlige høring om Lokalplan 1237 afsluttedes den 14. august 2025 med 784 indsendte svar. Teknik og Miljø (Aarhus) har udarbejdet et resumé, men offentliggørelse afventer, at politikerne har haft sagen til behandling.</p>
+              </div>
+              <div class="sag-nyt-item">
+                <span class="sag-nyt-dato">Juli 2025</span>
+                <strong>Syddjurs Kommune nedlægger planveto</strong>
+                <p>Syddjurs Kommune nedlagde i juli 2025 veto mod Aarhus Kommunes lokalplan for vindmøllerne ved Vosnæs. Vetoretten medfører, at sagen skal afgøres af ministeren for by og landdistrikter. Kommunerne afholdt mæglingsmøde, men nåede ikke til enighed.</p>
+              </div>
+              <p style="font-size:.82rem;color:var(--c-muted);margin-top:var(--sp-sm);border-left:3px solid var(--c-gold);padding-left:.75rem;">
+                Kilde: <a href="https://deltag.aarhus.dk/project/vindmoeller-ved-vosnaes" target="_blank" rel="noopener">Aarhus Kommune – Deltag</a> · <a href="https://dinavis.dk/samfund/ECE19076668/valget-udskyder-afgoerelse-i-betaendt-vindmoellekrig-paa-ubestemt-tid/" target="_blank" rel="noopener">Din Avis, 5. marts 2026</a> · <a href="https://dinavis.dk/politik/ECE19762672/minister-har-afgjort-betaendt-sag-om-150-meter-hoeje-vindmoeller-ved-kommunegraense/" target="_blank" rel="noopener">Din Avis, 22. oktober 2026</a>
+              </p>
+            </div>
+            <div class="sag-tab-panel" id="vosnæs-arbejde">
+              <p>Kystforeningen Djursland indsendte høringssvar i januar 2025 med indsigelse mod de planlagte vindmøller ved Ebeltoft Færgehavn. Vi argumenterede for, at de høje møller vil ødelægge det åbne kystlandskab og forringe de rekreative og visuelle kvaliteter i området.</p>
+            </div>
+            <div class="sag-tab-panel" id="vosnæs-dok">
+
+              <!-- Myndighedsafgørelser -->
+              <h4 style="font-size:.88rem;font-weight:700;margin:0 0 .5rem;color:var(--c-body);">Myndighedsafgørelser</h4>
+              <div style="border:2px solid var(--c-ocean);border-radius:8px;padding:var(--sp-sm) var(--sp-md);margin-bottom:var(--sp-md);">
+                <div style="font-size:.75rem;font-weight:700;color:var(--c-ocean);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem;">Ministerafgørelse · 22. oktober 2026</div>
+                <strong style="font-size:.95rem;display:block;margin-bottom:.35rem;">Ministerens afgørelse om vindmøller ved Vosnæs</strong>
+                <p style="font-size:.84rem;margin:.25rem 0 .5rem;">
+                  Ministeren har ophævet Syddjurs Kommunes indsigelse mod Aarhus Kommunes forslag til kommuneplantillæg nr. 169 og lokalplan nr. 1237 om tre vindmøller på op til 150 meter ved Vosnæs.
+                  Afgørelsen betyder, at Aarhus Kommune kan fortsætte planprocessen.
+                  <strong>Aarhus Byråd skal fortsat beslutte, om planerne skal vedtages endeligt.</strong>
+                </p>
+                <table style="width:100%;border-collapse:collapse;font-size:.82rem;margin-bottom:.75rem;">
+                  <tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Myndighed</td><td style="padding:.2rem 0;">Ministeriet for Byer og Landdistrikter (minister Signe Munk, SF)</td></tr>
+                  <tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Dato</td><td style="padding:.2rem 0;">22. oktober 2026</td></tr>
+                  <tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Sagsnummer</td><td style="padding:.2rem 0;">2026-3180</td></tr>
+                  <tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Omfang</td><td style="padding:.2rem 0;">6 sider, PDF</td></tr>
+                  <tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Klageadgang</td><td style="padding:.2rem 0;">Kan ikke påklages til Planklagenævnet</td></tr>
+                </table>
+                <a href="https://aarhus.viewer.dkplan.niras.dk/media/sqenxa1r/afgoerelse.pdf"
+                   target="_blank" rel="noopener noreferrer"
+                   style="display:inline-flex;align-items:center;gap:.4rem;background:var(--c-ocean);color:#fff;padding:.5rem 1rem;border-radius:4px;font-size:.85rem;font-weight:600;text-decoration:none;">
+                  📄 Læs ministerens afgørelse (PDF)
+                </a>
+              </div>
+
+              <!-- Høringssvar -->
+              <h4 style="font-size:.88rem;font-weight:700;margin:0 0 .5rem;color:var(--c-body);">Høringssvar</h4>
+              <a href="assets/documents/hoeringssvar/hoeringssvar-vindmoeller-faergehavnen-2025.pdf"
+                 target="_blank" rel="noopener" class="dok-row" style="border:1px solid var(--c-border);margin-bottom:.4rem;">
+                <span class="icon">📋</span>
+                <div class="info"><strong>Høringssvar – Kæmpevindmøller ved Ebeltoft Færgehavn</strong><span>Januar 2025 · Kommuneplan 2024</span></div>
+                <span class="dl">⬇</span>
+              </a>
+            </div>
+            <div class="sag-tab-panel" id="vosnæs-presse">
+              <p style="font-size:.78rem;color:var(--c-muted);margin-bottom:var(--sp-sm);border-left:3px solid var(--c-border);padding-left:.75rem;">Artiklerne herunder er eksterne mediers egne tekster og repræsenterer ikke Kystforeningens holdning.</p>
+              <a href="https://dinavis.dk/politik/ECE19762672/minister-har-afgjort-betaendt-sag-om-150-meter-hoeje-vindmoeller-ved-kommunegraense/" target="_blank" rel="noopener" class="presse-kort">
+                <div class="presse-kilde">Din Avis · 22. oktober 2026</div>
+                <div class="presse-overskrift">Minister har afgjort betændt sag om 150 meter høje vindmøller ved kommunegrænse</div>
+                <div class="presse-beskr">Signe Munk (SF) ophæver Syddjurs Kommunes planveto. Aarhus kan nu vedtage lokalplan for vindmøller ved Vosnæs. Borgmester Michael Harregaard Stegger (S) er dybt skuffet og vurderer videre muligheder.</div>
+                <div class="presse-laes">Læs artiklen hos Din Avis ↗</div>
+              </a>
+              <a href="https://dinavis.dk/debat/ECE19763418/taet-paa-dig-lige-nu/" target="_blank" rel="noopener" class="presse-kort">
+                <div class="presse-kilde">Din Avis – Debatindlæg · 23. oktober 2026</div>
+                <div class="presse-overskrift">Venstre efter Vosnæs-udmelding: »Det er menneskers hjem og lokalsamfund, der bliver ødelagt«</div>
+                <div class="presse-beskr">Jørgen Rosengren (V) citerer Gert Bjerregaard i reaktion på ministerens ophævelse af planvetoen. <em>(Artiklen kan kræve abonnement.)</em></div>
+                <div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+              </a>
+              <a href="https://dinavis.dk/debat/ECE19763125/ministeren-har-tilsidesat-syddjurs-aarhus-kan-stadig-sige-nej/" target="_blank" rel="noopener" class="presse-kort">
+                <div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
+                <div class="presse-overskrift">Ministeren har tilsidesat Syddjurs – Aarhus kan stadig sige nej</div>
+                <div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+              </a>
+              <a href="https://dinavis.dk/samfund/ECE19765492/minister-reagerer-paa-kritik-af-vindmoelleafgoerelse-kan-ikke-goere-alle-tilfredse/" target="_blank" rel="noopener" class="presse-kort">
+                <div class="presse-kilde">Din Avis · Oktober 2026</div>
+                <div class="presse-overskrift">Minister reagerer på kritik af vindmølleafgørelse: Kan ikke gøre alle tilfredse</div>
+                <div class="presse-laes">Læs artiklen hos Din Avis ↗</div>
+              </a>
+              <a href="https://dinavis.dk/debat/ECE19767306/vi-skal-vaelge-de-rigtige-steder-til-groen-energi/" target="_blank" rel="noopener" class="presse-kort">
+                <div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
+                <div class="presse-overskrift">Vi skal vælge de rigtige steder til grøn energi</div>
+                <div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+              </a>
+              <a href="https://dinavis.dk/debat/ECE19767316/studstrupvaerket-og-hoejhuse-er-ok-men-tre-vindmoeller-er-for-meget/" target="_blank" rel="noopener" class="presse-kort">
+                <div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
+                <div class="presse-overskrift">Studstrupværket og højhuse er ok, men tre vindmøller er for meget</div>
+                <div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+              </a>
+              <a href="https://dinavis.dk/debat/ECE19644723/praemissen-er-brudt-nu-kan-aarhus-afslutte-17-aars-vindmoellekonflikt/" target="_blank" rel="noopener" class="presse-kort">
+                <div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
+                <div class="presse-overskrift">Præmissen er brudt – nu kan Aarhus afslutte 17 års vindmøllekonflikt</div>
+                <div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+              </a>
+              <a href="https://dinavis.dk/politik/ECE19140264/naar-vindmoeller-bliver-valgkampsvaluta-i-slutspurten/" target="_blank" rel="noopener" class="presse-kort">
+                <div class="presse-kilde">Din Avis · Oktober 2026</div>
+                <div class="presse-overskrift">Når vindmøller bliver valgkampsvaluta i slutspurten</div>
+                <div class="presse-laes">Læs artiklen hos Din Avis ↗</div>
+              </a>
+              <a href="https://dinavis.dk/debat/ECE12976028/vosnaesmoeller-vil-levere-masser-af-groen-stroem-til-aarhusianerne/" target="_blank" rel="noopener" class="presse-kort">
+                <div class="presse-kilde">Din Avis – Historisk debatindlæg · Maj 2021</div>
+                <div class="presse-overskrift">Vosnæsmøller vil levere masser af grøn strøm til aarhusianerne</div>
+                <div class="presse-beskr">Historisk debatindlæg fra maj 2021, der argumenterer for vindmøllerne ved Vosnæs og deres potentiale for grøn strøm. Viser de forskellige perspektiver, der har præget debatten om Vosnæs-projektet. <em>(Debatindlæg afspejler forfatterens egne synspunkter.)</em></div>
+                <div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+              </a>
+            </div>
+            <div class="sag-tab-panel" id="vosnæs-kom">
+              <p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">
+                Officielle kommunale og myndighedskilder om planerne for vindmøller ved Vosnæs/Ebeltoft Færgehavn.
+              </p>
+              <a href="https://aabendagsorden.syddjurs.dk"
+                 target="_blank" rel="noopener" class="presse-kort" style="border-color:var(--c-ocean);">
+                <div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+                <div class="presse-overskrift">Åben Indsigt – politiske dagsordener og referater</div>
+                <div class="presse-beskr">Kommunens åbne portal med dagsordener, referater og bilag fra byråd og udvalg, herunder behandling af vindmøllesagen.</div>
+                <div class="presse-laes">Gå til Åben Indsigt ↗</div>
+              </a>
+              <a href="https://www.syddjurs.dk/politik-og-indflydelse/hoeringer-og-afgoerelser"
+                 target="_blank" rel="noopener" class="presse-kort" style="border-color:var(--c-ocean);">
+                <div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+                <div class="presse-overskrift">Høringer og afgørelser</div>
+                <div class="presse-beskr">Kommunens høringsportal med offentlige høringer, herunder Kommuneplan 2024 og vindmølleplanen (punkt 1.1.T2).</div>
+                <div class="presse-laes">Gå til høringer ↗</div>
+              </a>
+            </div>
+          </div>
+        </div>
+
         <!-- SAG 3: GROBUND -->
         <div class="sag-kort-3">
           <img class="sag-kort-img" src="assets/grobund-kyst.jpg"
@@ -629,19 +638,19 @@
           </div>
           <div class="sag-detalje" id="sag-grobund">
             <div class="sag-tabs" role="tablist">
-              <button class="sag-tab aktiv" data-tab="grobund-baggrund">Baggrund</button>
-              <button class="sag-tab" data-tab="grobund-nyt">Seneste nyt</button>
+              <button class="sag-tab" data-tab="grobund-baggrund">Baggrund</button>
+              <button class="sag-tab aktiv" data-tab="grobund-nyt">Seneste nyt</button>
               <button class="sag-tab" data-tab="grobund-dok">Høringer</button>
               <button class="sag-tab" data-tab="grobund-arbejde">Vores arbejde</button>
               <button class="sag-tab" data-tab="grobund-presse">Presse</button>
               <button class="sag-tab" data-tab="grobund-kom">Kommunale kilder</button>
             </div>
-            <div class="sag-tab-panel aktiv" id="grobund-baggrund">
+            <div class="sag-tab-panel" id="grobund-baggrund">
               <p>Syddjurs Kommune har planer om at udlægge et areal på 65 ha ved Ålerne – fra Tolløkke Skoven til Færgehavnen – til en landsby for det alternative samfund Grobund. Arealet ligger i det kystnære område og er i dag åbent naturlandskab med store rekreative og landskabelige værdier.</p>
               <p>Foreningen blev stiftet i juli 2024 som direkte reaktion på disse planer og har siden fulgt sagen tæt og afgivet adskillige høringssvar og indsigelser.</p>
-              <p>Kommunen sendte de 5,5 ha jord i offentligt udbud i maj 2024. Fonden Gældfri har forhandlet med kommunen om arealet. Helhedsplanen for Ålerne blev vedtaget af byrådet i sommeren 2025, men har ingen juridisk bindende virkning og giver ikke ret til at bygge.</p>
+              <p>Kommunen sendte de 5,5 ha jord i offentligt udbud i maj 2024. Fonden Gældfri har forhandlet med kommunen om arealet. <a href="https://www.syddjurs.dk/politik/udviklingsprojekter/helhedsplan-for-aalerne" target="_blank" rel="noopener">Helhedsplan for Ålerne</a> blev vedtaget af byrådet den 25. juni 2025. En helhedsplan er ikke juridisk bindende og giver ikke i sig selv ret til at bygge – en lokalplan skal vedtages særskilt, inden et byggeprojekt kan igangsættes.</p>
             </div>
-            <div class="sag-tab-panel" id="grobund-nyt">
+            <div class="sag-tab-panel aktiv" id="grobund-nyt">
               <p><strong>August 2026:</strong> Grobund ansøger om fornyelse og udvidelse af dispensationen fra Lokalplan 140 for ejendommen Kaarsbergsvej 2. Foreningen indsendte indsigelse.</p>
               <p><strong>Juni 2026:</strong> Lokalplanprocessen udsat til 4. kvartal 2026. Uenighed om spildevandsløsning fortsætter.</p>
               <p><strong>April 2026:</strong> Dialogen mellem kommunen og Grobund viser stor uenighed om håndtering af spildevand og "humane gødning". Kommunen gør opmærksom på ulovlighed.</p>
@@ -717,12 +726,136 @@
                 <div class="presse-beskr">Kommunens høringsportal med alle offentlige høringer, herunder Kommuneplan 2024, Helhedsplanen og dispensationssagen for Kaarsbergsvej 2 (sagsnr. 25/22279).</div>
                 <div class="presse-laes">Gå til høringer ↗</div>
               </a>
+              <a href="https://www.syddjurs.dk/politik/udviklingsprojekter/helhedsplan-for-aalerne"
+                 target="_blank" rel="noopener" class="presse-kort" style="border-color:var(--c-ocean);">
+                <div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune · Vedtaget 25. juni 2025</div>
+                <div class="presse-overskrift">Helhedsplan for Ålerne – officiel projektside</div>
+                <div class="presse-beskr">Kommunens officielle projektside for Helhedsplan for Ålerne, vedtaget af byrådet den 25. juni 2025. En helhedsplan er ikke juridisk bindende og giver ikke i sig selv ret til at bygge – en lokalplan skal vedtages særskilt.</div>
+                <div class="presse-laes">Gå til projektside ↗</div>
+              </a>
             </div>
           </div>
         </div>
 
 
-        <!-- SAG 4: FJELLERUP STRAND -->
+        <!-- SAG 4: HJELM BANKE -->
+        <div class="sag-kort-3">
+          <img class="sag-kort-img" src="assets/hjelm-banke.jpg"
+               alt="Hjelm Banke og Kattegat set fra luften – råstofindvindingsområde sydøst for øen Hjelm"
+               onerror="this.style.background='#0d2233';this.style.height='220px';this.removeAttribute('src')">
+          <div class="sag-kort-3-body">
+            <div class="sag-kort-3-header">
+              <span class="sag-tag">Statslig afgørelse</span>
+              <h3>Hjelm Banke – råstofindvinding i Kattegat</h3>
+              <p>Miljøstyrelsen har den 6. februar 2026 meddelt tilladelse til indvinding af op til 8 millioner m³ sand fra havbunden sydøst for Hjelm til projekter ved Tangkrogen i Aarhus. Tilladelsen er meddelt til Aarhus Havn og Aarhus Vand.</p>
+            </div>
+            <button class="btn-laes-sag" data-sag="hjelm" aria-expanded="false">Læs hele sagen</button>
+          </div>
+          <div class="sag-detalje" id="sag-hjelm">
+            <div class="sag-tabs">
+              <button class="sag-tab" data-tab="hjelm-baggrund">Baggrund</button>
+              <button class="sag-tab aktiv" data-tab="hjelm-nyt">Seneste nyt</button>
+              <button class="sag-tab" data-tab="hjelm-dok">Høringer</button>
+              <button class="sag-tab" data-tab="hjelm-arbejde">Vores arbejde</button>
+              <button class="sag-tab" data-tab="hjelm-presse">Presse</button>
+              <button class="sag-tab" data-tab="hjelm-kom">Myndighedskilder</button>
+            </div>
+
+            <div class="sag-tab-panel" id="hjelm-baggrund">
+              <h4>Råstofindvinding sydøst for Hjelm</h4>
+              <p>Miljøstyrelsen, som er statslig myndighed for råstofindvinding på havbunden, har den 6. februar 2026 meddelt Aarhus Havn og Aarhus Vand en tilladelse til at indvinde op til <strong>8 millioner m³ sand</strong> fra havbunden sydøst for øen Hjelm i Kattegat.</p>
+              <p>Indvindingen er planlagt til at levere materialer til anlægsprojekter ved Tangkrogen i Aarhus. Tilladelsen er meddelt efter en miljøvurdering, og Miljøstyrelsen har i sin afgørelse vurderet, at indvindingen kan gennemføres på de fastsatte vilkår.</p>
+              <p>Hjelm Banke er en undersøisk sandbanke i Kattegat. Området ligger i nærheden af Djurslands kyst og er af betydning for de marine naturforhold i Kattegat.</p>
+              <p><em>Kystforeningen Djursland følger sagen og vil orientere om eventuelle høringer eller initiativer.</em></p>
+            </div>
+
+            <div class="sag-tab-panel aktiv" id="hjelm-nyt">
+              <h4>Seneste nyt</h4>
+              <div class="sag-nyt-item">
+                <span class="sag-nyt-dato">6. februar 2026</span>
+                <p><strong>Miljøstyrelsen meddeler tilladelse.</strong> Aarhus Havn og Aarhus Vand modtager tilladelse til indvinding af op til 8 millioner m³ sand fra Hjelm Banke. Tilladelsen er udstedt med en række vilkår og er baseret på Miljøstyrelsens miljøvurdering af projektet.</p>
+              </div>
+            </div>
+
+            <div class="sag-tab-panel" id="hjelm-arbejde">
+              <h4>Vores arbejde</h4>
+              <p>Kystforeningen Djursland har endnu ikke iværksat konkrete initiativer i relation til Hjelm Banke-sagen. Vi følger udviklingen og vil orientere vores medlemmer, hvis sagen giver anledning til handling fra foreningens side.</p>
+              <p><em>Har du oplysninger eller synspunkter i denne sag, er du velkommen til at kontakte os.</em></p>
+            </div>
+
+            <div class="sag-tab-panel" id="hjelm-dok">
+              <h4>Dokumenter</h4>
+              <div class="dok-liste">
+                <div class="dok-item">
+                  <div class="dok-ikon">📄</div>
+                  <div class="dok-info">
+                    <div class="dok-titel">Afgørelse – Tilladelse til råstofindvinding ved Hjelm Banke</div>
+                    <div class="dok-meta">Miljøstyrelsen · Februar 2026 · Sagsnr. 506</div>
+                    <a href="https://mst.dk/media/nryluudm/afgoerelse-506-ja-hjelm-banke-februar-2026.pdf"
+                       target="_blank" rel="noopener noreferrer" class="dok-link">
+                      Læs Miljøstyrelsens afgørelse (PDF) ↗
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <p class="dok-note"><em>Dokumentet er tilgængeligt direkte hos Miljøstyrelsen (mst.dk). Kystforeningen Djursland er ikke afsender af afgørelsen.</em></p>
+            </div>
+
+            <div class="sag-tab-panel" id="hjelm-presse">
+              <h4>Presse og debat</h4>
+              <div class="presse-grid">
+                <a href="https://dinavis.dk/debat/ECE19713878/rettet-lyt-til-fiskerne-for-de-betaler-prisen-for-andres-oedelaeggelser"
+                   target="_blank" rel="noopener noreferrer" class="presse-kort">
+                  <div class="presse-kilde">Din Avis · Debat · 7. oktober 2026</div>
+                  <div class="presse-overskrift">Rettet: Lyt til fiskerne – for de betaler prisen for andres ødelæggelser</div>
+                  <div class="presse-meta">Af Ebba Grethe Møgelvang Laursen, medlem af Kystforeningen Djursland</div>
+                  <div class="presse-beskr">Debatindlæg om konsekvenserne af havbundsindvinding for fiskebestande og det marine miljø. Forfatteren nævner bl.a. projektet "Nordkystens Fremtid" og Hjelm Dyb og opfordrer lokale politikere til at modvirke råstofindvinding i nærliggende havområder. <em>Artiklen er rettet 8. oktober 2026 – en tidligere fejlagtig oplysning om Aarhus Havns udvidelse er korrigeret.</em></div>
+                  <div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+                </a>
+              </div>
+                <a href="https://dinavis.dk/samfund/ECE13891207/hjelm-dyb-ikke-robust-nok/"
+                   target="_blank" rel="noopener noreferrer" class="presse-kort">
+                  <div class="presse-kilde">Din Avis – Historisk artikel · April 2022</div>
+                  <div class="presse-overskrift">Hjelm Dyb ikke robust nok</div>
+                  <div class="presse-beskr">Artikel fra april 2022 om vurderingen af Hjelm Dybs robusthed i forbindelse med råstofindvinding i området.</div>
+                  <div class="presse-laes">Læs artiklen hos Din Avis ↗</div>
+                </a>
+              </div>
+              <p class="presse-note"><em>Debatindlæg afspejler forfatterens egne synspunkter og er ikke udtryk for Kystforeningen Djurslands officielle holdning.</em></p>
+            </div>
+
+            <div class="sag-tab-panel" id="hjelm-kom">
+              <h4>Myndighedskilder</h4>
+              <p class="kilde-note">Råstofindvinding på havbunden reguleres af <strong>Miljøstyrelsen</strong>, som er en statslig myndighed under Miljøministeriet – ikke en kommunal myndighed.</p>
+              <div class="presse-grid">
+                <a href="https://mst.dk/media/nryluudm/afgoerelse-506-ja-hjelm-banke-februar-2026.pdf"
+                   target="_blank" rel="noopener noreferrer" class="presse-kort">
+                  <div class="presse-kilde">Miljøstyrelsen</div>
+                  <div class="presse-overskrift">Afgørelse 506-JA – Hjelm Banke (februar 2026)</div>
+                  <div class="presse-beskr">Miljøstyrelsens officielle afgørelse om tilladelse til råstofindvinding af op til 8 mio. m³ sand sydøst for Hjelm. Indeholder vilkår, miljøvurdering og klagefrist.</div>
+                  <div class="presse-laes">Læs afgørelse (PDF) ↗</div>
+                </a>
+                <a href="https://mst.dk/erhverv-og-myndigheder/tilladelser-og-godkendelser/raastofindvinding/"
+                   target="_blank" rel="noopener noreferrer" class="presse-kort">
+                  <div class="presse-kilde">Miljøstyrelsen</div>
+                  <div class="presse-overskrift">Råstofindvinding – generel information</div>
+                  <div class="presse-beskr">Miljøstyrelsens overordnede information om tilladelser til indvinding af råstoffer fra havbunden i Danmark.</div>
+                  <div class="presse-laes">Gå til Miljøstyrelsen ↗</div>
+                </a>
+                <a href="https://aarhus.dk/media/fb1jw5am/besvarelse.pdf?format=noformat"
+                   target="_blank" rel="noopener noreferrer" class="presse-kort" style="border-color:var(--c-ocean);">
+                  <div class="presse-kilde" style="color:var(--c-ocean);">Aarhus Kommune · 10. marts 2026</div>
+                  <div class="presse-overskrift">Besvarelse: 10-dages forespørgsel om råstofindvinding ved Hjelm Banke</div>
+                  <div class="presse-beskr">Borgmester Anders Winnerskjold og kommunaldirektør Martin Østergaard Christensen besvarer Isabella Heilmanns (Ø) forespørgsel om sandindvinding til Aarhus ReWater-projektet. Kommunen oplyser, at Planklagenævnets afgørelse kun berørte Yderhavn-planlægningen og ikke indvindingstilladelsen, som sorterer under Miljøstyrelsen. Aarhus Havns gældende tilladelse dækker op til 2 mio. m³ sand til Tangkrogen og ReWater. Sagsnr. EMN-2024-031353.</div>
+                  <div class="presse-laes">Læs besvarelse (PDF) ↗</div>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- /SAG 4: HJELM BANKE -->
+        <!-- SAG 5: FJELLERUP STRAND -->
         <div class="sag-kort-3">
           <img class="sag-kort-img" src="assets/fjellerup-strand.jpg"
                alt="Luftfoto af Fjellerup Strand med badebro og bebyggelse langs kysten, Norddjurs">
@@ -734,15 +867,15 @@
           </div>
           <div class="sag-detalje" id="sag-fjellerup">
             <div class="sag-tabs" role="tablist">
-              <button class="sag-tab aktiv" data-tab="fjellerup-baggrund">Baggrund</button>
-              <button class="sag-tab" data-tab="fjellerup-nyt">Seneste nyt</button>
+              <button class="sag-tab" data-tab="fjellerup-baggrund">Baggrund</button>
+              <button class="sag-tab aktiv" data-tab="fjellerup-nyt">Seneste nyt</button>
               <button class="sag-tab" data-tab="fjellerup-dok">Høringer</button>
               <button class="sag-tab" data-tab="fjellerup-arbejde">Vores arbejde</button>
               <button class="sag-tab" data-tab="fjellerup-presse">Presse</button>
               <button class="sag-tab" data-tab="fjellerup-kom">Kommunale kilder</button>
             </div>
 
-            <div class="sag-tab-panel aktiv" id="fjellerup-baggrund">
+            <div class="sag-tab-panel" id="fjellerup-baggrund">
               <p>Norddjurs Kommune arbejder med et samlet udviklingsprojekt kaldet <strong>Fjellerup Udvikling</strong>, der omfatter fire indsatsområder direkte ved Fjellerup Strand. Projektet har til formål at udvikle stranden som turistmål og rekreativt område.</p>
               <p>Kommunen beskriver følgende fire nedslag i projektet:</p>
               <h4>1. Pælene</h4>
@@ -758,7 +891,7 @@
               </p>
             </div>
 
-            <div class="sag-tab-panel" id="fjellerup-nyt">
+            <div class="sag-tab-panel aktiv" id="fjellerup-nyt">
               <div class="sag-nyt-item">
                 <span class="sag-nyt-dato">9. oktober 2026</span>
                 <strong>Norddjurs Kommune: Ny lokalplan fører Fjellerup Udvikling til næste fase</strong>
@@ -897,115 +1030,6 @@
           </div>
         </div>
 
-        <!-- SAG 5: HJELM BANKE -->
-        <div class="sag-kort-3">
-          <img class="sag-kort-img" src="assets/hjelm-banke.jpg"
-               alt="Hjelm Banke og Kattegat set fra luften – råstofindvindingsområde sydøst for øen Hjelm"
-               onerror="this.style.background='#0d2233';this.style.height='220px';this.removeAttribute('src')">
-          <div class="sag-kort-3-body">
-            <div class="sag-kort-3-header">
-              <span class="sag-tag">Statslig afgørelse</span>
-              <h3>Hjelm Banke – råstofindvinding i Kattegat</h3>
-              <p>Miljøstyrelsen har den 6. februar 2026 meddelt tilladelse til indvinding af op til 8 millioner m³ sand fra havbunden sydøst for Hjelm til projekter ved Tangkrogen i Aarhus. Tilladelsen er meddelt til Aarhus Havn og Aarhus Vand.</p>
-            </div>
-            <button class="btn-laes-sag" data-sag="hjelm" aria-expanded="false">Læs hele sagen</button>
-          </div>
-          <div class="sag-detalje" id="sag-hjelm">
-            <div class="sag-tabs">
-              <button class="sag-tab aktiv" data-tab="hjelm-baggrund">Baggrund</button>
-              <button class="sag-tab" data-tab="hjelm-nyt">Seneste nyt</button>
-              <button class="sag-tab" data-tab="hjelm-dok">Høringer</button>
-              <button class="sag-tab" data-tab="hjelm-arbejde">Vores arbejde</button>
-              <button class="sag-tab" data-tab="hjelm-presse">Presse</button>
-              <button class="sag-tab" data-tab="hjelm-kom">Myndighedskilder</button>
-            </div>
-
-            <div class="sag-tab-panel aktiv" id="hjelm-baggrund">
-              <h4>Råstofindvinding sydøst for Hjelm</h4>
-              <p>Miljøstyrelsen, som er statslig myndighed for råstofindvinding på havbunden, har den 6. februar 2026 meddelt Aarhus Havn og Aarhus Vand en tilladelse til at indvinde op til <strong>8 millioner m³ sand</strong> fra havbunden sydøst for øen Hjelm i Kattegat.</p>
-              <p>Indvindingen er planlagt til at levere materialer til anlægsprojekter ved Tangkrogen i Aarhus. Tilladelsen er meddelt efter en miljøvurdering, og Miljøstyrelsen har i sin afgørelse vurderet, at indvindingen kan gennemføres på de fastsatte vilkår.</p>
-              <p>Hjelm Banke er en undersøisk sandbanke i Kattegat. Området ligger i nærheden af Djurslands kyst og er af betydning for de marine naturforhold i Kattegat.</p>
-              <p><em>Kystforeningen Djursland følger sagen og vil orientere om eventuelle høringer eller initiativer.</em></p>
-            </div>
-
-            <div class="sag-tab-panel" id="hjelm-nyt">
-              <h4>Seneste nyt</h4>
-              <div class="sag-nyt-item">
-                <span class="sag-nyt-dato">6. februar 2026</span>
-                <p><strong>Miljøstyrelsen meddeler tilladelse.</strong> Aarhus Havn og Aarhus Vand modtager tilladelse til indvinding af op til 8 millioner m³ sand fra Hjelm Banke. Tilladelsen er udstedt med en række vilkår og er baseret på Miljøstyrelsens miljøvurdering af projektet.</p>
-              </div>
-            </div>
-
-            <div class="sag-tab-panel" id="hjelm-arbejde">
-              <h4>Vores arbejde</h4>
-              <p>Kystforeningen Djursland har endnu ikke iværksat konkrete initiativer i relation til Hjelm Banke-sagen. Vi følger udviklingen og vil orientere vores medlemmer, hvis sagen giver anledning til handling fra foreningens side.</p>
-              <p><em>Har du oplysninger eller synspunkter i denne sag, er du velkommen til at kontakte os.</em></p>
-            </div>
-
-            <div class="sag-tab-panel" id="hjelm-dok">
-              <h4>Dokumenter</h4>
-              <div class="dok-liste">
-                <div class="dok-item">
-                  <div class="dok-ikon">📄</div>
-                  <div class="dok-info">
-                    <div class="dok-titel">Afgørelse – Tilladelse til råstofindvinding ved Hjelm Banke</div>
-                    <div class="dok-meta">Miljøstyrelsen · Februar 2026 · Sagsnr. 506</div>
-                    <a href="https://mst.dk/media/nryluudm/afgoerelse-506-ja-hjelm-banke-februar-2026.pdf"
-                       target="_blank" rel="noopener noreferrer" class="dok-link">
-                      Læs Miljøstyrelsens afgørelse (PDF) ↗
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <p class="dok-note"><em>Dokumentet er tilgængeligt direkte hos Miljøstyrelsen (mst.dk). Kystforeningen Djursland er ikke afsender af afgørelsen.</em></p>
-            </div>
-
-            <div class="sag-tab-panel" id="hjelm-presse">
-              <h4>Presse og debat</h4>
-              <div class="presse-grid">
-                <a href="https://dinavis.dk/debat/ECE19713878/rettet-lyt-til-fiskerne-for-de-betaler-prisen-for-andres-oedelaeggelser"
-                   target="_blank" rel="noopener noreferrer" class="presse-kort">
-                  <div class="presse-kilde">Din Avis · Debat · 7. oktober 2026</div>
-                  <div class="presse-overskrift">Rettet: Lyt til fiskerne – for de betaler prisen for andres ødelæggelser</div>
-                  <div class="presse-meta">Af Ebba Grethe Møgelvang Laursen, medlem af Kystforeningen Djursland</div>
-                  <div class="presse-beskr">Debatindlæg om konsekvenserne af havbundsindvinding for fiskebestande og det marine miljø. Forfatteren nævner bl.a. projektet "Nordkystens Fremtid" og Hjelm Dyb og opfordrer lokale politikere til at modvirke råstofindvinding i nærliggende havområder. <em>Artiklen er rettet 8. oktober 2026 – en tidligere fejlagtig oplysning om Aarhus Havns udvidelse er korrigeret.</em></div>
-                  <div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
-                </a>
-              </div>
-              <p class="presse-note"><em>Debatindlæg afspejler forfatterens egne synspunkter og er ikke udtryk for Kystforeningen Djurslands officielle holdning.</em></p>
-            </div>
-
-            <div class="sag-tab-panel" id="hjelm-kom">
-              <h4>Myndighedskilder</h4>
-              <p class="kilde-note">Råstofindvinding på havbunden reguleres af <strong>Miljøstyrelsen</strong>, som er en statslig myndighed under Miljøministeriet – ikke en kommunal myndighed.</p>
-              <div class="presse-grid">
-                <a href="https://mst.dk/media/nryluudm/afgoerelse-506-ja-hjelm-banke-februar-2026.pdf"
-                   target="_blank" rel="noopener noreferrer" class="presse-kort">
-                  <div class="presse-kilde">Miljøstyrelsen</div>
-                  <div class="presse-overskrift">Afgørelse 506-JA – Hjelm Banke (februar 2026)</div>
-                  <div class="presse-beskr">Miljøstyrelsens officielle afgørelse om tilladelse til råstofindvinding af op til 8 mio. m³ sand sydøst for Hjelm. Indeholder vilkår, miljøvurdering og klagefrist.</div>
-                  <div class="presse-laes">Læs afgørelse (PDF) ↗</div>
-                </a>
-                <a href="https://mst.dk/erhverv-og-myndigheder/tilladelser-og-godkendelser/raastofindvinding/"
-                   target="_blank" rel="noopener noreferrer" class="presse-kort">
-                  <div class="presse-kilde">Miljøstyrelsen</div>
-                  <div class="presse-overskrift">Råstofindvinding – generel information</div>
-                  <div class="presse-beskr">Miljøstyrelsens overordnede information om tilladelser til indvinding af råstoffer fra havbunden i Danmark.</div>
-                  <div class="presse-laes">Gå til Miljøstyrelsen ↗</div>
-                </a>
-                <a href="https://aarhus.dk/media/fb1jw5am/besvarelse.pdf?format=noformat"
-                   target="_blank" rel="noopener noreferrer" class="presse-kort" style="border-color:var(--c-ocean);">
-                  <div class="presse-kilde" style="color:var(--c-ocean);">Aarhus Kommune · 10. marts 2026</div>
-                  <div class="presse-overskrift">Besvarelse: 10-dages forespørgsel om råstofindvinding ved Hjelm Banke</div>
-                  <div class="presse-beskr">Borgmester Anders Winnerskjold og kommunaldirektør Martin Østergaard Christensen besvarer Isabella Heilmanns (Ø) forespørgsel om sandindvinding til Aarhus ReWater-projektet. Kommunen oplyser, at Planklagenævnets afgørelse kun berørte Yderhavn-planlægningen og ikke indvindingstilladelsen, som sorterer under Miljøstyrelsen. Aarhus Havns gældende tilladelse dækker op til 2 mio. m³ sand til Tangkrogen og ReWater. Sagsnr. EMN-2024-031353.</div>
-                  <div class="presse-laes">Læs besvarelse (PDF) ↗</div>
-                </a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <!-- /SAG 5: HJELM BANKE -->
 
       </div><!-- /sag-grid-3 -->
     </div>

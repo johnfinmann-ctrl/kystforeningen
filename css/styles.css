@@ -6,6 +6,7 @@
    Dyb havblå · Mørk skovgrøn · Gylden mark · Knækket hvid
    ================================================================ */
 
+/* ── RC6 – Google Fonts defineret i index.html <head> ──────────── */
 /* ── TOKENS ─────────────────────────────────────────────────────── */
 :root {
   /* Primærfarver */
@@ -26,9 +27,9 @@
   --c-border:    #ddd5c5;
   --c-danger:    #a02020;
 
-  /* Typografi */
-  --font-display: 'Georgia', 'Times New Roman', serif;
-  --font-body:    'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  /* Typografi – RC6: Playfair Display + Source Sans 3 */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:    'Source Sans 3', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 
   /* Rum */
   --sp-xs:  .4rem;
@@ -38,10 +39,10 @@
   --sp-xl:  5.5rem;
   --sp-2xl: 9rem;
 
-  /* Hjørner */
-  --r-sm: 3px;
-  --r-md: 6px;
-  --r-lg: 12px;
+  /* Hjørner – RC6: lidt mere afrundede */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
 
   /* Skygger */
   --shadow-sm: 0 1px 4px rgba(0,0,0,.08);
