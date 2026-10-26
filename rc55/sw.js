@@ -16,7 +16,7 @@
  * 8. Brugeren ser ny version
  */
 
-const CACHE_VERSION = 'kfd-v1.0.14';
+const CACHE_VERSION = 'kfd-v1.0.15';
 const CACHE_NAME    = CACHE_VERSION;
 
 const PRECACHE = [
