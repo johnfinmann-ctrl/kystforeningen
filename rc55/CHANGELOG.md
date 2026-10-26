@@ -3,6 +3,22 @@
 
 ---
 
+## Version 1.0.11 – RC5.9 – Oktober 2026
+
+**Status: Release Candidate**
+
+### Rettelser og tilføjelser – Vosnæs
+
+**Sag 3: Vosnæs – vindmøller**
+- Rettelse: Borgmester navnefejl rettet: "Michael Stegger Jensen (A)" → "Michael Harregaard Stegger (S)" (to steder: Seneste nyt + Presse-kort 1)
+- Vosnæs → Presse: Tilføjet Din Avis debatindlæg ECE19763125: "Ministeren har tilsidesat Syddjurs – Aarhus kan stadig sige nej" (dato ukendt, Oktober 2026)
+
+### PWA
+- APP_VERSION bump: 1.0.10 → 1.0.11
+- CACHE_VERSION bump: kfd-v1.0.10 → kfd-v1.0.11
+
+---
+
 ## Version 1.0.10 – RC5.8 – Oktober 2026
 
 **Status: Release Candidate**
