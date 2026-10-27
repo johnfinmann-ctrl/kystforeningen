@@ -767,18 +767,37 @@ footer p { margin-bottom: .25rem; }
     border-radius: 0;
   }
   .hamburger { display: flex; }
-  .hero { height: 88vh; }
-  .hero-title { font-size: clamp(2.6rem, 12vw, 4rem); }
+  /* MOBIL: komprimér hero */
+  .hero { height: 55vh; min-height: 320px; }
+  .hero-title { font-size: clamp(2rem, 9vw, 3rem); }
+  .hero-content { padding-bottom: var(--sp-lg); }
+  /* MOBIL: komprimér intro-sektion */
+  #intro { padding: var(--sp-lg) var(--sp-md); }
+  .intro-statement { font-size: clamp(1.45rem, 6vw, 2rem); margin-bottom: var(--sp-md); }
+  .intro-text { font-size: .95rem; }
+  /* MOBIL: komprimér dark-section (OPLEV·FORSTÅ·BEVAR) */
+  .dark-section { padding: var(--sp-lg) var(--sp-md); }
+  .dark-section-hdr { margin-bottom: var(--sp-md); }
+  .dark-tagline { font-size: 1.25rem; }
+  .dark-frames { grid-template-columns: 1fr; }
+  .dark-frame { min-height: 140px; }
+  .dark-frame-body { padding: var(--sp-md); }
+  .dark-frame-num { font-size: 1rem; }
+  .dark-frame-title { font-size: 1.15rem; }
+  .dark-frame-text { font-size: .85rem; margin-top: .3rem; }
+  /* MOBIL: komprimér sager-sektion */
+  .sag-grid { grid-template-columns: 1fr; }
+  /* MOBIL: komprimér øvrige sektioner */
   .bst-grid { grid-template-columns: repeat(2, 1fr); }
   .mb-perks, .mb-form { padding-left: var(--sp-md); padding-right: var(--sp-md); }
   .besked-btns { flex-direction: column; }
   #cookie-banner { flex-direction: column; }
-  .dark-frames { grid-template-columns: 1fr; }
-  .sag-grid { grid-template-columns: 1fr; }
   .om-pillars { grid-template-columns: 1fr 1fr; }
+  /* MOBIL: reducer sektionsafstande generelt */
+  .section-hdr { margin-bottom: var(--sp-md); }
 }
 @media (max-width: 480px) {
-  .hero { height: 92vh; }
+  .hero { height: 52vh; min-height: 280px; }
   .bst-grid { grid-template-columns: 1fr; }
   .om-pillars { grid-template-columns: 1fr; }
   .hero-cta { flex-direction: column; align-items: flex-start; }
@@ -829,8 +848,15 @@ footer p { margin-bottom: .25rem; }
 }
 .sag-grid-3 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--sp-md);
+}
+/* 5 kort: 3+2. Række 2 centreres med max-width og auto margin */
+.sag-grid-3 > .sag-kort-3:nth-child(4) {
+  grid-column: 1 / 2;
+}
+.sag-grid-3 > .sag-kort-3:nth-child(5) {
+  grid-column: 2 / 3;
 }
 .sag-kort-3 {
   background: var(--c-white);
