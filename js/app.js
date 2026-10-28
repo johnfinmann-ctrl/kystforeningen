@@ -592,42 +592,102 @@ function setupRealtime() {
 
 
 /* ════════════════════════════════════════════════
-   AKTUELLE SAGER – tab-navigation og toggle
+   AKTUELLE SAGER – fælles detaljefelt efter grid
 ════════════════════════════════════════════════ */
 function initSagerInteraktion() {
-  // "Læs hele sagen" toggle-knapper
+  const panel    = document.getElementById('sag-detalje-panel');
+  if (!panel) return;
+
+  let aktivSagId = null; // sporer hvilken sag der er åben
+
+  // ── "Læs hele sagen" / "Luk" toggle ─────────────────────────
   document.addEventListener('click', e => {
     const btn = e.target.closest('.btn-laes-sag');
     if (!btn) return;
-    const sagId  = btn.dataset.sag;
-    const detalje = $(`sag-${sagId}`);
-    if (!detalje) return;
-    const isAktiv = detalje.classList.contains('aktiv');
-    detalje.classList.toggle('aktiv', !isAktiv);
-    btn.setAttribute('aria-expanded', String(!isAktiv));
-    btn.classList.toggle('aktiv', !isAktiv);
-    btn.textContent = isAktiv ? 'Læs hele sagen' : 'Luk';
-    if (!btn.classList.contains('aktiv')) {
-      btn.textContent = 'Læs hele sagen';
-    }
-    if (!isAktiv) {
-      detalje.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    const sagId   = btn.dataset.sag;
+    const indhold = document.getElementById(`sag-${sagId}`);
+    if (!indhold) return;
+
+    const sagerAlle   = document.querySelectorAll('.btn-laes-sag');
+    const korteAlle   = document.querySelectorAll('.sag-kort-3');
+
+    if (aktivSagId === sagId) {
+      // ── Luk sagen ─────────────────────────────────────────────
+      aktivSagId = null;
+      panel.classList.remove('aktiv');
+      // Nulstil alle knapper og fremhævning
+      sagerAlle.forEach(b => {
+        b.textContent = 'Læs hele sagen';
+        b.classList.remove('aktiv');
+        b.setAttribute('aria-expanded', 'false');
+      });
+      korteAlle.forEach(k => k.classList.remove('valgt'));
+      // Skjul alle sag-indhold-sektioner
+      panel.querySelectorAll('.sag-detalje-indhold').forEach(d => d.classList.remove('aktiv'));
+    } else {
+      // ── Åbn eller skift sag ────────────────────────────────────
+      // Nulstil alle knapper og fremhævning
+      sagerAlle.forEach(b => {
+        b.textContent = 'Læs hele sagen';
+        b.classList.remove('aktiv');
+        b.setAttribute('aria-expanded', 'false');
+      });
+      korteAlle.forEach(k => k.classList.remove('valgt'));
+      // Skjul alle sag-indhold-sektioner
+      panel.querySelectorAll('.sag-detalje-indhold').forEach(d => d.classList.remove('aktiv'));
+
+      // Aktiver valgt sag
+      aktivSagId = sagId;
+      indhold.classList.add('aktiv');
+      panel.classList.add('aktiv');
+
+      // Markér det valgte kort
+      const valgtKort = document.getElementById(`kort-${sagId}`);
+      if (valgtKort) valgtKort.classList.add('valgt');
+
+      // Opdater knap
+      btn.textContent = 'Luk sagen';
+      btn.classList.add('aktiv');
+      btn.setAttribute('aria-expanded', 'true');
+
+      // Sæt standardfane til "Seneste nyt" (xxx-nyt)
+      const tabs   = indhold.querySelectorAll('.sag-tab');
+      const panels = indhold.querySelectorAll('.sag-tab-panel');
+      tabs.forEach(t => t.classList.remove('aktiv'));
+      panels.forEach(p => p.classList.remove('aktiv'));
+      // Find fanen med data-tab der ender på "-nyt"
+      const nytTab = indhold.querySelector('.sag-tab[data-tab$="-nyt"]');
+      if (nytTab) {
+        nytTab.classList.add('aktiv');
+        const nytPanel = document.getElementById(nytTab.dataset.tab);
+        if (nytPanel) nytPanel.classList.add('aktiv');
+      } else if (tabs.length > 0) {
+        // Fallback: første fane
+        tabs[0].classList.add('aktiv');
+        if (panels.length > 0) panels[0].classList.add('aktiv');
+      }
+
+      // Rul til detaljefeltet
+      requestAnimationFrame(() => {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
     }
   });
 
-  // Tab-navigation inden for sager
+  // ── Tab-navigation inden for sager ───────────────────────────
   document.addEventListener('click', e => {
     const tab = e.target.closest('.sag-tab');
     if (!tab) return;
-    const tabId = tab.dataset.tab;
-    const container = tab.closest('.sag-detalje');
+    const tabId     = tab.dataset.tab;
+    const container = tab.closest('.sag-detalje-indhold');
     if (!container) return;
     // Deaktiver alle tabs og panels i denne sag
     container.querySelectorAll('.sag-tab').forEach(t => t.classList.remove('aktiv'));
     container.querySelectorAll('.sag-tab-panel').forEach(p => p.classList.remove('aktiv'));
     // Aktiver valgt tab og panel
     tab.classList.add('aktiv');
-    const panel = $(`${tabId}`);
+    const panel = document.getElementById(tabId);
     if (panel) panel.classList.add('aktiv');
   });
 }

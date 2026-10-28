@@ -1,5 +1,28 @@
 # CHANGELOG – Kystforeningen Djursland
 
+## Version 1.0.22 – Fælles detaljefelt uden for grid (28. oktober 2026)
+
+### Ændrede filer
+- `index.html` (sag-detalje-indhold flyttet ud af grid til ét fælles panel)
+- `css/styles.css` (ny .sag-detalje-panel, .sag-detalje-indhold, .valgt)
+- `js/app.js` (initSagerInteraktion komplet omskrevet)
+- `js/config.js` (v1.0.22)
+- `sw.js` (kfd-v1.0.22)
+
+### Ændringer
+- HTML-strukturen ombygget: alle 5 sag-detalje-blokke samlet i ét `<div id="sag-detalje-panel">` EFTER `</div><!-- /sag-grid-3 -->`
+- Sagskortene er nu rent kompakte kort uden indlejret indhold – de ændrer aldrig størrelse
+- Klik på "Læs hele sagen" viser pågældende sags indhold i det fælles felt under grid
+- Klik på samme knap igen (nu "Luk sagen") skjuler detaljefeltet
+- Skift mellem sager genbruger samme felt – gammel sag skjules, ny vises
+- Standardfane ved åbning: "Seneste nyt"
+- Valgt kort markeres diskret med marineblå ramme (`.valgt`)
+- Siden ruller automatisk til detaljefeltet (requestAnimationFrame + scrollIntoView)
+- Mobilvisning: kort stables 1 pr. række, faner i 2×3-grid, ingen tomme områder
+- Bekræftet: kortenes højde uændret ved åbning (484px/440px) – panel starter 48px under grid
+
+---
+
 ## Version 1.0.21 – RC6 billeder og afsender (28. oktober 2026)
 
 ### Ændrede filer

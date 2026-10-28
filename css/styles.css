@@ -804,14 +804,35 @@ footer p { margin-bottom: .25rem; }
   .btn-lg { width: 100%; justify-content: center; }
 }
 
-/* ── AKTUELLE SAGER – udvidede sagskort ──────────────────────── */
-.sag-detalje {
+/* ── AKTUELLE SAGER – fælles detaljefelt UDEN FOR grid ──────── */
+
+/* Fælles detaljefelt – skjult som standard */
+.sag-detalje-panel {
   display: none;
-  border-top: 1px solid var(--c-border);
-  padding: var(--sp-md) 0 0;
-  margin-top: var(--sp-md);
+  margin-top: var(--sp-lg);
+  border-top: 3px solid var(--c-navy);
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-top: 3px solid var(--c-navy);
+  border-radius: 0 0 6px 6px;
+  padding: var(--sp-lg);
+  width: 100%;
 }
-.sag-detalje.aktiv { display: block; }
+.sag-detalje-panel.aktiv { display: block; }
+
+/* Enkelt sag-indhold-sektion – skjult som standard */
+.sag-detalje-indhold {
+  display: none;
+}
+.sag-detalje-indhold.aktiv { display: block; }
+
+/* Det valgte sagskort fremhæves diskret */
+.sag-kort-3.valgt {
+  border-color: var(--c-navy);
+  box-shadow: 0 0 0 2px var(--c-navy);
+}
+
+/* Faneblade */
 .sag-tabs {
   display: flex; flex-wrap: wrap; gap: .35rem;
   margin-bottom: var(--sp-md);
@@ -905,7 +926,17 @@ footer p { margin-bottom: .25rem; }
 .btn-laes-sag:hover::after { transform: translateX(4px); }
 .btn-laes-sag.aktiv::after { content: '↑'; }
 @media (max-width: 768px) {
-  .sag-grid-3 { grid-template-columns: 1fr; }
+  /* Kort stables lodret – naturlig højde */
+  .sag-grid-3 {
+    grid-template-columns: 1fr;
+    gap: var(--sp-md);
+  }
+  /* Ophæv 5-korts-grid-positionering på mobil */
+  .sag-grid-3 > .sag-kort-3:nth-child(4),
+  .sag-grid-3 > .sag-kort-3:nth-child(5) {
+    grid-column: auto;
+  }
+  /* Faner: 3 i første række, 3 i anden række */
   .sag-tabs {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -917,6 +948,11 @@ footer p { margin-bottom: .25rem; }
     letter-spacing: .03em;
     text-align: center;
     flex: unset;
+  }
+  /* Detaljefelt på mobil */
+  .sag-detalje-panel {
+    padding: var(--sp-md);
+    margin-top: var(--sp-md);
   }
 }
 
