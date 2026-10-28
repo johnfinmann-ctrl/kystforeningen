@@ -1,5 +1,29 @@
 # CHANGELOG – Kystforeningen Djursland
 
+## Version 1.0.21 – RC6 billeder og afsender (28. oktober 2026)
+
+### Ændrede filer
+- `index.html` (nye billeder wrappet i sag-kort-3-img-wrap med opdaterede alt-tekster)
+- `css/styles.css` (zoom-effekt ved hover på desktop)
+- `js/config.js` (versionsnummer, Nordic Operations fjernet)
+- `sw.js` (service worker cache-version, Nordic Operations fjernet)
+- `admin.html` (Nordic Operations fjernet fra login og sidebar)
+- `assets/draaby-sommerhus.jpg` (nyt billede – byplanstegning Dråby Strandvej)
+- `assets/vosnæs-vindmoeller.jpg` (nyt billede – kommunegrænse-kort med 900m-zone)
+- `assets/grobund-kyst.jpg` (nyt billede – dronefoto havn og vindmøller)
+- `assets/hjelm-banke.jpg` (nyt billede – søkort 506-JA Hjelm Banke)
+
+### Ændringer
+- Fire nye sagskort-billeder: Dråby, Vosnæs, Grobund, Hjelm Banke (800×450px JPEG, center-crop)
+- Fjellerup Strand: uændret
+- Alle 5 sagskort-billeder wrappet i `<div class="sag-kort-3-img-wrap">` med overflow:hidden
+- Desktop hover-zoom (scale 1.06) via `@media (hover: hover) and (pointer: fine)` – ingen zoom på mobil
+- Nordic Operations fjernet som synlig afsender fra config.js, sw.js, admin.html
+- Kystforeningen Djursland er eneste synlige afsender på alle sider
+- John Finmann bevaret som næstformand på bestyrelsessiden
+
+---
+
 ## Version 1.0.20 – RC6 fejlrettelse (26. oktober 2026)
 
 ### Ændrede filer

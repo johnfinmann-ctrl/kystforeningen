@@ -1,5 +1,5 @@
 /**
- * NORDIC OPERATIONS CMS v2 – config.js
+ * Kystforeningen Djursland – config.js
  * ======================================
  * UDFYLD DISSE TO LINJER FØR UPLOAD:
  *
@@ -8,14 +8,12 @@
  *
  * anon key er IKKE hemmelig og må ligge i frontend.
  * Service role key må ALDRIG indsættes her.
- *
- * Ved ny kundekopi: erstat kun SUPABASE_URL og SUPABASE_ANON.
  */
 const SUPABASE_URL  = 'DIN_SUPABASE_URL_HER';       // https://xxxx.supabase.co
 const SUPABASE_ANON = 'DIN_SUPABASE_ANON_KEY_HER';  // eyJhbGci...
 
 /** PWA cache-version – øg med 1 ved ny kodeversion (matcher sw.js CACHE_VERSION) */
-const APP_VERSION = '1.0.20';
+const APP_VERSION = '1.0.21';
 
 /**
  * DEBUG_MODE
@@ -31,6 +29,6 @@ const SITE = {
   name:     'Kystforeningen Djursland',
   tagline:  'Bevarelse af naturen og de rekreative kystområder på Djursland',
   email:    'info@kystforeningendj.dk',
-  builtBy:  'Nordic Operations',
-  builtUrl: 'https://nordic-operations.dk',
+  builtBy:  '',
+  builtUrl: '',
 };

@@ -866,10 +866,20 @@ footer p { margin-bottom: .25rem; }
   transition: box-shadow .2s, transform .2s;
 }
 .sag-kort-3:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+/* Billedwrapper til zoom-effekt */
+.sag-kort-3-img-wrap {
+  width: 100%; height: 180px;
+  overflow: hidden; flex-shrink: 0;
+}
 .sag-kort-3 .sag-kort-img {
   width: 100%; height: 180px;
   object-fit: cover; display: block;
   background: linear-gradient(135deg, var(--c-navy) 0%, var(--c-forest) 100%);
+  transition: transform .45s ease;
+}
+/* Desktop: zoom ved hover – deaktiveres på touch-enheder */
+@media (hover: hover) and (pointer: fine) {
+  .sag-kort-3:hover .sag-kort-img { transform: scale(1.06); }
 }
 .sag-kort-3-body {
   padding: var(--sp-md); flex: 1;
