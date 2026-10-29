@@ -1,5 +1,20 @@
 # CHANGELOG – Kystforeningen Djursland
 
+## Version 1.0.24 – Visuelt løft af intro-sektion (29. oktober 2026)
+
+### Ændrede filer
+- `css/styles.css` (#intro baggrund, bundkant, .intro-inner venstrekant)
+- `js/config.js` (v1.0.24)
+- `sw.js` (kfd-v1.0.24)
+
+### Ændringer
+- **Intro-sektion:** Baggrund ændret fra hvid (`#ffffff`) til varm sandfarve (`#f4efe6 / var(--c-cream)`)
+- **Intro-sektion:** Diskret bundkant tilføjet (`1px solid var(--c-border)`) mod næste sektion
+- **Intro-tekst:** Gylden venstrekant (3px) tilføjet på `.intro-inner` med tilhørende padding
+- Alt øvrigt indhold, navigation, sager og funktioner bevaret uændret
+
+---
+
 ## Version 1.0.23 – Mobilnavigation og fane-fix (29. oktober 2026)
 
 ### Ændrede filer

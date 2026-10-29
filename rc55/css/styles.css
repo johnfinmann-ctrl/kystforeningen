@@ -270,9 +270,14 @@ p:last-child { margin-bottom: 0; }
 /* ── INTRO ───────────────────────────────────────────────────────── */
 #intro {
   padding: var(--sp-2xl) var(--sp-md);
-  background: var(--c-white);
+  background: var(--c-cream);
+  border-bottom: 1px solid var(--c-border);
 }
-.intro-inner { max-width: 760px; margin: 0 auto; }
+.intro-inner {
+  max-width: 760px; margin: 0 auto;
+  border-left: 3px solid var(--c-gold);
+  padding-left: var(--sp-md);
+}
 .intro-statement {
   font-family: var(--font-display);
   font-size: clamp(1.9rem, 4vw, 3.2rem);
