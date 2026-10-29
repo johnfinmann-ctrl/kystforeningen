@@ -1,210 +1,179 @@
-# CHANGELOG
-## Nordic Operations Platform – Kystforeningen Djursland
+# CHANGELOG – Kystforeningen Djursland
+
+## Version 1.0.23 – Mobilnavigation og fane-fix (29. oktober 2026)
+
+### Ændrede filer
+- `css/styles.css` (faner grid 3×2, mobil panel, fjernet white-space:nowrap)
+- `js/app.js` (initSagerInteraktion: dual layout mobil/desktop)
+- `js/config.js` (v1.0.23)
+- `sw.js` (kfd-v1.0.23)
+
+### Ændringer
+- **MOBIL:** Detaljefeltet vises nu direkte under det valgte sagskort (inline `.sag-mobil-panel`), ikke under alle 5 kort. Kun ét kort kan være åbent ad gangen.
+- **MOBIL:** Scroll ruller til det valgte kort (overskriften), ikke til bunden.
+- **DESKTOP:** Uændret – fælles detaljefelt under alle 5 kort bevaret.
+- **FANER:** Seks faner vises i præcis 2 rækker × 3 kolonner via CSS Grid `repeat(3, minmax(0, 1fr))`. Ingen horisontal scroll, ingen overflow. `white-space: nowrap` fjernet; tekst må ombrydes.
+- Fane-tekst reduceret til `.62rem` på mobil med minimal padding.
+- Resize-handler synkroniserer layout ved skærmrotation.
 
 ---
 
-## Version 1.0.11 – RC5.9 – Oktober 2026
+## Version 1.0.22 – Fælles detaljefelt uden for grid (28. oktober 2026)
 
-**Status: Release Candidate**
+### Ændrede filer
+- `index.html` (sag-detalje-indhold flyttet ud af grid til ét fælles panel)
+- `css/styles.css` (ny .sag-detalje-panel, .sag-detalje-indhold, .valgt)
+- `js/app.js` (initSagerInteraktion komplet omskrevet)
+- `js/config.js` (v1.0.22)
+- `sw.js` (kfd-v1.0.22)
 
-### Rettelser og tilføjelser – Vosnæs
-
-**Sag 3: Vosnæs – vindmøller**
-- Rettelse: Borgmester navnefejl rettet: "Michael Stegger Jensen (A)" → "Michael Harregaard Stegger (S)" (to steder: Seneste nyt + Presse-kort 1)
-- Vosnæs → Presse: Tilføjet Din Avis debatindlæg ECE19763125: "Ministeren har tilsidesat Syddjurs – Aarhus kan stadig sige nej" (dato ukendt, Oktober 2026)
-
-### PWA
-- APP_VERSION bump: 1.0.10 → 1.0.11
-- CACHE_VERSION bump: kfd-v1.0.10 → kfd-v1.0.11
-
----
-
-## Version 1.0.10 – RC5.8 – Oktober 2026
-
-**Status: Release Candidate**
-
-### Tilføjet indhold – Vosnæs og Dråby (5 artikler)
-
-**Sag 3: Vosnæs – vindmøller**
-- Seneste nyt opdateret med ministerafgørelse: Signe Munk (SF) ophæver Syddjurs' planveto, 22. oktober 2026 (topnyhed)
-- Kilde-note opdateret; gammel note om "ingen afgørelse" erstattet af faktuel status
-- Vosnæs → Presse: Tilføjet Din Avis 22/10/2026 (nyhedsartikel om ministerafgørelse)
-- Vosnæs → Presse: Tilføjet Din Avis 23/10/2026 (Venstre-debatindlæg af Jørgen Rosengren; delvis bag betalingsmur, noteret)
-
-**Sag 2: Dråby – sommerhusområdet**
-- Dråby → Presse: Tilføjet Din Avis 17/9/2026: Byrådet sender Lokalplan 474 i høring (21-6), Anne Frank Henriksen
-- Dråby → Presse: Tilføjet TV2 Østjylland ca. 9/10/2026: "Er naturen eller turismen vigtigst?" – Anne Marie Stoustrup Petersen
-- Dråby → Presse: Tilføjet TV2 Østjylland ca. 19/10/2026: Thorkild Hansen imod kæmpesommerhuse – Sebastian Høeg Lerhøj Wiis & Anne Marie Stoustrup Petersen
-
-### PWA
-- APP_VERSION bump: 1.0.9 → 1.0.10
-- CACHE_VERSION bump: kfd-v1.0.9 → kfd-v1.0.10
+### Ændringer
+- HTML-strukturen ombygget: alle 5 sag-detalje-blokke samlet i ét `<div id="sag-detalje-panel">` EFTER `</div><!-- /sag-grid-3 -->`
+- Sagskortene er nu rent kompakte kort uden indlejret indhold – de ændrer aldrig størrelse
+- Klik på "Læs hele sagen" viser pågældende sags indhold i det fælles felt under grid
+- Klik på samme knap igen (nu "Luk sagen") skjuler detaljefeltet
+- Skift mellem sager genbruger samme felt – gammel sag skjules, ny vises
+- Standardfane ved åbning: "Seneste nyt"
+- Valgt kort markeres diskret med marineblå ramme (`.valgt`)
+- Siden ruller automatisk til detaljefeltet (requestAnimationFrame + scrollIntoView)
+- Mobilvisning: kort stables 1 pr. række, faner i 2×3-grid, ingen tomme områder
+- Bekræftet: kortenes højde uændret ved åbning (484px/440px) – panel starter 48px under grid
 
 ---
 
-## Version 1.0.9 – RC5.7 – Oktober 2026
+## Version 1.0.21 – RC6 billeder og afsender (28. oktober 2026)
 
-**Status: Release Candidate**
+### Ændrede filer
+- `index.html` (nye billeder wrappet i sag-kort-3-img-wrap med opdaterede alt-tekster)
+- `css/styles.css` (zoom-effekt ved hover på desktop)
+- `js/config.js` (versionsnummer, Nordic Operations fjernet)
+- `sw.js` (service worker cache-version, Nordic Operations fjernet)
+- `admin.html` (Nordic Operations fjernet fra login og sidebar)
+- `assets/draaby-sommerhus.jpg` (nyt billede – byplanstegning Dråby Strandvej)
+- `assets/vosnæs-vindmoeller.jpg` (nyt billede – kommunegrænse-kort med 900m-zone)
+- `assets/grobund-kyst.jpg` (nyt billede – dronefoto havn og vindmøller)
+- `assets/hjelm-banke.jpg` (nyt billede – søkort 506-JA Hjelm Banke)
 
-### Ajourført indhold – alle fem sager
-
-**Sag 1: Fjellerup Strand**
-- Lokalplan 134-707 og Kommuneplantillæg nr. 3 vedtaget af Norddjurs Kommunalbestyrelse 6. oktober 2026 (kilde: beslutningsprotokol)
-- Opdateret Seneste nyt med tre daterede nyheder: vedtagelse, høringsfrist, offentliggørelse af forslag
-- Tilføjet tydelig præcision om manglende øvrige tilladelser fra Kystdirektoratet og Norddjurs Kommune
-- Tilføjet forventning om ibrugtagning sommer 2028 (under forudsætning af at planen ikke ankes)
-- Tilføjet tre dokumentlinks: beslutningsprotokol, kommuneplantillæg PDF, DN Norddjurs-henvendelse
-- Kilde: norddjurs.meetingsplus.dk, norddjurs.dk/oplev-norddjurs/fjellerup-udvikling
-
-**Sag 2: Dråby – sommerhusområdet**
-- Opdateret Seneste nyt: byråd sender lokalplanforslag i 8 ugers offentlig høring, borgermøde 2. november 2026, miljøscreening
-- Tilføjet Dansk Byudvikling-artikel (21. september 2026) i Presse
-- Kilde: dansk-byudvikling.dk/plan-for-over-100-store-sommerhuse-sendes-i-hoering/
-
-**Sag 3: Vosnæs – vindmøller**
-- Opdateret Seneste nyt: ministerens afgørelse udskudt pga. valg (marts 2026), 784 høringssvar (august 2025), Syddjurs' planveto (juli 2025)
-- Eksplicit note: ingen ny afgørelse per oktober 2026
-- Kilde: deltag.aarhus.dk, dinavis.dk (5. marts 2026)
-
-**Sag 4: Grobund/Ålerne**
-- Ingen ny verificeret nyhed fundet. Eksisterende indhold bevaret uændret.
-- Seneste bekræftede beslutning: Helhedsplan vedtaget af byrådet 25. juni 2025
-- Lokalplan for Grobunds arealer ikke politisk igangsat per kilde (syddjurs.dk)
-
-**Sag 5: Hjelm Banke**
-- Bevaret uændret fra RC5.6
-- Fiskeritidende-artikel (september 2026) forsøgt hentet – ikke tilgængelig (fetch-fejl). Tilføjes ikke uden verificeret indhold.
-
-### PWA
-- APP_VERSION bump: 1.0.8 → 1.0.9
-- CACHE_VERSION bump: kfd-v1.0.8 → kfd-v1.0.9
-- sw.js-mekanisme verificeret: skipWaiting + clients.claim + controllerchange-flow er korrekt implementeret
-- Afventer live-test på installeret iPhone PWA – Stable-godkendelse gives ikke før live-test
+### Ændringer
+- Fire nye sagskort-billeder: Dråby, Vosnæs, Grobund, Hjelm Banke (800×450px JPEG, center-crop)
+- Fjellerup Strand: uændret
+- Alle 5 sagskort-billeder wrappet i `<div class="sag-kort-3-img-wrap">` med overflow:hidden
+- Desktop hover-zoom (scale 1.06) via `@media (hover: hover) and (pointer: fine)` – ingen zoom på mobil
+- Nordic Operations fjernet som synlig afsender fra config.js, sw.js, admin.html
+- Kystforeningen Djursland er eneste synlige afsender på alle sider
+- John Finmann bevaret som næstformand på bestyrelsessiden
 
 ---
 
-## Version 1.0.8 – RC5.6 – Oktober 2026
+## Version 1.0.20 – RC6 fejlrettelse (26. oktober 2026)
 
-**Status: Release Candidate**
-
-### Tilføjet
-- **Sag nr. 5: Hjelm Banke – råstofindvinding i Kattegat**
-  - Miljøstyrelsen meddelte 6. februar 2026 tilladelse til indvinding af op til 8 mio. m³ sand sydøst for Hjelm
-  - Direkte link til Miljøstyrelsens officielle afgørelse (PDF) på mst.dk
-  - Faner: Baggrund / Seneste nyt / Vores arbejde / Dokumenter / Presse / Myndighedskilder
-  - Myndighedskilder korrekt betegnet som statslig myndighed (Miljøstyrelsen), ikke kommunal
-  - Foreningens egne holdninger og handlinger er ikke påstået – kun kendte kendsgerninger
-- APP_VERSION bump: 1.0.6 → 1.0.7
-- CACHE_VERSION bump: kfd-v1.0.6 → kfd-v1.0.7
-
-### Bemærkning om billede
-Billedet `assets/hjelm-banke.jpg` er en teknisk placeholder (navy baggrund).
-Et rettighedsfrit billede af Hjelm/Kattegat skal indsættes manuelt.
-Mulige kilder: Wikimedia Commons, Miljøstyrelsen, Geodatastyrelsen (kortudsnit).
-
-### Ikke ændret
-Alle fire eksisterende sager, design, navigation, PWA, bestyrelse, dokumenter og øvrige indhold er uændret.
+### Ændrede filer
+- `index.html` (HTML-strukturfejl rettet; Hjelm Banke-billede opdateret)
+- `css/styles.css` (grid-layout og mobilkomprimering)
+- `js/config.js` (versionsnummer)
+- `sw.js` (service worker cache-version)
+- `assets/hjelm-banke.jpg` (erstattet med rigtigt billede)
 
 ---
 
-## Version 1.0.0 – Release Candidate – Juli 2026
+### Rettede fejl
 
-**Status: Release Candidate**
-Afventer live validering med aktiv Supabase-instans.
-Skifter til **Stable** når alle punkter i README.md → LIVE VALIDERING er bekræftet.
+#### FEJL 1 – Hjelm Banke: mørkeblå flade i stedet for billede
+- **Årsag:** `assets/hjelm-banke.jpg` var en 2115-byte PNG med ensfarvet marineblå (#0d2233) – aldrig et rigtigt foto
+- **Rettelse:** Erstattet med et center-cropped udsnit af `kyst-hero.jpg` (800×450px JPEG, 78KB)
+- **Princip:** Kun eksisterende projektbilleder anvendt – ingen genererede fotos, ingen stockfotos
 
-**Referenceprojekt:** Kystforeningen Djursland
-**Første installation af Nordic Operations Platform**
+#### FEJL 2+3 – Fjellerup og sagskort ikke ensartede
+- **Årsag 1:** CSS-grid brugte `repeat(auto-fit, minmax(280px, 1fr))` → 5. kort alene i række 2 spændte til fuld bredde
+- **Rettelse CSS:** Ændret til `repeat(3, 1fr)` med eksplicit `grid-column` for kort 4 og 5
+- **Årsag 2:** HTML-strukturfejl i SAG 4 (Hjelm Banke) – den tilføjede Din Avis-artikel i RC6 var placeret UDEN FOR `<div class="presse-grid">`, hvilket skabte et overflødig `</div>` og lod det 5. sag-kort falde ud af grid-containeren
+- **Rettelse HTML:** Din Avis-artiklen flyttes korrekt IND I presse-grid; det overflødige `</div>` fjernes
+- **Resultat:** Alle 5 kort måler præcist 335px brede – max forskel: 0px
 
-### Ny funktionalitet
+#### FEJL 4 – Mobilforsiden for lang
+- **Årsag:** Hero 88-92vh, intro-padding 9rem, dark-section 5.5rem padding, dark-frames min-height 340px → samlet side meget lang på mobil
+- **Rettelse CSS** (gælder kun `max-width: 768px` og `max-width: 480px`):
+  - Hero: reduceret til 55vh (min. 320px)
+  - Intro-sektion: padding reduceret til `--sp-lg` (3rem) – fra `--sp-2xl` (9rem)
+  - Intro-overskrift: font-size reduceret til `clamp(1.45rem, 6vw, 2rem)`
+  - Dark-section: padding reduceret til `--sp-lg`, margin-bottom til `--sp-md`
+  - Dark-tagline: font-size reduceret til 1.25rem
+  - Dark-frame: min-height reduceret til 140px (fra 340px desktop / 220px tablet)
+  - Section-hdr: margin-bottom reduceret til `--sp-md`
+- **Bevarede:** Alle 5 sager, tre indgange, nyheder, høringer, forsidebillede, OPLEV·FORSTÅ·BEVAR – kun afstande ændret
 
-**Offentlig hjemmeside**
-- Komplet SPA med 8 sider og hash-navigation (browser-tilbage virker)
-- Hero med Randers Fjord-billede — foreningens permanente visuelle identitet
-- Forside: hero + intro + tre live-opdaterede bokse (aktivitet, nyhed, sag)
-- PWA: installérbar fra browser, offline-kapabel via Service Worker
-- Opdateringsbanner vises automatisk ved ny kodeversion
-- Realtime: alle brugere ser CMS-ændringer straks
-- Responsivt design: mobil, tablet og desktop
-- Cookie-banner med privatlivspolitik og cookiepolitik
-- Kontaktformular og tilmeldingsformular (mailto-baseret)
+#### FEJL 5 – Kun eksisterende billeder
+- Bekræftet: Intet genereret, ingen stockfotos – kun `kyst-hero.jpg` brugt
 
-**CMS Admin**
-- Supabase Authentication: login, logout, password reset, session-persistering
-- 8 moduler: Dashboard, Nyheder, Aktiviteter, Aktuelle sager, Bestyrelse, Dokumenter, Billeder, Kontakt & Indstillinger
-- Dashboard: live tæller for alle tabeller
-- Nyheder: opret, rediger, slet, publicer, kladde, billede-URL
-- Aktiviteter: opret, rediger, slet, dato/tid/sted/tilmeldingslink, publicer/kladde
-- Aktuelle sager: prioritet, forsidevisning, status (draft/published/archived)
-- Bestyrelse: fotoupload med browserkomprimering, rækkefølge, aktiv/inaktiv
-- Dokumenter: PDF, Word, Excel — upload til Supabase Storage, kategorier + årstal
-- Billeder: upload med browserkomprimering (1600px, 82%), alt-tekst, billedtekst (caption), kopiér URL, slet
-- Kontakt & Indstillinger: kontaktperson, kontingent, CVR, Facebook — gemt med upsert
-
-**Sikkerhed**
-- Row Level Security på alle 9 tabeller
-- Offentlige brugere ser kun `published` indhold
-- Admin/editor: fuld CRUD
-- Storage policies: kun staff kan uploade og slette
-- Ingen service role key i frontend
-- Ingen localStorage som database
-
-**PWA**
-- Service Worker med stale-while-revalidate for egne filer
-- Network-first for Supabase API
-- SKIP_WAITING → controllerchange-flow for korrekt opdatering
-- Relative stier i precache (GitHub Pages kompatibel)
-- Opdateringsbanner skjult som standard, vises kun ved ny version
-
-**Database**
-- 9 tabeller: profiles, site_settings, news, activities, cases, board_members, documents, media, app_versions
-- Auto-trigger: updated_at opdateres automatisk
-- Auto-profil: oprettes ved ny Supabase-bruger
-- Indekser på hyppigt forespurgte kolonner
-
-**Dokumentation**
-- README.md: komplet trin-for-trin opsætningsvejledning + live valideringsliste
-- OVERDRAGELSE.md: GitHub, Supabase, domæne, backup, eksport, branding
-- PLATFORM.md: arkitektur, teknisk stack, ny kundekopi, vedligeholdelse
-- CHANGELOG.md: denne fil
-
-### Kendte begrænsninger (adresseres i v1.1)
-- Billedet kan ikke erstattes in-place (slet + genupload er workaround)
-- Drag-and-drop sortering ikke implementeret (numerisk rækkefølge bruges)
-- Kontaktformularen åbner e-mailprogram — ingen server-side afsendelse
-- Live test med rigtig Supabase-instans afventer
+#### FEJL 6 – Kvalitetskontrol
+- Playwright-screenshots taget og gennemgået for alle visninger inden levering
 
 ---
 
-## Version 1.1 – Planlagt
-
-Afhænger af live validering og feedback fra Version 1.0.
-
-**Planlagt funktionalitet:**
-- Erstat billede: udskift eksisterende URL uden slet + genupload
-- Drag-and-drop sortering af bestyrelsesmedlemmer og aktiviteter
-- Kontaktformular med server-side afsendelse (Supabase Edge Functions eller Resend)
-- Søgefunktion i dokumentbibliotek
-- Aktivitetskalender (årshjul-visning)
+### Teknisk
+- `js/config.js`: `APP_VERSION` → `'1.0.20'`
+- `sw.js`: `CACHE_VERSION` → `'kfd-v1.0.20'`
 
 ---
 
-## Version 1.2 – Planlagt
+## Version 1.0.19 – RC6 (26. oktober 2026)
 
-- Avancerede brugerroller (editor: kun eget indhold, admin: alt)
-- Statistik-dashboard med besøgstal
-- Automatisk e-mailnotifikation ved nye tilmeldinger
-- Formularbygger til admin
-
----
-
-## Version 2.0 – Langsigtede mål
-
-- Multi-sprog (dansk + engelsk)
-- API-integrationer (GolfBox, MemberPad m.fl.)
-- Avanceret mediebibliotek med mapper og søgning
-- White-label dashboard til Nordic Operations-overblik over alle installationer
+### Ændrede filer
+- `index.html` (hoveddokument)
+- `css/styles.css` (design-tokens)
+- `js/config.js` (versionsnummer)
+- `sw.js` (service worker cache-version)
+- `manifest.json` (PWA start_url og scope)
 
 ---
 
-*Nordic Operations Platform · nordicoperations.dk*
+### Nye funktioner og ændringer
+
+#### Design (RC6)
+- Google Fonts tilføjet i `<head>`: Playfair Display (overskrifter) + Source Sans 3 (brødtekst/UI)
+- Font-variabler opdateret i CSS tokens (`--font-display`, `--font-body`)
+- Mere afrundede hjørner: `--r-sm: 6px`, `--r-md: 10px`, `--r-lg: 16px`
+
+#### Navigation
+- Hero `aria-labelledby` opdateret (ingen "Randers Fjord"-reference)
+- **Sagernes rækkefølge ændret til:**
+  1. Dråby Sommerhuse
+  2. Vosnæs Vindmøller
+  3. Grobund / Ålerne
+  4. Hjelm Banke
+  5. Fjellerup Strand
+
+#### Standardfane
+- **"Seneste nyt" åbner nu som standard** for alle 5 sager (tidligere: "Baggrund")
+
+#### Nye kilder – Grobund / Ålerne
+- **Baggrund-tekst opdateret**: nævner nu korrekt at Helhedsplan for Ålerne blev vedtaget den **25. juni 2025**, og præciserer at en helhedsplan ikke i sig selv giver byggeret
+- **Kommunale kilder**: Ny kilde tilføjet:
+  - Syddjurs Kommune – Helhedsplan for Ålerne (officiel projektside)
+  - URL: https://www.syddjurs.dk/politik/udviklingsprojekter/helhedsplan-for-aalerne
+  - Vedtaget: 25. juni 2025
+  - Note: "En helhedsplan er ikke juridisk bindende og giver ikke i sig selv ret til at bygge – en lokalplan skal vedtages særskilt."
+
+#### Nye kilder – Hjelm Banke
+- **Presse**: Ny historisk artikel tilføjet:
+  - "Hjelm Dyb ikke robust nok" – Din Avis, april 2022
+  - URL: https://dinavis.dk/samfund/ECE13891207/hjelm-dyb-ikke-robust-nok/
+  - Markeret: "Historisk artikel · April 2022"
+
+#### Nye kilder – Vosnæs Vindmøller
+- **Presse**: Nyt historisk debatindlæg tilføjet:
+  - "Vosnæsmøller vil levere masser af grøn strøm til aarhusianerne" – Din Avis, maj 2021
+  - URL: https://dinavis.dk/debat/ECE12976028/vosnaesmoeller-vil-levere-masser-af-groen-stroem-til-aarhusianerne/
+  - Markeret: "Historisk debatindlæg · Maj 2021"
+  - Viser forskellige perspektiver i Vosnæs-sagen
+  - Ministerafgørelsen er ikke fremstillet som endelig tilladelse til at opføre vindmøllerne
+
+#### PWA / Teknisk
+- `manifest.json`: `start_url` og `scope` ændret fra `"/"` til `"/kystforeningen/"`
+- `js/config.js`: `APP_VERSION` → `'1.0.19'`
+- `sw.js`: `CACHE_VERSION` → `'kfd-v1.0.19'`
+
+---
+
+## Version 1.0.18 – RC5.5 (23. oktober 2026)
+(Se tidligere CHANGELOG for detaljer)

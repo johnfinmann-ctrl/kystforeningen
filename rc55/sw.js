@@ -1,5 +1,5 @@
 /**
- * NORDIC OPERATIONS CMS v2 – sw.js
+ * Kystforeningen Djursland – sw.js
  * Service Worker: PWA-caching og opdateringsdetektering
  *
  * VED NY KODEVERSION: Opdatér KUN CACHE_VERSION herunder.
@@ -16,7 +16,7 @@
  * 8. Brugeren ser ny version
  */
 
-const CACHE_VERSION = 'kfd-v1.0.15';
+const CACHE_VERSION = 'kfd-v1.0.23';
 const CACHE_NAME    = CACHE_VERSION;
 
 const PRECACHE = [
