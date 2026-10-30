@@ -592,103 +592,162 @@ function setupRealtime() {
 
 
 /* ════════════════════════════════════════════════
-   AKTUELLE SAGER – fælles detaljefelt efter grid
+   AKTUELLE SAGER – dual layout: mobil inline / desktop fælles panel
 ════════════════════════════════════════════════ */
 function initSagerInteraktion() {
-  const panel    = document.getElementById('sag-detalje-panel');
-  if (!panel) return;
+  const desktopPanel = document.getElementById('sag-detalje-panel');
+  if (!desktopPanel) return;
 
-  let aktivSagId = null; // sporer hvilken sag der er åben
+  let aktivSagId  = null; // id på åben sag (eller null)
+  let mobilPanel  = null; // det aktuelle .sag-mobil-panel-element i DOM
+
+  // Er vi på mobil? (<= 768px)
+  function erMobil() {
+    return window.matchMedia('(max-width: 768px)').matches;
+  }
+
+  // Aktiver standardfane i en indhold-blok
+  function aktiverStandardFane(indhold) {
+    const tabs   = indhold.querySelectorAll('.sag-tab');
+    const panels = indhold.querySelectorAll('.sag-tab-panel');
+    tabs.forEach(t => t.classList.remove('aktiv'));
+    panels.forEach(p => p.classList.remove('aktiv'));
+    const nytTab = indhold.querySelector('.sag-tab[data-tab$="-nyt"]');
+    if (nytTab) {
+      nytTab.classList.add('aktiv');
+      const nytPanel = document.getElementById(nytTab.dataset.tab);
+      if (nytPanel) nytPanel.classList.add('aktiv');
+    } else if (tabs.length > 0) {
+      tabs[0].classList.add('aktiv');
+      if (panels.length > 0) panels[0].classList.add('aktiv');
+    }
+  }
+
+  // Fjern evt. eksisterende mobil-panel fra DOM
+  function fjernMobilPanel() {
+    if (mobilPanel) {
+      mobilPanel.remove();
+      mobilPanel = null;
+    }
+  }
+
+  // Nulstil alle knapper, fremhævning og paneler
+  function nulstilAlt() {
+    document.querySelectorAll('.btn-laes-sag').forEach(b => {
+      b.textContent = 'Læs hele sagen';
+      b.classList.remove('aktiv');
+      b.setAttribute('aria-expanded', 'false');
+    });
+    document.querySelectorAll('.sag-kort-3').forEach(k => k.classList.remove('valgt'));
+    desktopPanel.querySelectorAll('.sag-detalje-indhold').forEach(d => d.classList.remove('aktiv'));
+    desktopPanel.classList.remove('aktiv');
+    fjernMobilPanel();
+  }
 
   // ── "Læs hele sagen" / "Luk" toggle ─────────────────────────
   document.addEventListener('click', e => {
     const btn = e.target.closest('.btn-laes-sag');
     if (!btn) return;
 
-    const sagId   = btn.dataset.sag;
+    const sagId  = btn.dataset.sag;
     const indhold = document.getElementById(`sag-${sagId}`);
     if (!indhold) return;
-
-    const sagerAlle   = document.querySelectorAll('.btn-laes-sag');
-    const korteAlle   = document.querySelectorAll('.sag-kort-3');
 
     if (aktivSagId === sagId) {
       // ── Luk sagen ─────────────────────────────────────────────
       aktivSagId = null;
-      panel.classList.remove('aktiv');
-      // Nulstil alle knapper og fremhævning
-      sagerAlle.forEach(b => {
-        b.textContent = 'Læs hele sagen';
-        b.classList.remove('aktiv');
-        b.setAttribute('aria-expanded', 'false');
-      });
-      korteAlle.forEach(k => k.classList.remove('valgt'));
-      // Skjul alle sag-indhold-sektioner
-      panel.querySelectorAll('.sag-detalje-indhold').forEach(d => d.classList.remove('aktiv'));
-    } else {
-      // ── Åbn eller skift sag ────────────────────────────────────
-      // Nulstil alle knapper og fremhævning
-      sagerAlle.forEach(b => {
-        b.textContent = 'Læs hele sagen';
-        b.classList.remove('aktiv');
-        b.setAttribute('aria-expanded', 'false');
-      });
-      korteAlle.forEach(k => k.classList.remove('valgt'));
-      // Skjul alle sag-indhold-sektioner
-      panel.querySelectorAll('.sag-detalje-indhold').forEach(d => d.classList.remove('aktiv'));
+      nulstilAlt();
+      return;
+    }
 
-      // Aktiver valgt sag
-      aktivSagId = sagId;
-      indhold.classList.add('aktiv');
-      panel.classList.add('aktiv');
+    // ── Åbn eller skift sag ────────────────────────────────────
+    nulstilAlt();
+    aktivSagId = sagId;
 
-      // Markér det valgte kort
-      const valgtKort = document.getElementById(`kort-${sagId}`);
-      if (valgtKort) valgtKort.classList.add('valgt');
+    // Markér valgt kort og knap
+    const valgtKort = document.getElementById(`kort-${sagId}`);
+    if (valgtKort) valgtKort.classList.add('valgt');
+    btn.textContent = 'Luk sagen';
+    btn.classList.add('aktiv');
+    btn.setAttribute('aria-expanded', 'true');
 
-      // Opdater knap
-      btn.textContent = 'Luk sagen';
-      btn.classList.add('aktiv');
-      btn.setAttribute('aria-expanded', 'true');
-
-      // Sæt standardfane til "Seneste nyt" (xxx-nyt)
-      const tabs   = indhold.querySelectorAll('.sag-tab');
-      const panels = indhold.querySelectorAll('.sag-tab-panel');
-      tabs.forEach(t => t.classList.remove('aktiv'));
-      panels.forEach(p => p.classList.remove('aktiv'));
-      // Find fanen med data-tab der ender på "-nyt"
-      const nytTab = indhold.querySelector('.sag-tab[data-tab$="-nyt"]');
-      if (nytTab) {
-        nytTab.classList.add('aktiv');
-        const nytPanel = document.getElementById(nytTab.dataset.tab);
-        if (nytPanel) nytPanel.classList.add('aktiv');
-      } else if (tabs.length > 0) {
-        // Fallback: første fane
-        tabs[0].classList.add('aktiv');
-        if (panels.length > 0) panels[0].classList.add('aktiv');
+    if (erMobil()) {
+      // ── MOBIL: indsæt inline-panel direkte efter valgt kort ───
+      mobilPanel = document.createElement('div');
+      mobilPanel.className = 'sag-mobil-panel';
+      // Kopier indholdet (klon indholdet fra shared panel til mobil-panel)
+      mobilPanel.appendChild(indhold.cloneNode(true));
+      // Den klonererede indhold-blok vises altid (ingen display:none)
+      const kloneIndhold = mobilPanel.firstElementChild;
+      if (kloneIndhold) {
+        kloneIndhold.style.display = 'block';
+        aktiverStandardFane(kloneIndhold);
       }
-
-      // Rul til detaljefeltet
+      // Indsæt efter valgt kort
+      if (valgtKort && valgtKort.parentNode) {
+        valgtKort.insertAdjacentElement('afterend', mobilPanel);
+      }
+      // Rul til overskriften i panelet (ikke til bunden)
       requestAnimationFrame(() => {
-        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (valgtKort) {
+          valgtKort.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    } else {
+      // ── DESKTOP: vis fælles panel under grid ──────────────────
+      indhold.classList.add('aktiv');
+      desktopPanel.classList.add('aktiv');
+      aktiverStandardFane(indhold);
+      requestAnimationFrame(() => {
+        desktopPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
   });
 
-  // ── Tab-navigation inden for sager ───────────────────────────
+  // ── Tab-navigation – virker i både desktop-panel og mobil-panel ──
   document.addEventListener('click', e => {
     const tab = e.target.closest('.sag-tab');
     if (!tab) return;
     const tabId     = tab.dataset.tab;
+    // Find nærmeste sag-detalje-indhold (både original og klon)
     const container = tab.closest('.sag-detalje-indhold');
     if (!container) return;
-    // Deaktiver alle tabs og panels i denne sag
     container.querySelectorAll('.sag-tab').forEach(t => t.classList.remove('aktiv'));
     container.querySelectorAll('.sag-tab-panel').forEach(p => p.classList.remove('aktiv'));
-    // Aktiver valgt tab og panel
     tab.classList.add('aktiv');
-    const panel = document.getElementById(tabId);
-    if (panel) panel.classList.add('aktiv');
+    // Tab-panelerne bruger id'er – find dem inden for samme container
+    const panelEl = container.querySelector(`[id="${tabId}"]`) || document.getElementById(tabId);
+    if (panelEl) panelEl.classList.add('aktiv');
+  });
+
+  // ── Skærmstørrelse ændres: synkronisér layout ─────────────────
+  // Hvis bruger roterer fra mobil til desktop eller omvendt med en sag åben,
+  // luk og genåbn for korrekt layout
+  window.addEventListener('resize', () => {
+    if (!aktivSagId) return;
+    const sagId   = aktivSagId;
+    const indhold = document.getElementById(`sag-${sagId}`);
+    if (!indhold) return;
+    nulstilAlt();
+    aktivSagId = sagId;
+
+    const valgtKort = document.getElementById(`kort-${sagId}`);
+    if (valgtKort) valgtKort.classList.add('valgt');
+    const btn = document.querySelector(`.btn-laes-sag[data-sag="${sagId}"]`);
+    if (btn) { btn.textContent = 'Luk sagen'; btn.classList.add('aktiv'); btn.setAttribute('aria-expanded', 'true'); }
+
+    if (erMobil()) {
+      mobilPanel = document.createElement('div');
+      mobilPanel.className = 'sag-mobil-panel';
+      mobilPanel.appendChild(indhold.cloneNode(true));
+      const kloneIndhold = mobilPanel.firstElementChild;
+      if (kloneIndhold) { kloneIndhold.style.display = 'block'; aktiverStandardFane(kloneIndhold); }
+      if (valgtKort && valgtKort.parentNode) valgtKort.insertAdjacentElement('afterend', mobilPanel);
+    } else {
+      indhold.classList.add('aktiv');
+      desktopPanel.classList.add('aktiv');
+      aktiverStandardFane(indhold);
+    }
   });
 }
 

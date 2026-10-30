@@ -270,9 +270,14 @@ p:last-child { margin-bottom: 0; }
 /* ── INTRO ───────────────────────────────────────────────────────── */
 #intro {
   padding: var(--sp-2xl) var(--sp-md);
-  background: var(--c-white);
+  background: var(--c-cream);
+  border-bottom: 1px solid var(--c-border);
 }
-.intro-inner { max-width: 760px; margin: 0 auto; }
+.intro-inner {
+  max-width: 760px; margin: 0 auto;
+  border-left: 3px solid var(--c-gold);
+  padding-left: var(--sp-md);
+}
 .intro-statement {
   font-family: var(--font-display);
   font-size: clamp(1.9rem, 4vw, 3.2rem);
@@ -832,19 +837,21 @@ footer p { margin-bottom: .25rem; }
   box-shadow: 0 0 0 2px var(--c-navy);
 }
 
-/* Faneblade */
+/* Faneblade – altid 3 kolonner (grid), ingen hvid-space overflow */
 .sag-tabs {
-  display: flex; flex-wrap: wrap; gap: .35rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .35rem;
   margin-bottom: var(--sp-md);
 }
 .sag-tab {
   background: none;
   border: 1.5px solid var(--c-border);
   border-radius: 4px;
-  padding: .5rem .75rem; font-size: .72rem; font-weight: 700;
-  letter-spacing: .05em; text-transform: uppercase;
-  color: var(--c-muted); cursor: pointer; white-space: nowrap;
-  flex: 1 1 auto;
+  padding: .5rem .5rem; font-size: .72rem; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase;
+  color: var(--c-muted); cursor: pointer;
+  text-align: center; word-break: break-word; min-width: 0;
   transition: color .15s, border-color .15s, background .15s;
 }
 .sag-tab:hover  { color: var(--c-navy); border-color: var(--c-navy); }
@@ -936,23 +943,28 @@ footer p { margin-bottom: .25rem; }
   .sag-grid-3 > .sag-kort-3:nth-child(5) {
     grid-column: auto;
   }
-  /* Faner: 3 i første række, 3 i anden række */
-  .sag-tabs {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: .3rem;
-  }
+  /* Faner: reduceret størrelse på smalle skærme */
   .sag-tab {
-    padding: .55rem .3rem;
-    font-size: .65rem;
-    letter-spacing: .03em;
-    text-align: center;
-    flex: unset;
+    padding: .5rem .2rem;
+    font-size: .62rem;
+    letter-spacing: .02em;
   }
-  /* Detaljefelt på mobil */
+  /* Det fælles desktop-detaljefelt skjules på mobil –
+     JS indsætter i stedet .sag-mobil-panel direkte under det valgte kort */
   .sag-detalje-panel {
+    display: none !important;
+  }
+  /* Mobil inline-panel (indsættes af JS efter valgt .sag-kort-3) */
+  .sag-mobil-panel {
+    display: block;
+    margin-top: 0;
+    border: 1px solid var(--c-border);
+    border-top: 3px solid var(--c-navy);
+    border-radius: 0 0 6px 6px;
     padding: var(--sp-md);
-    margin-top: var(--sp-md);
+    background: var(--c-white);
+    width: 100%;
+    margin-bottom: var(--sp-md);
   }
 }
 
