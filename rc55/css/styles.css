@@ -193,13 +193,13 @@ p:last-child { margin-bottom: 0; }
 /* ── HERO ────────────────────────────────────────────────────────── */
 .hero {
   position: relative;
-  width: 100%; height: 82vh; min-height: 560px; max-height: 900px;
+  width: 100%; height: 72vh; min-height: 480px; max-height: 580px;
   display: flex; align-items: flex-start;
   overflow: hidden; color: #fff;
 }
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
-  background: url('../assets/hero-kyst.jpg') center 38% / cover no-repeat;
+  background: url('../assets/landskab-aalerne.jpg') center 42% / cover no-repeat;
   animation: kenburns 24s ease-out forwards;
   transform-origin: center center;
 }
@@ -1027,14 +1027,14 @@ footer p { margin-bottom: .25rem; }
 
 /* ── MOBIL FORSIDE SPACING (mål: 390–430px) ─────────────────── */
 @media (max-width: 768px) {
-  /* Hero: portrait-billede på mobil – lidt højere for at bænken ses */
+  /* Hero: landskabsbillede – tilpas højde til 881×663 format */
   .hero {
-    min-height: 460px;
-    height: 75vh;
+    min-height: 360px;
+    height: 56vw; /* bevarer billedets ~3:2 ratio på mobil */
+    max-height: 480px;
   }
   .hero-bg {
-    background-image: url('../assets/hero-kyst-mobil.jpg');
-    background-position: center 35%;
+    background-position: center 38%;
   }
   /* CTA flyttes ~190px ned fra undertekst (110px ekstra ift. RC5.3) */
   .hero-sub {

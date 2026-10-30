@@ -16,7 +16,7 @@
  * 8. Brugeren ser ny version
  */
 
-const CACHE_VERSION = 'kfd-v1.0.28';
+const CACHE_VERSION = 'kfd-v1.0.29';
 const CACHE_NAME    = CACHE_VERSION;
 
 const PRECACHE = [
@@ -28,6 +28,7 @@ const PRECACHE = [
   './js/app.js',
   './assets/hero-kyst.jpg',
   './assets/hero-kyst-mobil.jpg',
+  './assets/landskab-aalerne.jpg',
   './manifest.json',
 ];
 
