@@ -1,5 +1,14 @@
 # CHANGELOG – Kystforeningen Djursland
 
+## v1.0.32 korrektioner (31. oktober 2026)
+
+### Rettelser
+- Hero-billede: styles.css placeret i css/-undermappe så url('../assets/landskab-aalerne.jpg') virker korrekt på alle enheder
+- GF 2026: Fjernet dobbelt dokument "Bestyrelsens beretning 2026" – kun "Velkomst og beretning 2026" vises
+- Grobund/Ålerne presse: Tilføjet artikler fra Din Avis (juni 2025), TV 2 Østjylland og DR Østjylland (links + kort omtale, ingen fulde tekster)
+
+---
+
 ## v1.0.32 (31. oktober 2026)
 
 ### Nye dokumenter tilføjet
