@@ -1,5 +1,66 @@
 # CHANGELOG – Kystforeningen Djursland
 
+## v1.0.34 (31. oktober 2026)
+
+### Kontrol og verifikation
+- Avisartikler: Direkte artikel-URLs ikke verificerbare (bag betalingsmure) – links holdes som forsidelinks med tydelig note om at den præcise URL kræver log-in hos avisen
+- Hero-billede: CSS-sti verificeret korrekt i GitHub repo (`css/styles.css` → `url('../assets/landskab-aalerne.jpg')`); billede bekræftet til stede i `assets/`
+- GitHub Pages: Live repo er v1.0.32 – v1.0.33-filer (nye Grobund-faner) IKKE deployet endnu; denne leverance (v1.0.34) er første komplette leverance klar til upload
+- Bliv medlem-funktion: Analyseret – se kontrolrapport nedenfor
+
+### Bliv-medlem analyse
+- Modtageradresse: `info@kystforeningendj.dk` (SITE.email fallback) og den Supabase `contact_email`-indstilling, der vises i k-email-elementet
+- Mekanisme: Åbner brugerens eget mailprogram med `mailto:` – der sendes INGEN mail automatisk fra serveren
+- Oplysninger i formularen: Navn (påkrævet), e-mail (påkrævet), telefon (valgfrit), kommentar (valgfrit)
+- Automatisk bekræftelse til nyt medlem: NEJ – ingen bekræftelsesmail sendes automatisk
+- Fejlhåndtering: Hvis brugerens mailprogram ikke åbner, vises besked med kopi-knap
+- Datalagring: Ingen – formulardata gemmes IKKE i database, localStorage eller server
+
+### Teknisk
+- Service Worker CACHE_VERSION: kfd-v1.0.34
+- config.js APP_VERSION: 1.0.34
+
+---
+
+## v1.0.33 (31. oktober 2026)
+
+### Grobund/Ålerne – udvidet
+
+**Presse og debat (fane):**
+- "Presse"-fanen omdøbt til "Presse og debat"
+- Foreningens eget debatindlæg tilføjet: "Bidrager Grobund positivt til samfundet?" (Elsebeth Due Kjeldsen)
+- Tilføjet debatindlæg: JP 2. feb 2026 – "Politikere svigter naturen" (link + omtale, ikke fuldt indhold – copyright JP)
+- Tilføjet debatindlæg: Ebeltoft Folketidende 4. feb 2026 – samme indlæg (link + omtale – copyright Ebeltoft Folketidende)
+- Tilføjet debatindlæg: Din Avis 27. apr 2026 – "Er Grobund vigtigere end velfærd?" af John Finmann (link + omtale – copyright JP Lokalaviser)
+- Tilføjet nyhedsartikel: Ebeltoft Folketidende 4. marts 2026 – "Politisk vilje til at finde en løsning" (link + omtale)
+
+**Ny fane: Trafik og infrastruktur:**
+- Beskriver trafikudfordringen på Langagervej, Christianslundsvej, Færgevejen og Ålervejen
+- Nævner Rambøll-analyse som internt kommunalt grundlag (ikke publiceret, IKKE linket som PDF – rapport er fortrolig)
+- Foreningens krav om reelle trafiktællinger
+- Link til John Finmanns debatindlæg om trafik
+
+**Ny fane: Vandhåndtering og miljø:**
+- Beskriver K-LAR's vandhåndteringsnotat (27. marts 2026) – ikke publiceret officielt, IKKE linket som PDF
+- Spildevandsproblematikken som central hindring
+- Link til eksisterende Din Avis-artikel om spildevandsprop
+- Beskyttede naturtyper og grundvand
+
+### Nye dokumentfiler
+- assets/documents/grobund/bidrager-grobund-til-samfundet.pdf (foreningens eget – kan publiceres)
+
+### Sikkerhed (uændret)
+- Rambøll Trafikafviklingsplan (Confidential, jan 2026): IKKE publiceret, IKKE linket
+- K-LAR Vandhåndteringsplan (ikke officielt frigivet): IKKE publiceret som download
+- Avisartikler (JP, Ebeltoft Folketidende, Din Avis): Kun overskrift, omtale og link – ingen fulde tekster (ophavsret)
+- Service Role Key: ikke til stede i frontend
+
+### Teknisk
+- Service Worker CACHE_VERSION: kfd-v1.0.33
+- config.js APP_VERSION: 1.0.33
+
+---
+
 ## v1.0.32 korrektioner (31. oktober 2026)
 
 ### Rettelser

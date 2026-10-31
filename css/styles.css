@@ -199,7 +199,7 @@ p:last-child { margin-bottom: 0; }
 }
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
-  background: url('../assets/landskab-aalerne.jpg') center 42% / cover no-repeat;
+  background: url('../assets/hero-blomstereng.jpg') center 55% / cover no-repeat;
   animation: kenburns 24s ease-out forwards;
   transform-origin: center center;
 }
@@ -1085,6 +1085,12 @@ footer p { margin-bottom: .25rem; }
   .hero {
     height: 80vh;
     min-height: 440px;
+  }
+  /* Mobil: samme bænkebillede, beskæring justeret så bænk + hav er tydeligt */
+  .hero-bg {
+    background-image: url('../assets/hero-blomstereng.jpg');
+    background-position: center 55%;
+    background-size: cover;
   }
 
   #intro {

@@ -527,27 +527,15 @@ async function loadMedlemInfo() {
    TILMELDING
 ════════════════════════════════════════════════ */
 function initTilmelding() {
-  $('btn-tilmeld')?.addEventListener('click', () => {
-    const navn   = $('m-navn')?.value.trim()       || '';
-    const email  = $('m-email')?.value.trim()      || '';
-    const tlf    = $('m-tlf')?.value.trim()        || '';
-    const komm   = $('m-kommentar')?.value.trim()  || '';
-    const alert  = $('m-alert');
-    if (alert) alert.className = 'alert';
-
-    if (!navn)  { showAlert('m-alert','⚠ Udfyld dit navn.',false);   return; }
-    if (!email || !/\S+@\S+\.\S+/.test(email))
-                { showAlert('m-alert','⚠ Ugyldig e-mail.',false);     return; }
-
-    const kontaktMail = $('k-email')?.textContent || SITE.email;
-    const emne  = 'Ny medlemstilmelding – ' + navn;
-    const tekst = `Hej Kystforeningen Djursland,\n\nJeg ønsker at melde mig ind.\n\nNavn: ${navn}\nE-mail: ${email}${tlf?'\nTelefon: '+tlf:''}${komm?'\nKommentar: '+komm:''}\n\nMed venlig hilsen\n${navn}`;
-    visBesked('Klik "Åbn e-mailprogram" eller kopiér og send manuelt.',
-      tekst, emne, tekst, kontaktMail);
-    ['m-navn','m-email','m-tlf','m-kommentar'].forEach(id => {
-      const e = $(id); if (e) e.value = '';
+  // Onlineindmeldelse midlertidigt deaktiveret – modtageradresse afventer godkendelse.
+  // Knappen er disabled i HTML; lytteren er sat til noop for at undgå utilsigtet afsendelse.
+  const btn = $('btn-tilmeld');
+  if (btn) {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Ingen handling – formularen er midlertidigt lukket.
     });
-  });
+  }
 }
 
 /* ════════════════════════════════════════════════
