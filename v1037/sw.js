@@ -16,7 +16,7 @@
  * 8. Brugeren ser ny version
  */
 
-const CACHE_VERSION = 'kfd-v1.0.41';
+const CACHE_VERSION = 'kfd-v1.0.42';
 const CACHE_NAME    = CACHE_VERSION; // v1.0.41 – tilføjet K-LAR vandhaandtering + Ramboll trafik PDF
 
 const PRECACHE = [
