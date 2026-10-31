@@ -16,7 +16,7 @@
  * 8. Brugeren ser ny version
  */
 
-const CACHE_VERSION = 'kfd-v1.0.26';
+const CACHE_VERSION = 'kfd-v1.0.32';
 const CACHE_NAME    = CACHE_VERSION;
 
 const PRECACHE = [
@@ -26,8 +26,7 @@ const PRECACHE = [
   './js/config.js',
   './js/supabase-client.js',
   './js/app.js',
-  './assets/hero-kyst.jpg',
-  './assets/hero-kyst-mobil.jpg',
+  './assets/landskab-aalerne.jpg',
   './manifest.json',
 ];
 
