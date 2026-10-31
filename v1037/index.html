@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+
+<html lang="da">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kystforeningen Djursland – Bevar Djurslands kyster</title>
+<meta content="Kystforeningen Djursland arbejder for at bevare naturen og de rekreative kystområder på Djursland gennem folkeoplysning, fællesskab og konkrete aktiviteter." name="description"/>
+<meta content="#0d2233" name="theme-color"/>
+<link href="./manifest.json" rel="manifest"/>
+<link href="./assets/icons/icon-192.png" rel="apple-touch-icon"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="Kystforeningen" name="apple-mobile-web-app-title"/>
+<meta content="Kystforeningen Djursland" property="og:title"/>
+<meta content="Bevarelse af naturen og de rekreative kystområder på Djursland" property="og:description"/>
+<meta content="https://kystforeningendjursland.dk/assets/landskab-aalerne.jpg" property="og:image"/>
+<meta content="https://kystforeningendjursland.dk" property="og:url"/>
+<meta content="website" property="og:type"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Source+Sans+3:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- UPDATE BANNER -->
+<div aria-live="polite" id="update-banner" role="alert" style="display:none;">
+  🔄 En ny version er klar –
+  <button class="btn btn-sm btn-navy" id="update-now" style="padding:.3rem .8rem;margin-left:.4rem;">Opdater nu</button>
+</div>
+<!-- DEBUG BAR (kun DEBUG_MODE = true) -->
+<div aria-hidden="true" id="config-warn" style="display:none;"></div>
+<!-- ════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════ -->
+<nav aria-label="Primær navigation" id="nav" role="navigation">
+<div class="nav-inner">
+<a aria-label="Kystforeningen Djursland – forside" class="nav-logo" href="#" id="nav-logo">
+      🌊 Kystforeningen Djursland
+    </a>
+<ul id="nav-links" role="list">
+<li><button class="nav-btn" data-page="forside">Forside</button></li>
+<li><button class="nav-btn" data-page="om">Om foreningen</button></li>
+<li><button class="nav-btn" data-page="sager">Aktuelle sager</button></li>
+<li><button class="nav-btn" data-page="bestyrelse">Bestyrelse</button></li>
+<li><button class="nav-btn" data-page="gf">Dokumenter</button></li>
+<li><button class="nav-btn" data-page="hoeringssvar">Høringssvar</button></li>
+<li><button class="nav-btn" data-page="kontakt">Kontakt</button></li>
+<li><button class="nav-btn" data-page="medlem" style="margin-left:.5rem;background:rgba(200,164,90,.18);color:var(--c-gold);border-radius:3px;padding:.4rem .8rem;">Bliv medlem</button></li>
+</ul>
+<button aria-expanded="false" aria-label="Åbn menu" class="hamburger" id="hamburger">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<!-- ════════════════════════════════════════════
+     FORSIDE
+════════════════════════════════════════════ -->
+<div class="page active" id="page-forside">
+<!-- HERO -->
+<section aria-labelledby="hero-h1" class="hero">
+<div aria-label="Udsigt over kystlandskabet på Djursland" class="hero-bg" role="img"></div>
+<div class="hero-overlay"></div>
+<div class="hero-content mw">
+<p class="hero-eyebrow">Uafhængig forening · Djursland</p>
+<h1 class="hero-title" id="hero-h1">
+<span>Kystforeningen</span>
+<span>Djursland</span>
+</h1>
+<p class="hero-sub">For vores kyst, natur og lokalsamfund</p>
+<div class="hero-cta">
+<button class="btn btn-primary btn-lg" data-goto="sager">
+          Se aktuelle sager <span class="arrow">→</span>
+</button>
+</div>
+</div>
+<button aria-label="Scroll ned" class="hero-scroll-hint" id="hero-scroll">
+<span>Scroll</span>
+<div class="hero-scroll-chevron"></div>
+</button>
+</section>
+<!-- INTRO -->
+<section aria-labelledby="intro-h2" id="intro">
+<div class="mw-sm" style="padding: var(--sp-xl) var(--sp-md);">
+<p class="section-label">Om foreningen</p>
+<h2 class="intro-statement" id="intro-h2">
+        Kysten er vores<br/>fælles landskab
+      </h2>
+<div class="section-rule"></div>
+<p class="intro-text">
+        Kystforeningen Djursland er en åben, partipolitisk uafhængig forening.
+        Vi samler borgere om bevarelsen af Djurslands kystlandskaber, natur og rekreative områder
+        gennem viden, fællesskab og konkrete aktiviteter.
+      </p>
+</div>
+</section>
+<!-- MØRKEBLÅ SEKTION: OPLEV · FORSTÅ · BEVAR -->
+<section aria-label="Hvad vi tilbyder" class="dark-section">
+<div class="dark-section-hdr">
+<p class="section-label">Kystforeningen Djursland</p>
+<div class="dark-tagline">OPLEV · FORSTÅ · BEVAR</div>
+</div>
+<div class="dark-frames">
+<div aria-label="Læs om natur og kyst" class="dark-frame" data-goto="om" role="button" tabindex="0">
+<div class="dark-frame-body">
+<div class="dark-frame-num">01</div>
+<div class="dark-frame-title">Natur<br/>&amp; kyst</div>
+<div class="dark-frame-text">
+            Naturformidling og viden om Djurslands kystlandskaber, biodiversitet og havmiljø.
+          </div>
+<div class="dark-frame-arrow">Læs mere</div>
+</div>
+</div>
+<div aria-label="Aktuelle sager" class="dark-frame" data-goto="sager" role="button" tabindex="0">
+<div class="dark-frame-body">
+<div class="dark-frame-num">02</div>
+<div class="dark-frame-title">Aktuelle<br/>sager</div>
+<div class="dark-frame-text">
+            Vi følger og formidler udviklingen langs Djurslands kyster og naturområder.
+          </div>
+<div class="dark-frame-arrow">Se sager</div>
+</div>
+</div>
+<div aria-label="Høringssvar og indsigelser" class="dark-frame" data-goto="hoeringssvar" role="button" tabindex="0">
+<div class="dark-frame-body">
+<div class="dark-frame-num">03</div>
+<div class="dark-frame-title">Høringssvar<br/>&amp; indsigelser</div>
+<div class="dark-frame-text">
+            Se foreningens høringssvar og indsigelser til kommunale planprocesser.
+          </div>
+<div class="dark-frame-arrow">Se høringssvar</div>
+</div>
+</div>
+</div>
+</section>
+<!-- MEDLEMS-CTA -->
+<section aria-labelledby="cta-h2" class="member-cta">
+<div class="mw-xs">
+<p class="section-label">Støt bevarelsen</p>
+<h2 class="member-cta-title" id="cta-h2">
+        Bliv en del<br/>af fællesskabet
+      </h2>
+<p class="member-cta-text">
+        Alle kan melde sig ind – uanset bopæl.
+        Dit medlemskab støtter foreningens arbejde for naturen og kystlandskabet.
+      </p>
+<button class="btn btn-gold btn-lg" data-goto="medlem">
+        Bliv medlem <span class="arrow">→</span>
+</button>
+</div>
+</section>
+</div><!-- /page-forside -->
+<!-- ════════════════════════════════════════════
+     OM FORENINGEN
+════════════════════════════════════════════ -->
+<div class="page" id="page-om">
+<div class="page-hero">
+<div class="mw">
+<p class="section-label">Hvem er vi</p>
+<h1 class="page-hero-title">Om foreningen</h1>
+</div>
+</div>
+<div class="page-body">
+<div class="mw">
+<p style="max-width:640px;font-size:1rem;color:var(--c-stone);line-height:1.8;margin-bottom:var(--sp-lg);">
+        Kystforeningen Djursland er en partipolitisk uafhængig forening.
+        Vi arbejder for bevarelse af naturværdier, kystlandskaber og rekreative muligheder
+        på Djursland — gennem oplysning, aktiviteter og åben dialog med borgerne.
+      </p>
+<div style="background:var(--c-cream);padding:var(--sp-md) var(--sp-lg);margin-bottom:var(--sp-xl);border-left:3px solid var(--c-gold);max-width:440px;">
+<div style="font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--c-gold);font-weight:700;margin-bottom:.6rem;">Stamoplysninger</div>
+<div style="font-size:.88rem;color:var(--c-ink);line-height:1.9;">
+<strong>CVR:</strong> 44995514<br/>
+<strong>Adresse:</strong> Langagervej 5, 8400 Ebeltoft<br/>
+<strong>Hjemsted:</strong> Syddjurs Kommune<br/>
+<strong>Stiftet:</strong> 25. juli 2024
+        </div>
+</div>
+<div class="om-pillars">
+<div class="om-pillar">
+<div class="om-pillar-icon">🎯</div>
+<h4>Formål</h4>
+<p>Bevare naturen og kystlandskaberne til glæde for nuværende og kommende generationer.</p>
+</div>
+<div class="om-pillar">
+<div class="om-pillar-icon">📚</div>
+<h4>Folkeoplysning</h4>
+<p>Foredrag, vandringer, borgermøder og formidling af viden om natur, miljø og planlægning.</p>
+</div>
+<div class="om-pillar">
+<div class="om-pillar-icon">👥</div>
+<h4>Fællesskab</h4>
+<p>Åben for alle borgere. Stemmeret og indflydelse på generalforsamlingen.</p>
+</div>
+<div class="om-pillar">
+<div class="om-pillar-icon">⚖️</div>
+<h4>Uafhængig</h4>
+<p>Ingen partipolitiske eller kommercielle bindinger. Vi taler naturens og borgernes sag.</p>
+</div>
+<div class="om-pillar">
+<div class="om-pillar-icon">🤝</div>
+<h4>Borgerinddragelse</h4>
+<p>Vi formidler om planprocesser og inddrager borgerne i demokratisk dialog.</p>
+</div>
+<div class="om-pillar">
+<div class="om-pillar-icon">🌿</div>
+<h4>Naturformidling</h4>
+<p>Vi formidler viden om Djurslands kystlandskaber, biodiversitet og havmiljø.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ════════════════════════════════════════════
+     AKTIVITETER
+════════════════════════════════════════════ -->
+<div class="page" id="page-aktiviteter">
+<div class="page-hero">
+<div class="mw">
+<p class="section-label">Hvad sker der</p>
+<h1 class="page-hero-title">Aktiviteter</h1>
+</div>
+</div>
+<div class="page-body">
+<div class="mw-sm">
+<p style="font-size:.88rem;color:var(--c-muted);margin-bottom:var(--sp-lg);">
+        Alle arrangementer er åbne for medlemmer og interesserede borgere.
+        Tilmelding ikke nødvendig, medmindre andet er angivet.
+      </p>
+<div class="ak-list" id="ak-list">
+<p class="text-muted">Henter aktiviteter…</p>
+</div>
+</div>
+</div>
+</div>
+<!-- ════════════════════════════════════════════
+     AKTUELLE SAGER
+════════════════════════════════════════════ -->
+<div class="page" id="page-sager">
+<div class="page-hero">
+<div class="mw">
+<p class="section-label">Vi følger sagerne</p>
+<h1 class="page-hero-title">Aktuelle sager</h1>
+</div>
+</div>
+<div class="page-body">
+<div class="mw">
+<div class="sag-note" role="note">
+        Vi formidler offentligt tilgængeligt materiale om sager der berører Djurslands
+        kyster og natur. Foreningen er ikke kampagneorganisation – vi oplyser og inddrager borgerne.
+      </div>
+<!-- DE FEM SAGER -->
+<div class="sag-grid-3" id="sag-grid">
+<!-- SAG 1: DRÅBY -->
+<div class="sag-kort-3" id="kort-draby">
+<div class="sag-kort-3-img-wrap">
+<img alt="Luftfoto af sommerhusområdet ved Dråby Strand – grøn mark med havudsigt" class="sag-kort-img" src="assets/sommerhus-mark.jpg"/>
+</div>
+<div class="sag-kort-3-body">
+<div class="sag-status-badge">Under behandling</div>
+<h3>Dråby – sommerhusområde og store sommerhuse</h3>
+<p>Et nyt sommerhusområde med op til 108 store partyhuse ved Dråby strand rejser spørgsmål om trafik, adgang og kystpåvirkning.</p>
+<button aria-expanded="false" class="btn-laes-sag" data-sag="draby">Læs hele sagen</button>
+</div>
+</div>
+<!-- SAG 2: VOSNÆS -->
+<div class="sag-kort-3" id="kort-vosnæs">
+<div class="sag-kort-3-img-wrap">
+<img alt="Kort over vindmølleplaceringer ved Vosnæs med 900 meter-zone og kommunegrænse" class="sag-kort-img" src="assets/vosnæs-vindmoeller.jpg"/>
+</div>
+<div class="sag-kort-3-body">
+<div class="sag-status-badge sag-status-aktiv">Aktiv sag</div>
+<h3>Vosnæs – vindmøller og ministerafgørelse</h3>
+<p>Naboerne og foreningen er i dialog med myndighederne om planerne for vindmøller ved Vosnæs. Ministerafgørelsen afklarer, hvem der har kompetencen til at afgøre sagen.</p>
+<button aria-expanded="false" class="btn-laes-sag" data-sag="vosnæs">Læs hele sagen</button>
+</div>
+</div>
+<!-- SAG 3: GROBUND/ÅLERNE -->
+<div class="sag-kort-3" id="kort-grobund">
+<div class="sag-kort-3-img-wrap">
+<img alt="Luftfoto af Grobund-området ved Ålerne – industrianlæg og havneområde" class="sag-kort-img" src="assets/grobund-industri.jpg"/>
+</div>
+<div class="sag-kort-3-body">
+<div class="sag-status-badge">Under behandling</div>
+<h3>Grobund / Ålerne – bosætning og kystplanlægning</h3>
+<p>Planerne om bosætning ved Ålerne og havneudvikling ved Grobund berører kystnærhedszonen og de rekreative interesser.</p>
+<button aria-expanded="false" class="btn-laes-sag" data-sag="grobund">Læs hele sagen</button>
+</div>
+</div>
+<!-- SAG 4: HJELM BANKE -->
+<div class="sag-kort-3" id="kort-hjelm">
+<div class="sag-kort-3-img-wrap">
+<img alt="Søkort over Hjelm Banke med råstofindvindingsområde 506-JA – Delområde 1 og 2" class="sag-kort-img" src="assets/hjelm-banke-kort-nyt.png"/>
+</div>
+<div class="sag-kort-3-body">
+<div class="sag-status-badge">Overvågning</div>
+<h3>Hjelm Banke – råstofindvinding til havs</h3>
+<p>Miljøstyrelsen behandler ansøgning om tilladelse til råstofindvinding på Hjelm Banke. Foreningen følger sagen tæt.</p>
+<button aria-expanded="false" class="btn-laes-sag" data-sag="hjelm">Læs hele sagen</button>
+</div>
+</div>
+<!-- SAG 5: FJELLERUP STRAND -->
+<div class="sag-kort-3" id="kort-fjellerup">
+<div class="sag-kort-3-img-wrap">
+<img alt="Luftfoto af Fjellerup Strand med badebro og bebyggelse langs kysten, Norddjurs" class="sag-kort-img" src="assets/fjellerup-strand.jpg"/>
+</div>
+<div class="sag-kort-3-body">
+<div class="sag-status-badge sag-status-fulgt">Fulgt</div>
+<h3>Fjellerup Strand – kystbeskyttelse og erosion</h3>
+<p>Foreningen følger arbejdet med kystbeskyttelse og erosionsbekæmpelse ved Fjellerup Strand i Norddjurs Kommune.</p>
+<button aria-expanded="false" class="btn-laes-sag" data-sag="fjellerup">Læs hele sagen</button>
+</div>
+</div>
+</div><!-- /sag-grid-3 -->
+<!-- FÆLLES DETALJEFELT – uden for grid -->
+<div aria-live="polite" class="sag-detalje-panel" id="sag-detalje-panel">
+<!-- SAG-INDHOLD: DRÅBY -->
+<div class="sag-detalje-indhold" id="sag-draby">
+<div class="sag-detalje">
+<div class="sag-tabs" role="tablist">
+<button class="sag-tab" data-tab="draby-baggrund">Baggrund</button>
+<button class="sag-tab aktiv" data-tab="draby-nyt">Seneste nyt</button>
+<button class="sag-tab" data-tab="draby-hoering">Høringer</button>
+<button class="sag-tab" data-tab="draby-arbejde">Vores arbejde</button>
+<button class="sag-tab" data-tab="draby-presse">Presse</button>
+<button class="sag-tab" data-tab="draby-kom">Kommunale kilder</button>
+</div>
+<div class="sag-tab-panel" id="draby-baggrund">
+<p>Der er planer om et nyt sommerhusområde ved Dråby strand syd for Ebeltoft med op til 108 store sommerhuse – i folkemunde kaldet "partyhuse" på grund af størrelsen. Husene forventes at ligge i op til to etager og har en størrelse, der langt overstiger det typiske sommerhus.</p>
+<p>Sagen rejser spørgsmål om trafikbelastning på de smalle veje, offentlig adgang til kysten og påvirkningen af det lokale miljø og nabolag.</p>
+</div>
+<div class="sag-tab-panel aktiv" id="draby-nyt">
+<div style="background:var(--c-ocean);color:#fff;padding:.75rem 1rem;border-radius:6px;font-weight:700;font-size:.9rem;margin-bottom:var(--sp-sm);text-align:center;letter-spacing:.03em;">
+                          ⚠ STATUS: OFFENTLIG HØRING – FRIST 16. DECEMBER 2026 KL. 23.59
+                        </div>
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">21. oktober 2026</span>
+<strong>Lokalplan 474 offentliggjort – høring åben</strong>
+<p>Syddjurs Kommune offentliggjorde den 21. oktober 2026 forslag til Lokalplan 474 for sommerhusområde ved Dråby Strand. Den offentlige høring løber frem til <strong>16. december 2026 kl. 23.59</strong>. Høringssvar sendes via kommunens hjemmeside.</p>
+</div>
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">2. november 2026 kl. 17.30</span>
+<strong>Borgermøde om lokalplanforslaget – Rådhuset i Ebeltoft</strong>
+<p>Syddjurs Kommune afholder borgermøde om Lokalplan 474 den 2. november 2026 kl. 17.30 på Rådhuset i Ebeltoft. Alle interesserede er velkomne.</p>
+</div>
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">September 2026</span>
+<strong>Lokalplanforslag sendt i 8 ugers offentlig høring</strong>
+<p>Syddjurs Byråd har sendt et lokalplanforslag i offentlig høring, der åbner for et nyt sommerhusområde ved Dråby Strand med op til 108 sommerhuse på ca. 16 hektar ca. 2 km øst for Dråby. Hvert hus kan være op til 180 m² med op til 50 m² sekundær bebyggelse. Husene placeres i spredte byggefelter med fælles grønne arealer imellem.</p>
+<p>Byrådet vedtog at sende forslaget i høring med 21 stemmer for og 6 imod. SF, Enhedslisten, Radikale Venstre og Alternativet stemte imod i dets nuværende form med henvisning til natur, miljø, lokalt nærmiljø og trafikforhold.</p>
+</div>
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">Miljøscreening</span>
+<strong>Ingen fuld miljørapport</strong>
+<p>Kommunens miljøscreening konkluderede, at planen ikke forventes at medføre væsentlig påvirkning af miljøet. Der udarbejdes derfor ikke en fuld miljøvurdering. Spildevandsløsning er under bearbejdning – byrådet stemte for at administrationens redegørelse revideres, inden planen offentliggøres endeligt.</p>
+</div>
+<p style="font-size:.82rem;color:var(--c-muted);margin-top:var(--sp-sm);">
+                          Kilde: <a href="https://dansk-byudvikling.dk/plan-for-over-100-store-sommerhuse-sendes-i-hoering/" rel="noopener" target="_blank">Dansk Byudvikling, 21. september 2026</a>
+</p>
+</div>
+<div class="sag-tab-panel" id="draby-hoering">
+<div style="background:var(--c-ocean);color:#fff;padding:.75rem 1rem;border-radius:6px;font-weight:700;font-size:.9rem;margin-bottom:var(--sp-md);text-align:center;letter-spacing:.03em;">
+                          ⚠ OFFENTLIG HØRING ÅBEN – FRIST 16. DECEMBER 2026 KL. 23.59
+                        </div>
+<!-- Høringskort: Lokalplan 474 -->
+<div style="border:2px solid var(--c-ocean);border-radius:8px;padding:var(--sp-sm) var(--sp-md);margin-bottom:var(--sp-md);">
+<div style="font-size:.78rem;font-weight:700;color:var(--c-ocean);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.35rem;">Igangværende høring</div>
+<h4 style="margin:0 0 .5rem;font-size:1rem;">Forslag til Lokalplan 474 – sommerhusområde ved Dråby Strand</h4>
+<table style="width:100%;border-collapse:collapse;font-size:.85rem;margin-bottom:.75rem;">
+<tr><td style="padding:.25rem .5rem .25rem 0;color:var(--c-muted);white-space:nowrap;vertical-align:top;">Offentliggjort</td><td style="padding:.25rem 0;">21. oktober 2026</td></tr>
+<tr><td style="padding:.25rem .5rem .25rem 0;color:var(--c-muted);white-space:nowrap;vertical-align:top;">Høringsfrist</td><td style="padding:.25rem 0;"><strong>16. december 2026 kl. 23.59</strong></td></tr>
+<tr><td style="padding:.25rem .5rem .25rem 0;color:var(--c-muted);white-space:nowrap;vertical-align:top;">Borgermøde</td><td style="padding:.25rem 0;">2. november 2026 kl. 17.30 – Rådhuset, Ebeltoft</td></tr>
+<tr><td style="padding:.25rem .5rem .25rem 0;color:var(--c-muted);white-space:nowrap;vertical-align:top;">Myndighed</td><td style="padding:.25rem 0;">Syddjurs Kommune</td></tr>
+</table>
+<a href="https://2025.syddjurs.dk/da/hoeringer-og-afgoerelser/oversigt/forslag-til-lokalplan-474-for-sommerhusomraade-ved-draaby-strand/" rel="noopener noreferrer" style="display:inline-block;background:var(--c-ocean);color:#fff;padding:.45rem .9rem;border-radius:4px;font-size:.85rem;font-weight:600;text-decoration:none;" target="_blank">
+                            Send høringssvar til kommunen ↗
+                          </a>
+</div>
+<!-- Høringssvar og indsigelser -->
+<h4 style="font-size:.92rem;font-weight:700;margin:.25rem 0 .5rem;">Høringssvar og indsigelser</h4>
+<p style="font-size:.85rem;color:var(--c-muted);margin-bottom:.5rem;">
+                          Høringen er åben frem til 16. december 2026. Alle kan sende bemærkninger til kommunen via linket ovenfor.
+                          Det aktuelle antal modtagne høringssvar oplyses af Syddjurs Kommune.
+                        </p>
+<p style="font-size:.82rem;color:var(--c-muted);">
+                          Kilde: <a href="https://2025.syddjurs.dk/da/hoeringer-og-afgoerelser/oversigt/forslag-til-lokalplan-474-for-sommerhusomraade-ved-draaby-strand/" rel="noopener" target="_blank">Syddjurs Kommune – høringsportal</a>
+</p>
+</div>
+<div class="sag-tab-panel" id="draby-arbejde">
+<p>Kystforeningen Djursland følger planprocessen og formidler offentligt tilgængeligt materiale. Vi er opmærksomme på sagens potentielle konsekvenser for kystadgang, trafik og landskab og vil deltage i relevante høringer.</p>
+</div>
+<div class="sag-tab-panel" id="draby-presse">
+<p style="font-size:.78rem;color:var(--c-muted);margin-bottom:var(--sp-sm);font-style:italic;">
+                          Artiklerne herunder er eksterne mediers egne tekster og repræsenterer ikke Kystforeningens holdning.
+                        </p>
+<a class="presse-kort" href="https://dansk-byudvikling.dk/plan-for-over-100-store-sommerhuse-sendes-i-hoering/" rel="noopener noreferrer" target="_blank">
+<div class="presse-kilde">Dansk Byudvikling · 21. september 2026</div>
+<div class="presse-overskrift">Plan for over 100 store sommerhuse sendes i høring</div>
+<div class="presse-beskr">Artiklen gennemgår Syddjurs Kommunes lokalplanforslag for et nyt sommerhusområde ved Dråby Strand med op til 108 sommerhuse. Belyser byrådsbehandlingen, de politiske stemmer imod, spildevandsdiskussionen og borgermødet den 2. november 2026.</div>
+<div class="presse-laes">Læs artiklen hos Dansk Byudvikling ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/samfund/ECE19625402/nu-er-nyt-sommerhusomraade-ved-draaby-paa-vej/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis</div>
+<div class="presse-overskrift">Nu er nyt sommerhusområde ved Dråby på vej</div>
+<div class="presse-beskr">Artikel om planerne for det nye sommerhusområde ved Dråby strand med op til 108 store sommerhuse.</div>
+<div class="presse-laes">Læs artiklen ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/debat/ECE19615092/jeg-baade-frygter-og-forventer-de-108-kaempe-partyhuse/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis – Debat</div>
+<div class="presse-overskrift">»Jeg både frygter og forventer de 108 kæmpe-partyhuse«</div>
+<div class="presse-beskr">Læsere og lokale udtaler sig om de planlagte store sommerhuse ved Dråby.</div>
+<div class="presse-laes">Læs artiklen ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/politik/ECE19650691/byraadet-sender-omstridt-sommerhusplan-i-hoering-trods-uklarhed-om-spildevand/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis · 17. september 2026</div>
+<div class="presse-overskrift">Byrådet sender omstridt sommerhusplan i høring trods uklarhed om spildevand</div>
+<div class="presse-beskr">Syddjurs Byråd vedtog 17. september 2026 med 21 stemmer mod 6 at sende Lokalplan 474 for 108 sommerhuse ved Dråby Strand i offentlig høring. Uklarhed om spildevandsafledning afventede statslig vejledning. Borgermøde afholdes 2. november 2026. Forfatter: Anne Frank Henriksen.</div>
+<div class="presse-laes">Læs artiklen hos Din Avis ↗</div>
+</a>
+<a class="presse-kort" href="https://www.tv2ostjylland.dk/syddjurs/er-naturen-eller-turismen-vigtigst-c58b7" rel="noopener" target="_blank">
+<div class="presse-kilde">TV2 Østjylland · Oktober 2026</div>
+<div class="presse-overskrift">Strid om nye sommerhuse: Er naturen eller turismen vigtigst?</div>
+<div class="presse-beskr">TV2 Østjylland belyser den politiske strid om sommerhusplanerne ved Dråby Strand. Leif Krabbe ønsker miljøvurdering, SF er imod projektet, Konservative støtter. Forfatter: Anne Marie Stoustrup Petersen.</div>
+<div class="presse-laes">Læs artiklen hos TV2 Østjylland ↗</div>
+</a>
+<a class="presse-kort" href="https://www.tv2ostjylland.dk/syddjurs/thorkild-vil-ikke-have-kaempesommerhuse-i-baghaven-f7086" rel="noopener" target="_blank">
+<div class="presse-kilde">TV2 Østjylland · Oktober 2026</div>
+<div class="presse-overskrift">Thorkild vil ikke have kæmpesommerhuse i baghaven</div>
+<div class="presse-beskr">Thorkild Hansen (80 år), der har boet i området i over 50 år, deltog i dialogmøde om planerne og er imod de store sommerhuse. Byrådsmedlem Kasper Kolstrup Møller (K) er for projektet. Forfattere: Sebastian Høeg Lerhøj Wiis &amp; Anne Marie Stoustrup Petersen.</div>
+<div class="presse-laes">Læs artiklen hos TV2 Østjylland ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/debat/ECE19697601/vi-mangler-fakta-om-store-sommerhusplaner-ved-draaby-strand/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
+<div class="presse-overskrift">Vi mangler fakta om store sommerhusplaner ved Dråby Strand</div>
+<div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/debat/ECE19660360/lokalplanforslag-474-ny-sommerhusby-ved-draaby-strand-er-en-ommer/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
+<div class="presse-overskrift">Lokalplanforslag 474: Ny sommerhusby ved Dråby Strand er en ommer</div>
+<div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+</a>
+</div>
+<div class="sag-tab-panel" id="draby-kom">
+<p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">
+                          Officielle kommunale kilder om planerne for sommerhusområdet ved Dråby strand.
+                        </p>
+<a class="presse-kort" href="https://www.syddjurs.dk/borger/bolig-og-byggeri/lokalplaner" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+<div class="presse-overskrift">Lokalplaner – Syddjurs Kommune</div>
+<div class="presse-beskr">Kommunens oversigt over lokalplaner, herunder forslag der berører sommerhusområder ved Dråby. Søg på Lokalplanforslag 474.</div>
+<div class="presse-laes">Gå til lokalplaner ↗</div>
+</a>
+<a class="presse-kort" href="https://aabendagsorden.syddjurs.dk" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+<div class="presse-overskrift">Åben Indsigt – politiske dagsordener og referater</div>
+<div class="presse-beskr">Kommunens åbne portal med dagsordener og referater fra byråd og udvalg, herunder behandling af Dråby-sagen.</div>
+<div class="presse-laes">Gå til Åben Indsigt ↗</div>
+</a>
+<a class="presse-kort" href="https://2025.syddjurs.dk/da/hoeringer-og-afgoerelser/oversigt/forslag-til-lokalplan-474-for-sommerhusomraade-ved-draaby-strand/" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune · 21. oktober 2026</div>
+<div class="presse-overskrift">Lokalplan 474 – høringssiden (kommunens høringsportal)</div>
+<div class="presse-beskr">Kommunens officielle høringssiden for Lokalplan 474, med høringsdokumenter, miljøscreening og mulighed for at sende høringssvar digitalt. Høringsfrist: 16. december 2026 kl. 23.59.</div>
+<div class="presse-laes">Gå til høringsportalen ↗</div>
+</a>
+<!-- Miljøscreening -->
+<h4 style="font-size:.88rem;font-weight:700;margin:var(--sp-md) 0 .4rem;color:var(--c-body);">Miljøscreening</h4>
+<p style="font-size:.84rem;margin-bottom:.4rem;">
+                          Syddjurs Kommune har gennemført en miljøscreening af Lokalplan 474 i henhold til Lov om miljøvurdering af planer og programmer. Screeningen konkluderede, at planen ikke forventes at medføre væsentlig indvirkning på miljøet, og der udarbejdes derfor ikke en fuld miljøvurdering (miljørapport).
+                        </p>
+<p style="font-size:.84rem;margin-bottom:.4rem;">
+                          Afgørelsen om ikke at udarbejde miljørapport (screening-afgørelsen) indgår i høringsmaterialet og kan tilgås via kommunens høringsportal ovenfor.
+                        </p>
+<p style="font-size:.82rem;color:var(--c-muted);">
+                          Kilde: <a href="https://2025.syddjurs.dk/da/hoeringer-og-afgoerelser/oversigt/forslag-til-lokalplan-474-for-sommerhusomraade-ved-draaby-strand/" rel="noopener" target="_blank">Syddjurs Kommune – høringsportal, Lokalplan 474</a>
+</p>
+</div>
+</div>
+</div><!-- /sag-draby -->
+<!-- SAG-INDHOLD: VOSNÆS -->
+<div class="sag-detalje-indhold" id="sag-vosnæs">
+<div class="sag-detalje">
+<div class="sag-tabs" role="tablist">
+<button class="sag-tab" data-tab="vosnæs-baggrund">Baggrund</button>
+<button class="sag-tab aktiv" data-tab="vosnæs-nyt">Seneste nyt</button>
+<button class="sag-tab" data-tab="vosnæs-dok">Høringer</button>
+<button class="sag-tab" data-tab="vosnæs-arbejde">Vores arbejde</button>
+<button class="sag-tab" data-tab="vosnæs-presse">Presse</button>
+<button class="sag-tab" data-tab="vosnæs-kom">Kommunale kilder</button>
+</div>
+<div class="sag-tab-panel" id="vosnæs-baggrund">
+<p>Syddjurs Kommune behandler planerne om opstilling af nye kæmpevindmøller ved Ebeltoft Færgehavn og i det kystnære område ved Vosnæs på Djursland. Møllerne er planlagt til at være 150 meter høje og vil ændre kystlandskabets karakter markant.</p>
+<p>Planerne er en del af Kommuneplan 2024 og berører punkt 1.1.T2, som reserverer arealer til tekniske anlæg i det kystnære område.</p>
+</div>
+<div class="sag-tab-panel aktiv" id="vosnæs-nyt">
+<div style="background:var(--c-muted);color:#fff;padding:.65rem 1rem;border-radius:6px;font-weight:700;font-size:.85rem;margin-bottom:var(--sp-sm);text-align:center;letter-spacing:.02em;">
+                          SENESTE: Minister ophæver planveto – Aarhus Byråd skal fortsat beslutte om endelig vedtagelse
+                        </div>
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">22. oktober 2026</span>
+<strong>Minister ophæver Syddjurs' planveto – Aarhus kan vedtage vindmølleplan</strong>
+<p>Minister for byer og landdistrikter Signe Munk (SF) har truffet afgørelse i sagen om planveto mod Aarhus Kommunes lokalplan for vindmøller ved Vosnæs. Ministeren ophæver Syddjurs Kommunes veto og åbner dermed for, at Aarhus kan vedtage lokalplanen. Borgmester Michael Harregaard Stegger (S, Syddjurs) betegner afgørelsen som "dybt skuffende" og oplyser, at kommunen vil vurdere sine videre muligheder. Kilde: <a href="https://dinavis.dk/politik/ECE19762672/minister-har-afgjort-betaendt-sag-om-150-meter-hoeje-vindmoeller-ved-kommunegraense/" rel="noopener" target="_blank">Din Avis, 22. oktober 2026</a></p>
+</div>
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">Marts 2026</span>
+<strong>Ministerens afgørelse udskudt på ubestemt tid</strong>
+<p>Energi-, byer- og landdistriktsminister Morten Dahlin (V) skulle efter planen have truffet afgørelse i plan-veto-sagen efter vinterferien 2026. Afgørelsen blev udskudt på ubestemt tid, fordi et folketingsvalg blev udskrevet. Sagen overgik til den nye minister efter regeringsskiftet.</p>
+</div>
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">August 2025</span>
+<strong>784 høringssvar – behandling afventer politisk behandling</strong>
+<p>Den offentlige høring om Lokalplan 1237 afsluttedes den 14. august 2025 med 784 indsendte svar. Teknik og Miljø (Aarhus) har udarbejdet et resumé, men offentliggørelse afventer, at politikerne har haft sagen til behandling.</p>
+</div>
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">Juli 2025</span>
+<strong>Syddjurs Kommune nedlægger planveto</strong>
+<p>Syddjurs Kommune nedlagde i juli 2025 veto mod Aarhus Kommunes lokalplan for vindmøllerne ved Vosnæs. Vetoretten medfører, at sagen skal afgøres af ministeren for by og landdistrikter. Kommunerne afholdt mæglingsmøde, men nåede ikke til enighed.</p>
+</div>
+<p style="font-size:.82rem;color:var(--c-muted);margin-top:var(--sp-sm);border-left:3px solid var(--c-gold);padding-left:.75rem;">
+                          Kilde: <a href="https://deltag.aarhus.dk/project/vindmoeller-ved-vosnaes" rel="noopener" target="_blank">Aarhus Kommune – Deltag</a> · <a href="https://dinavis.dk/samfund/ECE19076668/valget-udskyder-afgoerelse-i-betaendt-vindmoellekrig-paa-ubestemt-tid/" rel="noopener" target="_blank">Din Avis, 5. marts 2026</a> · <a href="https://dinavis.dk/politik/ECE19762672/minister-har-afgjort-betaendt-sag-om-150-meter-hoeje-vindmoeller-ved-kommunegraense/" rel="noopener" target="_blank">Din Avis, 22. oktober 2026</a>
+</p>
+</div>
+<div class="sag-tab-panel" id="vosnæs-arbejde">
+<p>Kystforeningen Djursland indsendte høringssvar i januar 2025 med indsigelse mod de planlagte vindmøller ved Ebeltoft Færgehavn. Vi argumenterede for, at de høje møller vil ødelægge det åbne kystlandskab og forringe de rekreative og visuelle kvaliteter i området.</p>
+</div>
+<div class="sag-tab-panel" id="vosnæs-dok">
+<!-- Myndighedsafgørelser -->
+<h4 style="font-size:.88rem;font-weight:700;margin:0 0 .5rem;color:var(--c-body);">Myndighedsafgørelser</h4>
+<div style="border:2px solid var(--c-ocean);border-radius:8px;padding:var(--sp-sm) var(--sp-md);margin-bottom:var(--sp-md);">
+<div style="font-size:.75rem;font-weight:700;color:var(--c-ocean);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem;">Ministerafgørelse · 22. oktober 2026</div>
+<strong style="font-size:.95rem;display:block;margin-bottom:.35rem;">Ministerens afgørelse om vindmøller ved Vosnæs</strong>
+<p style="font-size:.84rem;margin:.25rem 0 .5rem;">
+                            Ministeren har ophævet Syddjurs Kommunes indsigelse mod Aarhus Kommunes forslag til kommuneplantillæg nr. 169 og lokalplan nr. 1237 om tre vindmøller på op til 150 meter ved Vosnæs.
+                            Afgørelsen betyder, at Aarhus Kommune kan fortsætte planprocessen.
+                            <strong>Aarhus Byråd skal fortsat beslutte, om planerne skal vedtages endeligt.</strong>
+</p>
+<table style="width:100%;border-collapse:collapse;font-size:.82rem;margin-bottom:.75rem;">
+<tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Myndighed</td><td style="padding:.2rem 0;">Ministeriet for Byer og Landdistrikter (minister Signe Munk, SF)</td></tr>
+<tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Dato</td><td style="padding:.2rem 0;">22. oktober 2026</td></tr>
+<tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Sagsnummer</td><td style="padding:.2rem 0;">2026-3180</td></tr>
+<tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Omfang</td><td style="padding:.2rem 0;">6 sider, PDF</td></tr>
+<tr><td style="padding:.2rem .5rem .2rem 0;color:var(--c-muted);white-space:nowrap;">Klageadgang</td><td style="padding:.2rem 0;">Kan ikke påklages til Planklagenævnet</td></tr>
+</table>
+<a href="https://aarhus.viewer.dkplan.niras.dk/media/sqenxa1r/afgoerelse.pdf" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:.4rem;background:var(--c-ocean);color:#fff;padding:.5rem 1rem;border-radius:4px;font-size:.85rem;font-weight:600;text-decoration:none;" target="_blank">
+                            📄 Læs ministerens afgørelse (PDF)
+                          </a>
+</div>
+<!-- Høringssvar -->
+<h4 style="font-size:.88rem;font-weight:700;margin:0 0 .5rem;color:var(--c-body);">Høringssvar</h4>
+<a class="dok-row" href="assets/documents/hoeringssvar/hoeringssvar-vindmoeller-faergehavnen-2025.pdf" rel="noopener" style="border:1px solid var(--c-border);margin-bottom:.4rem;" target="_blank">
+<span class="icon">📋</span>
+<div class="info"><strong>Høringssvar – Kæmpevindmøller ved Ebeltoft Færgehavn</strong><span>Januar 2025 · Kommuneplan 2024</span></div>
+<span class="dl">⬇</span>
+</a>
+</div>
+<div class="sag-tab-panel" id="vosnæs-presse">
+<p style="font-size:.78rem;color:var(--c-muted);margin-bottom:var(--sp-sm);border-left:3px solid var(--c-border);padding-left:.75rem;">Artiklerne herunder er eksterne mediers egne tekster og repræsenterer ikke Kystforeningens holdning.</p>
+<a class="presse-kort" href="https://dinavis.dk/politik/ECE19762672/minister-har-afgjort-betaendt-sag-om-150-meter-hoeje-vindmoeller-ved-kommunegraense/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis · 22. oktober 2026</div>
+<div class="presse-overskrift">Minister har afgjort betændt sag om 150 meter høje vindmøller ved kommunegrænse</div>
+<div class="presse-beskr">Signe Munk (SF) ophæver Syddjurs Kommunes planveto. Aarhus kan nu vedtage lokalplan for vindmøller ved Vosnæs. Borgmester Michael Harregaard Stegger (S) er dybt skuffet og vurderer videre muligheder.</div>
+<div class="presse-laes">Læs artiklen hos Din Avis ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/debat/ECE19763418/taet-paa-dig-lige-nu/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis – Debatindlæg · 23. oktober 2026</div>
+<div class="presse-overskrift">Venstre efter Vosnæs-udmelding: »Det er menneskers hjem og lokalsamfund, der bliver ødelagt«</div>
+<div class="presse-beskr">Jørgen Rosengren (V) citerer Gert Bjerregaard i reaktion på ministerens ophævelse af planvetoen. <em>(Artiklen kan kræve abonnement.)</em></div>
+<div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/debat/ECE19763125/ministeren-har-tilsidesat-syddjurs-aarhus-kan-stadig-sige-nej/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
+<div class="presse-overskrift">Ministeren har tilsidesat Syddjurs – Aarhus kan stadig sige nej</div>
+<div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/samfund/ECE19765492/minister-reagerer-paa-kritik-af-vindmoelleafgoerelse-kan-ikke-goere-alle-tilfredse/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis · Oktober 2026</div>
+<div class="presse-overskrift">Minister reagerer på kritik af vindmølleafgørelse: Kan ikke gøre alle tilfredse</div>
+<div class="presse-laes">Læs artiklen hos Din Avis ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/debat/ECE19767306/vi-skal-vaelge-de-rigtige-steder-til-groen-energi/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
+<div class="presse-overskrift">Vi skal vælge de rigtige steder til grøn energi</div>
+<div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/debat/ECE19767316/studstrupvaerket-og-hoejhuse-er-ok-men-tre-vindmoeller-er-for-meget/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
+<div class="presse-overskrift">Studstrupværket og højhuse er ok, men tre vindmøller er for meget</div>
+<div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/debat/ECE19644723/praemissen-er-brudt-nu-kan-aarhus-afslutte-17-aars-vindmoellekonflikt/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
+<div class="presse-overskrift">Præmissen er brudt – nu kan Aarhus afslutte 17 års vindmøllekonflikt</div>
+<div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/politik/ECE19140264/naar-vindmoeller-bliver-valgkampsvaluta-i-slutspurten/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis · Oktober 2026</div>
+<div class="presse-overskrift">Når vindmøller bliver valgkampsvaluta i slutspurten</div>
+<div class="presse-laes">Læs artiklen hos Din Avis ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/debat/ECE12976028/vosnaesmoeller-vil-levere-masser-af-groen-stroem-til-aarhusianerne/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis – Historisk debatindlæg · Maj 2021</div>
+<div class="presse-overskrift">Vosnæsmøller vil levere masser af grøn strøm til aarhusianerne</div>
+<div class="presse-beskr">Historisk debatindlæg fra maj 2021, der argumenterer for vindmøllerne ved Vosnæs og deres potentiale for grøn strøm. Viser de forskellige perspektiver, der har præget debatten om Vosnæs-projektet. <em>(Debatindlæg afspejler forfatterens egne synspunkter.)</em></div>
+<div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+</a>
+</div>
+<div class="sag-tab-panel" id="vosnæs-kom">
+<p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">
+                          Officielle kommunale og myndighedskilder om planerne for vindmøller ved Vosnæs/Ebeltoft Færgehavn.
+                        </p>
+<a class="presse-kort" href="https://aabendagsorden.syddjurs.dk" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+<div class="presse-overskrift">Åben Indsigt – politiske dagsordener og referater</div>
+<div class="presse-beskr">Kommunens åbne portal med dagsordener, referater og bilag fra byråd og udvalg, herunder behandling af vindmøllesagen.</div>
+<div class="presse-laes">Gå til Åben Indsigt ↗</div>
+</a>
+<a class="presse-kort" href="https://www.syddjurs.dk/politik-og-indflydelse/hoeringer-og-afgoerelser" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+<div class="presse-overskrift">Høringer og afgørelser</div>
+<div class="presse-beskr">Kommunens høringsportal med offentlige høringer, herunder Kommuneplan 2024 og vindmølleplanen (punkt 1.1.T2).</div>
+<div class="presse-laes">Gå til høringer ↗</div>
+</a>
+</div>
+</div>
+</div><!-- /sag-vosnæs -->
+<!-- SAG-INDHOLD: GROBUND -->
+<div class="sag-detalje-indhold" id="sag-grobund">
+<div class="sag-detalje">
+<div class="sag-tabs" role="tablist">
+<button class="sag-tab" data-tab="grobund-baggrund">Baggrund</button>
+<button class="sag-tab aktiv" data-tab="grobund-nyt">Seneste nyt</button>
+<button class="sag-tab" data-tab="grobund-dok">Høringer</button>
+<button class="sag-tab" data-tab="grobund-arbejde">Vores arbejde</button>
+<button class="sag-tab" data-tab="grobund-presse">Presse og debat</button>
+<button class="sag-tab" data-tab="grobund-trafik">Trafik og infrastruktur</button>
+<button class="sag-tab" data-tab="grobund-vand">Vandhåndtering og miljø</button>
+<button class="sag-tab" data-tab="grobund-kom">Kommunale kilder</button>
+</div>
+<div class="sag-tab-panel" id="grobund-baggrund">
+<p>Syddjurs Kommune har planer om at udlægge et areal på 65 ha ved Ålerne – fra Tolløkke Skoven til Færgehavnen – til en landsby for det alternative samfund Grobund. Arealet ligger i det kystnære område og er i dag åbent naturlandskab med store rekreative og landskabelige værdier.</p>
+<p>Foreningen blev stiftet i juli 2024 som direkte reaktion på disse planer og har siden fulgt sagen tæt og afgivet adskillige høringssvar og indsigelser.</p>
+<p>Kommunen sendte de 5,5 ha jord i offentligt udbud i maj 2024. Fonden Gældfri har forhandlet med kommunen om arealet. <a href="https://www.syddjurs.dk/politik/udviklingsprojekter/helhedsplan-for-aalerne" rel="noopener" target="_blank">Helhedsplan for Ålerne</a> blev vedtaget af byrådet den 25. juni 2025. En helhedsplan er ikke juridisk bindende og giver ikke i sig selv ret til at bygge – en lokalplan skal vedtages særskilt, inden et byggeprojekt kan igangsættes.</p>
+</div>
+<div class="sag-tab-panel aktiv" id="grobund-nyt">
+<p><strong>August 2026:</strong> Grobund ansøger om fornyelse og udvidelse af dispensationen fra Lokalplan 140 for ejendommen Kaarsbergsvej 2. Foreningen indsendte indsigelse.</p>
+<p><strong>Juni 2026:</strong> Lokalplanprocessen udsat til 4. kvartal 2026. Uenighed om spildevandsløsning fortsætter.</p>
+<p><strong>April 2026:</strong> Dialogen mellem kommunen og Grobund viser stor uenighed om håndtering af spildevand og "humane gødning". Kommunen gør opmærksom på ulovlighed.</p>
+<p><strong>2025:</strong> Helhedsplanen for Ålerne vedtages af et enigt byråd i sommeren 2025. Den er juridisk ikke bindende.</p>
+</div>
+<div class="sag-tab-panel" id="grobund-arbejde">
+<p>Foreningen har siden sin stiftelse i juli 2024 arbejdet aktivt med Grobund-sagen. Vi formidler offentligt tilgængeligt materiale, følger planprocessen tæt og afgiver høringssvar og indsigelser ved alle relevante høringer.</p>
+<p>Vi har varslet byrådsmedlemmerne om personligt erstatningsansvar ved ulovlig tilsidesættelse af udbudsregler, og vi opfordrer løbende borgerne til selv at afgive høringssvar.</p>
+</div>
+<div class="sag-tab-panel" id="grobund-dok">
+<h4>Høringssvar</h4>
+<a class="dok-row" href="assets/documents/hoeringssvar/hoeringssvar-bosetning-aalerne-2024.pdf" rel="noopener" style="border:1px solid var(--c-border);margin-bottom:.4rem;" target="_blank">
+<span class="icon">📋</span>
+<div class="info"><strong>Nej til yderligere bosætning ved Ålerne</strong><span>29. juni 2024 · Foreningens første høringssvar</span></div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/hoeringssvar/hoeringssvar-grobund-kommuneplan-2025.pdf" rel="noopener" style="border:1px solid var(--c-border);margin-bottom:.4rem;" target="_blank">
+<span class="icon">📋</span>
+<div class="info"><strong>Høringssvar – Grobund og Kommuneplan 2024</strong><span>5. januar 2025</span></div>
+<span class="dl">⬇</span>
+</a>
+<h4>Indsigelser</h4>
+<a class="dok-row" href="assets/documents/indsigelser/indsigelse-dispensation-kaarsbergsvej-2026.pdf" rel="noopener" style="border:1px solid var(--c-border);margin-bottom:.4rem;" target="_blank">
+<span class="icon">📋</span>
+<div class="info"><strong>Indsigelse – Dispensation Kaarsbergsvej 2</strong><span>August 2026 · Sagsnr. 25/22279</span></div>
+<span class="dl">⬇</span>
+</a>
+</div>
+<div class="sag-tab-panel" id="grobund-presse">
+<p style="font-size:.78rem;color:var(--c-muted);margin-bottom:var(--sp-sm);font-style:italic;">
+  Nyhedsartikler er eksterne mediers egne tekster og repræsenterer ikke Kystforeningens holdning. Debatindlæg fra foreningens formand er foreningens egne.
+</p>
+<h4 style="margin:var(--sp-sm) 0 var(--sp-xs);font-size:.9rem;color:var(--c-muted);text-transform:uppercase;letter-spacing:.06em;">Foreningens debatindlæg</h4>
+<a class="presse-kort" href="assets/documents/grobund/bidrager-grobund-til-samfundet.pdf" rel="noopener" target="_blank">
+<div class="presse-kilde">Elsebeth Due Kjeldsen · Formand · Valgkamp 2025</div>
+<div class="presse-overskrift">Bidrager Grobund positivt til samfundet?</div>
+<div class="presse-beskr">Foreningens formand analyserer virksomhederne på Kaarsbergsvej 2: af 59 registrerede CVR-numre er 22 ophørt, 9 ApS'er betaler ingen skat, og ingen har lønudgifter. Spørger borgmesteren om grundlaget for påstanden om Grobunds positive samfundsbidrag.</div>
+<div class="presse-laes">Læs debatindlægget ↗</div>
+</a>
+<a class="presse-kort" href="assets/documents/grobund/presse/debat-bidrager-grobund-til-samfundet.pdf" rel="noopener" target="_blank">
+<div class="presse-kilde">Elsebeth Due Kjeldsen · Formand · 2026</div>
+<div class="presse-overskrift">Bidrager Grobund til samfundet? (opdateret udgave)</div>
+<div class="presse-beskr">Opdateret version af debatindlægget med supplerende dokumentation om CVR-registreringer, skatteforhold og beskæftigelsesdata for virksomhederne på Kaarsbergsvej 2.</div>
+<div class="presse-laes">Læs opdateret debatindlæg ↗</div>
+</a>
+<h4 style="margin:var(--sp-md) 0 var(--sp-xs);font-size:.9rem;color:var(--c-muted);text-transform:uppercase;letter-spacing:.06em;">Debatindlæg i pressen (link til original)</h4>
+<a class="presse-kort" href="assets/documents/grobund/presse/debat-jp-02-02-2026.pdf" rel="noopener" target="_blank">
+<div class="presse-kilde">Jyllands-Posten · Debat · 2. februar 2026</div>
+<div class="presse-overskrift">Politikere svigter naturen – kommunen fraviger egen helhedsplan</div>
+<div class="presse-meta" style="font-size:.78rem;color:var(--c-muted);margin:.2rem 0;">Af Elsebeth Due Kjeldsen, formand</div>
+<div class="presse-beskr">Debatindlæg, der kritiserer Syddjurs Kommune for at udbyde naturarealer til bebyggelse i strid med helhedsplanens egne målsætninger og den gældende strandbeskyttelseslinje. Trykt i Jyllands-Posten 2. februar 2026.</div>
+<div class="presse-laes">Læs debatindlægget (PDF) ↗</div>
+</a>
+<a class="presse-kort" href="assets/documents/grobund/presse/debat-folketidende-02-02-2026.pdf" rel="noopener" target="_blank">
+<div class="presse-kilde">Ebeltoft Folketidende · Debat · 2. februar 2026</div>
+<div class="presse-overskrift">Politikere svigter naturen – kommunen fraviger egen helhedsplan</div>
+<div class="presse-meta" style="font-size:.78rem;color:var(--c-muted);margin:.2rem 0;">Af Elsebeth Due Kjeldsen, formand</div>
+<div class="presse-beskr">Debatindlæg bragt i Ebeltoft Folketidende 2. februar 2026. Kritiserer Syddjurs Kommune for at udbyde naturarealer til bebyggelse i strid med helhedsplanens egne målsætninger og den gældende strandbeskyttelseslinje.</div>
+<div class="presse-laes">Læs debatindlægget (PDF) ↗</div>
+</a>
+<a class="presse-kort" href="assets/documents/grobund/presse/debat-folketidende-04-02-2026.pdf" rel="noopener" target="_blank">
+<div class="presse-kilde">Ebeltoft Folketidende · Debat · 4. februar 2026</div>
+<div class="presse-overskrift">Politikere svigter naturen – kommunen fraviger egen helhedsplan</div>
+<div class="presse-meta" style="font-size:.78rem;color:var(--c-muted);margin:.2rem 0;">Af Elsebeth Due Kjeldsen, formand</div>
+<div class="presse-beskr">Samme debatindlæg som i Jyllands-Posten, bragt på forsiden af Ebeltoft Folketidende 4. februar 2026. Opfordrer politikerne til at ophæve den forældede lokalplan og udlægge arealet til natur.</div>
+<div class="presse-laes">Læs debatindlægget (PDF) ↗</div>
+</a>
+<a class="presse-kort" href="assets/documents/grobund/presse/debat-dinavis-27-04-2026.pdf" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis · Debat · 27. april 2026</div>
+<div class="presse-overskrift">Er Grobund vigtigere end velfærd?</div>
+<div class="presse-meta" style="font-size:.78rem;color:var(--c-muted);margin:.2rem 0;">Af John Finmann, Lager og Logistikchef, Ebeltoft</div>
+<div class="presse-beskr">Debatindlæg, der stiller spørgsmål ved prioriteringen af et projekt baseret på en trafikanalyse uden reelle trafiktællinger og et anlægsoverslag på op mod 8,8 mio. kr. – mens velfærden for kommunens ældre beskæres. Kræver reelle trafiktællinger og fuldt økonomisk overblik inden beslutning.</div>
+<div class="presse-laes">Læs debatindlægget (PDF) ↗</div>
+</a>
+<h4 style="margin:var(--sp-md) 0 var(--sp-xs);font-size:.9rem;color:var(--c-muted);text-transform:uppercase;letter-spacing:.06em;">Nyhedsartikler</h4>
+<a class="presse-kort" href="https://ebeltoftfolketidende.dk" rel="noopener" target="_blank">
+<div class="presse-kilde">Ebeltoft Folketidende · 4. marts 2026</div>
+<div class="presse-overskrift">Politisk vilje til at finde en løsning for kystforeningen</div>
+<div class="presse-meta" style="font-size:.78rem;color:var(--c-muted);margin:.2rem 0;">Af Lars Norman Thomsen, Jyllands-Postens Lokalaviser</div>
+<div class="presse-beskr">Kultur-, fritids- og landdistriktudvalget rækker hånden ud til foreningen og inviterer til møde. Byrådet gav afslag på godkendelse som folkeoplysende forening med begrundelse om manglende kontinuerlig aktivitet. Elsebeth Due Kjeldsen: "Afgørelsen er urimelig og diskriminerende."</div>
+<div class="presse-laes">Søg artiklen på ebeltoftfolketidende.dk ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/samfund/ECE16450014/explainer-spildevandsprop-forhindrer-grobund-i-at-lave-landsby/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis</div>
+<div class="presse-overskrift">Explainer: Spildevandsprop forhindrer Grobund i at lave landsby</div>
+<div class="presse-beskr">Forklaring af den centrale tekniske hindring for Grobunds planer: spildevandshåndtering i kystnært område.</div>
+<div class="presse-laes">Læs artiklen ↗</div>
+</a>
+</div>
+<!-- TRAFIK OG INFRASTRUKTUR -->
+<div class="sag-tab-panel" id="grobund-trafik">
+<p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">
+  Grobund-projektet vil medføre op mod 1.900 daglige bilture i området. De berørte veje – Langagervej, Christianslundsvej, Færgevejen og Ålervejen – er smalle og uden faciliteter for bløde trafikanter.
+</p>
+<h4>Teknisk analyse</h4>
+<p>Syddjurs Kommune har bestilt en trafikafviklingsplan hos Rambøll (januar 2026). Foreningen har modtaget rapporten og gør den tilgængelig her som dokumentation i sagen.</p>
+<a class="presse-kort" href="assets/documents/grobund/trafikafviklingsplan-ramboll-2026.pdf" target="_blank" rel="noopener">
+  <div class="presse-kilde">Rambøll · Syddjurs Kommune · 15. januar 2026</div>
+  <div class="presse-overskrift">Trafikafviklingsplan – Grobund Landsby (Rambøll notat)</div>
+  <div class="presse-beskr">10-siders teknisk notat om trafikforhold ved Grobund Landsby. Beregner trafikgenerering (500–600 daglige ture for Grobund Landsby; 1.300–1.900 for fuld helhedsplan), vejbetjening via Christianslundvej/Langagervej/Kaarsbergsvej samt anlægsoverslag: 5,9 mio. kr. (Grobund Landsby) / 8,8 mio. kr. (helhedsplan). Dok. nr. RDK2023N01916-RAM-ME-00021.</div>
+  <div class="presse-laes">Hent notat (PDF) ↗</div>
+</a>
+<p>Et debatindlæg i Din Avis (27. april 2026) påpeger, at trafikanalysen er udarbejdet uden reelle lokale trafiktællinger, og at den overser spidsbelastninger fra turistsæsonen og færgetrafikken. Anlægsoverslaget er på op mod 8,8 mio. kr. til vejforbedringer – et beløb, der forventes at vokse.</p>
+<h4>Foreningens standpunkt</h4>
+<p>Foreningen kræver, at der foretages reelle trafiktællinger på Langagervej, Christianslundsvej, Færgevejen og Ålervejen – inkl. højsæson og færgetrafik – inden byrådet træffer endelig beslutning om lokalplan.</p>
+<h4>Relevante debatindlæg</h4>
+<a class="presse-kort" href="https://dinavis.dk" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis · Debat · 27. april 2026</div>
+<div class="presse-overskrift">Er Grobund vigtigere end velfærd?</div>
+<div class="presse-meta" style="font-size:.78rem;color:var(--c-muted);margin:.2rem 0;">Af John Finmann, Lager og Logistikchef, Ebeltoft</div>
+<div class="presse-beskr">Kritiserer trafikanalysen for manglende trafiktællinger og konkluderer, at beslutningen om Grobund bør udsættes, til reelle data foreligger.</div>
+<div class="presse-laes">Søg artiklen på dinavis.dk ↗</div>
+</a>
+</div>
+<!-- VANDHÅNDTERING OG MILJØ -->
+<div class="sag-tab-panel" id="grobund-vand">
+<p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">
+  Vandhåndtering er et centralt teknisk spørgsmål i Grobund-sagen. Det kystnære areal rummer beskyttede naturtyper, grundvandsinteresser og udfordringer med regnvands- og spildevandsafledning.
+</p>
+<h4>Teknisk notat</h4>
+<p>Miljørådgivningsvirksomheden K-LAR har den 27. marts 2026 udarbejdet et notat om <em>Grobund Landsby – Vandhåndteringsplan</em> for Syddjurs Kommune. Notatet (20 sider) behandler terrænforhold, lavninger, recipient- og drænforhold, jordbund, grundvand og OSD, beskyttede naturtyper, kloakering og regnvandshåndtering ved hverdagsregn og ekstremregn.</p>
+<p>Planen bygger på LAR-principper, hvor regnvandet håndteres lokalt via trug, grøfter og et centralt trappesystem, der leder vandet mod Kattegat. Løsningerne er dimensioneret til T5- og T100-hændelser. Samlet kapacitet i skybrudslavninger: 1.081 m³.</p>
+<a class="presse-kort" href="assets/documents/grobund/vandhaandteringsplan-klar-overflade-2026.pdf" target="_blank" rel="noopener">
+  <div class="presse-kilde">K-LAR Miljørådgivning · Syddjurs Kommune · 27. marts 2026</div>
+  <div class="presse-overskrift">Grobund Landsby – Vandhåndteringsplan (overfladevand)</div>
+  <div class="presse-beskr">20-siders teknisk notat om håndtering af regn- og overfladevand i boligområdet ved Ålerne. Behandler terrænforhold, lavninger, drænforhold, grundvand, OSD, kloakering og regnvandshåndtering (hverdagsregn og ekstremregn). Udarbejdet for Syddjurs Kommune.</div>
+  <div class="presse-laes">Hent notat (PDF, 7,2 MB) ↗</div>
+</a>
+<h4>Spildevand – central hindring</h4>
+<p>Myndighederne har gjort opmærksom på, at den eksisterende spildevandsløsning på ejendommen Kaarsbergsvej 2 er ulovlig. Håndteringen af spildevand – herunder "human gødning" – er fortsat uafklaret og udgør en væsentlig hindring for planen om en ny landsby.</p>
+<a class="presse-kort" href="https://dinavis.dk/samfund/ECE16450014/explainer-spildevandsprop-forhindrer-grobund-i-at-lave-landsby/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis</div>
+<div class="presse-overskrift">Explainer: Spildevandsprop forhindrer Grobund i at lave landsby</div>
+<div class="presse-beskr">Gennemgang af den tekniske hindring: spildevandshåndtering i kystnært område med beskyttede naturtyper.</div>
+<div class="presse-laes">Læs artiklen ↗</div>
+</a>
+<h4>Beskyttede naturtyper</h4>
+<p>Arealet ved Ålerne rummer beskyttede naturtyper og ligger inden for en 300 m strandbeskyttelseslinje. Grundvandsinteresser (OSD) og drænforhold gør vandhåndtering særligt kompleks i dette kystnære område.</p>
+</div>
+<div class="sag-tab-panel" id="grobund-kom">
+<p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">
+                          Officielle kommunale og myndighedskilder om Helhedsplanen for Ålerne og Grobund-projektet.
+                        </p>
+<a class="presse-kort" href="https://www.syddjurs.dk/borger/natur-og-miljoe/aalerne" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+<div class="presse-overskrift">Helhedsplan for Ålerne – Syddjurs Kommune</div>
+<div class="presse-beskr">Kommunens officielle side om Helhedsplanen for Ålerne, med helhedsplanen, høringssvar, bemærkningsnotat og den videre proces.</div>
+<div class="presse-laes">Gå til kommunens side ↗</div>
+</a>
+<a class="presse-kort" href="https://aabendagsorden.syddjurs.dk" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+<div class="presse-overskrift">Åben Indsigt – politiske dagsordener og referater</div>
+<div class="presse-beskr">Kommunens åbne portal med dagsordener og referater fra byråd og udvalg, herunder alle behandlinger af Helhedsplanen for Ålerne og Grobund.</div>
+<div class="presse-laes">Gå til Åben Indsigt ↗</div>
+</a>
+<a class="presse-kort" href="https://www.syddjurs.dk/politik-og-indflydelse/hoeringer-og-afgoerelser" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune</div>
+<div class="presse-overskrift">Høringer og afgørelser</div>
+<div class="presse-beskr">Kommunens høringsportal med alle offentlige høringer, herunder Kommuneplan 2024, Helhedsplanen og dispensationssagen for Kaarsbergsvej 2 (sagsnr. 25/22279).</div>
+<div class="presse-laes">Gå til høringer ↗</div>
+</a>
+<a class="presse-kort" href="https://www.syddjurs.dk/politik/udviklingsprojekter/helhedsplan-for-aalerne" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune · Vedtaget 25. juni 2025</div>
+<div class="presse-overskrift">Helhedsplan for Ålerne – officiel projektside</div>
+<div class="presse-beskr">Kommunens officielle projektside for Helhedsplan for Ålerne, vedtaget af byrådet den 25. juni 2025. En helhedsplan er ikke juridisk bindende og giver ikke i sig selv ret til at bygge – en lokalplan skal vedtages særskilt.</div>
+<div class="presse-laes">Gå til projektside ↗</div>
+</a>
+<a class="presse-kort" href="https://www.syddjurs.dk/media/qedlfqzv/helhedsplan-for-aalerne_endelig-version.pdf" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune · Juni 2025</div>
+<div class="presse-overskrift">Vedtaget helhedsplan for Ålerne (PDF)</div>
+<div class="presse-beskr">Den endelige vedtagne helhedsplan for Ålerne, godkendt af byrådet i juni 2025. Direkte link til kommunens officielle PDF-dokument.</div>
+<div class="presse-laes">Hent PDF ↗</div>
+</a>
+<a class="presse-kort" href="https://2025.syddjurs.dk/da/hoeringer-og-afgoerelser/oversigt/helhedsplan-for-aalerne-tidlig-hoering/" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Syddjurs Kommune · Høringsportal</div>
+<div class="presse-overskrift">Høringssvar fra borgerne – tidlig høring om Ålerne</div>
+<div class="presse-beskr">Kommunens høringsside med borgernes indsendte høringssvar til den tidlige høring om Helhedsplanen for Ålerne.</div>
+<div class="presse-laes">Se borgernes høringssvar ↗</div>
+</a>
+<div style="margin-top:var(--sp-md);padding-top:var(--sp-md);border-top:1px solid var(--c-border);">
+<a class="btn btn-ocean" href="https://www.syddjurs.dk/politik/udviklingsprojekter/helhedsplan-for-aalerne" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;background:var(--c-ocean,#1a6e8e);color:#fff;padding:.65rem 1.2rem;border-radius:6px;font-size:.88rem;font-weight:600;text-decoration:none;" target="_blank">
+                            Følg sagen hos Syddjurs Kommune <span>↗</span>
+</a>
+</div>
+</div>
+</div>
+</div><!-- /sag-grobund -->
+<!-- SAG-INDHOLD: HJELM -->
+<div class="sag-detalje-indhold" id="sag-hjelm">
+<div class="sag-detalje">
+<div class="sag-tabs">
+<button class="sag-tab" data-tab="hjelm-baggrund">Baggrund</button>
+<button class="sag-tab aktiv" data-tab="hjelm-nyt">Seneste nyt</button>
+<button class="sag-tab" data-tab="hjelm-dok">Høringer</button>
+<button class="sag-tab" data-tab="hjelm-arbejde">Vores arbejde</button>
+<button class="sag-tab" data-tab="hjelm-presse">Presse</button>
+<button class="sag-tab" data-tab="hjelm-kom">Myndighedskilder</button>
+</div>
+<div class="sag-tab-panel" id="hjelm-baggrund">
+<h4>Råstofindvinding sydøst for Hjelm</h4>
+<p>Miljøstyrelsen, som er statslig myndighed for råstofindvinding på havbunden, har den 6. februar 2026 meddelt Aarhus Havn og Aarhus Vand en tilladelse til at indvinde op til <strong>8 millioner m³ sand</strong> fra havbunden sydøst for øen Hjelm i Kattegat.</p>
+<p>Indvindingen er planlagt til at levere materialer til anlægsprojekter ved Tangkrogen i Aarhus. Tilladelsen er meddelt efter en miljøvurdering, og Miljøstyrelsen har i sin afgørelse vurderet, at indvindingen kan gennemføres på de fastsatte vilkår.</p>
+<p>Hjelm Banke er en undersøisk sandbanke i Kattegat. Området ligger i nærheden af Djurslands kyst og er af betydning for de marine naturforhold i Kattegat.</p>
+<p><em>Kystforeningen Djursland følger sagen og vil orientere om eventuelle høringer eller initiativer.</em></p>
+</div>
+<div class="sag-tab-panel aktiv" id="hjelm-nyt">
+<h4>Seneste nyt</h4>
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">6. februar 2026</span>
+<p><strong>Miljøstyrelsen meddeler tilladelse.</strong> Aarhus Havn og Aarhus Vand modtager tilladelse til indvinding af op til 8 millioner m³ sand fra Hjelm Banke. Tilladelsen er udstedt med en række vilkår og er baseret på Miljøstyrelsens miljøvurdering af projektet.</p>
+</div>
+</div>
+<div class="sag-tab-panel" id="hjelm-arbejde">
+<h4>Vores arbejde</h4>
+<p>Kystforeningen Djursland har endnu ikke iværksat konkrete initiativer i relation til Hjelm Banke-sagen. Vi følger udviklingen og vil orientere vores medlemmer, hvis sagen giver anledning til handling fra foreningens side.</p>
+<p><em>Har du oplysninger eller synspunkter i denne sag, er du velkommen til at kontakte os.</em></p>
+</div>
+<div class="sag-tab-panel" id="hjelm-dok">
+<h4>Dokumenter</h4>
+<div class="dok-liste">
+<div class="dok-item">
+<div class="dok-ikon">📄</div>
+<div class="dok-info">
+<div class="dok-titel">Afgørelse – Tilladelse til råstofindvinding ved Hjelm Banke</div>
+<div class="dok-meta">Miljøstyrelsen · Februar 2026 · Sagsnr. 506</div>
+<a class="dok-link" href="https://mst.dk/media/nryluudm/afgoerelse-506-ja-hjelm-banke-februar-2026.pdf" rel="noopener noreferrer" target="_blank">
+                                Læs Miljøstyrelsens afgørelse (PDF) ↗
+                              </a>
+</div>
+</div>
+</div>
+<p class="dok-note"><em>Dokumentet er tilgængeligt direkte hos Miljøstyrelsen (mst.dk). Kystforeningen Djursland er ikke afsender af afgørelsen.</em></p>
+</div>
+<div class="sag-tab-panel" id="hjelm-presse">
+<h4>Presse og debat</h4>
+<div class="presse-grid">
+<a class="presse-kort" href="https://dinavis.dk/debat/ECE19713878/rettet-lyt-til-fiskerne-for-de-betaler-prisen-for-andres-oedelaeggelser" rel="noopener noreferrer" target="_blank">
+<div class="presse-kilde">Din Avis · Debat · 7. oktober 2026</div>
+<div class="presse-overskrift">Rettet: Lyt til fiskerne – for de betaler prisen for andres ødelæggelser</div>
+<div class="presse-meta">Af Ebba Grethe Møgelvang Laursen, medlem af Kystforeningen Djursland</div>
+<div class="presse-beskr">Debatindlæg om konsekvenserne af havbundsindvinding for fiskebestande og det marine miljø. Forfatteren nævner bl.a. projektet "Nordkystens Fremtid" og Hjelm Dyb og opfordrer lokale politikere til at modvirke råstofindvinding i nærliggende havområder. <em>Artiklen er rettet 8. oktober 2026 – en tidligere fejlagtig oplysning om Aarhus Havns udvidelse er korrigeret.</em></div>
+<div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/samfund/ECE13891207/hjelm-dyb-ikke-robust-nok/" rel="noopener noreferrer" target="_blank">
+<div class="presse-kilde">Din Avis – Historisk artikel · April 2022</div>
+<div class="presse-overskrift">Hjelm Dyb ikke robust nok</div>
+<div class="presse-beskr">Artikel fra april 2022 om vurderingen af Hjelm Dybs robusthed i forbindelse med råstofindvinding i området.</div>
+<div class="presse-laes">Læs artiklen hos Din Avis ↗</div>
+</a>
+</div>
+<p class="presse-note"><em>Debatindlæg afspejler forfatterens egne synspunkter og er ikke udtryk for Kystforeningen Djurslands officielle holdning.</em></p>
+</div>
+<div class="sag-tab-panel" id="hjelm-kom">
+<h4>Myndighedskilder</h4>
+<p class="kilde-note">Råstofindvinding på havbunden reguleres af <strong>Miljøstyrelsen</strong>, som er en statslig myndighed under Miljøministeriet – ikke en kommunal myndighed.</p>
+<div class="presse-grid">
+<a class="presse-kort" href="https://mst.dk/media/nryluudm/afgoerelse-506-ja-hjelm-banke-februar-2026.pdf" rel="noopener noreferrer" target="_blank">
+<div class="presse-kilde">Miljøstyrelsen</div>
+<div class="presse-overskrift">Afgørelse 506-JA – Hjelm Banke (februar 2026)</div>
+<div class="presse-beskr">Miljøstyrelsens officielle afgørelse om tilladelse til råstofindvinding af op til 8 mio. m³ sand sydøst for Hjelm. Indeholder vilkår, miljøvurdering og klagefrist.</div>
+<div class="presse-laes">Læs afgørelse (PDF) ↗</div>
+</a>
+<a class="presse-kort" href="https://mst.dk/erhverv-og-myndigheder/tilladelser-og-godkendelser/raastofindvinding/" rel="noopener noreferrer" target="_blank">
+<div class="presse-kilde">Miljøstyrelsen</div>
+<div class="presse-overskrift">Råstofindvinding – generel information</div>
+<div class="presse-beskr">Miljøstyrelsens overordnede information om tilladelser til indvinding af råstoffer fra havbunden i Danmark.</div>
+<div class="presse-laes">Gå til Miljøstyrelsen ↗</div>
+</a>
+<a class="presse-kort" href="https://aarhus.dk/media/fb1jw5am/besvarelse.pdf?format=noformat" rel="noopener noreferrer" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Aarhus Kommune · 10. marts 2026</div>
+<div class="presse-overskrift">Besvarelse: 10-dages forespørgsel om råstofindvinding ved Hjelm Banke</div>
+<div class="presse-beskr">Borgmester Anders Winnerskjold og kommunaldirektør Martin Østergaard Christensen besvarer Isabella Heilmanns (Ø) forespørgsel om sandindvinding til Aarhus ReWater-projektet. Kommunen oplyser, at Planklagenævnets afgørelse kun berørte Yderhavn-planlægningen og ikke indvindingstilladelsen, som sorterer under Miljøstyrelsen. Aarhus Havns gældende tilladelse dækker op til 2 mio. m³ sand til Tangkrogen og ReWater. Sagsnr. EMN-2024-031353.</div>
+<div class="presse-laes">Læs besvarelse (PDF) ↗</div>
+</a>
+</div>
+</div>
+</div>
+</div><!-- /sag-hjelm -->
+<!-- SAG-INDHOLD: FJELLERUP -->
+<div class="sag-detalje-indhold" id="sag-fjellerup">
+<div class="sag-detalje">
+<div class="sag-tabs" role="tablist">
+<button class="sag-tab" data-tab="fjellerup-baggrund">Baggrund</button>
+<button class="sag-tab aktiv" data-tab="fjellerup-nyt">Seneste nyt</button>
+<button class="sag-tab" data-tab="fjellerup-dok">Høringer</button>
+<button class="sag-tab" data-tab="fjellerup-arbejde">Vores arbejde</button>
+<button class="sag-tab" data-tab="fjellerup-presse">Presse</button>
+<button class="sag-tab" data-tab="fjellerup-kom">Kommunale kilder</button>
+</div>
+<div class="sag-tab-panel" id="fjellerup-baggrund">
+<p>Norddjurs Kommune arbejder med et samlet udviklingsprojekt kaldet <strong>Fjellerup Udvikling</strong>, der omfatter fire indsatsområder direkte ved Fjellerup Strand. Projektet har til formål at udvikle stranden som turistmål og rekreativt område.</p>
+<p>Kommunen beskriver følgende fire nedslag i projektet:</p>
+<h4>1. Pælene</h4>
+<p>Området ved de eksisterende pæle i strandkanten indgår i planlægningen som et rekreativt opholds- og aktivitetsrum.</p>
+<h4>2. Promenadebroen</h4>
+<p>Der planlægges en promenade og badebro ved Fjellerup Strand, der skal styrke ophold og adgang til vandet for badegjæster og besøgende.</p>
+<h4>3. Makrelfabrikken</h4>
+<p>Den tidligere Makrelfabrik ved stranden er udpeget til omdannelse. Kommunen oplyser, at det forfaldne byggeri kan udvikles til turiststed med butikker og spisesteder.</p>
+<h4>4. Tæppet</h4>
+<p>Det fjerde nedslag, kaldet "Tæppet", er et strandnært areal der indgår i helhedsplanlægningen for området.</p>
+<p style="font-size:.82rem;color:var(--c-muted);margin-top:var(--sp-sm);">
+                          Ovenstående beskriver kommunens egne oplysninger om projektet. Kystforeningen Djurslands vurderinger fremgår under "Vores arbejde".
+                        </p>
+</div>
+<div class="sag-tab-panel aktiv" id="fjellerup-nyt">
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">9. oktober 2026</span>
+<strong>Norddjurs Kommune: Ny lokalplan fører Fjellerup Udvikling til næste fase</strong>
+<p>Norddjurs Kommune offentliggjorde den 9. oktober 2026 en officiel meddelelse om lokalplanens vedtagelse. Kommunen beskriver, at den vedtagne lokalplan muliggør ny strandpromenade og badebro, rekreative opholdsarealer samt renovering eller omdannelse af to forfaldne bygninger. Tidsplanen peger mod sommeren 2028 for åbning af badebro og opholdsområder.</p>
+<p><em>Vigtigt:</em> Lokalplanens vedtagelse er ikke en fuld anlægsgodkendelse. Der udestår yderligere myndighedstilladelser (bl.a. fra Kystdirektoratet), projektering og en aftale med rådgiverfirma. Kommunalbestyrelsen skal derudover i starten af 2027 træffe valg om tre kommunale anlægselementer.</p>
+<p style="font-size:.82rem;color:var(--c-muted);">Kilde: <a href="https://norddjurs.dk/nyheder/2026/oktober/ny-lokalplan-foerer-fjellerup-udvikling-til-naeste-fase" rel="noopener" target="_blank">Norddjurs Kommune, 9. oktober 2026</a></p>
+</div>
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">6. oktober 2026</span>
+<strong>Lokalplan 134-707 og Kommuneplantillæg nr. 3 vedtaget</strong>
+<p>Norddjurs Kommunalbestyrelse vedtog den 6. oktober 2026 endeligt Lokalplan 134-707 og Kommuneplantillæg nr. 3 for Fjellerup Udvikling. Planerne er vedtaget med de ændringer, forvaltningen anbefalede efter den offentlige høring – herunder at kobber udgår som materiale, at en del af matrikel 11u udtages af planen, og at belysning i delområde 3 begrænses til stibelysning. Beslutningen var forberedt i Natur-, Miljø- og Teknikudvalget den 21. september og Økonomiudvalget den 29. september 2026.</p>
+<p><em>Vigtig præcision:</em> Vedtagelsen af lokalplanen er ikke det samme som fuld anlægsgodkendelse. Der kræves fortsat øvrige tilladelser fra Norddjurs Kommune og Kystdirektoratet, samt en prøvegravning ved delområde 4. Kommunen forventer aftale med rådgiverfirma inden udgangen af 2026, og politikere skal i starten af 2027 træffe valg for tre kommunale elementer.</p>
+</div>
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">25. juni 2026</span>
+<strong>8 ugers offentlig høring afsluttet</strong>
+<p>Høringsfristen for Lokalplanforslag 134-707 og Kommuneplantillæg nr. 3 udløb den 25. juni 2026. Der indkom 13 høringssvar, herunder ét fra Styrelsen for Grøn Arealomlægning og Vandmiljø (SGAV). Kommuneplantillægget blev genudsendt den 2. juli 2026 som følge af en teknisk fejl på Plandata.dk – ny høringsfrist den 27. august 2026.</p>
+</div>
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">23. marts 2026</span>
+<strong>Lokalplanforslag og miljørapport offentliggjort</strong>
+<p>Natur-, Miljø- og Teknikudvalget offentliggjorde Forslag til Lokalplan 134-707 og Kommuneplantillæg nr. 3 med tilhørende miljørapport den 23. marts 2026. Planen opdeler projektet i fire delområder svarende til den eksisterende forsøgsdispensation.</p>
+</div>
+<p style="font-size:.82rem;color:var(--c-muted);margin-top:var(--sp-sm);">
+                          Kilde: <a href="https://norddjurs.meetingsplus.dk/committees/kommunalbestyrelsen/06-10-2026" rel="noopener" target="_blank">Kommunalbestyrelsens dagsorden og beslutningsprotokol, 6. oktober 2026</a> · <a href="https://norddjurs.dk/oplev-norddjurs/fjellerup-udvikling" rel="noopener" target="_blank">Norddjurs Kommune – Fjellerup Udvikling</a>
+</p>
+<p style="font-size:.82rem;color:var(--c-muted);border-left:3px solid var(--c-gold);padding-left:.75rem;margin-top:var(--sp-sm);">
+<strong>Bemærk:</strong> Ibrugtagning af badebro og rekreative arealer forventes sommeren 2028 – under forudsætning af, at lokalplanen ikke ankes, og at øvrige tilladelser opnås rettidigt.
+                        </p>
+</div>
+<div class="sag-tab-panel" id="fjellerup-arbejde">
+<p>Kystforeningen Djursland arbejder ikke kun med sager i Syddjurs Kommune. Fjellerup-sagen illustrerer, at foreningen følger relevante kystsager i både Syddjurs og Norddjurs – overalt hvor kystlandskab, natur og rekreative værdier er i spil.</p>
+<p>Vi formidler offentligt tilgængeligt materiale og følger kommunens planproces. Foreningen vil deltage i relevante høringer, hvis planerne berører kystlandskabet på måder, der falder inden for foreningens formål.</p>
+<p style="font-size:.82rem;color:var(--c-muted);">
+                          Kystforeningen har endnu ikke afgivet høringssvar i Fjellerup-sagen. Siden opdateres løbende.
+                        </p>
+</div>
+<div class="sag-tab-panel" id="fjellerup-dok">
+<h4>Officielle dokumenter</h4>
+<p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">Dokumenterne nedenfor er offentliggjort af Norddjurs Kommune. Kystforeningen Djursland har ikke afgivet egne dokumenter i sagen endnu.</p>
+<a class="dok-row" href="https://norddjurs.meetingsplus.dk/committees/kommunalbestyrelsen/06-10-2026/protocol/06-10-2026-beslutningsprotokolpdf?downloadMode=open" rel="noopener noreferrer" style="border:1px solid var(--c-border);margin-bottom:.4rem;" target="_blank">
+<span class="dok-ikon">📄</span>
+<span class="dok-tekst">
+<strong>Beslutningsprotokol – Kommunalbestyrelsen 6. oktober 2026</strong>
+<span class="dok-meta">Norddjurs Kommune · Oktober 2026 · PDF</span>
+</span>
+<span class="dl">↗</span>
+</a>
+<a class="dok-row" href="https://norddjurs.cowiplan.dk/media/3615/kommuneplantillaeg-nr-3-projekt-fjellerup-udvikling-tillaeg-til-kommuneplan-2025.pdf" rel="noopener noreferrer" style="border:1px solid var(--c-border);margin-bottom:.4rem;" target="_blank">
+<span class="dok-ikon">📄</span>
+<span class="dok-tekst">
+<strong>Kommuneplantillæg nr. 3 – Fjellerup Udvikling</strong>
+<span class="dok-meta">Norddjurs Kommune · 2026 · PDF</span>
+</span>
+<span class="dl">↗</span>
+</a>
+<a class="dok-row" href="https://norddjurs.dk/Media/638954218702936234/DN%20Norddjurs%20henvendelse%2012%20september%202025%20med%20svar%20fra%20forvaltningen.pdf" rel="noopener noreferrer" style="border:1px solid var(--c-border);margin-bottom:.4rem;" target="_blank">
+<span class="dok-ikon">📄</span>
+<span class="dok-tekst">
+<strong>DN Norddjurs henvendelse og forvaltningens svar</strong>
+<span class="dok-meta">Norddjurs Kommune · September 2025 · PDF</span>
+</span>
+<span class="dl">↗</span>
+</a>
+<p style="font-size:.82rem;color:var(--c-muted);margin-top:var(--sp-sm);">
+                          Øvrige dokumenter – herunder miljørapport, samlede høringssvar og politiske sagsdokumenter – er tilgængelige på <a href="https://norddjurs.dk/oplev-norddjurs/fjellerup-udvikling" rel="noopener" target="_blank">Norddjurs Kommunes projektside</a>.
+                        </p>
+</div>
+<div class="sag-tab-panel" id="fjellerup-presse">
+<p style="font-size:.78rem;color:var(--c-muted);margin-bottom:var(--sp-sm);font-style:italic;">
+                          Artiklerne herunder er eksterne mediers egne tekster og repræsenterer ikke Kystforeningens holdning.
+                        </p>
+<a class="presse-kort" href="https://norddjursliv.dk/storslaaede-planer-i-fjellerup-forfaldent-byggeri-kan-blive-til-turiststed-med-butikker-og-spisesteder/" rel="noopener" target="_blank">
+<div class="presse-kilde">NorddjursLIV</div>
+<div class="presse-overskrift">Storslåede planer i Fjellerup: Forfaldent byggeri kan blive til turiststed med butikker og spisesteder</div>
+<div class="presse-beskr">Artikel om kommunens planer for den tidligere Makrelfabrik og øvrig strandudvikling ved Fjellerup.</div>
+<div class="presse-laes">Læs artiklen ↗</div>
+</a>
+<a class="presse-kort" href="https://norddjursliv.dk/haaabet-er-lysegroennt-i-fjellerup/" rel="noopener" target="_blank">
+<div class="presse-kilde">NorddjursLIV</div>
+<div class="presse-overskrift">Håbet er lysegrønt i Fjellerup</div>
+<div class="presse-beskr">Artikel om den lokale stemning og forventningerne til udviklingen ved Fjellerup Strand.</div>
+<div class="presse-laes">Læs artiklen ↗</div>
+</a>
+<a class="presse-kort" href="https://www.tv2ostjylland.dk/norddjurs/storstilet-strandprojekt-kan-blive-til-virkelighed" rel="noopener" target="_blank">
+<div class="presse-kilde">TV2 Østjylland · November 2024 · Kamilla Sørensen</div>
+<div class="presse-overskrift">Storstilet strandprojekt kan blive til virkelighed, men det deler vandene</div>
+<div class="presse-beskr">Folketing giver forsøgstilladelse til ni kyst- og naturturismeprojekter, herunder "Fjellerup Udvikling". Projektet omfatter flydebro, "Makrelfabrikken" til aktiviteter og overnatning, badebro samt bundgarnspæle. Politisk opbakning fra Norddjurs Kommune, men Danmarks Naturfredningsforening advarer mod klimabelastning og påvirkning af naturområdet.</div>
+<div class="presse-laes">Læs artiklen hos TV2 Østjylland ↗</div>
+</a>
+</div>
+<div class="sag-tab-panel" id="fjellerup-kom">
+<p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">
+                          Officielle kommunale kilder om Fjellerup Udvikling og den tilhørende lokalplanproces i Norddjurs Kommune.
+                        </p>
+<a class="presse-kort" href="https://www.norddjurs.dk/fjellerup-udvikling" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Norddjurs Kommune</div>
+<div class="presse-overskrift">Fjellerup Udvikling – projektside</div>
+<div class="presse-beskr">Kommunens hovedside med projektbeskrivelse, status, høringssvar, dokumenter og politisk behandling af Fjellerup Udvikling.</div>
+<div class="presse-laes">Gå til kommunens projektside ↗</div>
+</a>
+<a class="presse-kort" href="https://www.norddjurs.dk/lokalplan-134-707" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Norddjurs Kommune</div>
+<div class="presse-overskrift">Lokalplanforslag 134-707 – Fjellerup Udvikling</div>
+<div class="presse-beskr">Offentliggørelse vedrørende Lokalplanforslag 134-707 og Kommuneplantillæg nr. 3 for Fjellerup Udvikling.</div>
+<div class="presse-laes">Gå til lokalplanforslaget ↗</div>
+</a>
+<a class="presse-kort" href="https://www.norddjurs.dk/hoeringer" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Norddjurs Kommune</div>
+<div class="presse-overskrift">Høringer – Norddjurs Kommune</div>
+<div class="presse-beskr">Norddjurs Kommunes høringsportal med offentlige høringer over lokalplaner og kommuneplantillæg, herunder sager der vedrører Fjellerup.</div>
+<div class="presse-laes">Gå til høringer ↗</div>
+</a>
+<a class="presse-kort" href="https://norddjurs.dk/nyheder/2026/oktober/ny-lokalplan-foerer-fjellerup-udvikling-til-naeste-fase" rel="noopener" style="border-color:var(--c-ocean);" target="_blank">
+<div class="presse-kilde" style="color:var(--c-ocean);">Norddjurs Kommune · 9. oktober 2026</div>
+<div class="presse-overskrift">Ny lokalplan fører Fjellerup Udvikling til næste fase</div>
+<div class="presse-beskr">Officiel meddelelse fra Norddjurs Kommune om den vedtagne lokalplan. Lokalplanen er vedtaget, men yderligere myndighedstilladelser og projektering udestår, inden anlægsarbejdet kan starte. Åbning af badebro og opholdsarealer forventes sommeren 2028.</div>
+<div class="presse-laes">Læs kommunens meddelelse ↗</div>
+</a>
+</div>
+</div>
+</div><!-- /sag-fjellerup -->
+</div><!-- /sag-detalje-panel -->
+</div>
+</div>
+</div>
+<!-- ════════════════════════════════════════════
+     BESTYRELSE
+════════════════════════════════════════════ -->
+<div class="page" id="page-bestyrelse">
+<div class="page-hero">
+<div class="mw">
+<p class="section-label">Hvem driver foreningen</p>
+<h1 class="page-hero-title">Bestyrelse</h1>
+</div>
+</div>
+<div class="page-body">
+<div class="mw">
+<!-- Bestyrelse valgt på generalforsamling 25. september 2026 -->
+<p style="font-size:.82rem;color:var(--c-muted);margin-bottom:var(--sp-lg);">
+        Valgt på ordinær generalforsamling den 25. september 2026.
+      </p>
+<div class="bst-grid" id="bst-grid">
+<article class="bst-kort">
+<div class="bst-avatar">👤</div>
+<h3>Elsebeth Due Kjeldsen</h3>
+<div class="bst-role">Formand</div>
+<a href="mailto:elsebethduekjeldsen@gmail.com">elsebethduekjeldsen@gmail.com</a>
+</article>
+<article class="bst-kort">
+<div class="bst-avatar">👤</div>
+<h3>John Finmann</h3>
+<div class="bst-role">Næstformand</div>
+</article>
+<article class="bst-kort">
+<div class="bst-avatar">👤</div>
+<h3>Åse Bønløkke</h3>
+<div class="bst-role">Kasserer</div>
+</article>
+<article class="bst-kort">
+<div class="bst-avatar">👤</div>
+<h3>John Palm</h3>
+<div class="bst-role">Bestyrelsesmedlem</div>
+</article>
+<article class="bst-kort">
+<div class="bst-avatar">👤</div>
+<h3>Ivan Bundgaard Sørensen</h3>
+<div class="bst-role">Bestyrelsesmedlem</div>
+</article>
+<article class="bst-kort">
+<div class="bst-avatar">👤</div>
+<h3>Sean Blicher</h3>
+<div class="bst-role">Suppleant</div>
+</article>
+<article class="bst-kort">
+<div class="bst-avatar">👤</div>
+<h3>Kim Withen Olesen</h3>
+<div class="bst-role">Suppleant</div>
+</article>
+</div>
+</div>
+</div>
+</div>
+<!-- ════════════════════════════════════════════
+     GENERALFORSAMLING OG DOKUMENTER
+════════════════════════════════════════════ -->
+<div class="page" id="page-gf">
+<div class="page-hero">
+<div class="mw">
+<p class="section-label">Vedtægter · Nyhedsbreve · Høringssvar</p>
+<h1 class="page-hero-title">Dokumenter<br/>&amp; høringssvar</h1>
+</div>
+</div>
+<div class="page-body">
+<div class="mw-sm">
+<p style="font-size:.88rem;color:var(--c-muted);margin-bottom:var(--sp-xl);">
+        Alle officielle dokumenter, høringssvar og indsigelser er frit tilgængelige. Klik for at åbne eller downloade som PDF.
+      </p>
+<!-- VEDTÆGTER -->
+<div class="dok-section">
+<div class="dok-cat-title">Vedtægter</div>
+<div class="dok-list">
+<a class="dok-row" href="assets/documents/vedtaegter/vedtaegter-kystforeningen-djursland.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Vedtægter – Kystforeningen Djursland</strong>
+<span>Vedtaget 25. juli 2024 · Ændret på generalforsamling 25. september 2026</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+</div>
+</div>
+<!-- NYHEDSBREVE -->
+<div class="dok-section">
+<div class="dok-cat-title">Nyhedsbreve</div>
+<div class="dok-list">
+<a class="dok-row" href="assets/documents/nyhedsbreve/nyhedsbrev-11.pdf" rel="noopener" target="_blank">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Nyhedsbrev 11</strong>
+<span>August 2026</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/nyhedsbreve/nyhedsbrev-10.pdf" rel="noopener" target="_blank">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Nyhedsbrev 10</strong>
+<span>Juni 2026</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/nyhedsbreve/nyhedsbrev-09.pdf" rel="noopener" target="_blank">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Nyhedsbrev 9</strong>
+<span>April 2026</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/nyhedsbreve/nyhedsbrev-08.pdf" rel="noopener" target="_blank">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Nyhedsbrev 8</strong>
+<span>December 2025</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/nyhedsbreve/nyhedsbrev-07.pdf" rel="noopener" target="_blank">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Nyhedsbrev 7</strong>
+<span>Juni 2025</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/nyhedsbreve/nyhedsbrev-06.pdf" rel="noopener" target="_blank">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Nyhedsbrev 6</strong>
+<span>April 2025</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/nyhedsbreve/nyhedsbrev-05.pdf" rel="noopener" target="_blank">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Nyhedsbrev 5</strong>
+<span>Januar 2025</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/nyhedsbreve/nyhedsbrev-04.pdf" rel="noopener" target="_blank">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Nyhedsbrev 4 – Velkomstbrev</strong>
+<span>August 2024</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/nyhedsbreve/nyhedsbrev-03.pdf" rel="noopener" target="_blank">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Nyhedsbrev 3</strong>
+<span>November 2024</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+</div>
+</div>
+<!-- HØRINGSSVAR -->
+<div class="dok-section">
+<div class="dok-cat-title">Høringssvar</div>
+<div class="dok-list">
+<a class="dok-row" href="assets/documents/hoeringssvar/hoeringssvar-vindmoeller-faergehavnen-2025.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Høringssvar – Kæmpevindmøller ved Ebeltoft Færgehavn</strong>
+<span>Januar 2025 · Kommuneplan 2024, punkt 1.1.T2</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/hoeringssvar/hoeringssvar-grobund-kommuneplan-2025.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Høringssvar – Grobund og Kommuneplan 2024</strong>
+<span>5. januar 2025 · Indsigelse mod arealer ved Ålerne</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/hoeringssvar/hoeringssvar-bosetning-aalerne-2024.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Nej til yderligere bosætning ved Ålerne</strong>
+<span>29. juni 2024 · Første høringssvar som forening</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+</div>
+</div>
+<!-- INDSIGELSER -->
+<div class="dok-section">
+<div class="dok-cat-title">Indsigelser</div>
+<div class="dok-list">
+<a class="dok-row" href="assets/documents/indsigelser/indsigelse-dispensation-kaarsbergsvej-2026.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Indsigelse mod dispensation – Kaarsbergsvej 2</strong>
+<span>August 2026 · Sagsnr. 25/22279 · Syddjurs Kommune</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+</div>
+</div>
+<!-- GENERALFORSAMLINGER -->
+<div class="dok-section">
+<div class="dok-cat-title">Generalforsamlinger</div>
+<!-- 2026 -->
+<div class="dok-year-label" style="font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--c-muted);padding:.6rem 0 .3rem;">2026 – Anden ordinære generalforsamling</div>
+<div class="dok-list">
+<a class="dok-row" href="assets/documents/aktiviteter/referat-generalforsamling-2026.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Referat fra generalforsamlingen 25. september 2026</strong>
+<span>Ordinær generalforsamling · Kystforeningen Djursland</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/aktiviteter/velkomst-og-beretning-generalforsamling-2026.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Velkomst og beretning – Generalforsamling 2026</strong>
+<span>25. september 2026 · Anden ordinære generalforsamling</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+</div>
+<!-- 2025 -->
+<div class="dok-year-label" style="font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--c-muted);padding:.6rem 0 .3rem;margin-top:.5rem;">2025 – Første ordinære generalforsamling</div>
+<div class="dok-list">
+<a class="dok-row" href="assets/documents/aktiviteter/referat-generalforsamling-2025.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Referat fra generalforsamlingen 27. september 2025</strong>
+<span>Første ordinære generalforsamling · Ebeltoft, Aktivitetshuset</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/aktiviteter/velkomst-og-beretning-generalforsamling-2025.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Velkomst og beretning – Generalforsamling 2025</strong>
+<span>27. september 2025 · Formand Elsebeth Due Kjeldsen</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+</div>
+</div>
+<!-- GROBUND / ÅLERNE – DOKUMENTOVERSIGT -->
+<div class="dok-section" id="dok-grobund">
+<div class="dok-cat-title">Grobund / Ålerne – dokumenter</div>
+<p style="font-size:.82rem;color:var(--c-muted);margin:.25rem 0 .75rem;line-height:1.5;">
+          Tekniske rapporter, myndighedsafgørelser, høringssvar og presseomtale vedrørende planerne om etablering af landsbyen Grobund ved Ålerne syd for Ebeltoft.
+        </p>
+<!-- Kategori 1: Kommunale planer og afgørelser -->
+<div class="dok-year-label" style="font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--c-muted);padding:.6rem 0 .3rem;">
+          1 · Kommunale planer og afgørelser
+        </div>
+<div class="dok-list">
+<a class="dok-row" href="https://www.syddjurs.dk/borger/natur-og-miljoe/aalerne" rel="noopener" target="_blank">
+<span class="icon">🔗</span>
+<div class="info">
+<strong>Helhedsplan for Ålerne – Syddjurs Kommunes officielle side</strong>
+<span>Syddjurs Kommune · Vedtaget af byrådet 25. juni 2025 · Helhedsplanen er ikke juridisk bindende</span>
+</div>
+<span class="dl">↗</span>
+</a>
+<a class="dok-row" href="https://www.syddjurs.dk/politik/udviklingsprojekter/helhedsplan-for-aalerne" rel="noopener" target="_blank">
+<span class="icon">🔗</span>
+<div class="info">
+<strong>Helhedsplan for Ålerne – officiel projektside</strong>
+<span>Syddjurs Kommune · Projektside med dokumentation og procesforløb</span>
+</div>
+<span class="dl">↗</span>
+</a>
+<a class="dok-row" href="https://www.syddjurs.dk/media/qedlfqzv/helhedsplan-for-aalerne_endelig-version.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Vedtaget helhedsplan for Ålerne (PDF)</strong>
+<span>Syddjurs Kommune · Vedtaget juni 2025 · Ikke juridisk bindende</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="https://2025.syddjurs.dk/da/hoeringer-og-afgoerelser/oversigt/helhedsplan-for-aalerne-tidlig-hoering/" rel="noopener" target="_blank">
+<span class="icon">🔗</span>
+<div class="info">
+<strong>Høringssvar fra borgerne – tidlig høring om Ålerne</strong>
+<span>Syddjurs Kommune · Borgernes indsendte høringssvar til den tidlige høring</span>
+</div>
+<span class="dl">↗</span>
+</a>
+</div>
+<!-- Kategori 2: Vandhåndtering og afvanding -->
+<div class="dok-year-label" style="font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--c-muted);padding:.6rem 0 .3rem;margin-top:.5rem;">
+          2 · Vandhåndtering og afvanding
+        </div>
+<div class="dok-list">
+<a class="dok-row" href="assets/documents/grobund/vandhaandteringsplan-grobund-2026.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Grobund Landsby – Vandhåndteringsplan (overfladevand)</strong>
+<span>27. marts 2026 · K-LAR Miljørådgivning, udarbejdet for Syddjurs Kommune · 20 sider · Offentliggjort af Syddjurs Kommune</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+</div>
+<!-- Kategori 3: Trafik og adgangsforhold -->
+<div class="dok-year-label" style="font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--c-muted);padding:.6rem 0 .3rem;margin-top:.5rem;">
+          3 · Trafik og adgangsforhold
+        </div>
+<div class="dok-list">
+<div class="dok-row document-awaiting-permission" rel="noopener" target="_blank" title="PDF afventer tilladelse til offentliggørelse">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Trafikafviklingsplaner, Grobund – Notat</strong>
+<span>15. januar 2026 · Rambøll Transport, udarbejdet for Syddjurs Kommune · 10 sider</span>
+</div>
+<span class="dl">⬇</span>
+<small> · PDF afventer offentliggørelsestilladelse</small></div>
+</div>
+<!-- Kategori 4: Høringssvar og indsigelser -->
+<div class="dok-year-label" style="font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--c-muted);padding:.6rem 0 .3rem;margin-top:.5rem;">
+          4 · Høringssvar og indsigelser
+        </div>
+<div class="dok-list">
+<a class="dok-row" href="assets/documents/hoeringssvar/hoeringssvar-bosetning-aalerne-2024.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Nej til yderligere bosætning ved Ålerne</strong>
+<span>29. juni 2024 · Foreningens første høringssvar · Kystforeningen Djursland</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/grobund/indsigelse-kommuneplan-grobund-aalerne-2025.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Indsigelse – Kommuneplan 2024 vedr. Grobund / Ålerne</strong>
+<span>5. januar 2025 · Kystforeningen Djursland · Indsigelse mod punkt 1.1.E7 m.fl. i Kommuneplan 2024</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+<a class="dok-row" href="assets/documents/hoeringssvar/hoeringssvar-grobund-kommuneplan-2025.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Høringssvar – Grobund og Kommuneplan 2024</strong>
+<span>5. januar 2025 · Kystforeningen Djursland</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+</div>
+<!-- Kategori 5: Presseartikler og baggrundsmateriale -->
+<div class="dok-year-label" style="font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--c-muted);padding:.6rem 0 .3rem;margin-top:.5rem;">
+          5 · Presseartikler og baggrundsmateriale
+        </div>
+<div class="dok-list">
+<div class="dok-row document-awaiting-permission" rel="noopener" target="_blank" title="PDF afventer tilladelse til offentliggørelse">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Politikere svigter naturen – kommunen fraviger egen helhedsplan</strong>
+<span>2. februar 2026 · Jyllands-Posten · Debat ved Elsebeth Due Kjeldsen</span>
+</div>
+<span class="dl">⬇</span>
+<small> · PDF afventer offentliggørelsestilladelse</small></div>
+<div class="dok-row document-awaiting-permission" rel="noopener" target="_blank" title="PDF afventer tilladelse til offentliggørelse">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Politikere svigter naturen – kommunen fraviger egen helhedsplan</strong>
+<span>2. februar 2026 · Ebeltoft Folketidende (online) · Debat ved Elsebeth Due Kjeldsen</span>
+</div>
+<span class="dl">⬇</span>
+<small> · PDF afventer offentliggørelsestilladelse</small></div>
+<div class="dok-row document-awaiting-permission" rel="noopener" target="_blank" title="PDF afventer tilladelse til offentliggørelse">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Politikere svigter naturen – kommunen fraviger egen helhedsplan</strong>
+<span>4. februar 2026 · Ebeltoft Folketidende (print) · Debat ved Elsebeth Due Kjeldsen</span>
+</div>
+<span class="dl">⬇</span>
+<small> · PDF afventer offentliggørelsestilladelse</small></div>
+<div class="dok-row document-awaiting-permission" rel="noopener" target="_blank" title="PDF afventer tilladelse til offentliggørelse">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Politisk vilje til at finde en løsning for kystforeningen</strong>
+<span>3. marts 2026 · Ebeltoft Folketidende · Kultur-, fritids- og landsdistriktsudvalget rækker hånden ud</span>
+</div>
+<span class="dl">⬇</span>
+<small> · PDF afventer offentliggørelsestilladelse</small></div>
+<div class="dok-row document-awaiting-permission" rel="noopener" target="_blank" title="PDF afventer tilladelse til offentliggørelse">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Er Grobund vigtigere end velfærd?</strong>
+<span>27. april 2026 · Din Avis (Syddjurs) · Debat ved John Finmann, Lager og Logistikchef, Ebeltoft</span>
+</div>
+<span class="dl">⬇</span>
+<small> · PDF afventer offentliggørelsestilladelse</small></div>
+<a class="dok-row" href="assets/documents/grobund/bidrager-grobund-til-samfundet.pdf" rel="noopener" target="_blank">
+<span class="icon">📰</span>
+<div class="info">
+<strong>Bidrager Grobund positivt til samfundet?</strong>
+<span>Ca. 2025 (kommunalvalg-periode) · Debat ved Elsebeth Due Kjeldsen, formand · Kystforeningen Djursland</span>
+</div>
+<span class="dl">⬇</span>
+</a>
+</div>
+</div><!-- /dok-grobund -->
+<!-- DYNAMISKE DOKUMENTER FRA SUPABASE (vises når aktiv) -->
+<div id="dok-areas"></div>
+</div>
+</div>
+</div>
+<!-- ════════════════════════════════════════════
+     BLIV MEDLEM
+════════════════════════════════════════════ -->
+<div class="page" id="page-medlem">
+<div class="page-hero">
+<div class="mw">
+<p class="section-label">Støt bevarelsen</p>
+<h1 class="page-hero-title">Bliv medlem</h1>
+</div>
+</div>
+<div class="page-body" style="text-align:center;">
+<div class="mw-xs">
+<p style="font-size:.9rem;color:var(--c-muted);margin-bottom:var(--sp-lg);">
+        Alle kan melde sig ind – uanset bopæl.
+      </p>
+<div class="membership-box">
+<div class="mb-top">
+<div style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;padding:.5rem 0;">
+<div style="text-align:center;">
+<div class="mb-price" id="mb-price" style="font-size:2.2rem;">100 kr.</div>
+<div style="font-size:.78rem;opacity:.8;margin-top:.2rem;">Personligt medlemskab / år</div>
+</div>
+<div style="text-align:center;">
+<div style="font-size:1.6rem;font-family:var(--font-display);font-weight:400;line-height:1;">50 kr.</div>
+<div id="mb-note" style="font-size:.78rem;opacity:.8;margin-top:.2rem;">Ægtefælle/samlever i samme husstand / år</div>
+</div>
+</div>
+</div>
+<ul aria-label="Fordele ved medlemskab" class="mb-perks">
+<li>Nyhedsbrev og løbende orientering om foreningens arbejde</li>
+<li>Adgang til alle arrangementer og aktiviteter</li>
+<li>Stemmeret på den årlige generalforsamling</li>
+<li>Mulighed for at påvirke foreningens arbejde og prioriteter</li>
+</ul>
+<div class="mb-form">
+<!-- Onlineindmeldelse midlertidigt deaktiveret – modtageradresse afventer godkendelse -->
+<div class="alert alert-info" id="m-midlertidig-besked" role="status" style="display:block;background:var(--c-navy);color:#fff;border-left:4px solid var(--c-gold);padding:1rem 1.2rem;border-radius:4px;margin-bottom:1rem;">
+  <strong>Onlineindmeldelse er midlertidigt ikke tilgængelig.</strong><br/>
+  Kontakt foreningen direkte: <a href="mailto:info@kystforeningendjursland.dk" style="color:var(--c-gold);">info@kystforeningendjursland.dk</a>
+</div>
+<input autocomplete="name" class="fi" id="m-navn" placeholder="Navn *" type="text" disabled style="opacity:.45;"/>
+<input autocomplete="email" class="fi" id="m-email" placeholder="E-mail *" type="email" disabled style="opacity:.45;"/>
+<input autocomplete="tel" class="fi" id="m-tlf" placeholder="Telefon (valgfrit)" type="tel" disabled style="opacity:.45;"/>
+<textarea class="fi" id="m-kommentar" placeholder="Kommentar (valgfrit)" style="height:72px;opacity:.45;" disabled></textarea>
+<button class="btn btn-primary btn-full" id="btn-tilmeld" type="button" disabled style="opacity:.45;cursor:not-allowed;">
+            Indmeldelse midlertidigt utilgængelig
+</button>
+<div class="alert" id="m-alert" role="alert"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ════════════════════════════════════════════
+     HØRINGSSVAR & INDSIGELSER
+════════════════════════════════════════════ -->
+<div class="page" id="page-hoeringssvar">
+<div class="page-hero">
+<div class="mw">
+<p class="section-label">Demokrati &amp; borgerinddragelse</p>
+<h1 class="page-hero-title">Høringssvar<br/>&amp; indsigelser</h1>
+</div>
+</div>
+<div class="page-body">
+<div class="mw-sm">
+<p style="font-size:.9rem;color:var(--c-muted);margin-bottom:var(--sp-xl);max-width:540px;line-height:1.75;">
+        Foreningen afgiver høringssvar og indsigelser i offentlige planprocesser
+        der berører Djurslands kystlandskab og natur. Alle dokumenter er frit tilgængelige.
+      </p>
+<!-- HØRINGSSVAR -->
+<div class="dok-section">
+<div class="dok-cat-title">Høringssvar</div>
+<div class="dok-list">
+<a class="dok-row" href="assets/documents/hoeringssvar/hoeringssvar-vindmoeller-faergehavnen-2025.pdf" rel="noopener" target="_blank">
+<span class="icon">📋</span>
+<div class="info">
+<strong>Kæmpevindmøller ved Ebeltoft Færgehavn</strong>
+<span>Januar 2025 · Kommuneplan 2024, punkt 1.1.T2</span>
+</div>
+<span class="dl" style="color:var(--c-navy);font-size:.8rem;font-weight:700;white-space:nowrap;">Læs høringssvar →</span>
+</a>
+<a class="dok-row" href="assets/documents/hoeringssvar/hoeringssvar-grobund-kommuneplan-2025.pdf" rel="noopener" target="_blank">
+<span class="icon">📋</span>
+<div class="info">
+<strong>Grobund og Kommuneplan 2024</strong>
+<span>5. januar 2025 · Indsigelse mod arealer ved Ålerne til tekniske anlæg</span>
+</div>
+<span class="dl" style="color:var(--c-navy);font-size:.8rem;font-weight:700;white-space:nowrap;">Læs høringssvar →</span>
+</a>
+<a class="dok-row" href="assets/documents/hoeringssvar/hoeringssvar-bosetning-aalerne-2024.pdf" rel="noopener" target="_blank">
+<span class="icon">📋</span>
+<div class="info">
+<strong>Nej til yderligere bosætning ved Ålerne</strong>
+<span>29. juni 2024 · Foreningens første høringssvar</span>
+</div>
+<span class="dl" style="color:var(--c-navy);font-size:.8rem;font-weight:700;white-space:nowrap;">Læs høringssvar →</span>
+</a>
+</div>
+</div>
+<!-- INDSIGELSER -->
+<div class="dok-section">
+<div class="dok-cat-title">Indsigelser</div>
+<div class="dok-list">
+<a class="dok-row" href="assets/documents/indsigelser/indsigelse-dispensation-kaarsbergsvej-2026.pdf" rel="noopener" target="_blank">
+<span class="icon">📋</span>
+<div class="info">
+<strong>Dispensationsansøgning – Kaarsbergsvej 2</strong>
+<span>August 2026 · Sagsnr. 25/22279 · Syddjurs Kommune</span>
+</div>
+<span class="dl" style="color:var(--c-navy);font-size:.8rem;font-weight:700;white-space:nowrap;">Læs indsigelse →</span>
+</a>
+</div>
+</div>
+<div style="margin-top:var(--sp-xl);padding:var(--sp-md);background:var(--c-cream);border-left:3px solid var(--c-gold);">
+<p style="font-size:.84rem;color:var(--c-stone);line-height:1.7;margin:0;">
+          Vil du støtte foreningens arbejde? Du er altid velkommen til at
+          <button class="btn btn-ghost btn-sm" data-goto="kontakt" style="display:inline-flex;vertical-align:middle;margin-left:.3rem;">kontakte os →</button>
+</p>
+</div>
+</div>
+</div>
+</div>
+<!-- ════════════════════════════════════════════
+     KONTAKT
+════════════════════════════════════════════ -->
+<div class="page" id="page-kontakt">
+<div class="page-hero">
+<div class="mw">
+<p class="section-label">Skriv til os</p>
+<h1 class="page-hero-title">Kontakt</h1>
+</div>
+</div>
+<div class="page-body">
+<div class="mw">
+<div class="kontakt-grid">
+<div class="kontakt-info">
+<div class="k-block">
+<h4>Kontaktperson</h4>
+<div class="k-row"><span class="ki">👤</span><span id="k-navn">Elsebeth Due Kjeldsen</span></div>
+<div class="k-row"><span class="ki">📧</span>
+<a href="mailto:elsebethduekjeldsen@gmail.com" id="k-email">elsebethduekjeldsen@gmail.com</a></div>
+<div class="k-row"><span class="ki">📞</span>
+<a href="tel:+4529442740" id="k-tlf">+45 29 44 27 40</a></div>
+</div>
+<div class="k-block">
+<h4>Find os</h4>
+<div class="k-row"><span class="ki">📍</span><span>Djursland, Region Midtjylland</span></div>
+<div class="k-row"><span class="ki">📘</span>
+<a href="https://www.facebook.com/groups/1627389338104320/" id="k-fb" rel="noopener" target="_blank">
+                Kystforeningen Djursland på Facebook</a></div>
+</div>
+<!-- FACEBOOK QR-KODE -->
+<div class="fb-qr-boks">
+<div class="fb-qr-label">Følg os på Facebook</div>
+<a aria-label="Gå til Kystforeningen Djurslands Facebook-gruppe" href="https://www.facebook.com/groups/1627389338104320/" rel="noopener" target="_blank">
+<img alt="QR-kode til Kystforeningen Djurslands Facebook-gruppe" class="fb-qr-img" src="assets/facebook-qr.png"/>
+</a>
+<p class="fb-qr-tekst">
+              Scan QR-koden eller tryk på den for at besøge
+              Kystforeningen Djurslands Facebook-gruppe.
+            </p>
+</div>
+<p class="text-muted">Vi svarer normalt inden for 3 hverdage.</p>
+</div>
+<div class="k-form">
+<input autocomplete="name" class="fi" id="k-navn-form" placeholder="Dit navn *" type="text"/>
+<input autocomplete="email" class="fi" id="k-email-form" placeholder="Din e-mail *" type="email"/>
+<textarea class="fi" id="k-besked" placeholder="Din besked *"></textarea>
+<button class="btn btn-navy btn-full" id="btn-kontakt" type="button">
+            Send besked <span class="arrow">→</span>
+</button>
+<div class="alert" id="k-alert" role="alert"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer role="contentinfo">
+<strong>Kystforeningen Djursland</strong>
+<p>Bevarelse af naturen og de rekreative kystområder på Djursland</p>
+<p style="margin-top:.3rem;">
+    Langagervej 5, 8400 Ebeltoft · CVR: <span id="f-cvr">44995514</span> · © 2026
+    <br/>Partipolitisk uafhængig forening
+  </p>
+<nav aria-label="Footer" class="footer-links">
+<a href="#" id="fp-priv">Privatlivspolitik</a>
+<span aria-hidden="true">·</span>
+<a href="#" id="fp-cook">Cookiepolitik</a>
+<span aria-hidden="true">·</span>
+<a href="admin.html" id="fp-admin">Admin</a>
+</nav>
+</footer>
+<!-- ════════════════════════════════════════════
+     MODALER
+════════════════════════════════════════════ -->
+<div aria-labelledby="sag-modal-h2" aria-modal="true" class="modal-ov" id="modal-sag" role="dialog">
+<div class="modal">
+<div class="modal-hdr">
+<h2 id="sag-modal-h2">Sag</h2>
+<button aria-label="Luk" class="modal-close" data-close="modal-sag">✕</button>
+</div>
+<div class="modal-body" id="sag-modal-body"></div>
+</div>
+</div>
+<div aria-labelledby="besked-h2" aria-modal="true" class="modal-ov" id="modal-besked" role="dialog">
+<div class="modal">
+<div class="modal-hdr">
+<h2 id="besked-h2">Besked klar</h2>
+<button aria-label="Luk" class="modal-close" data-close="modal-besked">✕</button>
+</div>
+<div class="modal-body">
+<p id="bd-intro"></p>
+<div aria-label="Beskedindhold" class="besked-boks" id="bd-tekst"></div>
+<div class="besked-btns">
+<button class="btn btn-primary btn-sm" id="bd-kopi">📋 Kopiér</button>
+<a class="btn btn-navy btn-sm" href="#" id="bd-mailto">✉ Åbn e-mailprogram</a>
+<button class="btn btn-ghost btn-sm" data-close="modal-besked">Luk</button>
+</div>
+<p class="text-muted" style="margin-top:.8rem;">
+        Send til: <strong id="bd-til"></strong>
+</p>
+</div>
+</div>
+</div>
+<div aria-labelledby="priv-h2" aria-modal="true" class="modal-ov" id="modal-priv" role="dialog">
+<div class="modal">
+<div class="modal-hdr">
+<h2 id="priv-h2">Privatlivspolitik</h2>
+<button aria-label="Luk" class="modal-close" data-close="modal-priv">✕</button>
+</div>
+<div class="modal-body">
+<p><strong>Kystforeningen Djursland</strong> er dataansvarlig for de personoplysninger vi behandler.</p>
+<h3>Oplysninger vi behandler</h3>
+<ul><li>Navn, e-mail og telefon ved medlemstilmelding</li><li>Navn, e-mail og besked ved kontakthenvendelse</li></ul>
+<h3>Formål og retsgrundlag</h3>
+<p>Oplysningerne bruges til at administrere medlemskab og besvare henvendelser (GDPR art. 6, stk. 1, litra a og b).</p>
+<h3>Opbevaring</h3>
+<p>Medlemsoplysninger slettes senest 1 år efter udmeldelse.</p>
+<h3>Dine rettigheder</h3>
+<p>Ret til indsigt, berigtigelse og sletning. Klage til <a href="https://datatilsynet.dk" rel="noopener" target="_blank">Datatilsynet</a>.</p>
+<p>Kontakt: <a href="mailto:info@kystforeningendj.dk">info@kystforeningendj.dk</a></p>
+</div>
+</div>
+</div>
+<div aria-labelledby="cook-h2" aria-modal="true" class="modal-ov" id="modal-cook" role="dialog">
+<div class="modal">
+<div class="modal-hdr">
+<h2 id="cook-h2">Cookiepolitik</h2>
+<button aria-label="Luk" class="modal-close" data-close="modal-cook">✕</button>
+</div>
+<div class="modal-body">
+<p>Denne hjemmeside gemmer udelukkende funktionelle data i din browser. Vi anvender ingen tracking, ingen analysecookies og ingen reklamecookies.</p>
+<p>Spørgsmål: <a href="mailto:info@kystforeningendj.dk">info@kystforeningendj.dk</a></p>
+</div>
+</div>
+</div>
+<!-- COOKIE BANNER -->
+<div aria-label="Cookiesamtykke" id="cookie-banner" role="complementary" style="display:none;">
+<p>Vi bruger kun nødvendige cookies til drift af siden.
+    <button id="ck-laes" style="background:none;border:none;color:rgba(200,164,90,.9);text-decoration:underline;cursor:pointer;font-size:inherit;padding:0;">Læs mere</button>
+</p>
+<div class="ck-btns">
+<button class="btn btn-ghost btn-sm" id="ck-nej" style="color:#fff;border-color:rgba(255,255,255,.35);" type="button">Kun nødvendige</button>
+<button class="btn btn-primary btn-sm" id="ck-ok" type="button">OK</button>
+</div>
+</div>
+<!-- ════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════ -->
+<script src="js/config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
