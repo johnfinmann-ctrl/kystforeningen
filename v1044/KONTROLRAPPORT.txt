@@ -1,0 +1,134 @@
+================================================================
+KONTROLRAPPORT – Kystforeningen Djursland v1.0.32
+Dato: 31. oktober 2026
+================================================================
+
+1. FORSIDEN / HERO-BILLEDE
+   ✓ Hero-billede: assets/landskab-aalerne.jpg
+   ✓ CSS desktop: url('../assets/landskab-aalerne.jpg') center 42% / cover
+   ✓ CSS 768px breakpoint: background-position center 38% (ingen override)
+   ✓ CSS 480px: hero { height: 80vh; min-height: 440px }
+   ✓ Ken Burns animation: kenburns 24s ease-out forwards
+   ✓ OG/social image: https://kystforeningendjursland.dk/assets/landskab-aalerne.jpg
+   ✓ Service Worker CACHE_VERSION: kfd-v1.0.32 (frisk cache ved opdatering)
+   ✓ Ingen referencer til gamle hero-billeder
+
+2. DOKUMENTER OG PDF-ARKIV (22 PDF-filer – alle verificeret)
+
+   Generalforsamling / aktiviteter (5 filer):
+   ✓ aktiviteter/beretning-generalforsamling-2026.pdf          (212K)
+   ✓ aktiviteter/referat-generalforsamling-2025.pdf             (148K)
+   ✓ aktiviteter/referat-generalforsamling-2026.pdf             (304K)
+   ✓ aktiviteter/velkomst-og-beretning-generalforsamling-2025.pdf (188K)
+   ✓ aktiviteter/velkomst-og-beretning-generalforsamling-2026.pdf (228K)
+
+   Vedtægter (1 fil):
+   ✓ vedtaegter/vedtaegter-kystforeningen-djursland.pdf         (232K)
+   ⚠ BEMÆRK: PDF-indhold fra 2024. HTML-etiket er korrekt:
+     "Vedtaget 25. juli 2024 · Ændret på generalforsamling 25. september 2026"
+     Afventer opdateret PDF fra foreningen.
+
+   Nyhedsbreve (9 filer):
+   ✓ nyhedsbreve/nyhedsbrev-03.pdf  (232K)
+   ✓ nyhedsbreve/nyhedsbrev-04.pdf  (212K)
+   ✓ nyhedsbreve/nyhedsbrev-05.pdf  (204K)
+   ✓ nyhedsbreve/nyhedsbrev-06.pdf  (160K)
+   ✓ nyhedsbreve/nyhedsbrev-07.pdf  (164K)
+   ✓ nyhedsbreve/nyhedsbrev-08.pdf  (208K)
+   ✓ nyhedsbreve/nyhedsbrev-09.pdf  (264K)
+   ✓ nyhedsbreve/nyhedsbrev-10.pdf  (264K)
+   ✓ nyhedbreve/nyhedsbrev-11.pdf  (320K)
+
+   Høringssvar (3 filer):
+   ✓ hoeringssvar/hoeringssvar-bosetning-aalerne-2024.pdf       (40K)
+   ✓ hoeringssvar/hoeringssvar-grobund-kommuneplan-2025.pdf     (416K)
+   ✓ hoeringssvar/hoeringssvar-vindmoeller-faergehavnen-2025.pdf (216K)
+
+   Indsigelser (1 fil):
+   ✓ indsigelser/indsigelse-dispensation-kaarsbergsvej-2026.pdf (252K)
+
+   Grobund (3 filer):
+   ✓ grobund/bidrager-grobund-til-samfundet-2025.pdf            (144K)
+   ✓ grobund/indsigelse-kommuneplan-grobund-aalerne-2025.pdf    (120K)
+   ✓ grobund/vandhaandteringsplan-grobund-2026.pdf              (7.2M)
+
+   TILBAGEHOLDTE DOKUMENTER (ikke i ZIP – ophavsret/fortrolighed):
+   ✗ Rambølls trafikrapport – mærket CONFIDENTIAL, må ikke publiceres
+   ✗ 5 avisartikler – ophavsret ikke afklaret, må ikke publiceres
+     (Erstattet af beskrivelser + links til udgivere i index.html)
+
+3. FEM AKTUELLE SAGER
+   ✓ Dråby – sommerhusområde og store sommerhuse
+     Billede: assets/draaby-sommerhus.jpg
+   ✓ Vosnæs – vindmøller og ministerafgørelse
+     Billede: assets/vosnæs-vindmoeller.jpg
+   ✓ Grobund / Ålerne – bosætning og kystplanlægning
+     Billede: assets/grobund-kyst.jpg
+   ✓ Hjelm Banke – råstofindvinding til havs
+     Billede: assets/hjelm-banke.jpg
+   ✓ Fjellerup Strand – udvikling i det kystnære område
+     Billede: assets/fjellerup-strand.jpg
+   ✓ Ministerafgørelsen (Hjelm Banke) er korrekt beskrevet som
+     TILLADELSE til indvinding – ikke fremstillet som igangværende
+     ansøgning
+   ✓ Miljøstyrelsen betegnes korrekt som statslig myndighed
+
+4. SUPABASE OG ADMIN
+   ✓ SUPABASE_URL = 'DIN_SUPABASE_URL_HER' (placeholder – intet leak)
+   ✓ Service Role Key er IKKE til stede i frontend-kode
+   ✓ localStorage bruges ikke som database
+   ✓ handle_new_user() opretter profiler med role = 'viewer' (default)
+   ✓ Ingen self-service UPDATE-politik på profiles (ingen escalation)
+   ✓ is_admin() og is_staff() er SECURITY DEFINER-funktioner
+   ✓ seed.sql: kontingent 100 kr. / 50 kr. (enkelt/familie)
+   ✓ seed.sql: ingen fiktive aktiviteter, ingen opfundne nyheder
+   ✓ CVR: 44995514
+
+5. BILLEDKONTROL (7 referencer i index.html – alle OK)
+   ✓ assets/draaby-sommerhus.jpg
+   ✓ assets/facebook-qr.png
+   ✓ assets/fjellerup-strand.jpg
+   ✓ assets/grobund-kyst.jpg
+   ✓ assets/hjelm-banke.jpg
+   ✓ assets/vosnæs-vindmoeller.jpg
+   ✓ assets/landskab-aalerne.jpg (hero)
+
+6. TEKNISK AUDIT
+   ✓ CACHE_VERSION: kfd-v1.0.32
+   ✓ APP_VERSION: 1.0.32
+   ✓ Alle PDF-links testet: 22/22 OK (ingen brudte links)
+   ✓ Alle billedreferencer testet: 7/7 OK
+   ✓ Ingen referencer til 1.0.31 i JS/HTML/JSON
+   ✓ manifest.json: start_url /kystforeningen/, scope /kystforeningen/
+   ✓ ASCII-sikre filnavne (undtagen vosnæs-vindmoeller.jpg som index.html
+     eksplicit refererer til med æ – filsystemet håndterer det)
+
+7. INDHOLD IKKE INKLUDERET I OFFENTLIG ZIP
+   Rambølls trafikrapport er markeret Confidential og må ikke
+   publiceres uden dokumenteret tilladelse fra Rambøll.
+   5 avisartikler fra lokale medier er ikke inkluderet; hjemmesiden
+   viser i stedet korte beskrivelser + links til udgivernes hjemmesider.
+
+8. ÅBNE PUNKTER (kræver handling af foreningen)
+   ⚠ Vedtægt-PDF: indeholder kun 2024-vedtægterne.
+     Afventer PDF med ændringerne fra generalforsamling 25.9.2026.
+   ⚠ PWA-ikoner (icon-192.png, icon-512.png): ikke i denne leverance.
+     Bør allerede være på GitHub Pages fra forrige version.
+   ⚠ Supabase-URL og anon-nøgle: skal udfyldes i config.js inden
+     deployment til GitHub Pages.
+   ⚠ Testen på GitHub Pages / iOS Safari er ikke udført af leverandør.
+     Anbefales gennemført inden lancering.
+
+================================================================
+Leverancen: Kystforeningen_Djursland_v1.0.32_KOMPLET.zip
+Indhold:
+  index.html, admin.html, styles.css, admin.css, app.js, admin.js,
+  config.js, supabase-client.js, sw.js, manifest.json
+  assets/landskab-aalerne.jpg + sagsbilleder + facebook-qr.png
+  assets/documents/ (22 PDF-filer i 6 undermapper)
+  sql/schema.sql, sql/policies.sql, sql/seed.sql
+  CHANGELOG.md, KONTROLRAPPORT.txt
+================================================================
+INSTRUKS: Ingen filer er uploadt til GitHub. Hjemmesiden er ikke
+publiceret. Godkend ZIP-leverancen, inden du uploader til GitHub Pages.
+================================================================
