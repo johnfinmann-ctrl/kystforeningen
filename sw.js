@@ -16,8 +16,8 @@
  * 8. Brugeren ser ny version
  */
 
-const CACHE_VERSION = 'kfd-v1.0.43';
-const CACHE_NAME    = CACHE_VERSION; // v1.0.43 – fjernet "Søg artiklen"-kort; direkte til GitHub upload
+const CACHE_VERSION = 'kfd-v1.0.45';
+const CACHE_NAME    = CACHE_VERSION; // v1.0.45 – nyhedsbjælke v1 tilføjet
 
 const PRECACHE = [
   './',
