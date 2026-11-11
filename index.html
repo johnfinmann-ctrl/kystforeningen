@@ -22,137 +22,112 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Source+Sans+3:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link href="css/styles.css" rel="stylesheet"/>
-<!-- ── NYHEDSBJÆLKE CSS ───────────────────────────────────── -->
+
+<!-- INLINE: Nyhedsbjælke + vedtægt-luk CSS – tilføjet v1.0.46 -->
 <style>
+/* ── Nyhedsbjælke ── */
 #nyheds-bjaelke {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  z-index: 390; /* under cookie-banner (400) og modal (500), over update-banner (300) */
-  background: #0d2a1a;
-  border-top: 2px solid rgba(200,164,90,.5);
-  display: flex;
-  align-items: center;
-  min-height: 52px;
-  padding: 0 .75rem 0 .75rem;
-  font-family: 'Source Sans 3', 'Segoe UI', Arial, sans-serif;
-  font-size: .84rem;
-  color: rgba(255,255,255,.92);
-  box-shadow: 0 -2px 12px rgba(0,0,0,.35);
-  transition: opacity .25s ease;
+  position:fixed; bottom:0; left:0; right:0;
+  z-index:390;
+  background:#0d2a1a;
+  border-top:2px solid rgba(200,164,90,.5);
+  display:flex; align-items:center; min-height:52px;
+  padding:0 .75rem; font-family:'Source Sans 3',sans-serif;
+  font-size:.84rem; color:rgba(255,255,255,.92);
+  box-shadow:0 -2px 12px rgba(0,0,0,.35);
+  transition:opacity .25s ease;
 }
-#nyheds-bjaelke.nb-skjult { display: none; }
-
-/* Label */
+#nyheds-bjaelke.nb-skjult { display:none; }
 .nb-label {
-  flex-shrink: 0;
-  font-size: .68rem;
-  font-weight: 700;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-  color: rgba(200,164,90,.9);
-  white-space: nowrap;
-  margin-right: .6rem;
-  line-height: 1;
-  padding: .18rem .45rem;
-  border: 1px solid rgba(200,164,90,.35);
-  border-radius: 3px;
+  font-size:.7rem; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; color:rgba(200,164,90,.85);
+  white-space:nowrap; margin-right:.6rem; flex-shrink:0;
 }
-
-/* Indhold-wrapper – fade */
 .nb-indhold {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  overflow: hidden;
-  transition: opacity .4s ease;
+  flex:1; overflow:hidden; min-width:0;
+  transition:opacity .3s ease;
 }
-.nb-indhold.nb-fade { opacity: 0; }
-
 .nb-sag {
-  flex-shrink: 0;
-  font-size: .72rem;
-  font-weight: 600;
-  color: rgba(200,164,90,.8);
-  white-space: nowrap;
+  display:inline-block; font-size:.74rem; font-weight:700;
+  letter-spacing:.05em; text-transform:uppercase;
+  color:rgba(200,164,90,.7); margin-right:.45rem; white-space:nowrap;
 }
-.nb-sep {
-  flex-shrink: 0;
-  color: rgba(255,255,255,.25);
-  font-size: .8rem;
-}
+.nb-sep { color:rgba(255,255,255,.25); margin:0 .3rem; }
 .nb-link {
-  color: rgba(255,255,255,.92);
-  text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  flex: 1;
-  min-width: 0;
-  line-height: 1.35;
+  color:rgba(255,255,255,.92); text-decoration:none;
+  font-weight:600;
 }
-.nb-link:hover { color: rgba(200,164,90,.95); text-decoration: underline; }
-
+.nb-link:hover { text-decoration:underline; color:#fff; }
 .nb-dato {
-  flex-shrink: 0;
-  font-size: .72rem;
-  color: rgba(255,255,255,.45);
-  white-space: nowrap;
-  margin-left: .4rem;
+  font-size:.74rem; color:rgba(255,255,255,.45);
+  margin-left:.5rem; white-space:nowrap;
 }
-
-/* Højre-knapper */
 .nb-knapper {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: .35rem;
-  margin-left: .6rem;
+  display:flex; align-items:center; gap:.35rem;
+  flex-shrink:0; margin-left:.5rem;
 }
-.nb-pause-btn, .nb-luk-btn {
-  background: none;
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 3px;
-  color: rgba(255,255,255,.55);
-  font-size: .72rem;
-  line-height: 1;
-  padding: .25rem .45rem;
-  cursor: pointer;
-  transition: color .15s, border-color .15s;
-  white-space: nowrap;
+.nb-pause-btn,.nb-luk-btn {
+  background:none; border:1px solid rgba(255,255,255,.18);
+  color:rgba(255,255,255,.65); cursor:pointer;
+  border-radius:3px; padding:.18rem .45rem; font-size:.8rem;
+  line-height:1; transition:background .15s;
 }
-.nb-pause-btn:hover, .nb-luk-btn:hover {
-  color: rgba(200,164,90,.9);
-  border-color: rgba(200,164,90,.5);
+.nb-pause-btn:hover,.nb-luk-btn:hover {
+  background:rgba(255,255,255,.12); color:#fff;
 }
-
-/* Prikker */
 .nb-prikker {
-  flex-shrink: 0;
-  display: flex;
-  gap: .3rem;
-  margin-left: .5rem;
+  display:flex; gap:.3rem; align-items:center; margin-left:.5rem;
 }
 .nb-prik {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.2);
-  transition: background .3s;
+  width:5px; height:5px; border-radius:50%;
+  background:rgba(255,255,255,.2); transition:background .2s;
 }
-.nb-prik.aktiv { background: rgba(200,164,90,.8); }
-
-/* Skjul prikker på meget smal skærm */
-@media (max-width: 480px) {
-  .nb-dato { display: none; }
-  .nb-prikker { display: none; }
-  .nb-sag { display: none; }
-  .nb-sep { display: none; }
+.nb-prik.aktiv { background:rgba(200,164,90,.8); }
+@media (max-width:480px) {
+  .nb-dato,.nb-prikker,.nb-sag,.nb-sep { display:none; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .nb-indhold { transition:none; }
 }
 
-/* Reduceret bevægelse */
-@media (prefers-reduced-motion: reduce) {
-  .nb-indhold { transition: none; }
+/* ── Dokumenter-side: luk-knap (vedtægt / page-gf) ── */
+#page-gf { position:relative; }
+.page-luk-knap {
+  position:fixed;
+  top:calc(env(safe-area-inset-top,0px) + 68px);
+  right:max(16px,env(safe-area-inset-right,0px));
+  z-index:210;
+  display:none;
+  width:40px; height:40px;
+  background:rgba(255,255,255,.92);
+  border:1.5px solid rgba(0,0,0,.12);
+  border-radius:50%;
+  box-shadow:0 2px 10px rgba(0,0,0,.18);
+  cursor:pointer;
+  font-size:1.1rem; line-height:1;
+  color:#333;
+  align-items:center; justify-content:center;
+  transition:background .15s, transform .15s;
+}
+.page-luk-knap:hover {
+  background:#fff;
+  transform:scale(1.08);
+}
+#page-gf.active ~ * .page-luk-knap,
+#page-gf.active .page-luk-knap {
+  display:flex;
+}
+/* Vis kun når page-gf er aktiv */
+body.gf-aktiv .page-luk-knap {
+  display:flex;
+}
+@media (max-width:600px) {
+  .page-luk-knap {
+    top:calc(env(safe-area-inset-top,0px) + 60px);
+    right:max(12px,env(safe-area-inset-right,0px));
+    width:36px; height:36px;
+    font-size:1rem;
+  }
 }
 </style>
 </head>
@@ -388,7 +363,7 @@
 <!-- SAG 1: DRÅBY -->
 <div class="sag-kort-3" id="kort-draby">
 <div class="sag-kort-3-img-wrap">
-<img alt="Luftfoto af sommerhusområdet ved Dråby Strand – grøn mark med havudsigt" class="sag-kort-img" src="assets/sommerhus-mark.jpg"/>
+<img alt="Byplanstegning af sommerhusområdet Dråby Strand – Djursland" class="sag-kort-img" src="assets/draaby-sommerhus.jpg"/>
 </div>
 <div class="sag-kort-3-body">
 <div class="sag-status-badge">Under behandling</div>
@@ -412,7 +387,7 @@
 <!-- SAG 3: GROBUND/ÅLERNE -->
 <div class="sag-kort-3" id="kort-grobund">
 <div class="sag-kort-3-img-wrap">
-<img alt="Luftfoto af Grobund-området ved Ålerne – industrianlæg og havneområde" class="sag-kort-img" src="assets/grobund-industri.jpg"/>
+<img alt="Dronefoto af havn og kystlinje med vindmøller ved Grobund / Ålerne, Djursland" class="sag-kort-img" src="assets/grobund-kyst.jpg"/>
 </div>
 <div class="sag-kort-3-body">
 <div class="sag-status-badge">Under behandling</div>
@@ -424,7 +399,7 @@
 <!-- SAG 4: HJELM BANKE -->
 <div class="sag-kort-3" id="kort-hjelm">
 <div class="sag-kort-3-img-wrap">
-<img alt="Søkort over Hjelm Banke med råstofindvindingsområde 506-JA – Delområde 1 og 2" class="sag-kort-img" src="assets/hjelm-banke-kort-nyt.png"/>
+<img alt="Søkort over Hjelm Banke med råstofindvindingsområde 506-JA – Delområde 1 og 2" class="sag-kort-img" src="assets/hjelm-banke.jpg"/>
 </div>
 <div class="sag-kort-3-body">
 <div class="sag-status-badge">Overvågning</div>
@@ -468,14 +443,24 @@
                           ⚠ STATUS: OFFENTLIG HØRING – FRIST 16. DECEMBER 2026 KL. 23.59
                         </div>
 <div class="sag-nyt-item">
-<span class="sag-nyt-dato">3. november 2026</span>
-<strong>DR Nyheder: Massivt pres mod kæmpesommerhuse til borgermøde</strong>
-<p>DR omtaler den lokale modstand mod planerne om store sommerhuse ved Dråby Strand og debatten på borgermødet den 2. november 2026. <a href="https://www.dr.dk/nyheder/indland/massivt-pres-mod-kaempesommerhuse-til-borgermoede-der-er-noget-muggent-ved-det" rel="noopener noreferrer" target="_blank">Læs artiklen hos DR Nyheder ↗</a></p>
+<span class="sag-nyt-dato">9. november 2026</span>
+<strong>Debatindlæg: Vejen skal følge med hvis 100 nye sommerhuse vedtages</strong>
+<p>Debatindlæg i Din Avis om behovet for vejforbedringer, hvis lokalplan 474 for sommerhusområde ved Dråby Strand vedtages. <a href="https://dinavis.dk/debat/ECE19813428/100-nye-sommerhuse-i-draaby-saa-skal-vejen-foelge-med-og-ikke-bare-trafikken/" rel="noopener noreferrer" target="_blank">Læs debatindlægget hos Din Avis ↗</a></p>
+</div>
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">8. november 2026</span>
+<strong>Debatindlæg: Kan de små veje klare trafikken på skiftedage?</strong>
+<p>Debatindlæg i Din Avis om trafikbelastningen på de lokale veje ved Dråby Strand. Bemærk: Tallet 500 biler er debattantens eget skøn og er ikke en dokumenteret trafikprognose. <a href="https://dinavis.dk/debat/ECE19811622/kan-de-smaa-veje-klare-500-biler-paa-skiftedage/" rel="noopener noreferrer" target="_blank">Læs debatindlægget hos Din Avis ↗</a></p>
 </div>
 <div class="sag-nyt-item">
 <span class="sag-nyt-dato">21. oktober 2026</span>
 <strong>Lokalplan 474 offentliggjort – høring åben</strong>
 <p>Syddjurs Kommune offentliggjorde den 21. oktober 2026 forslag til Lokalplan 474 for sommerhusområde ved Dråby Strand. Den offentlige høring løber frem til <strong>16. december 2026 kl. 23.59</strong>. Høringssvar sendes via kommunens hjemmeside.</p>
+</div>
+<div class="sag-nyt-item">
+<span class="sag-nyt-dato">3. november 2026</span>
+<strong>DR Nyheder: Massivt pres mod kæmpesommerhuse til borgermøde</strong>
+<p>DR omtaler den lokale modstand mod planerne om store sommerhuse ved Dråby Strand og debatten på borgermødet den 2. november 2026. <a href="https://www.dr.dk/nyheder/indland/massivt-pres-mod-kaempesommerhuse-til-borgermoede-der-er-noget-muggent-ved-det" rel="noopener noreferrer" target="_blank">Læs artiklen hos DR Nyheder ↗</a></p>
 </div>
 <div class="sag-nyt-item">
 <span class="sag-nyt-dato">2. november 2026 kl. 17.30</span>
@@ -532,12 +517,6 @@
 <p style="font-size:.78rem;color:var(--c-muted);margin-bottom:var(--sp-sm);font-style:italic;">
                           Artiklerne herunder er eksterne mediers egne tekster og repræsenterer ikke Kystforeningens holdning.
                         </p>
-<a class="presse-kort" href="https://www.dr.dk/nyheder/indland/massivt-pres-mod-kaempesommerhuse-til-borgermoede-der-er-noget-muggent-ved-det" rel="noopener noreferrer" target="_blank">
-<div class="presse-kilde">DR Nyheder · 3. november 2026</div>
-<div class="presse-overskrift">Massivt pres mod kæmpesommerhuse til borgermøde: 'Der er noget muggent ved det'</div>
-<div class="presse-beskr">DR omtaler den lokale modstand mod planerne om store sommerhuse ved Dråby Strand og debatten på borgermødet den 2. november 2026.</div>
-<div class="presse-laes">Læs artiklen hos DR Nyheder ↗</div>
-</a>
 <a class="presse-kort" href="https://dansk-byudvikling.dk/plan-for-over-100-store-sommerhuse-sendes-i-hoering/" rel="noopener noreferrer" target="_blank">
 <div class="presse-kilde">Dansk Byudvikling · 21. september 2026</div>
 <div class="presse-overskrift">Plan for over 100 store sommerhuse sendes i høring</div>
@@ -582,6 +561,19 @@
 <a class="presse-kort" href="https://dinavis.dk/debat/ECE19660360/lokalplanforslag-474-ny-sommerhusby-ved-draaby-strand-er-en-ommer/" rel="noopener" target="_blank">
 <div class="presse-kilde">Din Avis – Debatindlæg · Oktober 2026</div>
 <div class="presse-overskrift">Lokalplanforslag 474: Ny sommerhusby ved Dråby Strand er en ommer</div>
+<div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+</a>
+
+<a class="presse-kort" href="https://dinavis.dk/debat/ECE19811622/kan-de-smaa-veje-klare-500-biler-paa-skiftedage/" rel="noopener noreferrer" target="_blank">
+<div class="presse-kilde">Din Avis – Debatindlæg · 8. november 2026</div>
+<div class="presse-overskrift">Kan de små veje klare 500 biler på skiftedage?</div>
+<div class="presse-beskr">Debatindlæg om trafikbelastningen på de lokale veje ved Dråby Strand ved et eventuelt nyt sommerhusområde. Tallet 500 biler er debattantens eget skøn og er ikke en dokumenteret trafikprognose.</div>
+<div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+</a>
+<a class="presse-kort" href="https://dinavis.dk/debat/ECE19813428/100-nye-sommerhuse-i-draaby-saa-skal-vejen-foelge-med-og-ikke-bare-trafikken/" rel="noopener noreferrer" target="_blank">
+<div class="presse-kilde">Din Avis – Debatindlæg · 9. november 2026</div>
+<div class="presse-overskrift">100 nye sommerhuse i Dråby – så skal vejen følge med og ikke bare trafikken</div>
+<div class="presse-beskr">Debatindlæg om behovet for vejforbedringer, hvis lokalplan 474 for sommerhusområde ved Dråby Strand vedtages.</div>
 <div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
 </a>
 </div>
@@ -641,6 +633,11 @@
                           SENESTE: Minister ophæver planveto – Aarhus Byråd skal fortsat beslutte om endelig vedtagelse
                         </div>
 <div class="sag-nyt-item">
+<span class="sag-nyt-dato">6. november 2026</span>
+<strong>Debatindlæg: Retssikkerhed skal også virke i Vosnæs-sagen</strong>
+<p>Debatindlæg i Din Avis om retssikkerhed og behandlingen af borgernes indsigelser i Vosnæs-vindmøllesagen. <a href="https://dinavis.dk/debat/ECE19808212/retssikkerhed-skal-ogsaa-virke-naar-borgernes-indsigelser-er-politisk-ubekvemme/" rel="noopener noreferrer" target="_blank">Læs debatindlægget hos Din Avis ↗</a></p>
+</div>
+<div class="sag-nyt-item">
 <span class="sag-nyt-dato">22. oktober 2026</span>
 <strong>Minister ophæver Syddjurs' planveto – Aarhus kan vedtage vindmølleplan</strong>
 <p>Minister for byer og landdistrikter Signe Munk (SF) har truffet afgørelse i sagen om planveto mod Aarhus Kommunes lokalplan for vindmøller ved Vosnæs. Ministeren ophæver Syddjurs Kommunes veto og åbner dermed for, at Aarhus kan vedtage lokalplanen. Borgmester Michael Harregaard Stegger (S, Syddjurs) betegner afgørelsen som "dybt skuffende" og oplyser, at kommunen vil vurdere sine videre muligheder. Kilde: <a href="https://dinavis.dk/politik/ECE19762672/minister-har-afgjort-betaendt-sag-om-150-meter-hoeje-vindmoeller-ved-kommunegraense/" rel="noopener" target="_blank">Din Avis, 22. oktober 2026</a></p>
@@ -699,6 +696,12 @@
 </div>
 <div class="sag-tab-panel" id="vosnæs-presse">
 <p style="font-size:.78rem;color:var(--c-muted);margin-bottom:var(--sp-sm);border-left:3px solid var(--c-border);padding-left:.75rem;">Artiklerne herunder er eksterne mediers egne tekster og repræsenterer ikke Kystforeningens holdning.</p>
+<a class="presse-kort" href="https://dinavis.dk/debat/ECE19808212/retssikkerhed-skal-ogsaa-virke-naar-borgernes-indsigelser-er-politisk-ubekvemme/" rel="noopener noreferrer" target="_blank">
+<div class="presse-kilde">Din Avis – Debatindlæg · 6. november 2026</div>
+<div class="presse-overskrift">Retssikkerhed skal også virke, når borgernes indsigelser er politisk ubekvemme</div>
+<div class="presse-beskr">Debatindlæg om retssikkerhed og behandlingen af borgernes indsigelser i Vosnæs-vindmøllesagen.</div>
+<div class="presse-laes">Læs debatindlægget hos Din Avis ↗</div>
+</a>
 <a class="presse-kort" href="https://dinavis.dk/politik/ECE19762672/minister-har-afgjort-betaendt-sag-om-150-meter-hoeje-vindmoeller-ved-kommunegraense/" rel="noopener" target="_blank">
 <div class="presse-kilde">Din Avis · 22. oktober 2026</div>
 <div class="presse-overskrift">Minister har afgjort betændt sag om 150 meter høje vindmøller ved kommunegrænse</div>
@@ -775,9 +778,7 @@
 <button class="sag-tab aktiv" data-tab="grobund-nyt">Seneste nyt</button>
 <button class="sag-tab" data-tab="grobund-dok">Høringer</button>
 <button class="sag-tab" data-tab="grobund-arbejde">Vores arbejde</button>
-<button class="sag-tab" data-tab="grobund-presse">Presse og debat</button>
-<button class="sag-tab" data-tab="grobund-trafik">Trafik og infrastruktur</button>
-<button class="sag-tab" data-tab="grobund-vand">Vandhåndtering og miljø</button>
+<button class="sag-tab" data-tab="grobund-presse">Presse</button>
 <button class="sag-tab" data-tab="grobund-kom">Kommunale kilder</button>
 </div>
 <div class="sag-tab-panel" id="grobund-baggrund">
@@ -816,100 +817,20 @@
 </div>
 <div class="sag-tab-panel" id="grobund-presse">
 <p style="font-size:.78rem;color:var(--c-muted);margin-bottom:var(--sp-sm);font-style:italic;">
-  Nyhedsartikler er eksterne mediers egne tekster og repræsenterer ikke Kystforeningens holdning. Debatindlæg fra foreningens formand er foreningens egne.
-</p>
-<h4 style="margin:var(--sp-sm) 0 var(--sp-xs);font-size:.9rem;color:var(--c-muted);text-transform:uppercase;letter-spacing:.06em;">Foreningens debatindlæg</h4>
-<a class="presse-kort" href="assets/documents/grobund/bidrager-grobund-til-samfundet.pdf" rel="noopener" target="_blank">
-<div class="presse-kilde">Elsebeth Due Kjeldsen · Formand · Valgkamp 2025</div>
-<div class="presse-overskrift">Bidrager Grobund positivt til samfundet?</div>
-<div class="presse-beskr">Foreningens formand analyserer virksomhederne på Kaarsbergsvej 2: af 59 registrerede CVR-numre er 22 ophørt, 9 ApS'er betaler ingen skat, og ingen har lønudgifter. Spørger borgmesteren om grundlaget for påstanden om Grobunds positive samfundsbidrag.</div>
-<div class="presse-laes">Læs debatindlægget ↗</div>
+                          Artiklerne herunder er eksterne mediers egne tekster og repræsenterer ikke Kystforeningens holdning.
+                        </p>
+<a class="presse-kort" href="https://dinavis.dk/samfund/ECE17500943/borgmester-moedes-med-kritikere-af-grobund-hvorfor-stoetter-du-et-usolidarisk-parallelsamfund/" rel="noopener" target="_blank">
+<div class="presse-kilde">Din Avis</div>
+<div class="presse-overskrift">Borgmester mødes med kritikere af Grobund: Hvorfor støtter du et usolidarisk parallelsamfund?</div>
+<div class="presse-beskr">Artikel om mødet mellem borgmesteren og kritikere af planerne om en ny landsby ved Ålerne.</div>
+<div class="presse-laes">Læs artiklen ↗</div>
 </a>
-<a class="presse-kort" href="assets/documents/grobund/presse/debat-bidrager-grobund-til-samfundet.pdf" rel="noopener" target="_blank">
-<div class="presse-kilde">Elsebeth Due Kjeldsen · Formand · 2026</div>
-<div class="presse-overskrift">Bidrager Grobund til samfundet? (opdateret udgave)</div>
-<div class="presse-beskr">Opdateret version af debatindlægget med supplerende dokumentation om CVR-registreringer, skatteforhold og beskæftigelsesdata for virksomhederne på Kaarsbergsvej 2.</div>
-<div class="presse-laes">Læs opdateret debatindlæg ↗</div>
-</a>
-<h4 style="margin:var(--sp-md) 0 var(--sp-xs);font-size:.9rem;color:var(--c-muted);text-transform:uppercase;letter-spacing:.06em;">Debatindlæg i pressen (link til original)</h4>
-<a class="presse-kort" href="assets/documents/grobund/presse/debat-jp-02-02-2026.pdf" rel="noopener" target="_blank">
-<div class="presse-kilde">Jyllands-Posten · Debat · 2. februar 2026</div>
-<div class="presse-overskrift">Politikere svigter naturen – kommunen fraviger egen helhedsplan</div>
-<div class="presse-meta" style="font-size:.78rem;color:var(--c-muted);margin:.2rem 0;">Af Elsebeth Due Kjeldsen, formand</div>
-<div class="presse-beskr">Debatindlæg, der kritiserer Syddjurs Kommune for at udbyde naturarealer til bebyggelse i strid med helhedsplanens egne målsætninger og den gældende strandbeskyttelseslinje. Trykt i Jyllands-Posten 2. februar 2026.</div>
-<div class="presse-laes">Læs debatindlægget (PDF) ↗</div>
-</a>
-<a class="presse-kort" href="assets/documents/grobund/presse/debat-folketidende-02-02-2026.pdf" rel="noopener" target="_blank">
-<div class="presse-kilde">Ebeltoft Folketidende · Debat · 2. februar 2026</div>
-<div class="presse-overskrift">Politikere svigter naturen – kommunen fraviger egen helhedsplan</div>
-<div class="presse-meta" style="font-size:.78rem;color:var(--c-muted);margin:.2rem 0;">Af Elsebeth Due Kjeldsen, formand</div>
-<div class="presse-beskr">Debatindlæg bragt i Ebeltoft Folketidende 2. februar 2026. Kritiserer Syddjurs Kommune for at udbyde naturarealer til bebyggelse i strid med helhedsplanens egne målsætninger og den gældende strandbeskyttelseslinje.</div>
-<div class="presse-laes">Læs debatindlægget (PDF) ↗</div>
-</a>
-<a class="presse-kort" href="assets/documents/grobund/presse/debat-folketidende-04-02-2026.pdf" rel="noopener" target="_blank">
-<div class="presse-kilde">Ebeltoft Folketidende · Debat · 4. februar 2026</div>
-<div class="presse-overskrift">Politikere svigter naturen – kommunen fraviger egen helhedsplan</div>
-<div class="presse-meta" style="font-size:.78rem;color:var(--c-muted);margin:.2rem 0;">Af Elsebeth Due Kjeldsen, formand</div>
-<div class="presse-beskr">Samme debatindlæg som i Jyllands-Posten, bragt på forsiden af Ebeltoft Folketidende 4. februar 2026. Opfordrer politikerne til at ophæve den forældede lokalplan og udlægge arealet til natur.</div>
-<div class="presse-laes">Læs debatindlægget (PDF) ↗</div>
-</a>
-<a class="presse-kort" href="assets/documents/grobund/presse/debat-dinavis-27-04-2026.pdf" rel="noopener" target="_blank">
-<div class="presse-kilde">Din Avis · Debat · 27. april 2026</div>
-<div class="presse-overskrift">Er Grobund vigtigere end velfærd?</div>
-<div class="presse-meta" style="font-size:.78rem;color:var(--c-muted);margin:.2rem 0;">Af John Finmann, Lager og Logistikchef, Ebeltoft</div>
-<div class="presse-beskr">Debatindlæg, der stiller spørgsmål ved prioriteringen af et projekt baseret på en trafikanalyse uden reelle trafiktællinger og et anlægsoverslag på op mod 8,8 mio. kr. – mens velfærden for kommunens ældre beskæres. Kræver reelle trafiktællinger og fuldt økonomisk overblik inden beslutning.</div>
-<div class="presse-laes">Læs debatindlægget (PDF) ↗</div>
-</a>
-<h4 style="margin:var(--sp-md) 0 var(--sp-xs);font-size:.9rem;color:var(--c-muted);text-transform:uppercase;letter-spacing:.06em;">Nyhedsartikler</h4>
 <a class="presse-kort" href="https://dinavis.dk/samfund/ECE16450014/explainer-spildevandsprop-forhindrer-grobund-i-at-lave-landsby/" rel="noopener" target="_blank">
 <div class="presse-kilde">Din Avis</div>
 <div class="presse-overskrift">Explainer: Spildevandsprop forhindrer Grobund i at lave landsby</div>
 <div class="presse-beskr">Forklaring af den centrale tekniske hindring for Grobunds planer: spildevandshåndtering i kystnært område.</div>
 <div class="presse-laes">Læs artiklen ↗</div>
 </a>
-</div>
-<!-- TRAFIK OG INFRASTRUKTUR -->
-<div class="sag-tab-panel" id="grobund-trafik">
-<p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">
-  Grobund-projektet vil medføre op mod 1.900 daglige bilture i området. De berørte veje – Langagervej, Christianslundsvej, Færgevejen og Ålervejen – er smalle og uden faciliteter for bløde trafikanter.
-</p>
-<h4>Teknisk analyse</h4>
-<p>Syddjurs Kommune har bestilt en trafikafviklingsplan hos Rambøll (januar 2026). Foreningen har modtaget rapporten og gør den tilgængelig her som dokumentation i sagen.</p>
-<a class="presse-kort" href="assets/documents/grobund/trafikafviklingsplan-ramboll-2026.pdf" target="_blank" rel="noopener">
-  <div class="presse-kilde">Rambøll · Syddjurs Kommune · 15. januar 2026</div>
-  <div class="presse-overskrift">Trafikafviklingsplan – Grobund Landsby (Rambøll notat)</div>
-  <div class="presse-beskr">10-siders teknisk notat om trafikforhold ved Grobund Landsby. Beregner trafikgenerering (500–600 daglige ture for Grobund Landsby; 1.300–1.900 for fuld helhedsplan), vejbetjening via Christianslundvej/Langagervej/Kaarsbergsvej samt anlægsoverslag: 5,9 mio. kr. (Grobund Landsby) / 8,8 mio. kr. (helhedsplan). Dok. nr. RDK2023N01916-RAM-ME-00021.</div>
-  <div class="presse-laes">Hent notat (PDF) ↗</div>
-</a>
-<p>Et debatindlæg i Din Avis (27. april 2026) påpeger, at trafikanalysen er udarbejdet uden reelle lokale trafiktællinger, og at den overser spidsbelastninger fra turistsæsonen og færgetrafikken. Anlægsoverslaget er på op mod 8,8 mio. kr. til vejforbedringer – et beløb, der forventes at vokse.</p>
-<h4>Foreningens standpunkt</h4>
-<p>Foreningen kræver, at der foretages reelle trafiktællinger på Langagervej, Christianslundsvej, Færgevejen og Ålervejen – inkl. højsæson og færgetrafik – inden byrådet træffer endelig beslutning om lokalplan.</p>
-<h4>Relevante debatindlæg</h4>
-</div>
-<!-- VANDHÅNDTERING OG MILJØ -->
-<div class="sag-tab-panel" id="grobund-vand">
-<p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">
-  Vandhåndtering er et centralt teknisk spørgsmål i Grobund-sagen. Det kystnære areal rummer beskyttede naturtyper, grundvandsinteresser og udfordringer med regnvands- og spildevandsafledning.
-</p>
-<h4>Teknisk notat</h4>
-<p>Miljørådgivningsvirksomheden K-LAR har den 27. marts 2026 udarbejdet et notat om <em>Grobund Landsby – Vandhåndteringsplan</em> for Syddjurs Kommune. Notatet (20 sider) behandler terrænforhold, lavninger, recipient- og drænforhold, jordbund, grundvand og OSD, beskyttede naturtyper, kloakering og regnvandshåndtering ved hverdagsregn og ekstremregn.</p>
-<p>Planen bygger på LAR-principper, hvor regnvandet håndteres lokalt via trug, grøfter og et centralt trappesystem, der leder vandet mod Kattegat. Løsningerne er dimensioneret til T5- og T100-hændelser. Samlet kapacitet i skybrudslavninger: 1.081 m³.</p>
-<a class="presse-kort" href="assets/documents/grobund/vandhaandteringsplan-klar-overflade-2026.pdf" target="_blank" rel="noopener">
-  <div class="presse-kilde">K-LAR Miljørådgivning · Syddjurs Kommune · 27. marts 2026</div>
-  <div class="presse-overskrift">Grobund Landsby – Vandhåndteringsplan (overfladevand)</div>
-  <div class="presse-beskr">20-siders teknisk notat om håndtering af regn- og overfladevand i boligområdet ved Ålerne. Behandler terrænforhold, lavninger, drænforhold, grundvand, OSD, kloakering og regnvandshåndtering (hverdagsregn og ekstremregn). Udarbejdet for Syddjurs Kommune.</div>
-  <div class="presse-laes">Hent notat (PDF, 7,2 MB) ↗</div>
-</a>
-<h4>Spildevand – central hindring</h4>
-<p>Myndighederne har gjort opmærksom på, at den eksisterende spildevandsløsning på ejendommen Kaarsbergsvej 2 er ulovlig. Håndteringen af spildevand – herunder "human gødning" – er fortsat uafklaret og udgør en væsentlig hindring for planen om en ny landsby.</p>
-<a class="presse-kort" href="https://dinavis.dk/samfund/ECE16450014/explainer-spildevandsprop-forhindrer-grobund-i-at-lave-landsby/" rel="noopener" target="_blank">
-<div class="presse-kilde">Din Avis</div>
-<div class="presse-overskrift">Explainer: Spildevandsprop forhindrer Grobund i at lave landsby</div>
-<div class="presse-beskr">Gennemgang af den tekniske hindring: spildevandshåndtering i kystnært område med beskyttede naturtyper.</div>
-<div class="presse-laes">Læs artiklen ↗</div>
-</a>
-<h4>Beskyttede naturtyper</h4>
-<p>Arealet ved Ålerne rummer beskyttede naturtyper og ligger inden for en 300 m strandbeskyttelseslinje. Grundvandsinteresser (OSD) og drænforhold gør vandhåndtering særligt kompleks i dette kystnære område.</p>
 </div>
 <div class="sag-tab-panel" id="grobund-kom">
 <p style="font-size:.84rem;color:var(--c-muted);margin-bottom:var(--sp-sm);">
@@ -1264,6 +1185,7 @@
      GENERALFORSAMLING OG DOKUMENTER
 ════════════════════════════════════════════ -->
 <div class="page" id="page-gf">
+<button aria-label="Luk dokumenter og gå tilbage" class="page-luk-knap" id="gf-luk-knap" title="Luk og gå tilbage">✕</button>
 <div class="page-hero">
 <div class="mw">
 <p class="section-label">Vedtægter · Nyhedsbreve · Høringssvar</p>
@@ -1425,6 +1347,14 @@
 </div>
 <span class="dl">⬇</span>
 </a>
+<a class="dok-row" href="assets/documents/aktiviteter/beretning-generalforsamling-2026.pdf" rel="noopener" target="_blank">
+<span class="icon">📄</span>
+<div class="info">
+<strong>Bestyrelsens beretning 2026</strong>
+<span>25. september 2026 · Anden ordinære generalforsamling</span>
+</div>
+<span class="dl">⬇</span>
+</a>
 <a class="dok-row" href="assets/documents/aktiviteter/velkomst-og-beretning-generalforsamling-2026.pdf" rel="noopener" target="_blank">
 <span class="icon">📄</span>
 <div class="info">
@@ -1507,8 +1437,8 @@
 <a class="dok-row" href="assets/documents/grobund/vandhaandteringsplan-grobund-2026.pdf" rel="noopener" target="_blank">
 <span class="icon">📄</span>
 <div class="info">
-<strong>Grobund Landsby – Vandhåndteringsplan (overfladevand)</strong>
-<span>27. marts 2026 · K-LAR Miljørådgivning, udarbejdet for Syddjurs Kommune · 20 sider · Offentliggjort af Syddjurs Kommune</span>
+<strong>Grobund Landsby – Vandhåndteringsplan (overfladvand)</strong>
+<span>27. marts 2026 · K-LAR Miljørådgivning, udarbejdet for Syddjurs Kommune · 20 sider</span>
 </div>
 <span class="dl">⬇</span>
 </a>
@@ -1602,7 +1532,7 @@
 </div>
 <span class="dl">⬇</span>
 <small> · PDF afventer offentliggørelsestilladelse</small></div>
-<a class="dok-row" href="assets/documents/grobund/bidrager-grobund-til-samfundet.pdf" rel="noopener" target="_blank">
+<a class="dok-row" href="assets/documents/grobund/bidrager-grobund-til-samfundet-2025.pdf" rel="noopener" target="_blank">
 <span class="icon">📰</span>
 <div class="info">
 <strong>Bidrager Grobund positivt til samfundet?</strong>
@@ -1652,17 +1582,12 @@
 <li>Mulighed for at påvirke foreningens arbejde og prioriteter</li>
 </ul>
 <div class="mb-form">
-<!-- Onlineindmeldelse midlertidigt deaktiveret – modtageradresse afventer godkendelse -->
-<div class="alert alert-info" id="m-midlertidig-besked" role="status" style="display:block;background:var(--c-navy);color:#fff;border-left:4px solid var(--c-gold);padding:1rem 1.2rem;border-radius:4px;margin-bottom:1rem;">
-  <strong>Onlineindmeldelse er midlertidigt ikke tilgængelig.</strong><br/>
-  Kontakt foreningen direkte: <a href="mailto:info@kystforeningendjursland.dk" style="color:var(--c-gold);">info@kystforeningendjursland.dk</a>
-</div>
-<input autocomplete="name" class="fi" id="m-navn" placeholder="Navn *" type="text" disabled style="opacity:.45;"/>
-<input autocomplete="email" class="fi" id="m-email" placeholder="E-mail *" type="email" disabled style="opacity:.45;"/>
-<input autocomplete="tel" class="fi" id="m-tlf" placeholder="Telefon (valgfrit)" type="tel" disabled style="opacity:.45;"/>
-<textarea class="fi" id="m-kommentar" placeholder="Kommentar (valgfrit)" style="height:72px;opacity:.45;" disabled></textarea>
-<button class="btn btn-primary btn-full" id="btn-tilmeld" type="button" disabled style="opacity:.45;cursor:not-allowed;">
-            Indmeldelse midlertidigt utilgængelig
+<input autocomplete="name" class="fi" id="m-navn" placeholder="Navn *" type="text"/>
+<input autocomplete="email" class="fi" id="m-email" placeholder="E-mail *" type="email"/>
+<input autocomplete="tel" class="fi" id="m-tlf" placeholder="Telefon (valgfrit)" type="tel"/>
+<textarea class="fi" id="m-kommentar" placeholder="Kommentar (valgfrit)" style="height:72px;"></textarea>
+<button class="btn btn-primary btn-full" id="btn-tilmeld" type="button">
+            Send tilmelding <span class="arrow">→</span>
 </button>
 <div class="alert" id="m-alert" role="alert"></div>
 </div>
@@ -1893,260 +1818,276 @@
 <script src="js/supabase-client.js"></script>
 <script src="js/app.js"></script>
 
-<!-- ── NYHEDSBJÆLKE HTML + JS ────────────────────────────── -->
-<div aria-label="Seneste nyheder" id="nyheds-bjaelke" role="complementary">
-  <span class="nb-label" aria-hidden="true">Nyt</span>
-  <div class="nb-indhold" id="nb-indhold" aria-live="polite" aria-atomic="true">
-    <span class="nb-sag" id="nb-sag"></span>
-    <span class="nb-sep" aria-hidden="true">·</span>
-    <a class="nb-link" href="#" id="nb-link" rel="noopener noreferrer" target="_blank"></a>
-    <span class="nb-dato" id="nb-dato"></span>
+<!-- ════════════════════════════════════════════
+     NYHEDSBJÆLKE – tilføjet v1.0.45
+════════════════════════════════════════════ -->
+<div aria-live="polite" id="nyheds-bjaelke" role="complementary" aria-label="Seneste nyheder">
+  <div class="nb-label">Nyt</div>
+  <div class="nb-indhold">
+    <span class="nb-sag" id="nb-sag-txt"></span>
+    <span class="nb-sep" id="nb-sep">·</span>
+    <a class="nb-link" href="#" id="nb-link-txt" rel="noopener" target="_blank"></a>
+    <span class="nb-dato" id="nb-dato-txt"></span>
   </div>
-  <div class="nb-prikker" id="nb-prikker" aria-hidden="true"></div>
+  <div class="nb-prikker" aria-hidden="true" id="nb-prikker"></div>
   <div class="nb-knapper">
-    <button class="nb-pause-btn" id="nb-pause" aria-label="Sæt på pause" title="Pause">⏸</button>
-    <button class="nb-luk-btn" id="nb-luk" aria-label="Luk nyhedsbjælke" title="Luk">✕</button>
+    <button aria-label="Pause rotation" class="nb-pause-btn" id="nb-pause-btn" title="Pause">⏸</button>
+    <button aria-label="Luk nyhedsbjælke" class="nb-luk-btn" id="nb-luk-btn" title="Luk">✕</button>
   </div>
 </div>
 
+<!-- LUK-KNAP JS + NYHEDSBJÆLKE JS -->
 <script>
-(function () {
+(function() {
   'use strict';
 
-  // ── Måneder til datoparse ────────────────────────────────
-  var MAANEDER = {
+  /* ── Vedtægt / Dokumenter-side: luk-knap ── */
+  var gfLukKnap = document.getElementById('gf-luk-knap');
+  var prevPage = 'forside';
+
+  // Spor forrige side
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-page],[data-goto]');
+    if (btn) {
+      var dest = btn.getAttribute('data-page') || btn.getAttribute('data-goto');
+      if (dest && dest !== 'gf') prevPage = dest;
+    }
+  }, true);
+
+  function updateGfKnap() {
+    var pageGf = document.getElementById('page-gf');
+    if (!pageGf) return;
+    var aktiv = pageGf.classList.contains('active');
+    if (gfLukKnap) gfLukKnap.style.display = aktiv ? 'flex' : 'none';
+    document.body.classList.toggle('gf-aktiv', aktiv);
+  }
+
+  if (gfLukKnap) {
+    gfLukKnap.addEventListener('click', function() {
+      // Navigér til forrige side via nav-btn
+      var navBtns = document.querySelectorAll('[data-page]');
+      for (var i = 0; i < navBtns.length; i++) {
+        if ((navBtns[i].getAttribute('data-page') || '') === prevPage) {
+          navBtns[i].click();
+          return;
+        }
+      }
+      // Fallback: klik forside
+      var forsideBtn = document.querySelector('[data-page="forside"]');
+      if (forsideBtn) forsideBtn.click();
+    });
+  }
+
+  // Lyt på side-ændringer (MutationObserver på body for klasse-ændringer)
+  var pageGfEl = document.getElementById('page-gf');
+  if (pageGfEl) {
+    var obs = new MutationObserver(function() { updateGfKnap(); });
+    obs.observe(pageGfEl, { attributes: true, attributeFilter: ['class'] });
+    updateGfKnap();
+  }
+
+  // Escape-tast lukker dokumenter-siden
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var pageGf2 = document.getElementById('page-gf');
+      if (pageGf2 && pageGf2.classList.contains('active')) {
+        if (gfLukKnap) gfLukKnap.click();
+      }
+    }
+  });
+
+  /* ── Nyhedsbjælke ── */
+  var MAKS = 5;
+  var ROTATIONS_INTERVAL = 7000;
+
+  var MÅNEDER = {
     'januar':1,'februar':2,'marts':3,'april':4,'maj':5,'juni':6,
     'juli':7,'august':8,'september':9,'oktober':10,'november':11,'december':12
   };
 
-  // Parse "DD. måned ÅÅÅÅ" eller "måned ÅÅÅÅ" → Date (eller null)
-  function parseDato(tekst) {
-    if (!tekst) return null;
-    tekst = tekst.toLowerCase().trim();
-    // "3. november 2026" eller "3 november 2026"
-    var m = tekst.match(/(\d{1,2})\.?\s+([a-zæøå]+)\s+(\d{4})/);
-    if (m) {
-      var mdr = MAANEDER[m[2]];
-      if (mdr) return new Date(parseInt(m[3]), mdr - 1, parseInt(m[1]));
-    }
-    // "november 2026"
-    m = tekst.match(/([a-zæøå]+)\s+(\d{4})/);
-    if (m) {
-      var mdr2 = MAANEDER[m[1]];
-      if (mdr2) return new Date(parseInt(m[2]), mdr2 - 1, 1);
-    }
-    // "februar 2026" via måned-mapping
-    m = tekst.match(/(\d{4})/);
-    if (m) return new Date(parseInt(m[1]), 0, 1);
-    return null;
+  function parseDato(str) {
+    if (!str) return null;
+    var m = str.match(/(\d{1,2})\.\s*(\w+)\s+(\d{4})/);
+    if (!m) return null;
+    var mdr = MÅNEDER[m[2].toLowerCase()];
+    if (!mdr) return null;
+    return new Date(parseInt(m[3]), mdr - 1, parseInt(m[1]));
   }
 
-  // Sagsnavn ud fra panel-id
-  function sagsnavn(panelId) {
-    if (!panelId) return '';
-    if (panelId.indexOf('draby') !== -1)     return 'Dråby Strand';
-    if (panelId.indexOf('vosnæs') !== -1 || panelId.indexOf('vosnaes') !== -1) return 'Vosnæs';
-    if (panelId.indexOf('grobund') !== -1)   return 'Grobund/Ålerne';
-    if (panelId.indexOf('hjelm') !== -1)     return 'Hjelm Banke';
-    if (panelId.indexOf('fjellerup') !== -1) return 'Fjellerup Strand';
-    return '';
-  }
+  function hentNyheder() {
+    var items = [];
 
-  // ── Indsaml nyheder fra eksisterende HTML ───────────────
-  function indsamlNyheder() {
-    var nyheder = [];
-
-    // 1) .presse-kort – presseomtale og debat (har direkte artikel-link)
-    var presseKort = document.querySelectorAll('a.presse-kort[href]');
-    presseKort.forEach(function (el) {
-      var href = el.getAttribute('href') || '';
-      // Spring kommunale portaler over (bare domæner uden artikelsti)
-      if (!href || href === '#') return;
-      var kilde = el.querySelector('.presse-kilde');
-      var overskrift = el.querySelector('.presse-overskrift');
-      if (!kilde || !overskrift) return;
-      var kildeText = kilde.textContent || '';
-      // Spring over hvis overskrifttekst er tom
-      var overskriftText = (overskrift.textContent || '').trim();
-      if (!overskriftText) return;
-      // Find dato i kildeteksten (efter "·")
-      var datoStr = kildeText.split('·').slice(1).join('·').trim();
-      var dato = parseDato(datoStr);
-      if (!dato) return; // kun verificerede datoer
-      // Find sagsnavn via nærmeste .sag-tab-panel forfader
-      var panel = el.closest('.sag-tab-panel');
-      var sag = panel ? sagsnavn(panel.id) : '';
-      // Klassificér type
-      var type = 'presse';
-      if (kildeText.toLowerCase().indexOf('debat') !== -1) type = 'debat';
-      if (kildeText.toLowerCase().indexOf('kommune') !== -1 ||
-          kildeText.toLowerCase().indexOf('syddjurs') !== -1 ||
-          kildeText.toLowerCase().indexOf('miljø') !== -1) type = 'myndighed';
-      nyheder.push({ dato: dato, sag: sag, overskrift: overskriftText, link: href, type: type });
+    // 1) presse-kort med href
+    document.querySelectorAll('a.presse-kort[href]').forEach(function(el) {
+      var kildeEl = el.querySelector('.presse-kilde');
+      var ovEl = el.querySelector('.presse-overskrift');
+      if (!kildeEl || !ovEl) return;
+      var kilde = kildeEl.textContent || '';
+      var dato = parseDato(kilde);
+      var sag = '';
+      var panel = el.closest('[id]');
+      if (panel) {
+        var pid = panel.id || '';
+        if (pid.startsWith('draby') || pid.startsWith('sag-draby')) sag = 'Dråby';
+        else if (pid.startsWith('vosnæs') || pid.startsWith('sag-vosnæs')) sag = 'Vosnæs';
+        else if (pid.startsWith('grobund')) sag = 'Grobund';
+        else if (pid.startsWith('hjelm')) sag = 'Hjelm Banke';
+        else if (pid.startsWith('fjellerup')) sag = 'Fjellerup';
+      }
+      items.push({
+        link: el.href,
+        titel: (ovEl.textContent || '').trim(),
+        dato: dato,
+        datoStr: dato ? (dato.getDate() + '. ' + Object.keys(MÅNEDER)[dato.getMonth()] + ' ' + dato.getFullYear()) : '',
+        sag: sag
+      });
     });
 
-    // 2) .sag-nyt-item – statusopdateringer med direkte link i teksten
-    var nytItems = document.querySelectorAll('.sag-nyt-item');
-    nytItems.forEach(function (el) {
+    // 2) sag-nyt-item med link
+    document.querySelectorAll('.sag-nyt-item').forEach(function(el) {
       var datoEl = el.querySelector('.sag-nyt-dato');
-      var stærk = el.querySelector('strong');
-      var link = el.querySelector('a[href]');
-      if (!datoEl || !stærk || !link) return;
-      var datoStr = (datoEl.textContent || '').trim();
-      var dato = parseDato(datoStr);
-      if (!dato) return;
-      var overskriftText = (stærk.textContent || '').trim();
-      if (!overskriftText) return;
-      var href = link.getAttribute('href') || '';
-      if (!href || href === '#') return;
-      var panel = el.closest('.sag-tab-panel');
-      var sag = panel ? sagsnavn(panel.id) : '';
-      nyheder.push({ dato: dato, sag: sag, overskrift: overskriftText, link: href, type: 'nyt' });
+      var strkEl = el.querySelector('strong');
+      var linkEl = el.querySelector('a[href]');
+      if (!datoEl || !strkEl || !linkEl) return;
+      var dato = parseDato(datoEl.textContent || '');
+      var sag = '';
+      var panel = el.closest('[id]');
+      if (panel) {
+        var pid = panel.id || '';
+        if (pid.startsWith('draby') || pid.startsWith('sag-draby')) sag = 'Dråby';
+        else if (pid.startsWith('vosnæs') || pid.startsWith('sag-vosnæs')) sag = 'Vosnæs';
+      }
+      items.push({
+        link: linkEl.href,
+        titel: (strkEl.textContent || '').trim(),
+        dato: dato,
+        datoStr: datoEl.textContent.trim(),
+        sag: sag
+      });
     });
 
-    // Sorter nyeste øverst, tag de 5 seneste
-    nyheder.sort(function (a, b) { return b.dato - a.dato; });
-    // Fjern dubletter (samme link)
+    // Sortér nyeste øverst, deduplikér på link
     var set = {};
-    nyheder = nyheder.filter(function (n) {
-      if (set[n.link]) return false;
-      set[n.link] = true;
+    items = items.filter(function(it) {
+      if (!it.link || set[it.link]) return false;
+      set[it.link] = true;
       return true;
     });
-    return nyheder.slice(0, 5);
+    items.sort(function(a, b) {
+      if (!a.dato && !b.dato) return 0;
+      if (!a.dato) return 1;
+      if (!b.dato) return -1;
+      return b.dato - a.dato;
+    });
+    return items.slice(0, MAKS);
   }
 
-  // ── Formater dato til visning ────────────────────────────
-  var MDR_KORT = ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'];
-  function formatDato(d) {
-    return d.getDate() + '. ' + MDR_KORT[d.getMonth()] + ' ' + d.getFullYear();
-  }
+  function initBjaelke() {
+    // Tjek sessionStorage
+    try {
+      if (sessionStorage.getItem('nb-lukket') === '1') return;
+    } catch(e) {}
 
-  // ── Bjælke-controller ────────────────────────────────────
-  var bjaelke = document.getElementById('nyheds-bjaelke');
-  var indhold = document.getElementById('nb-indhold');
-  var sagEl   = document.getElementById('nb-sag');
-  var linkEl  = document.getElementById('nb-link');
-  var datoEl  = document.getElementById('nb-dato');
-  var prikker = document.getElementById('nb-prikker');
-  var pauseBtn = document.getElementById('nb-pause');
-  var lukBtn  = document.getElementById('nb-luk');
+    var bjaelke = document.getElementById('nyheds-bjaelke');
+    if (!bjaelke) return;
 
-  if (!bjaelke) return;
+    var nyheder = hentNyheder();
+    if (!nyheder.length) { bjaelke.classList.add('nb-skjult'); return; }
 
-  // Tjek om brugeren har lukket bjælken denne session
-  try {
-    if (sessionStorage.getItem('nb-lukket') === '1') {
-      bjaelke.classList.add('nb-skjult');
-      return;
-    }
-  } catch(e) {}
+    var sagTxt  = document.getElementById('nb-sag-txt');
+    var sepEl   = document.getElementById('nb-sep');
+    var linkTxt = document.getElementById('nb-link-txt');
+    var datoTxt = document.getElementById('nb-dato-txt');
+    var prikker = document.getElementById('nb-prikker');
+    var pauseBtn = document.getElementById('nb-pause-btn');
+    var lukBtn  = document.getElementById('nb-luk-btn');
 
-  var nyheder = indsamlNyheder();
-  if (!nyheder.length) {
-    bjaelke.classList.add('nb-skjult');
-    return;
-  }
-
-  // Byg prikker
-  nyheder.forEach(function (_, i) {
-    var p = document.createElement('span');
-    p.className = 'nb-prik' + (i === 0 ? ' aktiv' : '');
-    p.setAttribute('aria-hidden', 'true');
-    prikker.appendChild(p);
-  });
-
-  var aktuelIndex = 0;
-  var paused = false;
-  var intervalId = null;
-  var reduceret = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function visByIndex(idx, animation) {
-    var n = nyheder[idx];
-    function opdater() {
-      sagEl.textContent = n.sag;
-      linkEl.textContent = n.overskrift;
-      linkEl.href = n.link;
-      datoEl.textContent = formatDato(n.dato);
-      // Opdater prikker
-      var alle = prikker.querySelectorAll('.nb-prik');
-      alle.forEach(function (p, i) {
-        p.classList.toggle('aktiv', i === idx);
+    // Opbyg prikker
+    if (prikker) {
+      nyheder.forEach(function(_, i) {
+        var p = document.createElement('span');
+        p.className = 'nb-prik' + (i === 0 ? ' aktiv' : '');
+        prikker.appendChild(p);
       });
     }
-    if (animation && !reduceret) {
-      indhold.classList.add('nb-fade');
-      setTimeout(function () {
-        opdater();
-        indhold.classList.remove('nb-fade');
-      }, 400);
-    } else {
-      opdater();
+
+    var aktuel = 0;
+    var paused = false;
+    var timer  = null;
+
+    function vis(idx) {
+      var n = nyheder[idx];
+      if (!n) return;
+      if (linkTxt) {
+        bjaelke.querySelector('.nb-indhold').style.opacity = '0';
+        setTimeout(function() {
+          if (sagTxt) sagTxt.textContent = n.sag;
+          if (sepEl)  sepEl.style.display = n.sag ? '' : 'none';
+          if (linkTxt) { linkTxt.textContent = n.titel; linkTxt.href = n.link; }
+          if (datoTxt) datoTxt.textContent = n.datoStr ? '– ' + n.datoStr : '';
+          bjaelke.querySelector('.nb-indhold').style.opacity = '1';
+        }, 160);
+      }
+      // Opdater prikker
+      if (prikker) {
+        prikker.querySelectorAll('.nb-prik').forEach(function(p, i) {
+          p.classList.toggle('aktiv', i === idx);
+        });
+      }
+      // Juster body padding
+      requestAnimationFrame(function() {
+        document.body.style.paddingBottom = bjaelke.offsetHeight + 'px';
+      });
     }
-  }
 
-  function næste() {
-    aktuelIndex = (aktuelIndex + 1) % nyheder.length;
-    visByIndex(aktuelIndex, true);
-  }
+    function næste() {
+      aktuel = (aktuel + 1) % nyheder.length;
+      vis(aktuel);
+    }
 
-  function startInterval() {
-    if (intervalId) clearInterval(intervalId);
-    intervalId = setInterval(næste, 7000);
-  }
+    function startTimer() {
+      clearInterval(timer);
+      if (nyheder.length > 1) timer = setInterval(næste, ROTATIONS_INTERVAL);
+    }
 
-  // Initial visning
-  visByIndex(0, false);
-  startInterval();
+    vis(0);
+    startTimer();
 
-  // Juster body padding-bottom dynamisk
-  function justerPadding() {
-    if (bjaelke.classList.contains('nb-skjult')) {
-      document.body.style.paddingBottom = '';
-    } else {
+    // Pause ved hover / touch
+    bjaelke.addEventListener('mouseenter', function() { clearInterval(timer); });
+    bjaelke.addEventListener('mouseleave', function() { if (!paused) startTimer(); });
+    bjaelke.addEventListener('touchstart', function() { clearInterval(timer); }, { passive: true });
+    bjaelke.addEventListener('touchend',   function() { if (!paused) startTimer(); }, { passive: true });
+
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', function() {
+        paused = !paused;
+        pauseBtn.textContent = paused ? '▶' : '⏸';
+        pauseBtn.setAttribute('aria-label', paused ? 'Fortsæt rotation' : 'Pause rotation');
+        if (paused) clearInterval(timer); else startTimer();
+      });
+    }
+
+    if (lukBtn) {
+      lukBtn.addEventListener('click', function() {
+        bjaelke.classList.add('nb-skjult');
+        document.body.style.paddingBottom = '';
+        try { sessionStorage.setItem('nb-lukket', '1'); } catch(e) {}
+      });
+    }
+
+    // Initial padding
+    requestAnimationFrame(function() {
       document.body.style.paddingBottom = bjaelke.offsetHeight + 'px';
-    }
+    });
   }
-  justerPadding();
-  window.addEventListener('resize', justerPadding);
 
-  // Pause ved hover / touch
-  bjaelke.addEventListener('mouseenter', function () {
-    if (!paused) clearInterval(intervalId);
-  });
-  bjaelke.addEventListener('mouseleave', function () {
-    if (!paused) startInterval();
-  });
-  bjaelke.addEventListener('touchstart', function () {
-    if (!paused) clearInterval(intervalId);
-  }, { passive: true });
-  bjaelke.addEventListener('touchend', function () {
-    if (!paused) startInterval();
-  }, { passive: true });
-
-  // Pause-knap
-  pauseBtn.addEventListener('click', function () {
-    paused = !paused;
-    if (paused) {
-      clearInterval(intervalId);
-      pauseBtn.textContent = '▶';
-      pauseBtn.setAttribute('aria-label', 'Genoptag rotation');
-      pauseBtn.title = 'Genoptag';
-    } else {
-      startInterval();
-      pauseBtn.textContent = '⏸';
-      pauseBtn.setAttribute('aria-label', 'Sæt på pause');
-      pauseBtn.title = 'Pause';
-    }
-  });
-
-  // Luk-knap
-  lukBtn.addEventListener('click', function () {
-    clearInterval(intervalId);
-    bjaelke.classList.add('nb-skjult');
-    document.body.style.paddingBottom = '';
-    try { sessionStorage.setItem('nb-lukket', '1'); } catch(e) {}
-  });
+  // Kør efter DOM er klar
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBjaelke);
+  } else {
+    initBjaelke();
+  }
 
 })();
 </script>

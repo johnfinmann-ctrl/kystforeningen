@@ -16,8 +16,8 @@
  * 8. Brugeren ser ny version
  */
 
-const CACHE_VERSION = 'kfd-v1.0.45';
-const CACHE_NAME    = CACHE_VERSION; // v1.0.45 – nyhedsbjælke v1 tilføjet
+const CACHE_VERSION = 'kfd-v1.0.46';
+const CACHE_NAME    = CACHE_VERSION;
 
 const PRECACHE = [
   './',
@@ -26,7 +26,7 @@ const PRECACHE = [
   './js/config.js',
   './js/supabase-client.js',
   './js/app.js',
-  './assets/hero-blomstereng.jpg',
+  './assets/landskab-aalerne.jpg',
   './manifest.json',
 ];
 
