@@ -199,7 +199,7 @@ p:last-child { margin-bottom: 0; }
 }
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
-  background: url('../assets/hero-blomstereng.jpg') center 55% / cover no-repeat;
+  background: url('../assets/landskab-aalerne.jpg') center 42% / cover no-repeat;
   animation: kenburns 24s ease-out forwards;
   transform-origin: center center;
 }
@@ -1086,12 +1086,6 @@ footer p { margin-bottom: .25rem; }
     height: 80vh;
     min-height: 440px;
   }
-  /* Mobil: samme bænkebillede, beskæring justeret så bænk + hav er tydeligt */
-  .hero-bg {
-    background-image: url('../assets/hero-blomstereng.jpg');
-    background-position: center 55%;
-    background-size: cover;
-  }
 
   #intro {
     padding: 2rem var(--sp-md);
@@ -1144,3 +1138,6 @@ footer p { margin-bottom: .25rem; }
     height: 180px;
   }
 }
+
+@media(max-width:768px){#sag-grid{display:flex;flex-direction:column;align-items:stretch;}#sag-grid>.sag-kort-3{height:auto;min-height:0;flex:0 0 auto;width:100%;}#sag-grid .sag-kort-3-body{flex:0 0 auto;}#sag-grid .sag-kort-3-body p{flex:0 0 auto;}#cookie-banner{padding:8px 12px;gap:6px;}#cookie-banner p{min-width:0;margin:0;}}
+body:has(#cookie-banner[style*="flex"]) #kfd-install{bottom:120px;}
