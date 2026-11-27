@@ -16,7 +16,7 @@
  * 8. Brugeren ser ny version
  */
 
-const CACHE_VERSION = 'kfd-v1.0.53';
+const CACHE_VERSION = 'kfd-v1.0.50';
 const CACHE_NAME    = CACHE_VERSION;
 
 const PRECACHE = [
@@ -48,7 +48,7 @@ self.addEventListener('activate', event => {
     caches.keys()
       .then(keys => Promise.all(
         keys
-          .filter(k => k.startsWith('kfd-') && k !== CACHE_NAME)
+          .filter(k => k !== CACHE_NAME)
           .map(k => caches.delete(k))
       ))
       .then(() => self.clients.claim())
