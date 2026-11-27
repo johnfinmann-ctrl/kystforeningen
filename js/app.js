@@ -435,9 +435,9 @@ async function loadBestyrelse() {
           ? `<img src="${escH(m.photo_url)}" alt="${escH(m.name)}" loading="lazy">`
           : '👤'}
       </div>
-      <h3>${escH(m.name)}</h3>
+      <h3>${escH(m.name.trim() === "John Palm" ? "John Palm Nielsen" : m.name)}</h3>
       <div class="bst-role">${escH(m.role_title||'')}</div>
-      ${m.email ? `<a href="mailto:${escH(m.email)}">${escH(m.email)}</a>` : ''}
+      ${m.email && !/^Åse(?:\s|$)/i.test(m.name.trim()) ? `<a href="mailto:${escH(m.email)}">${escH(m.email)}</a>` : ''}
     </article>`).join('');
 }
 

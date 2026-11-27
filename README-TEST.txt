@@ -1,1 +1,1 @@
-Kun test-opdatering. Upload med mappestruktur. CNAME og sitemap er ikke med og må ikke ændres. Uafklaret: præcis rettelse af 5,5 ha, godkendelse af Grobund-foto, hvilken Dråby-dublet der menes, eksisterende PDF-links og PWA-ikoner. Ingen live-test udført. Behold 2025-beretningen.
+v1.0.52 – testopdatering. Upload kun disse filer med deres mapper. CNAME og sitemap ændres ikke. Bestyrelsesmails læses fra Supabase, Åse skjules. Manglende adresser skal indtastes i admin. Ikke live-testet.

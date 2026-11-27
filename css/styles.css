@@ -1141,3 +1141,9 @@ footer p { margin-bottom: .25rem; }
 
 @media(max-width:768px){#sag-grid{display:flex;flex-direction:column;align-items:stretch;}#sag-grid>.sag-kort-3{height:auto;min-height:0;flex:0 0 auto;width:100%;}#sag-grid .sag-kort-3-body{flex:0 0 auto;}#sag-grid .sag-kort-3-body p{flex:0 0 auto;}#cookie-banner{padding:8px 12px;gap:6px;}#cookie-banner p{min-width:0;margin:0;}}
 body:has(#cookie-banner[style*="flex"]) #kfd-install{bottom:120px;}
+
+/* v1.0.52: desktopfoto og kompakt intro */
+@media (min-width:769px) { .hero-bg { background-image:url('../assets/hero-kyst-desktop.jpg'); background-position:center 65%; } #intro { padding:3rem var(--sp-md); } }
+@media (max-width:768px) { #intro { padding:1.75rem var(--sp-md); } }
+.sag-kort-img[src$="hjelm-banke-kort-nyt.png"] { object-fit:contain; background:#d5e6ee; }
+.bst-kort a[href^="mailto:"] { overflow-wrap:anywhere; }
