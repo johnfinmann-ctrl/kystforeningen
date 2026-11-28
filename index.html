@@ -232,6 +232,7 @@ body.gf-aktiv .page-luk-knap {
 <li><button class="nav-btn" data-page="hoeringssvar">Høringssvar</button></li>
 <li><button class="nav-btn" data-page="kontakt">Kontakt</button></li>
 <li><button class="nav-btn" data-page="medlem" style="margin-left:.5rem;background:rgba(200,164,90,.18);color:var(--c-gold);border-radius:3px;padding:.4rem .8rem;">Bliv medlem</button></li>
+<li><button aria-label="Installér appen på din enhed" class="nav-btn" id="nav-pwa-btn" style="display:none;">📲 Installér appen</button></li>
 </ul>
 <button aria-expanded="false" aria-label="Åbn menu" class="hamburger" id="hamburger">
 <span></span><span></span><span></span>
@@ -334,6 +335,30 @@ body.gf-aktiv .page-luk-knap {
 </button>
 </div>
 </section>
+<!-- PWA INSTALL – tilføjet v1.0.54 -->
+<section aria-labelledby="pwa-h2" class="pwa-install-sektion" id="pwa-install-sektion" style="display:none;">
+<div class="mw-xs" style="text-align:center;padding:2rem 1rem;">
+<p class="section-label">App</p>
+<h2 id="pwa-h2" style="font-size:1.5rem;margin-bottom:.75rem;">Installér appen</h2>
+<p style="color:var(--c-muted);margin-bottom:1.25rem;font-size:.95rem;">Få hurtig adgang til Kystforeningen Djursland – som app på din telefon, tablet eller computer.</p>
+<div id="pwa-install-chrome" style="display:none;">
+<button class="btn btn-gold" id="pwa-install-btn" style="margin-bottom:.75rem;">📲 Installér appen</button>
+<p style="font-size:.8rem;color:var(--c-muted);">Fungerer på Android, Windows og Mac (Chrome/Edge)</p>
+</div>
+<div id="pwa-install-ios" style="display:none;background:rgba(0,0,0,.04);border-radius:8px;padding:1rem;text-align:left;font-size:.88rem;line-height:1.7;">
+<strong>iPhone og iPad:</strong>
+<ol style="margin:.5rem 0 0 1.2rem;padding:0;">
+<li>Tryk på <strong>Del-ikonet</strong> <span aria-hidden="true">⎙</span> i Safari (bunden af skærmen)</li>
+<li>Vælg <strong>"Føj til hjemmeskærm"</strong></li>
+<li>Tryk <strong>"Tilføj"</strong></li>
+</ol>
+<p style="margin-top:.5rem;font-size:.78rem;color:var(--c-muted);">Kræver Safari-browseren. Chrome på iOS understøtter ikke installation.</p>
+</div>
+<div id="pwa-install-unsupported" style="display:none;">
+<p style="font-size:.88rem;color:var(--c-muted);">Din browser understøtter ikke app-installation. Prøv Chrome, Edge eller Safari.</p>
+</div>
+</div>
+</section>
 </div><!-- /page-forside -->
 <!-- ════════════════════════════════════════════
      OM FORENINGEN
@@ -358,7 +383,8 @@ body.gf-aktiv .page-luk-knap {
 <strong>CVR:</strong> 44995514<br/>
 <strong>Adresse:</strong> Langagervej 5, 8400 Ebeltoft<br/>
 <strong>Hjemsted:</strong> Syddjurs Kommune<br/>
-<strong>Stiftet:</strong> 25. juli 2024
+<strong>Stiftet:</strong> 25. juli 2024<br/>
+<strong>Reg.nr.:</strong> 8117 &nbsp;·&nbsp; <strong>Kontonr.:</strong> 1764734 <button class="kopi-btn" data-kopi="8117 / 1764734" title="Kopiér bankoplysninger" type="button">📋</button>
         </div>
 </div>
 <div class="om-pillars">
@@ -475,7 +501,7 @@ body.gf-aktiv .page-luk-knap {
 <!-- SAG 4: HJELM BANKE -->
 <div class="sag-kort-3" id="kort-hjelm">
 <div class="sag-kort-3-img-wrap">
-<img alt="Søkort over Hjelm Banke med råstofindvindingsområde 506-JA – Delområde 1 og 2" class="sag-kort-img" src="assets/hjelm-banke.jpg"/>
+<img alt="Udsigt fra havet ved Hjelm Banke på Djursland – råstofindvindingsområde 506-JA" class="sag-kort-img" src="assets/hjelm-banke-udsigt.jpg"/>
 </div>
 <div class="sag-kort-3-body">
 <div class="sag-status-badge">Overvågning</div>
@@ -735,7 +761,7 @@ body.gf-aktiv .page-luk-knap {
 <div class="sag-nyt-item">
 <span class="sag-nyt-dato">23. november 2026</span>
 <strong>Forslag om pause i vindmølleprojektet sendt til forberedelse</strong>
-<p>Aarhus Byråd har besluttet at sende et forslag om at sætte projektet med tre 150 meter høje vindmøller ved Vosnæs på pause til videre forberedelse i Teknik og Miljø. Forslaget – fremsat af Venstre, Liberal Alliance, Danmarksdemokraterne og Dansk Folkeparti – omfatter pause i den politiske behandling, yderligere afklaring af natur-, landskabs-, støj- og miljøforhold, genoptagelse af dialogen med Syddjurs Kommune og berørte borgere samt undersøgelse af alternativer, herunder muligheden for at opgive projektet helt. Forslaget er endnu ikke vedtaget; forvaltningen skal forberede sagen, inden den igen kommer til politisk behandling. Der er modtaget 784 høringssvar til projektet. Kystforeningen Djursland følger den videre udvikling.</p>
+<p>Aarhus Byråd har besluttet at sende et forslag om at sætte projektet med tre 150 meter høje vindmøller ved Vosnæs på pause til videre forberedelse i Teknik og Miljø. Forslaget – fremsat af Venstre, Liberal Alliance, Danmarksdemokraterne og Dansk Folkeparti – omfatter pause i den politiske behandling, yderligere afklaring af natur-, landskabs-, støj- og miljøforhold, genoptagelse af dialogen med Syddjurs Kommune og berørte borgere samt undersøgelse af alternativer, herunder muligheden for at opgive projektet helt. Forslaget er endnu ikke vedtaget; forvaltningen skal forberede sagen, inden den igen kommer til politisk behandling. Der er modtaget 784 høringssvar til projektet. Kystforeningen Djursland følger den videre udvikling. <a href="https://aarhusavis.dk/article/pause-for-3-vindmoller-paa-150-meter-ved-vosnaes-venter---forvaltningen-skal-forst-forberede-sagen-63914" rel="noopener noreferrer" target="_blank">Læs artiklen hos Aarhus Avis ↗</a></p>
 </div>
 <div class="sag-nyt-item">
 <span class="sag-nyt-dato">6. november 2026</span>
@@ -1249,12 +1275,13 @@ body.gf-aktiv .page-luk-knap {
 <div class="bst-avatar">👤</div>
 <h3>Elsebeth Due Kjeldsen</h3>
 <div class="bst-role">Formand</div>
-<a href="mailto:elsebethduekjeldsen@gmail.com">elsebethduekjeldsen@gmail.com</a>
+<a class="bst-email" href="mailto:elsebethduekjeldsen@gmail.com"><span class="bst-email-ikon" aria-hidden="true">✉</span>elsebethduekjeldsen@gmail.com</a>
 </article>
 <article class="bst-kort">
 <div class="bst-avatar">👤</div>
 <h3>John Finmann</h3>
 <div class="bst-role">Næstformand</div>
+<a class="bst-email" href="mailto:j.finmann@mail.dk"><span class="bst-email-ikon" aria-hidden="true">✉</span>j.finmann@mail.dk</a>
 </article>
 <article class="bst-kort">
 <div class="bst-avatar">👤</div>
@@ -1265,21 +1292,25 @@ body.gf-aktiv .page-luk-knap {
 <div class="bst-avatar">👤</div>
 <h3>John Palm Nielsen</h3>
 <div class="bst-role">Bestyrelsesmedlem</div>
+<a class="bst-email" href="mailto:john.palm.nielsen@icloud.com"><span class="bst-email-ikon" aria-hidden="true">✉</span>john.palm.nielsen@icloud.com</a>
 </article>
 <article class="bst-kort">
 <div class="bst-avatar">👤</div>
 <h3>Ivan Bundgaard Sørensen</h3>
 <div class="bst-role">Bestyrelsesmedlem</div>
+<a class="bst-email" href="mailto:ibs@ibsmanagement.dk"><span class="bst-email-ikon" aria-hidden="true">✉</span>ibs@ibsmanagement.dk</a>
 </article>
 <article class="bst-kort">
 <div class="bst-avatar">👤</div>
 <h3>Sean Blicher</h3>
 <div class="bst-role">Suppleant</div>
+<a class="bst-email" href="mailto:marschall68@gmail.com"><span class="bst-email-ikon" aria-hidden="true">✉</span>marschall68@gmail.com</a>
 </article>
 <article class="bst-kort">
 <div class="bst-avatar">👤</div>
 <h3>Kim Withen Olesen</h3>
 <div class="bst-role">Suppleant</div>
+<a class="bst-email" href="mailto:kim@marstrandnielsen.dk"><span class="bst-email-ikon" aria-hidden="true">✉</span>kim@marstrandnielsen.dk</a>
 </article>
 </div>
 </div>
@@ -1683,6 +1714,11 @@ body.gf-aktiv .page-luk-knap {
 <li>Stemmeret på den årlige generalforsamling</li>
 <li>Mulighed for at påvirke foreningens arbejde og prioriteter</li>
 </ul>
+<div style="background:rgba(0,0,0,.04);border-radius:8px;padding:.85rem 1rem;margin-bottom:1rem;font-size:.85rem;line-height:1.8;">
+<div style="font-weight:700;margin-bottom:.3rem;color:var(--c-ink);">Bankoverførsel</div>
+<div>Reg.nr.: <strong>8117</strong> &nbsp;·&nbsp; Kontonr.: <strong>1764734</strong> <button class="kopi-btn" data-kopi="8117 / 1764734" title="Kopiér bankoplysninger" type="button">📋</button></div>
+<div style="font-size:.78rem;color:var(--c-muted);margin-top:.2rem;">Husk at skrive navn og "Medlem" i beskedfeltet</div>
+</div>
 <div class="mb-form">
 <input autocomplete="name" class="fi" id="m-navn" placeholder="Navn *" type="text"/>
 <input autocomplete="email" class="fi" id="m-email" placeholder="E-mail *" type="email"/>
@@ -2068,8 +2104,23 @@ body.gf-aktiv .page-luk-knap {
     return new Date(parseInt(m[3]), mdr - 1, parseInt(m[1]));
   }
 
+  // Fast nyhed: Dråby høringsfrist – udløber automatisk 17. dec 2026
+  var DRAABY_FRIST = new Date(2026, 11, 16, 23, 59); // 16. dec 2026
+  var DRAABY_FAST = {
+    link: '#kort-draby',
+    titel: '⚠ Høringsfrist: 16. december 2026 – send dit høringssvar om Dråby Strand',
+    dato: DRAABY_FRIST,
+    datoStr: '16. december 2026',
+    sag: 'Dråby',
+    fast: true
+  };
+
   function hentNyheder() {
     var items = [];
+    // Tilføj fast Dråby-frist-nyhed hvis ikke udløbet
+    if (new Date() <= DRAABY_FRIST) {
+      items.push(DRAABY_FAST);
+    }
 
     // 1) presse-kort med href
     document.querySelectorAll('a.presse-kort[href]').forEach(function(el) {
@@ -2230,6 +2281,22 @@ body.gf-aktiv .page-luk-knap {
       });
     }
 
+    // Håndter interne #-links i bjælken (åbn sag-kort)
+    if (linkTxt) {
+      linkTxt.addEventListener('click', function(e) {
+        var href = linkTxt.getAttribute('href') || '';
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          var el = document.querySelector(href);
+          if (el) {
+            var knap = el.querySelector('.btn-laes-sag');
+            if (knap) knap.click();
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    }
+
     // Initial padding
     requestAnimationFrame(function() {
       document.body.style.paddingBottom = bjaelke.offsetHeight + 'px';
@@ -2243,6 +2310,128 @@ body.gf-aktiv .page-luk-knap {
     initBjaelke();
   }
 
+})();
+
+/* ── Kopi-knapper (bankoplysninger) ── */
+(function() {
+  function setupKopiKnapper() {
+    document.querySelectorAll('.kopi-btn[data-kopi]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var tekst = btn.getAttribute('data-kopi');
+        if (!tekst) return;
+        var orig = btn.textContent;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(tekst).then(function() {
+            btn.textContent = '✓ Kopieret';
+            btn.classList.add('kopieret');
+            setTimeout(function() { btn.textContent = orig; btn.classList.remove('kopieret'); }, 2000);
+          }).catch(function() { fallbackKopier(btn, tekst, orig); });
+        } else {
+          fallbackKopier(btn, tekst, orig);
+        }
+      });
+    });
+  }
+  function fallbackKopier(btn, tekst, orig) {
+    var ta = document.createElement('textarea');
+    ta.value = tekst; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try {
+      document.execCommand('copy');
+      btn.textContent = '✓ Kopieret'; btn.classList.add('kopieret');
+      setTimeout(function() { btn.textContent = orig; btn.classList.remove('kopieret'); }, 2000);
+    } catch(e) {}
+    document.body.removeChild(ta);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupKopiKnapper);
+  } else {
+    setupKopiKnapper();
+  }
+})();
+
+/* ── PWA Installation – tilføjet v1.0.54 ── */
+(function() {
+  var deferredPrompt = null;
+
+  function erIOS() {
+    return /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+  }
+  function erSafariIOS() {
+    return erIOS() && /safari/i.test(navigator.userAgent) && !/crios|fxios/i.test(navigator.userAgent);
+  }
+  function erAlleInstalleret() {
+    return window.matchMedia('(display-mode: standalone)').matches ||
+           window.navigator.standalone === true;
+  }
+
+  function visPWA() {
+    var sek = document.getElementById('pwa-install-sektion');
+    var navBtn = document.getElementById('nav-pwa-btn');
+    if (sek) sek.style.display = '';
+    if (navBtn) navBtn.style.display = '';
+  }
+
+  function setupPWA() {
+    if (erAlleInstalleret()) return; // allerede installeret
+
+    var chromeDiv = document.getElementById('pwa-install-chrome');
+    var iosDiv = document.getElementById('pwa-install-ios');
+    var unsupported = document.getElementById('pwa-install-unsupported');
+    var installBtn = document.getElementById('pwa-install-btn');
+    var navBtn = document.getElementById('nav-pwa-btn');
+
+    if (erSafariIOS()) {
+      // iOS Safari: vis vejledning
+      if (iosDiv) iosDiv.style.display = '';
+      visPWA();
+    }
+
+    // Chrome/Edge: lyt på beforeinstallprompt
+    window.addEventListener('beforeinstallprompt', function(e) {
+      e.preventDefault();
+      deferredPrompt = e;
+      if (chromeDiv) chromeDiv.style.display = '';
+      visPWA();
+
+      if (installBtn) {
+        installBtn.addEventListener('click', function() {
+          if (!deferredPrompt) return;
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(function() { deferredPrompt = null; });
+        });
+      }
+      if (navBtn) {
+        navBtn.addEventListener('click', function() {
+          if (!deferredPrompt) return;
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(function() { deferredPrompt = null; });
+        });
+      }
+    });
+
+    // Tilføj klik på nav-btn som navigerer til sektionen hvis ingen prompt endnu
+    if (navBtn) {
+      navBtn.addEventListener('click', function() {
+        if (!deferredPrompt && !erSafariIOS()) return;
+        var sek = document.getElementById('pwa-install-sektion');
+        if (sek) {
+          // skift til forside
+          var forsideBtn = document.querySelector('[data-page="forside"]');
+          if (forsideBtn) forsideBtn.click();
+          setTimeout(function() {
+            sek.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 150);
+        }
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupPWA);
+  } else {
+    setupPWA();
+  }
 })();
 </script>
 </body>

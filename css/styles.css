@@ -1142,8 +1142,35 @@ footer p { margin-bottom: .25rem; }
 @media(max-width:768px){#sag-grid{display:flex;flex-direction:column;align-items:stretch;}#sag-grid>.sag-kort-3{height:auto;min-height:0;flex:0 0 auto;width:100%;}#sag-grid .sag-kort-3-body{flex:0 0 auto;}#sag-grid .sag-kort-3-body p{flex:0 0 auto;}#cookie-banner{padding:8px 12px;gap:6px;}#cookie-banner p{min-width:0;margin:0;}}
 body:has(#cookie-banner[style*="flex"]) #kfd-install{bottom:120px;}
 
-/* v1.0.52: desktopfoto og kompakt intro */
-@media (min-width:769px) { .hero-bg { background-image:url('../assets/hero-kyst-desktop.jpg'); background-position:center 65%; } #intro { padding:3rem var(--sp-md); } }
+/* v1.0.52: desktopfoto og kompakt intro – v1.0.54: baenk-billede på PC */
+@media (min-width:769px) { .hero-bg { background-image:url('../assets/aalerne-baenk-portraet.jpg'); background-position:center 55%; } #intro { padding:3rem var(--sp-md); } }
 @media (max-width:768px) { #intro { padding:1.75rem var(--sp-md); } }
 .sag-kort-img[src$="hjelm-banke-kort-nyt.png"] { object-fit:contain; background:#d5e6ee; }
 .bst-kort a[href^="mailto:"] { overflow-wrap:anywhere; }
+
+/* ── v1.0.54: Bestyrelse e-mail + kopi-knap ── */
+.bst-email {
+  display: inline-flex; align-items: center; gap: .3em;
+  font-size: .82rem; color: var(--c-muted);
+  text-decoration: none; word-break: break-all;
+  margin-top: .25rem;
+  transition: color .15s;
+}
+.bst-email:hover, .bst-email:focus { color: var(--c-ocean); text-decoration: underline; }
+.bst-email-ikon { font-size: .9em; flex-shrink: 0; }
+
+.kopi-btn {
+  display: inline-flex; align-items: center;
+  background: none; border: 1px solid rgba(0,0,0,.18);
+  border-radius: 4px; padding: .15rem .4rem;
+  font-size: .78rem; cursor: pointer; color: var(--c-muted);
+  vertical-align: middle; margin-left: .4rem;
+  transition: background .15s, color .15s;
+}
+.kopi-btn:hover, .kopi-btn:focus { background: var(--c-ocean); color: #fff; border-color: var(--c-ocean); }
+.kopi-btn.kopieret { background: #2a7a3b; color: #fff; border-color: #2a7a3b; }
+
+/* ── v1.0.54: Hero whitespace reducer ── */
+.hero { padding-bottom: 0; }
+#intro { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+.hero-content { padding-bottom: 1.5rem; }
